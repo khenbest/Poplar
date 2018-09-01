@@ -43,6 +43,12 @@ server.use((req, res, next) => {
 //YOUR ROUTES HERE!!!!!!
 
 
+
+
+
+
+
+
 //Catch all
 server.get('*', (req, res, next) => {
   res.status(404).send({

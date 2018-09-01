@@ -21,10 +21,6 @@
 <script>
 export default {
   name: "login",
-  created() {
-    //checks for valid session
-    this.$store.dispatch("authenticate");
-  },
   data() {
     return {
       loginForm: true,

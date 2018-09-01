@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "start": "npm run --prefix server start & npm run --prefix client serve"
+    },
+    "dependencies": {
+        "npm": "^6.4.1"
+    }
+}
