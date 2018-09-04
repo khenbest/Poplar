@@ -1,17 +1,18 @@
 <template>
   <div class="board">
+    {{boardId}}
   </div>
 </template>
 
 <script>
 export default {
   name: "board",
-  created(){
+  created() {
     //blocks users not logged in
     if (!this.$store.state.user._id) {
       this.$router.push({ name: "login" });
     }
   },
-  props: ['boardId']
+  props: ["boardId"]
 };
 </script>

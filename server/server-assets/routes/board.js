@@ -56,6 +56,9 @@ router.delete('/:id', (req, res, next) => {
         return res.status(401).send("ACCESS DENIED!")
       }
       Boards.findByIdAndRemove(req.params.id)
+        .then(data => {
+          res.send('DELORTED')
+        })
     })
 })
 
