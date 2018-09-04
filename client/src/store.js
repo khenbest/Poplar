@@ -26,29 +26,42 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    setBoards(state, boards) {
+      state.boards = boards
     }
   },
   actions: {
+    //AUTH STUFF
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'home' })
+          router.push({ name: 'boards' })
         })
     },
     authenticate({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'home' })
+          router.push({ name: 'boards' })
         })
     },
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'home' })
+          router.push({ name: 'boards' })
+        })
+    },
+
+    //BOARDS
+    getBoards({ commit, dispatch }) {
+      api.get('boards')
+        .then(res => {
+          commit('setBoards', res.data)
         })
     }
+
   }
 })
