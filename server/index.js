@@ -51,7 +51,7 @@ server.use('/api/boards', boardRoutes)
 
 
 //Catch all
-server.get('*', (req, res, next) => {
+server.use('*', (req, res, next) => {
   res.status(404).send({
     error: 'No matching routes'
   })

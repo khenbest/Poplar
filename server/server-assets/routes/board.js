@@ -55,10 +55,14 @@ router.delete('/:id', (req, res, next) => {
       if (!board.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      Boards.findByIdAndRemove(req.params.id)
-        .then(data => {
-          res.send('DELORTED')
-        })
+      board.delete(err => {
+        if (err) {
+          console.log(err)
+          next()
+          return
+        }
+        res.send("Successfully Deleted")
+      });
     })
 })
 
