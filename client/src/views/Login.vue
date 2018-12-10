@@ -11,7 +11,7 @@
       <input type="password" v-model="newUser.password" placeholder="password">
       <button type="submit">Create Account</button>
     </form>
-    <div @click="loginForm = !loginForm">
+    <div class="action" @click="loginForm = !loginForm">
       <p v-if="loginForm">No account? Click here to Register</p>
       <p v-else>Already have an account? Click here to Login</p>
     </div>
@@ -19,29 +19,35 @@
 </template>
 
 <script>
-export default {
-  name: "login",
-  data() {
-    return {
-      loginForm: true,
-      creds: {
-        email: "",
-        password: ""
-      },
-      newUser: {
-        email: "",
-        password: "",
-        name: ""
-      }
-    };
-  },
-  methods: {
-    register() {
-      this.$store.dispatch("register", this.newUser);
+  export default {
+    name: "login",
+    data() {
+      return {
+        loginForm: true,
+        creds: {
+          email: "",
+          password: ""
+        },
+        newUser: {
+          email: "",
+          password: "",
+          name: ""
+        }
+      };
     },
-    loginUser() {
-      this.$store.dispatch("login", this.creds);
+    methods: {
+      register() {
+        this.$store.dispatch("register", this.newUser);
+      },
+      loginUser() {
+        this.$store.dispatch("login", this.creds);
+      }
     }
-  }
-};
+  };
 </script>
+
+<style>
+  .action {
+    cursor: pointer;
+  }
+</style>
