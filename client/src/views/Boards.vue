@@ -14,38 +14,38 @@
 </template>
 
 <script>
-export default {
-  name: "boards",
-  created() {
-    //blocks users not logged in
-    if (!this.$store.state.user._id) {
-      this.$router.push({ name: "login" });
-    }
-  },
-  mounted() {
-    this.$store.dispatch("getBoards");
-  },
-  data() {
-    return {
-      newBoard: {
-        title: "",
-        description: ""
+  export default {
+    name: "boards",
+    created() {
+      //blocks users not logged in
+      if (!this.$store.state.user._id) {
+        this.$router.push({ name: "login" });
       }
-    };
-  },
-  computed: {
-    boards() {
-      return this.$store.state.boards;
-    }
-  },
-  methods: {
-    addBoard() {
-      this.$store.dispatch("addBoard", this.newBoard);
-      this.newBoard = { title: "", description: "" };
     },
-    deleteBoard(boardId) {
-      this.$store.dispatch("deleteBoard", boardId);
+    mounted() {
+      this.$store.dispatch("getBoards");
+    },
+    data() {
+      return {
+        newBoard: {
+          title: "",
+          description: ""
+        }
+      };
+    },
+    computed: {
+      boards() {
+        return this.$store.state.boards;
+      }
+    },
+    methods: {
+      addBoard() {
+        this.$store.dispatch("addBoard", this.newBoard);
+        this.newBoard = { title: "", description: "" };
+      },
+      deleteBoard(boardId) {
+        this.$store.dispatch("deleteBoard", boardId);
+      }
     }
-  }
-};
+  };
 </script>
