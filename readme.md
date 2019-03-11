@@ -11,7 +11,7 @@ Perhaps on of the most important skills to obtain on your road to becoming a Sof
 
 As we move into these larger projects we are also going to start enforcing stricter guidelines to help teach the concepts of Object Oriented Programming.
 
-You will notice that there are two main directories in this project. One for the frontend and the other is for the server. Having these distinct directories helps create a separation of concerns. To help cement this even further you will want to open up two instances of vscode, one for each directory. 
+You will notice that there are two main directories in this project. One for the frontend and the other is for the server. Having these distinct directories helps create a separation of concerns. To help cement this even further you may want to open up two instances of vscode, one for each directory. 
 
 You will need to launch both the client and the server independently. Make sure you push the play button in vs code on both projects.
 
@@ -21,7 +21,7 @@ The goal of each of these projects is to be decoupled from each other. Meaning y
 
 
 ### The Server
-On the server you will utilize a node-mongodb setup with express sessions and a mongoose ORM. The server side code needs to be setup similar to your previous projects*. You will need to create a new free database at mlab for this assignment. 
+On the server you will utilize a node-mongodb setup with express sessions and a mongoose ORM. The server side code needs to be setup similar to your previous projects*. You will need to create a new free database at gearhost for this assignment. 
 
 *\* portions of this have already been done for you*
 
@@ -31,15 +31,15 @@ The Web client will be a vue application. The project has already been initializ
 
 ### Feature Requests (AKA your tasks)
 
-Kanban is a simple enough application. Users have the request to be able to create and manage boards, lists, and tasks. Tasks should also have the ability to add notes or comments and should be assigned to individual users. This setup will take a while to get all ironed out but we have some time to work on it so don't fret.
+Kanban is a simple enough application. Users have the request to be able to create and manage boards, lists, and tasks. Tasks should also have the ability to add notes or comments. This setup will take a while to get all ironed out but we have some time to work on it so don't fret.
 
-A board manages several lists. Once created lists can not be transfered between boards but they can be removed. If a list is removed go ahead and remove all of the tasks and comments on the list as well.
+A board manages several lists. Once created lists can not be transfered between boards but they can be removed. If a list is removed go ahead and remove all of the tasks and comments on the list as well to avoid orphan data.
 
 A task should be able to move between any of the lists on whatever board it was created. Tasks can be removed individually. 
 
-Comments always belong to a task and will transfer with the task when moved. This should not require any effort on your part. If a comment is created only the user who created the comment should be able to edit/remove it unless of course the task, list, or board is removed. 
+Comments always belong to a task and will transfer with the task when moved. This should not require any extra efforts on your part. If a comment is created only the user who created the comment should be able to edit/remove it unless of course the task, list, or board is removed. 
 
-It will probably be helpful to start on the backend of this application first. Utilize a tool like postman to create a user and start creating and editing your boards and lists which has been setup for you already. Then move onto the other collections. 
+It will probably be helpful to start on the backend of this application first. Utilize a tool like postman to create a user and start creating and editing your boards which has been setup for you already. Then move onto the other collections. 
 
 The active user is always stored on the server side via sessions so you should be able to enforce some of the security concerns using something like `req.session.uid`
 

@@ -9,9 +9,8 @@ let Lists = require('./list')
 let schema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  created: { type: Number, required: true, default: Date.now() },
   authorId: { type: ObjectId, ref: 'User', required: true }
-})
+}, { timestamps: true })
 
 //CASCADE ON DELETE
 

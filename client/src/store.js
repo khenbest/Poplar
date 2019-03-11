@@ -45,8 +45,8 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
         })
-        .catch(res=>{
-          router.push({name: 'login'})
+        .catch(res => {
+          router.push({ name: 'login' })
         })
     },
     login({ commit, dispatch }, creds) {
@@ -57,7 +57,7 @@ export default new Vuex.Store({
         })
     },
 
-    //BOARDS
+    //#region -- BOARDS --
     getBoards({ commit, dispatch }) {
       api.get('boards')
         .then(res => {
@@ -76,6 +76,13 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     }
+    //#endregion
 
+
+    //#region -- LISTS --
+
+
+
+    //#endregion
   }
 })

@@ -19,8 +19,15 @@
 </template>
 
 <script>
+  import router from '@/router.js'
   export default {
     name: "login",
+    mounted() {
+      //If already logged in, will be sent back to boards page
+      if (this.$store.state.user._id) {
+        router.push({ name: 'boards' })
+      }
+    },
     data() {
       return {
         loginForm: true,
