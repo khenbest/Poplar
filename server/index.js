@@ -15,7 +15,7 @@ var corsOptions = {
 server.use(cors(corsOptions))
 
 //Fire up database connection
-require('./server-assets/db/mlab-config')
+require('./server-assets/db/gearhost-config')
 
 
 //REGISTER MIDDLEWEAR

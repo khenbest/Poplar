@@ -32,7 +32,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    //AUTH STUFF
+    //#region -- AUTH STUFF --
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -44,6 +44,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
+          router.push({ name: 'boards' })
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -56,6 +57,8 @@ export default new Vuex.Store({
           router.push({ name: 'boards' })
         })
     },
+    //#endregion
+
 
     //#region -- BOARDS --
     getBoards({ commit, dispatch }) {

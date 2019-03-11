@@ -9,9 +9,7 @@
     name: 'App',
     mounted() {
       //Authenticate on startup
-      if (!this.$store.state.user._id) {
-        this.$store.dispatch('authenticate')
-      }
+      this.$store.dispatch('authenticate')
     }
   }
 </script>

@@ -16,15 +16,15 @@ router.post('/auth/register', (req, res) => {
     })
   }
   //CHANGE THE PASSWORD TO A HASHED PASSWORD
-  req.body.password = Users.generateHash(req.body.password)
+  req.body.hash = Users.generateHash(req.body.password)
   //CREATE THE USER
   Users.create(req.body)
     .then(user => {
       //REMOVE THE PASSWORD BEFORE RETURNING
-      delete user._doc.password
+      delete user._doc.hash
       //SET THE SESSION UID (SHORT FOR USERID)
       req.session.uid = user._id
-      res.send(user)
+      res.status(201).send(user)
     })
     .catch(err => {
       res.status(400).send(err)
@@ -45,7 +45,7 @@ router.post('/auth/login', (req, res) => {
         return res.status(400).send(loginError)
       }
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
-      delete user._doc.password
+      delete user._doc.hash
       req.session.uid = user._id
       res.send(user)
     }).catch(err => {
@@ -75,7 +75,7 @@ router.get('/auth/authenticate', (req, res) => {
           error: 'Please login to continue'
         })
       }
-      delete user._doc.password
+      delete user._doc.hash
       res.send(user)
     }).catch(err => {
       res.status(500).send(err)
