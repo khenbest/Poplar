@@ -4,15 +4,17 @@ import Axios from 'axios'
 import router from './router'
 
 Vue.use(Vuex)
+//Allows axios to work locally or live
+let base = window.location.host.includes('localhost:8080') ? '//localhost:3000' : '/'
 
 let auth = Axios.create({
-  baseURL: "//localhost:3000/auth/",
+  baseURL: base + "/auth/",
   timeout: 3000,
   withCredentials: true
 })
 
 let api = Axios.create({
-  baseURL: "//localhost:3000/api/",
+  baseURL: base + "/api/",
   timeout: 3000,
   withCredentials: true
 })
