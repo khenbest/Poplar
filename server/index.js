@@ -15,7 +15,7 @@ var corsOptions = {
 };
 server.use(cors(corsOptions))
 //SET THE FRONT END
-server.use(express.static(__dirname + '../client/dist'))
+server.use(express.static(__dirname + '/../client/dist'))
 
 //Fire up database connection
 require('./server-assets/db/gearhost-config')
@@ -34,7 +34,7 @@ server.use(auth.router)
 
 
 //Gate Keeper Must login to access any route below this code
-server.use('/api', (req, res, next) => {
+server.use((req, res, next) => {
   if (!req.session.uid) {
     return res.status(401).send({
       error: 'please login to continue'
