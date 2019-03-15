@@ -5,6 +5,7 @@ var cors = require('cors')
 //SETS THE PORT TO HEROKU's 
 var port = process.env.PORT || 3000
 
+server.use(express.static(__dirname + '/../client/dist'))
 var whitelist = ['http://localhost:8080'];
 var corsOptions = {
   origin: function (origin, callback) {
@@ -15,7 +16,6 @@ var corsOptions = {
 };
 server.use(cors(corsOptions))
 //SET THE FRONT END
-server.use(express.static(__dirname + '/../client/dist'))
 
 //Fire up database connection
 require('./server-assets/db/gearhost-config')
