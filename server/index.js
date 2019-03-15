@@ -2,10 +2,13 @@ var express = require('express')
 var bp = require('body-parser')
 var server = express()
 var cors = require('cors')
-//SETS THE PORT TO HEROKU's 
-var port = process.env.PORT || 3000
 
+
+//Sets the port to Heroku's, and the files to the built project 
+var port = process.env.PORT || 3000
 server.use(express.static(__dirname + '/../client/dist'))
+
+
 var whitelist = ['http://localhost:8080'];
 var corsOptions = {
   origin: function (origin, callback) {
@@ -15,7 +18,6 @@ var corsOptions = {
   credentials: true
 };
 server.use(cors(corsOptions))
-//SET THE FRONT END
 
 //Fire up database connection
 require('./server-assets/db/gearhost-config')
