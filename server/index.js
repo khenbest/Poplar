@@ -34,7 +34,7 @@ server.use(auth.router)
 
 
 //Gate Keeper Must login to access any route below this code
-server.use((req, res, next) => {
+server.use('/api', (req, res, next) => {
   if (!req.session.uid) {
     return res.status(401).send({
       error: 'please login to continue'
