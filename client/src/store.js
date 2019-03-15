@@ -8,13 +8,13 @@ Vue.use(Vuex)
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000' : '/'
 
 let auth = Axios.create({
-  baseURL: base + "/auth/",
+  baseURL: base + "auth/",
   timeout: 3000,
   withCredentials: true
 })
 
 let api = Axios.create({
-  baseURL: base + "/api/",
+  baseURL: base + "api/",
   timeout: 3000,
   withCredentials: true
 })
