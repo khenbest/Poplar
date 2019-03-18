@@ -41,9 +41,14 @@ router.post('/auth/login', (req, res) => {
         return res.status(400).send(loginError)
       }
       //CHECK THE PASSWORD
-      if (!user.validatePassword(req.body.password)) {
-        return res.status(400).send(loginError)
-      }
+      user.validatePassword(req.body.password)
+        .then(valid => {
+          if(!valid){
+            return res.status(400).send(loginError)
+          }
+        })
+        
+      
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
       delete user._doc.hash
       req.session.uid = user._id
