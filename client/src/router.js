@@ -22,12 +22,6 @@ export default new Router({
       props: true,
       component: PostDetails
     },
-    // {
-    //   path: '/board/:boardId',
-    //   name: 'board',
-    //   props: true,
-    //   component: Board
-    // },
     {
       path: '/login',
       name: 'login',
