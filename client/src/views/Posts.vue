@@ -1,6 +1,7 @@
 <template>
   <div class="posts">
-    WELCOME TO THE BOARDS!!!
+    WELCOME TO THE POSTS!!!
+    <chatroom></chatroom>
     <form @submit.prevent="addPost">
       <input type="text" placeholder="title" v-model="newPost.title" required>
       <input type="text" placeholder="description" v-model="newPost.description">
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+  import Chatroom from "./Chatroom.vue"
   export default {
     name: "posts",
     created() {
@@ -46,6 +48,9 @@
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
       }
+    },
+    components: {
+      Chatroom
     }
   };
 </script>
