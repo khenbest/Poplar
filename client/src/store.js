@@ -158,6 +158,7 @@ export default new Vuex.Store({
       api.post('posts', postData)
         .then(serverPost => {
           dispatch('getPosts')
+          console.log(serverPost.data)
         })
     },
     deletePost({ commit, dispatch }, postId) {
