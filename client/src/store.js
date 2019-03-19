@@ -37,13 +37,13 @@ export default new Vuex.Store({
     roomData: {}
   },
   mutations: {
-    //sockets
     setUser(state, user) {
       state.user = user
     },
     setPosts(state, posts) {
       state.posts = posts
     },
+    //#region --SOCKETS--
     setJoined(state, payload) {
       state.joined = true
       state.name = payload;
@@ -66,9 +66,10 @@ export default new Vuex.Store({
         state.messages = [],
         state.roomData = {}
     }
+    //#endregion --SOCKETS
   },
   actions: {
-    //sockets
+    //#region --SOCKETS--
     join({ commit, dispatch }, payload) {
       commit('setJoined', payload);
       dispatch('socket', payload)
@@ -110,6 +111,7 @@ export default new Vuex.Store({
       socket.close()
       commit('leave')
     },
+    //#endregion
     //#region -- AUTH STUFF --
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
@@ -159,19 +161,11 @@ export default new Vuex.Store({
         })
     },
     deletePost({ commit, dispatch }, postId) {
-      api.delete('postss/' + postId)
+      api.delete('posts/' + postId)
         .then(res => {
-          dispatch('getPost')
+          dispatch('getPosts')
         })
     },
-
-    //#endregion
-
-
-    //#region -- LISTS --
-
-
-
     //#endregion
   }
 })
