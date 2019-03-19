@@ -4,14 +4,10 @@ var server = express()
 var cors = require('cors')
 
 //SOCKETS
-var socketServer = require("http").createServer(server)
-var io = require("socket.io")(socketServer)
+var app = require("http").createServer(server)
+var io = require("socket.io")(app)
 let Socket = require('./server-assets/models/socket')
 let socket = new Socket(io)
-
-server.listen(port, function () {
-  console.log("Server listening at port:", port)
-})
 
 //Sets the port to Heroku's, and the files to the built project 
 var port = process.env.PORT || 3000
@@ -56,8 +52,13 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
-let postRoutes = require('./server-assets/routes/post')
-server.use('/api/posts', postRoutes)
+// let boardRoutes = require('./server-assets/routes/board')
+// server.use('/api/boards', boardRoutes)
+
+
+
+
+
 
 
 //Catch all
@@ -68,6 +69,6 @@ server.use('*', (req, res, next) => {
 })
 
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log('server running on port', port)
 })
