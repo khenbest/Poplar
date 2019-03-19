@@ -86,7 +86,6 @@ export default new Vuex.Store({
       })
 
       socket.on('joinedRoom', data => {
-        debugger
         commit('setRoom', data)
       })
 
