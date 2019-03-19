@@ -153,7 +153,7 @@ export default new Vuex.Store({
           dispatch('getPosts')
         })
     },
-    deleteBoard({ commit, dispatch }, postId) {
+    deletePost({ commit, dispatch }, postId) {
       api.delete('postss/' + postId)
         .then(res => {
           dispatch('getPost')
