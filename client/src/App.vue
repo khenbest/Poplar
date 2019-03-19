@@ -5,11 +5,15 @@
 </template>
 
 <script>
+  import Chatroom from "@/views/Chatroom.vue"
   export default {
     name: 'App',
     mounted() {
       //Authenticate on startup
       this.$store.dispatch('authenticate')
+    },
+    components: {
+      Chatroom
     }
   }
 </script>

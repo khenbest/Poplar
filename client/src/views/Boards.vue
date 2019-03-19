@@ -1,6 +1,7 @@
 <template>
   <div class="boards">
     WELCOME TO THE BOARDS!!!
+    <chatroom></chatroom>
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
       <input type="text" placeholder="description" v-model="newBoard.description">
