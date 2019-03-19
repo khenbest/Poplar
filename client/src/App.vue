@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Chatroom from "@/views/Chatroom.vue"
+
   export default {
     name: 'App',
     mounted() {
