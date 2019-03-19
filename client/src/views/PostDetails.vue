@@ -1,18 +1,21 @@
 <template>
    <div class="postDetails">
-      
+      <chatroom></chatroom>
    </div>
 </template>
 
 <script>
-export default {
-   name: "postDetails",
-   props: [],
-   data() {
-      return {}
-   },
-   computed: {},
-   methods: {},
-   components: {}
-}
+   import Chatroom from "./Chatroom.vue"
+   export default {
+      name: "postDetails",
+      props: [],
+      data() {
+         return {}
+      },
+      computed: {},
+      methods: {},
+      components: {
+         Chatroom
+      }
+   }
 </script>

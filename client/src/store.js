@@ -99,7 +99,6 @@ export default new Vuex.Store({
       })
 
       socket.on('newMessage', data => {
-        debugger
         commit('addMessage', data)
       })
     },
