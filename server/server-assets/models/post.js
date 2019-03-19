@@ -9,7 +9,8 @@ let schemaName = 'Post'
 let schema = new Schema({
   title: { type: String, required: true },
   authorId: { type: ObjectId, ref: 'User', required: true },
-  imgUrl: { type: String, required: true },
+  imgUrl1: { type: String, required: true },
+  imgUrl2: { type: String },
   votes: {},
   tags: { type: String, enum: ["music", "sports", "fashion", "food", "movies"] }
 }, { timestamps: true })
