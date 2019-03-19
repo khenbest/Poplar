@@ -53,8 +53,15 @@ router.put('/:id', (req, res, next) => {
 
 //DELETE
 router.delete('/:id', (req, res, next) => {
-  Posts.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+  Posts.findOne({ _id: req.params.id, authorId: req.session.uid })
     .then(post => {
+      post.remove(err => {
+        if (err) {
+          console.log(err)
+          next()
+          return
+        }
+      })
       res.send("Successfully Deleted")
     })
     .catch(err => {
