@@ -82,7 +82,8 @@
     max-height: 20vh;
   }
 
-  body {
+  .login {
+    min-height: 100vh;
     background-color: #6496c7;
   }
 </style>
