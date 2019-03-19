@@ -23,15 +23,15 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
-    boards: [],
-    activeBoard: {}
+    posts: [],
+    activePost: {}
   },
   mutations: {
     setUser(state, user) {
       state.user = user
     },
-    setBoards(state, boards) {
-      state.boards = boards
+    setBoards(state, posts) {
+      state.posts = posts
     }
   },
   actions: {
@@ -47,7 +47,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          router.push({ name: 'posts' })
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -57,29 +57,29 @@ export default new Vuex.Store({
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          router.push({ name: 'posts' })
         })
     },
     //#endregion
 
 
-    //#region -- BOARDS --
+    //#region -- POSTS --
     getBoards({ commit, dispatch }) {
-      api.get('boards')
+      api.get('posts')
         .then(res => {
-          commit('setBoards', res.data)
+          commit('setPosts', res.data)
         })
     },
     addBoard({ commit, dispatch }, boardData) {
-      api.post('boards', boardData)
+      api.post('posts', boardData)
         .then(serverBoard => {
-          dispatch('getBoards')
+          dispatch('getPosts')
         })
     },
-    deleteBoard({ commit, dispatch }, boardId) {
-      api.delete('boards/' + boardId)
+    deleteBoard({ commit, dispatch }, postId) {
+      api.delete('postss/' + postId)
         .then(res => {
-          dispatch('getBoards')
+          dispatch('getPost')
         })
     }
     //#endregion
