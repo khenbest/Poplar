@@ -6,7 +6,8 @@ var cors = require('cors')
 //SOCKETS
 var app = require("http").createServer(server)
 var io = require("socket.io")(app)
-
+let Socket = require('./server-assets/models/socket')
+let socket = new Socket(io)
 
 //Sets the port to Heroku's, and the files to the built project 
 var port = process.env.PORT || 3000
@@ -23,9 +24,6 @@ var corsOptions = {
   credentials: true
 };
 server.use(cors(corsOptions))
-
-let Socket = require('./server-assets/models/socket')
-new Socket(io)
 
 //Fire up database connection
 require('./server-assets/db/gearhost-config')
