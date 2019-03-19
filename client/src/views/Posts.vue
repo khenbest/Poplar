@@ -1,6 +1,7 @@
 <template>
   <div class="posts">
     WELCOME TO THE POSTS!!!
+    <button class="btn btn-outline-danger logout mr-3 shadow" @click="logout">Logout</button>
     <form @submit.prevent="addPost">
       <input type="text" placeholder="title" v-model="newPost.title" required>
       <input type="text" placeholder="description" v-model="newPost.description">
@@ -27,6 +28,7 @@
     mounted() {
       this.$store.dispatch("getPosts");
     },
+
     data() {
       return {
         newPost: {
@@ -50,6 +52,9 @@
       },
       chatroom() {
         this.$router.push({ name: 'postDetails' })
+      },
+      logout() {
+        this.$store.dispatch('logout')
       }
     },
     components: {
