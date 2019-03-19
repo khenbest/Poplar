@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Boards from './views/Boards.vue'
-import Board from './views/Board.vue'
+import Posts from './views/Posts.vue'
 import Login from './views/Login.vue'
 
 Vue.use(Router)
@@ -10,15 +9,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'boards',
-      component: Boards
+      name: 'posts',
+      component: Posts
     },
-    {
-      path: '/board/:boardId',
-      name: 'board',
-      props: true,
-      component: Board
-    },
+    // {
+    //   path: '/board/:boardId',
+    //   name: 'board',
+    //   props: true,
+    //   component: Board
+    // },
     {
       path: '/login',
       name: 'login',
