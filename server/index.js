@@ -56,18 +56,8 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
-<<<<<<< HEAD
-// let boardRoutes = require('./server-assets/routes/board')
-// server.use('/api/boards', boardRoutes)
-
-
-
-
-
-=======
 let postRoutes = require('./server-assets/routes/post')
 server.use('/api/posts', postRoutes)
->>>>>>> 155c137008e3a9dbede51796f0c426d177c32397
 
 
 //Catch all
