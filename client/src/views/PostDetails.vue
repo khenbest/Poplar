@@ -1,5 +1,6 @@
 <template>
    <div class="postDetails">
+      <chatroom></chatroom>
    </div>
 </template>
 
