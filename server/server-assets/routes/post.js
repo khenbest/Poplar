@@ -1,9 +1,9 @@
 let router = require('express').Router()
-let Boards = require('../models/board')
+let Posts = require('../models/post')
 
 //GET
 router.get('/', (req, res, next) => {
-  Boards.find({ authorId: req.session.uid })
+  Posts.find({ authorId: req.session.uid })
     .then(data => {
       res.send(data)
     })
@@ -16,9 +16,9 @@ router.get('/', (req, res, next) => {
 //POST
 router.post('/', (req, res, next) => {
   req.body.authorId = req.session.uid
-  Boards.create(req.body)
-    .then(newBoard => {
-      res.send(newBoard)
+  Posts.create(req.body)
+    .then(newPost => {
+      res.send(newPost)
     })
     .catch(err => {
       console.log(err)
@@ -28,12 +28,12 @@ router.post('/', (req, res, next) => {
 
 //PUT
 router.put('/:id', (req, res, next) => {
-  Boards.findById(req.params.id)
-    .then(board => {
-      if (!board.authorId.equals(req.session.uid)) {
+  Posts.findById(req.params.id)
+    .then(post => {
+      if (!post.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      board.update(req.body, (err) => {
+      post.update(req.body, (err) => {
         if (err) {
           console.log(err)
           next()
@@ -48,10 +48,13 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
+//logic inside of your vote route will need to update the user document as well by including the post id in the user's participated array
+
+
 //DELETE
 router.delete('/:id', (req, res, next) => {
-  Boards.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
-    .then(board => {
+  Posts.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+    .then(post => {
       res.send("Successfully Deleted")
     })
     .catch(err => {

@@ -9,9 +9,10 @@ const SALT = 10
 
 let schema = new Schema({
   name: { type: String, required: true },
-  //every email must be unique on the database
   email: { type: String, required: true, unique: true },
-  hash: { type: String, required: true }
+  hash: { type: String, required: true },
+  participated: [{ type: ObjectId, ref: "Post" }],
+  posted: [{ type: ObjectId, ref: "Post" }]
 }, { timestamps: true })
 
 
@@ -24,7 +25,7 @@ schema.statics.generateHash = function (password) {
 
 //schema.methods are used to add a method to a Model instance
 schema.methods.validatePassword = function (password) {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, function (err, isMatch) {
       if (err || !isMatch) {
         return reject(err)
