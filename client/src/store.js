@@ -30,7 +30,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     posts: [],
-    activeBoard: {},
+    activePost: {},
     joined: false,
     name: '',
     messages: [],
@@ -115,7 +115,7 @@ export default new Vuex.Store({
       auth.post('register', newUser)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          router.push({ name: 'posts' })
         })
     },
     authenticate({ commit, dispatch }) {
@@ -139,15 +139,15 @@ export default new Vuex.Store({
 
 
     //#region -- POSTS --
-    getBoards({ commit, dispatch }) {
+    getPosts({ commit, dispatch }) {
       api.get('posts')
         .then(res => {
           commit('setPosts', res.data)
         })
     },
-    addBoard({ commit, dispatch }, boardData) {
-      api.post('posts', boardData)
-        .then(serverBoard => {
+    addPost({ commit, dispatch }, postData) {
+      api.post('posts', postData)
+        .then(serverPost => {
           dispatch('getPosts')
         })
     },
