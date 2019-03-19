@@ -12,9 +12,6 @@
       //Authenticate on startup
       this.$store.dispatch('authenticate')
     },
-    components: {
-      Chatroom
-    }
   }
 </script>
 

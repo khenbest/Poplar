@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import Chatroom from "@/views/Chatroom.vue"
+  import Chatroom from "./Chatroom.vue"
   export default {
     name: "posts",
     created() {
