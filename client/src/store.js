@@ -29,7 +29,11 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
+<<<<<<< HEAD
     posts: [],
+=======
+    boards: [],
+>>>>>>> 34f16930a51ea95f903853a72ad6f25627ec5115
     activeBoard: {},
     joined: false,
     name: '',
@@ -41,8 +45,13 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user
     },
+<<<<<<< HEAD
     setPosts(state, posts) {
       state.posts = posts
+=======
+    setBoards(state, boards) {
+      state.boards = boards
+>>>>>>> 34f16930a51ea95f903853a72ad6f25627ec5115
     },
     setJoined(state, payload) {
       state.joined = true
