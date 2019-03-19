@@ -1,7 +1,6 @@
 <template>
   <div class="posts">
     WELCOME TO THE POSTS!!!
-    <chatroom></chatroom>
     <form @submit.prevent="addPost">
       <input type="text" placeholder="title" v-model="newPost.title" required>
       <input type="text" placeholder="description" v-model="newPost.description">
@@ -11,6 +10,7 @@
       <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link>
       <button @click="deletePost(post._id)">DELETE BOARD</button>
     </div>
+    <button @click="chatroom">Go to Chatroom!</button>
   </div>
 </template>
 
@@ -47,6 +47,9 @@
       },
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
+      },
+      chatroom() {
+        this.$router.push({ name: 'postDetails' })
       }
     },
     components: {
