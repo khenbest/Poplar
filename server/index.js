@@ -4,14 +4,9 @@ var server = express()
 var cors = require('cors')
 
 //SOCKETS
-var socketServer = require("http").createServer(server)
-var io = require("socket.io")(socketServer)
-let Socket = require('./server-assets/models/socket')
-let socket = new Socket(io)
+var app = require("http").createServer(server)
+var io = require("socket.io")(app)
 
-server.listen(port, function () {
-  console.log("Server listening at port:", port)
-})
 
 //Sets the port to Heroku's, and the files to the built project 
 var port = process.env.PORT || 3000
@@ -28,6 +23,9 @@ var corsOptions = {
   credentials: true
 };
 server.use(cors(corsOptions))
+
+let Socket = require('./server-assets/models/socket')
+new Socket(io)
 
 //Fire up database connection
 require('./server-assets/db/gearhost-config')
@@ -56,10 +54,6 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
-<<<<<<< HEAD
-let postRoutes = require('./server-assets/routes/post')
-server.use('/api/posts', postRoutes)
-=======
 // let boardRoutes = require('./server-assets/routes/board')
 // server.use('/api/boards', boardRoutes)
 
@@ -67,7 +61,6 @@ server.use('/api/posts', postRoutes)
 
 
 
->>>>>>> d76517782b23b192e248cacd65d1cf37aed9e84f
 
 
 //Catch all
@@ -78,6 +71,6 @@ server.use('*', (req, res, next) => {
 })
 
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log('server running on port', port)
 })
