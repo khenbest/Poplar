@@ -2,16 +2,27 @@ let router = require('express').Router()
 let Posts = require('../models/post')
 
 //GET
+
 router.get('/', (req, res, next) => {
-  Posts.find({ authorId: req.session.uid })
-    .then(data => {
-      res.send(data)
+  Posts.find({})
+    .then(post => {
+      res.send(post)
     })
     .catch(err => {
       console.log(err)
-      next()
     })
 })
+
+// router.get('/', (req, res, next) => {
+//   Posts.find({ authorId: req.session.uid })
+//     .then(data => {
+//       res.send(data)
+//     })
+//     .catch(err => {
+//       console.log(err)
+//       next()
+//     })
+// })
 
 //POST
 router.post('/', (req, res, next) => {
