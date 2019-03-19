@@ -29,27 +29,18 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
-<<<<<<< HEAD
-    posts: [],
-    activePost: {}
-=======
     boards: [],
     activeBoard: {},
     joined: false,
     name: '',
     messages: [],
     roomData: {}
->>>>>>> 5c87f2ac9ee7ef3087d40cb9c6a575eca6d55912
   },
   mutations: {
     //sockets
     setUser(state, user) {
       state.user = user
     },
-<<<<<<< HEAD
-    setBoards(state, posts) {
-      state.posts = posts
-=======
     setBoards(state, boards) {
       state.boards = boards
     },
@@ -74,7 +65,6 @@ export default new Vuex.Store({
         state.name = '',
         state.messages = [],
         state.roomData = {}
->>>>>>> 5c87f2ac9ee7ef3087d40cb9c6a575eca6d55912
     }
   },
   actions: {
