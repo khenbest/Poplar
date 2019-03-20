@@ -1,5 +1,11 @@
 <template>
     <div class="profile">
+        <h1 class="text-dark">ayyo</h1>
+        <h1 class="text-dark">ayyo</h1>
+        <h1 class="text-dark">ayyo</h1>
+
+        <h1 class="text-dark">ayyo</h1>
+        <h1 class="text-dark">ayyo</h1>
 
     </div>
 </template>
