@@ -11,19 +11,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
-          <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"
-            href="#">
+          <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
             All
             Posts
           </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 1}" @click="activeClass = 1" href="#">
+          <a class="nav-item nav-link" :class="{active : activeClass == 1}" @click="activeClass = 1; friendPosts()">
             Friend
             Posts
           </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 3}" @click="activeClass = 3; profile();"
-            href="#">Profile</a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 4}" @click="logout(); activeClass = null"
-            href="#">Logout</a>
+          <a class="nav-item nav-link" :class="{active : activeClass == 3}"
+            @click="activeClass = 3; profile();">Profile</a>
+          <a class="nav-item nav-link" :class="{active : activeClass == 4}"
+            @click="logout(); activeClass = null">Logout</a>
         </ul>
       </div>
     </nav>
@@ -52,6 +51,9 @@
       },
       allPosts() {
         this.$router.push({ path: '/' });
+      },
+      friendPosts() {
+        this.$router.push({ path: '/posts/myPosts' })
       }
     },
     components: {}
