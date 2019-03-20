@@ -10,11 +10,14 @@
                 </div>
 
                 <!-- POST CARDS -->
-                <div class="row d-flex justify-content-center">
-                    <h1>{{this.$store.state.user.name}}'s Posts</h1>
+                <div id="btn-bar" class="row d-flex d-flex justify-content-center ">
+                    <div class="row d-flex justify-content-center">
+                        <button class="btn btn-my" @click="showPosts = !showPosts">My Posts</button>
+                        <button class="btn btn-my" @click="showPosts = !showPosts">My Participated Posts</button>
+                    </div>
                 </div>
-                <button class="btn btn-primary" @click="showPosts = !showPosts">My Posts</button>
-                <button class="btn btn-primary" @click="showPosts = !showPosts">My Participated Posts</button>
+                <h1>{{this.$store.state.user.name}}'s Profile</h1>
+
                 <span v-show="showPosts">
 
                     <div class="row">
@@ -105,6 +108,18 @@
         color: #a0b5c5;
         font-family: 'Amatic SC', cursive;
         margin-bottom: -0.2em;
+    }
+
+    .btn-my {
+        background: #6496c7;
+        color: white;
+
+    }
+
+    #btn-bar {
+        background-color: #6496c7;
+        color: black;
+
     }
 
     .title {
