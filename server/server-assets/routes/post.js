@@ -28,6 +28,7 @@ router.get('/', (req, res, next) => {
 //POST
 router.post('/', (req, res, next) => {
   req.body.authorId = req.session.uid
+  req.body.user = req.session.username
   Posts.create(req.body)
     .then(newPost => {
       res.send(newPost)

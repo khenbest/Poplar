@@ -11,7 +11,7 @@
         </div>
 
         <!-- CREATE POST FORM -->
-        <!-- <div class="row">
+        <div class="row">
           <div class="col">
             <form @submit.prevent="addPost">
               <input type="text" placeholder="title" v-model="newPost.title" required>
@@ -19,7 +19,7 @@
               <button type="submit">Create Post</button>
             </form>
           </div>
-        </div> -->
+        </div>
 
         <!-- POST CARDS -->
         <div class="row">
@@ -28,7 +28,7 @@
 
             <div class="row">
               <div class="col">
-                <h4 class="username">_________{{post.authorId}_________</h4>
+                <h4 class="username">Posted By: {{post.user || 'Unknown'}}</h4>
               </div>
             </div>
 
@@ -60,7 +60,7 @@
               </div>
             </div>
 
-            <!-- <button @click="deletePost(post._id)">Delete</button> -->
+            <button @click="deletePost(post._id)">Delete</button>
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
           </div>
         </div>
