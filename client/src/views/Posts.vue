@@ -49,9 +49,7 @@
       chatroom() {
         this.$router.push({ name: 'postDetails' })
       },
-      logout() {
-        this.$store.dispatch('logout')
-      }
+
     },
     components: {
       Chatroom

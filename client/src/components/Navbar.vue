@@ -1,42 +1,116 @@
+  // <nav class="navbar navbar-expand-md navbar-expand-lg poplarBG">
+      <img class="poplarIMG" @click="goHome, activeClass = null" src="../assets/poplarName.jpg">
+  //     <button
+  //       class="navbar-toggler"
+  //       type="button"
+  //       data-toggle="collapse"
+  //       data-target="#navbarNavAltMarkup"
+  //       aria-controls="navbarNavAltMarkup"
+  //       aria-expanded="false"
+  //       aria-label="Toggle navigation"
+  //     >
+  //       <span class="navbar-toggler-icon"></span>
+  //     </button>
+  //     <div class="collapse navbar-collapse ml-4" id="navbarNavAltMarkup">
+  //       <div class="navbar-nav">
+  //         <div class="navbar-nav">
+            // <a
+            //   class="nav-item nav-link"
+            //   :class="{active : activeClass == 1}"
+            //   @click="activeClass = 1"
+            //   href="#"
+            // >Friend Posts</a>
+            // <a
+            //   class="nav-item nav-link"
+            //   :class="{active : activeClass == 2}"
+            //   @click="activeClass = 2"
+            //   href="#"
+            // >All Posts</a>
+            // <a
+            //   class="nav-item nav-link"
+            //   :class="{active : activeClass == 3}"
+            //   @click="activeClass = 3"
+            //   href="#"
+            // >Profile</a>
+            // <a
+            //   class="nav-item nav-link"
+            //   :class="{active : activeClass == 4}"
+            //   @click="logout(); activeClass = null"
+            //   href="#"
+            >Logout</a>
+  //         </div>
+  //       </div>
+  // </nav>
+
 <template>
   <div class="component">
-    <nav class="navbar navbar-expand-md navbar-expand-lg poplarBG">
-      <img class="poplarIMG" @click="goHome" src="../assets/poplarName.jpg">
+    <nav class="navbar navbar-expand-lg navbar-light poplarBG">
+      <img
+        class="poplarIMG"
+        href="#"
+        @click="goHome(); activeClass = null;"
+        src="../assets/poplarName.jpg"
+      >
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
+        data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">All Posts</a>
-            <a class="nav-item nav-link" href="#">Friend Posts</a>
-            <a class="nav-item nav-link" href="#">Profile</a>
-          </div>
-        </div>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
+          <a
+            class="nav-item nav-link"
+            :class="{active : activeClass == 1}"
+            @click="activeClass = 1"
+            href="#"
+          >Friend Posts</a>
+          <a
+            class="nav-item nav-link"
+            :class="{active : activeClass == 2}"
+            @click="activeClass = 2"
+            href="#"
+          >All Posts</a>
+          <a
+            class="nav-item nav-link"
+            :class="{active : activeClass == 3}"
+            @click="activeClass = 3"
+            href="#"
+          >Profile</a>
+          <a
+            class="nav-item nav-link"
+            :class="{active : activeClass == 4}"
+            @click="logout(); activeClass = null"
+            href="#"
+          >Logout</a>
+        </ul>
       </div>
-      <!-- <i class="fas fa-user"></i> -->
-      <!-- <i class="fas fa-users"></i> -->
     </nav>
+    <!-- <i class="fas fa-user"></i> -->
+    <!-- <i class="fas fa-users"></i> -->
   </div>
 </template>
 <script>
 export default {
   name: "component",
   data() {
-    return {};
+    return {
+      activeClass: null
+    };
   },
   computed: {},
   methods: {
     goHome() {
       this.$router.push({ path: "/" });
+    },
+    logout() {
+      this.$store.dispatch("logout");
     }
   },
   components: {}
@@ -58,6 +132,11 @@ export default {
 }
 
 .active {
-  color: black;
+  color: rgb(1, 1, 157);
+  border-bottom: 3px solid rgb(1, 1, 157);
+}
+
+a {
+  color: white;
 }
 </style>
