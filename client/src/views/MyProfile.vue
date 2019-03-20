@@ -25,11 +25,6 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
                         <div class="row">
-                            <div class="col">
-                                <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col d-flex justify-content-start">
                                 <h4 class="title">{{post.title}}</h4>
                             </div>
@@ -39,30 +34,23 @@
                                 <img :src="post.imgUrl1" class="photo">
                             </div>
                         </div>
-                        <div class="row mb-2 mt-2 justify-content-between">
-                            <div class="col">
-                                <button class="vote yes" @click="">yes</button>
-                            </div>
-                            <div class="col">
-                                <button class="vote no" @click="">no</button>
-                            </div>
-                        </div>
                         <div class="row mb-2">
                             <div class="col d-flex justify-content-center">
                                 <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
                             </div>
+                            <div class="col d-flex justify-content-center">
+                                <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
+                            </div>
                         </div>
-                        <!-- <button @click="deletePost(post._id)">Delete</button> -->
-                        <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
+
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
-                    </div>
-                </div>
+                <!-- <button @click="deletePost(post._id)">Delete</button> -->
+                <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </template>
 <script>
