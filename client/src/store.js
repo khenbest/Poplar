@@ -170,6 +170,12 @@ export default new Vuex.Store({
           dispatch('getPosts')
         })
     },
+    castVote({ commit, dispatch }, payload) {
+      api.put(payload.endpoint, payload.data)
+        .then(res => {
+          dispatch('getPosts')
+        })
+    }
     //#endregion
   }
 })
