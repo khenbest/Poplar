@@ -17,6 +17,7 @@ router.get('/:myPosts?', (req, res, next) => {
       console.log(err)
     })
 })
+//get posts that you participated in is handled in your user routes
 
 //GET friends posts
 // router.get('/', (req, res, next) => {
@@ -30,7 +31,6 @@ router.get('/:myPosts?', (req, res, next) => {
 //     })
 // })
 
-//get posts that you participated in is handled in your user routes
 
 //POST
 router.post('/', (req, res, next) => {
