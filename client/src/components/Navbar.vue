@@ -1,6 +1,6 @@
 <template>
-  <div class="component">
-    <nav class="navbar navbar-expand-lg navbar-light poplarBG">
+  <div class="nav-component">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark poplarBG">
       <img
         class="poplarIMG"
         href="#"
@@ -18,7 +18,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
           <a
@@ -60,7 +59,7 @@
 </template>
 <script>
 export default {
-  name: "component",
+  name: "nav-component",
   data() {
     return {
       activeClass: null
@@ -80,7 +79,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 .poplarBG {
   background-color: #6496c7;
 }
@@ -103,10 +102,10 @@ export default {
 
 .active {
   color: rgb(1, 1, 157);
-  border-bottom: 3px solid rgb(1, 1, 157);
+  border-bottom: 3px solid rgb(51, 51, 211);
 }
 
 a {
-  color: white;
+  color: white !important;
 }
 </style>
