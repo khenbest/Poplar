@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-component">
+  <div class="navComponent">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark poplarBG">
       <img
         class="poplarIMG"
