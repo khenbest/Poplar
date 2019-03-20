@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
 
-
 //sockets
 import io from 'socket.io-client'
 let socket = {}
