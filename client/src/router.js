@@ -6,8 +6,13 @@ import Posts from './views/Posts.vue'
 import PostDetails from './views/PostDetails.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
+<<<<<<< HEAD
+import makePost from './components/makePost.vue'
+
+=======
 import Profile from './views/Profile.vue'
 import MyProfile from './views/MyProfile.vue'
+>>>>>>> f425957a7bca2f6661ec18adc5e61f225ba5dab9
 Vue.use(Router)
 
 export default new Router({
@@ -30,9 +35,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
+      path: '/makePost',
+      name: 'makePost',
+      component: makePost
     },
     {
       path: '/posts/myPosts',

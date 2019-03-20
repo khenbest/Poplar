@@ -1,10 +1,14 @@
 <template>
   <div class="navComponent">
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
+<<<<<<< HEAD
+      <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
+=======
       <div>
         <img class="poplarIMG pr-2" href="#" src="../assets/poplarLogo.jpg">
         <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       </div>
+>>>>>>> f425957a7bca2f6661ec18adc5e61f225ba5dab9
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,6 +27,11 @@
             @click="activeClass = 3; profile();">Profile</a>
           <a class="nav-item nav-link" :class="{active : activeClass == 4}"
             @click="logout(); activeClass = null">Logout</a>
+<<<<<<< HEAD
+          <a class="nav-item nav-link" :class="{active : activeClass == 5}" @click="activeClass = 5; makePost();">Make
+            Post</a>
+=======
+>>>>>>> f425957a7bca2f6661ec18adc5e61f225ba5dab9
         </ul>
       </div>
     </nav>
@@ -52,8 +61,13 @@
       allPosts() {
         this.$router.push({ path: '/' });
       },
+<<<<<<< HEAD
+      makePost() {
+        this.$router.push({ path: '/makePost' })
+=======
       friendPosts() {
         this.$router.push({ path: '/posts/myPosts' })
+>>>>>>> f425957a7bca2f6661ec18adc5e61f225ba5dab9
       }
     },
     components: {}
