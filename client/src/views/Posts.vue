@@ -4,7 +4,7 @@
       <div class="col-12">
 
         <!-- FILTERS -->
-        <div class="navbar sticky-bottom bg-white row justify-content-around">
+        <div class="navbar fixed-bottom bg-white row justify-content-around">
           <i class="fas fa-globe-americas filters fa-2x col=1"></i>
           <i class="fas fa-users filters fa-2x col-1"></i>
           <i class="fas fa-user filters fa-2x col-1"></i>
@@ -24,27 +24,21 @@
         <!-- POST CARDS -->
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
-
-
             <div class="row">
               <div class="col">
                 <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
               </div>
             </div>
-
             <div class="row">
               <div class="col d-flex justify-content-start">
                 <h4 class="title">{{post.title}}</h4>
               </div>
             </div>
-
             <div class="row">
               <div class="col px-0">
-
                 <img :src="post.imgUrl1" class="photo">
               </div>
             </div>
-
             <div class="row mb-2 mt-2 justify-content-between">
               <div class="col">
                 <button class="vote yes" @click="">yes</button>
@@ -53,29 +47,29 @@
                 <button class="vote no" @click="">no</button>
               </div>
             </div>
-
             <div class="row mb-2">
               <div class="col d-flex justify-content-center">
                 <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
               </div>
             </div>
+<<<<<<< HEAD
 
             <button @click="deletePost(post._id)">Delete</button>
+=======
+            <!-- <button @click="deletePost(post._id)">Delete</button> -->
+>>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
           </div>
         </div>
-
         <div class="row">
           <div class="col">
             <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </template>
-
 <script>
   import Moment from 'moment';
   import Chatroom from "./Chatroom.vue"
