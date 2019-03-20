@@ -78,7 +78,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts");
+      this.$store.dispatch("getPosts"); //without a second argument passed in this will get all the posts
+
     },
 
     data() {

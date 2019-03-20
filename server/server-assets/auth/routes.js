@@ -36,7 +36,7 @@ router.post('/auth/login', (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
     email: req.body.email
-  })
+  }).populate('participated')
     .then(user => {
       if (!user) {
         return res.status(400).send(loginError)
@@ -87,7 +87,7 @@ router.delete('/auth/logout', (req, res) => {
 
 //Validates req.session.uid
 router.get('/auth/authenticate', (req, res) => {
-  Users.findById(req.session.uid)
+  Users.findById(req.session.uid).populate('participated')
     .then(user => {
       if (!user) {
         return res.status(401).send({
