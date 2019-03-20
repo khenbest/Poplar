@@ -1,10 +1,6 @@
 <template>
   <div class="navComponent">
-<<<<<<< HEAD
-    <nav class="navbar navbar-expand-lg navbar-light poplarBG">
-=======
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark poplarBG">
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
       <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,17 +8,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
-<<<<<<< HEAD
-          <a class="nav-item nav-link" :class="{active : activeClass == 1}" @click="activeClass = 1" href="#">
-            Friend
-            Posts
-          </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2" href="#">
-            All
-            Posts
-          </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 3}" @click="activeClass = 3"
-=======
           <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"
             href="#">
             All
@@ -33,7 +18,6 @@
             Posts
           </a>
           <a class="nav-item nav-link" :class="{active : activeClass == 3}" @click="activeClass = 3; profile();"
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
             href="#">Profile</a>
           <a class="nav-item nav-link" :class="{active : activeClass == 4}" @click="logout(); activeClass = null"
             href="#">Logout</a>
@@ -59,15 +43,12 @@
       },
       logout() {
         this.$store.dispatch("logout");
-<<<<<<< HEAD
-=======
       },
       profile() {
         this.$router.push({ path: '/profile' });
       },
       allPosts() {
         this.$router.push({ path: '/' });
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
       }
     },
     components: {}
@@ -75,11 +56,7 @@
 </script>
 
 
-<<<<<<< HEAD
-<style scoped>
-=======
 <style>
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
   .poplarBG {
     background-color: #6496c7;
   }
@@ -102,18 +79,10 @@
 
   .active {
     color: rgb(1, 1, 157);
-<<<<<<< HEAD
-    border-bottom: 3px solid rgb(1, 1, 157);
-  }
-
-  a {
-    color: white;
-=======
     border-bottom: 3px solid rgb(51, 51, 211);
   }
 
   a {
     color: white !important;
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
   }
 </style>

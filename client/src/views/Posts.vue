@@ -52,12 +52,7 @@
                 <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
               </div>
             </div>
-<<<<<<< HEAD
-
-            <button @click="deletePost(post._id)">Delete</button>
-=======
             <!-- <button @click="deletePost(post._id)">Delete</button> -->
->>>>>>> 16afe4626fd247ed90c944b5a0675ece0da23e42
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
           </div>
         </div>
