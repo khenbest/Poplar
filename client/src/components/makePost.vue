@@ -8,10 +8,18 @@
                         <div class="col-6">
                             <h3 class="text-muted">(1 image)</h3>
                             <div class="btn border shadow" @click="toggleShow1">Yes or No?</div>
+                            <form v-if="toggleShow1" @submit.prevent="addPost">
+                                <input type="text" placeholder="title" v-model="newPost.title" required>
+                                <button type="submit">Create Post</button>
+                            </form>
                         </div>
                         <div class="col-6">
                             <h3 class="text-muted">(2 images)</h3>
                             <div class="btn border shadow" @click="toggleShow">This or That?</div>
+                            <form v-if="toggleShow" @submit.prevent="addPost">
+                                <input type="text" placeholder="title" v-model="newPost.title" required>
+                                <button type="submit">Create Post</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -20,15 +28,15 @@
                 </form>
             </div>
         </div>
-        <a class="btn btn-primary mt-5" @click="toggleShow">Upload Image</a>
         <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadFail" v-model="show" :width="250" :noCircle='noCircle' :height="500"
-            url="/upload" :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
+            @crop-upload-fail="cropUploadSuccess" v-model="show" :width="250" :noCircle='noCircle' :height="500" url=""
+            :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
+
         <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadFail" v-model="show1" :width="500" :noCircle='noCircle' :height="500"
-            url="/upload" :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
+            @crop-upload-fail="cropUploadSuccess" v-model="show1" :width="500" :noCircle='noCircle' :height="500" url=""
+            :params="params" :langType="langType" :headers="headers" img-format="jpg">
+        </my-upload>
         <img :src="imgDataUrl">
-        <p>{{this.imgDataUrl}}</p>
     </div>
 </template>
 
@@ -41,6 +49,9 @@
         props: [],
         data() {
             return {
+                newPost: {
+
+                },
                 show: null,
                 params: {
                     token: '123456798',
@@ -60,6 +71,12 @@
             'my-upload': myUpload
         },
         methods: {
+            addPost() {
+                this.newPost.imgUrl1 = this.imgDataUrl
+                console.log(this.newPost)
+                this.$store.dispatch("addPost", this.newPost);
+                event.target.reset()
+            },
             toggleShow() {
                 this.show = !this.show;
             },
