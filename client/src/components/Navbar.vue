@@ -1,7 +1,7 @@
 <template>
   <div class="navComponent">
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
-      <img class="poplarIMG pr-2" href="#" src="../assets/poplarLogo.jpg">
+      <img class="poplarIMG pr-2" href="#" @click="goHome()" src="../assets/poplarLogo.jpg">
       <img class="poplarIMG curs" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       <div>
 
