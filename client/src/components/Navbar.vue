@@ -1,7 +1,10 @@
 <template>
   <div class="navComponent">
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
-      <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
+      <div>
+        <img class="poplarIMG pr-2" href="#" src="../assets/poplarLogo.jpg">
+        <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
+      </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
