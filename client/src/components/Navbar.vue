@@ -1,6 +1,6 @@
 <template>
   <div class="navComponent">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark poplarBG">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
       <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,8 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
-          <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"
-            href="#">
+          <a class="nav-item nav-link" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
             All
             Posts
           </a>
@@ -17,10 +16,12 @@
             Friend
             Posts
           </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 3}" @click="activeClass = 3; profile();"
-            href="#">Profile</a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 4}" @click="logout(); activeClass = null"
-            href="#">Logout</a>
+          <a class="nav-item nav-link" :class="{active : activeClass == 3}"
+            @click="activeClass = 3; profile();">Profile</a>
+          <a class="nav-item nav-link" :class="{active : activeClass == 4}"
+            @click="logout(); activeClass = null">Logout</a>
+          <a class="nav-item nav-link" :class="{active : activeClass == 5}" @click="activeClass = 5; makePost();">Make
+            Post</a>
         </ul>
       </div>
     </nav>
@@ -49,6 +50,9 @@
       },
       allPosts() {
         this.$router.push({ path: '/' });
+      },
+      makePost() {
+        this.$router.push({ path: '/makePost' })
       }
     },
     components: {}
