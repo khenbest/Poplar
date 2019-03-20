@@ -1,8 +1,6 @@
 <template>
   <div class="posts">
     WELCOME TO THE POSTS!!!
-    <button class="btn btn-outline-danger logout mr-3 shadow" @click="logout">Logout</button>
-
     <form @submit.prevent="addPost">
       <input type="text" placeholder="title" v-model="newPost.title" required>
       <input type="text" placeholder="Image URL" v-model="newPost.imgUrl1" required>
