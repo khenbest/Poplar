@@ -20,7 +20,7 @@ export default new Router({
     },
     {
       // path: '/posts/:postId',
-      path: '/posts/',
+      path: '/posts',
       name: 'postDetails',
       props: true,
       component: PostDetails
