@@ -18,10 +18,10 @@
       </div>
       <div class="row mb-2 mt-2 justify-content-between">
         <div class="col">
-          <button class="vote yes" @click="castVote('yes')">yes</button>
+          <button class="vote yes" @click="castVote(post._id, 'yes')">yes</button>
         </div>
         <div class="col">
-          <button class="vote no" @click="castVote('no')">no</button>
+          <button class="vote no" @click="castVote(post._id, 'no')">no</button>
         </div>
       </div>
       <div class="row mb-2">
@@ -29,7 +29,7 @@
           <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
         </div>
       </div>
-      <!-- <button @click="deletePost(post._id)">Delete</button> -->
+      <button @click="deletePost(post._id)">Delete</button>
       <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
     </div>
   </div>
@@ -42,7 +42,8 @@
     name: "post",
     props: [],
     data() {
-      return {};
+      return {
+      }
     },
     computed: {
       posts() {
@@ -53,13 +54,10 @@
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
       },
-      castVote(vote) {
-        debugger;
-        let postId = this.post.id;
-
-        console.log(postId);
+      castVote(postId, vote) {
         this.$store.dispatch("castVote", {
-          endpoint: "posts/${postId}"
+          endpoint: `posts/${postId}/vote`,
+          data: { "vote": vote }
         });
       }
     },
