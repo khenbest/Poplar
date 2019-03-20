@@ -147,8 +147,12 @@ export default new Vuex.Store({
 
 
     //#region -- POSTS --
-    getPosts({ commit, dispatch }) {
-      api.get('posts')
+    getPosts({ commit, dispatch }, myPosts) {
+      let query = 'posts'
+      if (myPosts) {
+        query += '/myPosts'
+      }
+      api.get(query)
         .then(res => {
           commit('setPosts', res.data)
         })

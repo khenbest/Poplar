@@ -11,7 +11,7 @@
         </div>
 
         <!-- CREATE POST FORM -->
-        <!-- <div class="row">
+        <div class="row">
           <div class="col">
             <form @submit.prevent="addPost">
               <input type="text" placeholder="title" v-model="newPost.title" required>
@@ -19,14 +19,14 @@
               <button type="submit">Create Post</button>
             </form>
           </div>
-        </div> -->
+        </div>
 
         <!-- POST CARDS -->
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts">
             <div class="row">
               <div class="col">
-                <h4 class="username">_________{{post.authorId}_________</h4>
+                <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
               </div>
             </div>
             <div class="row">
@@ -41,10 +41,10 @@
             </div>
             <div class="row mb-2 mt-2 justify-content-between">
               <div class="col">
-                <button class="vote yes" @click="">yes</button>
+                <button class="vote yes" @click="castVote(post._id, 'yes')">yes</button>
               </div>
               <div class="col">
-                <button class="vote no" @click="">no</button>
+                <button class="vote no" @click="castVote(post._id, 'no')">no</button>
               </div>
             </div>
             <div class="row mb-2">
@@ -78,7 +78,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts");
+      this.$store.dispatch("getPosts"); //without a second argument passed in this will get all the posts
+
     },
 
     data() {
@@ -101,6 +102,15 @@
       },
       chatroom() {
         this.$router.push({ name: 'postDetails' })
+      },
+      castVote(vote) {
+        debugger
+        let postId = this.post.id
+
+        console.log(postId)
+        this.$store.dispatch('castVote', {
+          endpoint: 'posts/${postId}'
+        })
       }
     },
     components: {

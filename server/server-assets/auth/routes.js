@@ -24,6 +24,7 @@ router.post('/auth/register', (req, res) => {
       delete user._doc.hash
       //SET THE SESSION UID (SHORT FOR USERID)
       req.session.uid = user._id
+      req.session.username = user.name
       res.status(201).send(user)
     })
     .catch(err => {
@@ -35,7 +36,7 @@ router.post('/auth/login', (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
     email: req.body.email
-  })
+  }).populate('participated')
     .then(user => {
       if (!user) {
         return res.status(400).send(loginError)
@@ -46,6 +47,7 @@ router.post('/auth/login', (req, res) => {
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
       delete user._doc.hash
       req.session.uid = user._id
+      req.session.username = user.name
       res.send(user)
     }).catch(err => {
       res.status(400).send(loginError)
@@ -85,7 +87,7 @@ router.delete('/auth/logout', (req, res) => {
 
 //Validates req.session.uid
 router.get('/auth/authenticate', (req, res) => {
-  Users.findById(req.session.uid)
+  Users.findById(req.session.uid).populate('participated')
     .then(user => {
       if (!user) {
         return res.status(401).send({
