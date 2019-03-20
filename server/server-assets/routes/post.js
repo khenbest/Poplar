@@ -65,21 +65,28 @@ router.put('/:id', (req, res, next) => {
 
 //DELETE
 router.delete('/:id', (req, res, next) => {
-  Posts.findOne({ _id: req.params.id, authorId: req.session.uid })
-    .then(post => {
-      post.remove(err => {
-        if (err) {
-          console.log(err)
-          next()
-          return
-        }
-      })
-      res.send("Successfully Deleted")
-    })
-    .catch(err => {
-      res.status(400).send('ACCESS DENIED; Invalid Request')
-    })
+  Posts.findById(req.params.id)
+    .then(post => post.remove())
+    .then(() => res.send('THIS POST WAS BOTTOM TO TOP'))
+    .catch(err => res.status(400).send(err))
 })
+
+// router.delete('/:id', (req, res, next) => {
+//   Posts.findOne({ _id: req.params.id, authorId: req.session.uid })
+//     .then(post => {
+//       post.remove(err => {
+//         if (err) {
+//           console.log(err)
+//           next()
+//           return
+//         }
+//       })
+//       res.send("Successfully Deleted")
+//     })
+//     .catch(err => {
+//       res.status(400).send('ACCESS DENIED; Invalid Request')
+//     })
+// })
 
 
 module.exports = router
