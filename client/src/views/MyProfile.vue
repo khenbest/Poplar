@@ -2,7 +2,6 @@
     <div class="posts container-fluid">
         <div class="row">
             <div class="col-12">
-
                 <!-- FILTERS -->
                 <div class="navbar fixed-bottom bg-white row justify-content-around">
                     <i class="fas fa-globe-americas filters fa-2x col=1"></i>
@@ -10,42 +9,39 @@
                     <i class="fas fa-user filters fa-2x col-1"></i>
                 </div>
 
-                <!-- CREATE POST FORM -->
-                <div class="row">
-                    <div class="col">
-                        <form @submit.prevent="addPost">
-                            <input type="text" placeholder="title" v-model="newPost.title" required>
-                            <input type="text" placeholder="Image URL" v-model="newPost.imgUrl1" required>
-                            <button type="submit">Create Post</button>
-                        </form>
-                    </div>
-                </div>
-
                 <!-- POST CARDS -->
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
-                        <div class="row">
-                            <div class="col d-flex justify-content-start">
-                                <h4 class="title">{{post.title}}</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col px-0">
-                                <img :src="post.imgUrl1" class="photo">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col d-flex justify-content-center">
-                                <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
-                            </div>
-                            <div class="col d-flex justify-content-center">
-                                <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="row d-flex justify-content-center">
+                    <h1>{{this.$store.state.user.name}}'s Posts</h1>
                 </div>
-                <!-- <button @click="deletePost(post._id)">Delete</button> -->
+                <button class="btn btn-primary" @click="showPosts = !showPosts">My Posts</button>
+                <button class="btn btn-primary" @click="showPosts = !showPosts">My Participated Posts</button>
+                <span v-show="showPosts">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    <h4 class="title">{{post.title}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col px-0">
+                                    <img :src="post.imgUrl1" class="photo">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col d-flex justify-content-center">
+                                    <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
+                                </div>
+                            </div>
+                            <button @click="deletePost(post._id)">Delete</button>
+
+                        </div>
+                    </div>
+                </span>
                 <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
             </div>
         </div>
@@ -72,6 +68,7 @@
 
         data() {
             return {
+                showPosts: false,
                 newPost: {}
             };
         },
