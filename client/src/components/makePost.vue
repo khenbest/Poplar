@@ -5,7 +5,7 @@
                 <div class="card-title">
                     <div class="row justify-content-center">
                         <h3>Which type of question would you like to ask?</h3>
-                        <div class="col-6 p-5 card" @click="showForm = true">
+                        <div class="col-6 p-5 card" :class="{question : showForm == false}" @click="showForm=true">
                             <!-- <button class="btn btn-secondary col-3" v-if="showForm"
                                 @click="showForm = false">Back</button> -->
                             <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
@@ -23,7 +23,8 @@
                                 <button class="btn btn-primary mt-3" type="submit">Create Post</button>
                             </form>
                         </div>
-                        <div class="col-6 p-5 card" @click="showForm1 = !showForm1">
+                        <div class="col-6 p-5 card" :class="{question2 : showForm==false}"
+                            @click="showForm1 = !showForm1">
                             <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                             <h3 v-if="!showForm1">This or That?</h3>
                             <button v-if="showForm1" class="btn btn-primary" @click="toggleShow1">Upload Image</button>
@@ -71,7 +72,7 @@
                 show1: null,
                 noCircle: true,
                 makePost: null,
-                showForm: null,
+                showForm: false,
                 showForm1: null
             }
         },
@@ -129,6 +130,24 @@
     }
 </script>
 <style>
+    .question:hover {
+        background-color: rgba(210, 210, 210, 0.673);
+        cursor: pointer;
+    }
+
+    .question {
+        transition: all 0.2s linear;
+    }
+
+    .question2:hover {
+        background-color: rgba(210, 210, 210, 0.673);
+        cursor: pointer;
+    }
+
+    .question2 {
+        transition: all 0.2s linear;
+    }
+
     .vue-image-crop-upload .vicp-wrap .vicp-operate a {
         color: white;
         background-color: blue;
