@@ -7,6 +7,7 @@ import PostDetails from './views/PostDetails.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
 import makePost from './components/makePost.vue'
+import MyProfile from "./views/MyProfile.vue"
 
 Vue.use(Router)
 
