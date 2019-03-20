@@ -1,18 +1,17 @@
 <template>
     <div class="makePost">
-        <a class="btn btn-primary mt-5 mr-2" @click="makePost = !makePost">Make New Post</a>
         <div class="row justify-content-center">
-            <div v-if="makePost" class="col-3 mt-4 d-flex border rounded">
+            <div class="col-6 mt-4 d-flex border rounded">
                 <div class="card-title">
                     <div class="row justify-content-center">
                         <h3>Which type of question would you like to ask?</h3>
                         <div class="col-6">
-                            <h5 class="text-muted">(1 image)</h5>
-                            <button class="btn border box-shadow" @click="toggleShow1">This or That?</button>
+                            <h3 class="text-muted">(1 image)</h3>
+                            <div class="btn border shadow" @click="toggleShow1">Yes or No?</div>
                         </div>
                         <div class="col-6">
-                            <h5 class="text-muted">(2 images)</h5>
-                            <button class="btn border box-shadow" @click="toggleShow">Yes or No?</button>
+                            <h3 class="text-muted">(2 images)</h3>
+                            <div class="btn border shadow" @click="toggleShow">This or That?</div>
                         </div>
                     </div>
                 </div>
