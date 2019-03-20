@@ -55,7 +55,8 @@ server.use((req, res, next) => {
 let postRoutes = require('./server-assets/routes/post')
 server.use('/api/posts', postRoutes)
 
-
+let profileRoutes = require('./server-assets/routes/profile')
+server.use('/api/profile', profileRoutes)
 
 
 
