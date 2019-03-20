@@ -28,7 +28,7 @@
 
             <div class="row">
               <div class="col">
-                <h4 class="username">Posted By: {{post.user || 'Unknown'}}</h4>
+                <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
               </div>
             </div>
 
