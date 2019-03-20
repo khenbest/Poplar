@@ -6,27 +6,28 @@
                     <div class="row justify-content-center">
                         <h3>Which type of question would you like to ask?</h3>
                         <div class="col-6 p-5 card" @click="showForm = true">
+                            <!-- <button class="btn btn-secondary col-3" v-if="showForm"
+                                @click="showForm = false">Back</button> -->
                             <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                             <h3 v-if="!showForm">Yes or No?</h3>
-                            <p v-if="showForm">Upload image: <button class="btn btn-primary" @click="toggleShow1">Choose
+                            <p v-if="showForm">Upload image: <button class="btn btn-secondary"
+                                    @click="toggleShow1">Choose
                                     File</button></p>
                             <h4 v-if="showForm" class="muted">OR</h4>
-
-
-
                             <form v-if="showForm" @submit.prevent="addPost">
                                 <p v-if="showForm">Enter image Url: <input v-model="newPost.imgUrl1" type="text"
                                         placeholder="URL" /></p>
-                                <input type="text" placeholder="title" v-model="newPost.title" required>
-                                <button type="submit">Create Post</button>
+                                <H4>THEN</H4>
+                                <input class="form-control" type="text" placeholder="Ask your question"
+                                    v-model="newPost.title" required>
+                                <button class="btn btn-primary mt-3" type="submit">Create Post</button>
                             </form>
                         </div>
-                        <div class="col-6 p-5 card" @click="showForm = !showForm">
-                            <h3 v-if="!showForm" class="text-muted">(2 images)</h3>
-                            <h3 v-if="!showForm">This or That?</h3>
-                            <button v-if="showForm" class="btn btn-primary" @click="toggleShow1">Upload Image</button>
-                            <form v-if="showForm" @submit.prevent="addPost">
-                                <input type="text" placeholder="title" v-model="newPost.title" required>
+                        <div class="col-6 p-5 card" @click="showForm1 = !showForm1">
+                            <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
+                            <h3 v-if="!showForm1">This or That?</h3>
+                            <button v-if="showForm1" class="btn btn-primary" @click="toggleShow1">Upload Image</button>
+                            <form v-if="showForm1" @submit.prevent="addPost">
                                 <button type="submit">Create Post</button>
                             </form>
                         </div>
