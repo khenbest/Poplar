@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
+//GET friends posts
 // router.get('/', (req, res, next) => {
 //   Posts.find({ authorId: req.session.uid })
 //     .then(data => {

@@ -6,6 +6,7 @@ import Posts from './views/Posts.vue'
 import PostDetails from './views/PostDetails.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
+import Profile from './views/Profile.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     },
     {
       path: "*",
