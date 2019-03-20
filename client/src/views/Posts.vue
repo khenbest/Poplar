@@ -2,15 +2,24 @@
   <div class="posts">
     WELCOME TO THE POSTS!!!
     <button class="btn btn-outline-danger logout mr-3 shadow" @click="logout">Logout</button>
+
     <form @submit.prevent="addPost">
       <input type="text" placeholder="title" v-model="newPost.title" required>
       <input type="text" placeholder="Image URL" v-model="newPost.imgUrl1" required>
       <button type="submit">Create Post</button>
     </form>
+
     <div v-for="post in posts" :key="post._id">
-      <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link>
-      <button @click="deletePost(post._id)">DELETE POST</button>
+      <div class="card">
+        <img class="card-img-top" :src="post.imgUrl1">
+        <div class="card-body">
+          <h4 class="card-title">{{post.title}}<</h4> <a href="#!" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <button @click="deletePost(post._id)">DELETE POST</button>
+      </div>
+      <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
     </div>
+
     <button @click="chatroom">Go to Chatroom!</button>
   </div>
 </template>
