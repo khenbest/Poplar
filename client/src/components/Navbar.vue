@@ -1,5 +1,5 @@
 <template>
-  <div class="component">
+  <div class="navComponent">
     <nav class="navbar navbar-expand-lg navbar-light poplarBG">
       <img class="poplarIMG" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -26,7 +26,7 @@
 </template>
 <script>
   export default {
-    name: "component",
+    name: "navComponent",
     data() {
       return {
         activeClass: null
