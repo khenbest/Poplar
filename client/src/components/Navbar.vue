@@ -16,12 +16,12 @@
             All
             Posts
           </a>
-          <a class="nav-item nav-link" :class="{active : activeClass == 1}" @click="activeClass = 1; friendPosts()">
+          <a class="nav-item nav-link" :class="{active : activeClass == 1}" @click="activeClass = 1; ">
             Friend
             Posts
           </a>
           <a class="nav-item nav-link" :class="{active : activeClass == 3}"
-            @click="activeClass = 3; profile();">Profile</a>
+            @click="activeClass = 3; friendPosts();">Profile</a>
           <a class="nav-item nav-link" :class="{active : activeClass == 4}"
             @click="logout(); activeClass = null">Logout</a>
           <a class="nav-item nav-link" :class="{active : activeClass == 5}" @click="activeClass = 5; makePost();">Make
