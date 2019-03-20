@@ -5,30 +5,43 @@
                 <div class="card-title">
                     <div class="row justify-content-center">
                         <h3>Which type of question would you like to ask?</h3>
-                        <div class="col-6">
-                            <h3 class="text-muted">(1 image)</h3>
-                            <div class="btn border shadow" @click="toggleShow1">Yes or No?</div>
+                        <div class="col-6 p-5 card" @click="showForm = true">
+                            <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
+                            <h3 v-if="!showForm">Yes or No?</h3>
+                            <p v-if="showForm">Upload image: <button class="btn btn-primary" @click="toggleShow1">Choose
+                                    File</button></p>
+                            <h4 v-if="showForm" class="muted">OR</h4>
+
+
+
+                            <form v-if="showForm" @submit.prevent="addPost">
+                                <p v-if="showForm">Enter image Url: <input v-model="newPost.imgUrl1" type="text"
+                                        placeholder="URL" /></p>
+                                <input type="text" placeholder="title" v-model="newPost.title" required>
+                                <button type="submit">Create Post</button>
+                            </form>
                         </div>
-                        <div class="col-6">
-                            <h3 class="text-muted">(2 images)</h3>
-                            <div class="btn border shadow" @click="toggleShow">This or That?</div>
+                        <div class="col-6 p-5 card" @click="showForm = !showForm">
+                            <h3 v-if="!showForm" class="text-muted">(2 images)</h3>
+                            <h3 v-if="!showForm">This or That?</h3>
+                            <button v-if="showForm" class="btn btn-primary" @click="toggleShow1">Upload Image</button>
+                            <form v-if="showForm" @submit.prevent="addPost">
+                                <input type="text" placeholder="title" v-model="newPost.title" required>
+                                <button type="submit">Create Post</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <form @submit.prevent="submitPost">
-
-                </form>
             </div>
         </div>
-        <a class="btn btn-primary mt-5" @click="toggleShow">Upload Image</a>
         <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadFail" v-model="show" :width="250" :noCircle='noCircle' :height="500"
-            url="/upload" :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
+            @crop-upload-fail="cropUploadSuccess" v-model="show" :width="250" :noCircle='noCircle' :height="500" url=""
+            :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
         <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadFail" v-model="show1" :width="500" :noCircle='noCircle' :height="500"
-            url="/upload" :params="params" :langType="langType" :headers="headers" img-format="jpg"></my-upload>
+            @crop-upload-fail="cropUploadSuccess" v-model="show1" :width="500" :noCircle='noCircle' :height="500" url=""
+            :params="params" :langType="langType" :headers="headers" img-format="jpg">
+        </my-upload>
         <img :src="imgDataUrl">
-        <p>{{this.imgDataUrl}}</p>
     </div>
 </template>
 
@@ -41,6 +54,9 @@
         props: [],
         data() {
             return {
+                newPost: {
+
+                },
                 show: null,
                 params: {
                     token: '123456798',
@@ -53,13 +69,23 @@
                 langType: 'en',
                 show1: null,
                 noCircle: true,
-                makePost: null
+                makePost: null,
+                showForm: null,
+                showForm1: null
             }
         },
         components: {
             'my-upload': myUpload
         },
         methods: {
+            addPost() {
+                if (this.newPost.imgDataUrl = "") {
+                    this.newPost.imgUrl1 = this.imgDataUrl
+                }
+                console.log(this.newPost)
+                this.$store.dispatch("addPost", this.newPost);
+                event.target.reset()
+            },
             toggleShow() {
                 this.show = !this.show;
             },

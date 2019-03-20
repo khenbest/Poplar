@@ -32,6 +32,7 @@ router.post('/auth/register', (req, res) => {
     })
 })
 
+
 router.post('/auth/login', (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
