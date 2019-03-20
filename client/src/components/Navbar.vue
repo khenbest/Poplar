@@ -1,5 +1,5 @@
 <template>
-  <div class="component">
+  <div class="navComponent">
     <nav class="navbar navbar-expand-lg navbar-light poplarBG">
       <img
         class="poplarIMG"
@@ -59,6 +59,14 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
+  export default {
+    name: "navComponent",
+    data() {
+      return {
+        activeClass: null
+      };
+=======
 export default {
   name: "component",
   data() {
@@ -70,6 +78,7 @@ export default {
   methods: {
     goHome() {
       this.$router.push({ path: "/" });
+>>>>>>> cdfcc50b9644247808f732cab4c1bfa8c4df633d
     },
     logout() {
       this.$store.dispatch("logout");
