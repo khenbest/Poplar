@@ -58,13 +58,11 @@
       allPosts() {
         this.$router.push({ path: '/' });
       },
-<<<<<<< HEAD
       makePost() {
         this.$router.push({ path: '/makePost' })
-=======
+      },
       friendPosts() {
         this.$router.push({ path: '/posts/myPosts' })
->>>>>>> f425957a7bca2f6661ec18adc5e61f225ba5dab9
       }
     },
     components: {}
