@@ -3,16 +3,12 @@
     <div class="row">
       <div class="col-12">
 
-
-
         <!-- FILTERS -->
         <div class="navbar sticky-bottom bg-white row justify-content-around">
           <i class="fas fa-globe-americas filters fa-2x col=1"></i>
           <i class="fas fa-users filters fa-2x col-1"></i>
           <i class="fas fa-user filters fa-2x col-1"></i>
         </div>
-
-
 
         <!-- CREATE POST FORM -->
         <!-- <div class="row">
@@ -24,8 +20,6 @@
             </form>
           </div>
         </div> -->
-
-
 
         <!-- POST CARDS -->
         <div class="row">
@@ -44,14 +38,12 @@
               </div>
             </div>
 
-
             <div class="row">
               <div class="col px-0">
 
                 <img :src="post.imgUrl1" class="photo">
               </div>
             </div>
-
 
             <div class="row mb-2 mt-2 justify-content-between">
               <div class="col">
@@ -69,7 +61,6 @@
             </div>
 
             <!-- <button @click="deletePost(post._id)">Delete</button> -->
-
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
           </div>
         </div>
@@ -79,7 +70,6 @@
             <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
           </div>
         </div>
-
 
       </div>
     </div>
@@ -188,7 +178,6 @@
     cursor: pointer;
   }
 
-
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
   .chatroom {
     border: none;
@@ -200,10 +189,6 @@
     min-height: 1em;
     font-family: 'Kalam', cursive;
   }
-
-
-
-
 
   /* font-family: 'Amatic SC', cursive;
 font-family: 'Patrick Hand SC', cursive;
