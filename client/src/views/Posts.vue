@@ -1,7 +1,7 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row">
-      <div class="col-12 py-5">
+    <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
+      <div class="col-12 ">
 
 
         <!-- CREATE POST FORM -->
@@ -16,10 +16,12 @@
         </div> -->
 
         <!-- POST CARDS -->
-        <div class="row">
+        <div class="row bar">
           <post v-for="post in posts" :post="post"></post>
         </div>
       </div>
+    </div>
+    <div class="row pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
         <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
           <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
@@ -29,6 +31,7 @@
           @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script>
@@ -148,6 +151,8 @@
   .fas:hover {
     cursor: pointer;
   }
+
+
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
   .chatroom {
