@@ -12,8 +12,8 @@
                 <!-- POST CARDS -->
                 <div id="btn-bar" class="row d-flex justify-content-center ">
                     <div class="row d-flex justify-content-center">
-                        <button class="btn btn-my" @click="showPosts = !showPosts">My Posts</button>
-                        <button class="btn btn-my" @click="showParticipated = !showParticipated">My
+                        <button class="btn btn-my" @click="showPosts = true">My Posts</button>
+                        <button class="btn btn-my" @click="showPosts = false">My
                             Participated Posts</button>
                     </div>
                 </div>
@@ -21,8 +21,11 @@
                     <h1>{{this.$store.state.user.name}}'s Profile</h1>
                 </div>
                 <span v-show="showPosts">
-                    <div class="row">
-                        <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-3 " v-for="post in posts" :key="post._id">
+                    <div class="row ">
+                        <div class="col-12">
+                            <h3 class="justify-self-center">My Posts</h3>
+                        </div>
+                        <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-4" v-for="post in posts" :key="post._id">
                             <div class="row">
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="title">{{post.title}}</h4>
@@ -45,14 +48,14 @@
                         </div>
                     </div>
                 </span>
-                <span v-show="showParticipated">
+                <span v-show="!showPosts">
                     <div class="row">
-                        <div class="col">
-                            <h3>Participated</h3>
+                        <div class="col-12">
+                            <h3>My Participated Posts</h3>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3"
+                        <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-4"
                             v-for="(participated, index) in participated" :key="index">
                             <div class="row">
                                 <div class="col">
@@ -73,12 +76,11 @@
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="timestamp">{{participated.createdAt| formatTime}}</h4>
                                 </div>
-                                <div class="col d-flex justify-content-center">
-                                    <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
-                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
                             </div>
                             <button @click="deletePost(post._id)">Delete</button>
-
                         </div>
                     </div>
                 </span>
@@ -108,7 +110,6 @@
 
         data() {
             return {
-                showParticipated: false,
                 showPosts: true,
                 newPost: {}
             };
