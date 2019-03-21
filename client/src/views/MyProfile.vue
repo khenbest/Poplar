@@ -10,16 +10,22 @@
                 </div>
 
                 <!-- POST CARDS -->
-                <div class="row d-flex justify-content-center">
-                    <h1>{{this.$store.state.user.name}}'s Posts</h1>
+                <div id="btn-bar" class="row d-flex justify-content-center ">
+                    <div class="row d-flex justify-content-center">
+                        <button class="btn btn-my" @click="showPosts = !showPosts">My Posts</button>
+                        <button class="btn btn-my" @click="showParticipatedPosts = !showParticipatedPosts">My
+                            Participated Posts</button>
+                    </div>
+                </div>
+                <div class="row d-flex  justify-content-center">
+                    <h1>{{this.$store.state.user.name}}'s Profile</h1>
                 </div>
                 <button class="btn btn-primary" @click="showPosts = !showPosts">My Posts</button>
                 <button class="btn btn-primary" @click="showParticipated = !showParticipated">My Participated
                     Posts</button>
                 <span v-show="showPosts">
-
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3" v-for="post in posts" :key="post._id">
+                        <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-3 " v-for="post in posts" :key="post._id">
                             <div class="row">
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="title">{{post.title}}</h4>
@@ -34,9 +40,9 @@
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
                                 </div>
-                                <div class="col d-flex justify-content-center">
-                                    <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
-                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
                             </div>
                             <button @click="deletePost(post._id)">Delete</button>
 
@@ -97,8 +103,8 @@
 
         data() {
             return {
-                showPosts: false,
-                showParticipated: false,
+                showParticipatedPosts: false,
+                showPosts: true,
                 newPost: {}
             };
         },
@@ -134,10 +140,27 @@
 </script>
 
 <style scoped>
+    #post {
+        border: #3d6ea0 1px solid;
+
+    }
+
     .username {
         color: #a0b5c5;
         font-family: 'Amatic SC', cursive;
         margin-bottom: -0.2em;
+    }
+
+    .btn-my {
+        background: #6496c7;
+        color: white;
+
+    }
+
+    #btn-bar {
+        background-color: #6496c7;
+        color: black;
+
     }
 
     .title {
