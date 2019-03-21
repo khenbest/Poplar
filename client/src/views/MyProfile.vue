@@ -50,10 +50,14 @@
                     </div>
                 </span>
                 <span v-show="showParticipated">
-
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3"
                             v-for="(participated, index) in participated" :key="index">
+                            <div class="row">
+                                <div class="col">
+                                    <h4 class="username">__________{{participated.user || 'Unknown'}}__________</h4>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="title">{{participated.title}}</h4>
@@ -103,7 +107,7 @@
 
         data() {
             return {
-                showParticipatedPosts: false,
+                showParticipated: false,
                 showPosts: true,
                 newPost: {}
             };
