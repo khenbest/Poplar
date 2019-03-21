@@ -13,16 +13,13 @@
                 <div id="btn-bar" class="row d-flex justify-content-center ">
                     <div class="row d-flex justify-content-center">
                         <button class="btn btn-my" @click="showPosts = !showPosts">My Posts</button>
-                        <button class="btn btn-my" @click="showParticipatedPosts = !showParticipatedPosts">My
+                        <button class="btn btn-my" @click="showParticipated = !showParticipated">My
                             Participated Posts</button>
                     </div>
                 </div>
                 <div class="row d-flex  justify-content-center">
                     <h1>{{this.$store.state.user.name}}'s Profile</h1>
                 </div>
-                <button class="btn btn-primary" @click="showPosts = !showPosts">My Posts</button>
-                <button class="btn btn-primary" @click="showParticipated = !showParticipated">My Participated
-                    Posts</button>
                 <span v-show="showPosts">
                     <div class="row">
                         <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-3 " v-for="post in posts" :key="post._id">
