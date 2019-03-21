@@ -8,7 +8,7 @@ const SALT = 10
 
 
 let schema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
   participated: [{ type: ObjectId, ref: "Post" }]
