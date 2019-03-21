@@ -16,7 +16,19 @@ router.get('/:myPosts?', (req, res, next) => {
     .catch(err => {
       console.log(err)
     })
-})
+}),
+
+  // if you ever use this then add an additional path
+  router.get('/:activePostId', (req, res, next) => {
+    Posts.findById(req.params.id)
+      .then(post => {
+        res.send(post)
+      }).catch(err => {
+        res.status(400).send(err)
+      })
+  })
+
+
 //get posts that you participated in is handled in your user routes
 
 //GET friends posts

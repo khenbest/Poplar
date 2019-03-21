@@ -1,6 +1,7 @@
 <template>
   <div class="Chatroom">
     <div v-if="!joined" class="text-center">
+      {{post.title}}
       <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button>
     </div>
     <div v-else>
@@ -41,6 +42,7 @@
 <script>
   export default {
     name: 'Chatroom',
+    props: ['post'],
     data() {
       return {
         name: this.$store.state.user.name,
@@ -60,13 +62,22 @@
     },
     methods: {
       join() {
-        this.$store.dispatch('join', this.name)
+        let payload = {
+          name: this.name,
+          postId: this.post._id
+        }
+        console.log(payload)
+        this.$store.dispatch('join', payload)
       },
       leave() {
-        this.$store.dispatch('leaveRoom')
+        let payload = {
+          name: this.name,
+          postId: this.post._id
+        }
+        this.$store.dispatch('leaveRoom', payload)
       },
       send() {
-        this.$store.dispatch('sendMessage', { user: this.name, message: this.message })
+        this.$store.dispatch('sendMessage', { user: this.name, message: this.message, postId: this.$route.params.postId })
       }
     },
     components: {}

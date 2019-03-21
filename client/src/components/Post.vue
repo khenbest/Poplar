@@ -31,13 +31,16 @@
     </div>
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes == true" class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+    <div v-if="showVotes == true" class="progress h-100">
+      <div class="progress-bar progress-bar-striped progress-bar-animated h-25" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger h-25" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+      <div class="col h-100">
+        <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
       </div>
     </div>
 
@@ -49,21 +52,6 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
-<<<<<<< HEAD
-
-=======
-    <!-- PROGRESS BAR GOES HERE -->
-    <button @click="go(10)">up</button>
-    <button @click="go(-10)">down</button>
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: x + '%'}">
-        math.floor(% amount yes/total)
-      </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-        :style="{width: 100-x + '%'}">math.floor(% amount no/total)</div>
-    </div>
->>>>>>> 7fa72a949992c4136badf704ced90020002211f4
-
 
   </div>
 </template>
@@ -72,7 +60,7 @@
 
 <script>
   import Moment from "moment";
-
+  import Chatroom from "@/views/Chatroom.vue"
   export default {
     name: "post",
     props: ["post"],
@@ -108,16 +96,27 @@
             this.totalNo++
           )
         })
+      },
+      chatroom() {
+        this.$router.push({
+          path: 'posts/' + this.post._id,
+          name: 'postDetails',
+          params: {
+            postId: this.post._id
+          }
+        })
       }
     },
-    components: {},
+    components: {
+      Chatroom
+    },
     filters: {
       formatTime(date) {
         return Moment(String(date))
           .startOf("hour")
           .fromNow();
       }
-    }
+    },
   };
 </script>
 
