@@ -1,13 +1,7 @@
 <template>
   <div class="Chatroom">
     <div v-if="!joined" class="text-center">
-      <form @submit.prevent="join">
-        <div class="form-group">
-          <input type="text" max="12" class="form-control input-lg text-center" placeholder="Name" v-model="name"
-            required>
-        </div>
-        <button class="btn btn-primary btn-lg" type="submit">Join Chatroom</button>
-      </form>
+      <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button>
     </div>
     <div v-else>
       <div class="connected-users text-left">
@@ -49,7 +43,7 @@
     name: 'Chatroom',
     data() {
       return {
-        name: '',
+        name: this.$store.state.user.name,
         message: ''
       }
     },
