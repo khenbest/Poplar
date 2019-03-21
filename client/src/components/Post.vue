@@ -35,8 +35,6 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
-
-
     <!-- PROGRESS BAR GOES HERE -->
     <button @click="go(10)">up</button>
     <button @click="go(-10)">down</button>

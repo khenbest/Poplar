@@ -25,10 +25,8 @@
         <div class="row">
           <post v-for="post in posts" :post="post"></post>
         </div>
-
-
-
       </div>
+
     </div>
   </div>
 </template>

@@ -75,26 +75,6 @@ router.put('/:id/vote', (req, res, next) => {
     })
 })
 
-// router.put('/:id', (req, res, next) => {
-//   Posts.findById(req.params.id)
-//     .then(post => {
-//       if (!post.authorId.equals(req.session.uid)) {
-//         return res.status(401).send("ACCESS DENIED!")
-//       }
-//       post.update(req.body, (err) => { 
-//         if (err) {
-//           console.log(err)
-//           next()
-//           return
-//         }
-//         res.send("Successfully Updated")
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       next()
-//     })
-// })
 //DELETE
 router.delete('/:id', (req, res, next) => {
   Posts.findById(req.params.id)
@@ -103,22 +83,22 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => res.status(400).send(err))
 })
 
-router.delete('/:id', (req, res, next) => {
-  User.findOne({ _id: req.params.id, authorId: req.session.uid })
-    .then(user => {
-      user.remove(err => {
-        if (err) {
-          console.log(err)
-          next()
-          return
-        }
-      })
-      res.send("Successfully Deleted")
-    })
-    .catch(err => {
-      res.status(400).send('ACCESS DENIED; Invalid Request')
-    })
-})
+// router.delete('/:id', (req, res, next) => {
+//   User.findOne({ _id: req.params.id, authorId: req.session.uid })
+//     .then(user => {
+//       user.remove(err => {
+//         if (err) {
+//           console.log(err)
+//           next()
+//           return
+//         }
+//       })
+//       res.send("Successfully Deleted")
+//     })
+//     .catch(err => {
+//       res.status(400).send('ACCESS DENIED; Invalid Request')
+//     })
+// })
 
 
 module.exports = router

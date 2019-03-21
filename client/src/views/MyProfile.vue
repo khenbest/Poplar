@@ -19,6 +19,10 @@
                 </div>
                 <div class="row d-flex  justify-content-center">
                     <h1>{{this.$store.state.user.name}}'s Profile</h1>
+
+                </div>
+                <div class="row d-flex  justify-content-center">
+                    <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
                 </div>
                 <span v-show="showPosts">
                     <div class="row ">
@@ -137,6 +141,9 @@
         filters: {
             formatTime(date) {
                 return Moment(String(date)).startOf('hour').fromNow();
+            },
+            formatTime2(date) {
+                return Moment(String(date)).format('MMMM Do, YYYY')
             }
         }
     };
