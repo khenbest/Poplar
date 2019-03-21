@@ -60,7 +60,8 @@
                             v-for="(participated, index) in participated" :key="index">
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="username">__________{{participated.user || 'Unknown'}}__________</h4>
+                                    <h4 class="username d-flex justify-content-center">
+                                        {{participated.user || 'Unknown'}}</h4>
                                 </div>
                             </div>
                             <div class="row">
