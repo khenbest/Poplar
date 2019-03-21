@@ -1,16 +1,9 @@
 <template>
     <div class="posts container-fluid">
-        <div class="row">
+        <div class="row d-flex align-items-center h-100 bg-light text-center">
             <div class="col-12">
                 <!-- FILTERS -->
-                <div class="navbar fixed-bottom bg-white row justify-content-around">
-                    <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
-                        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
-                    </a>
-                    <i class="fas fa-users filters fa-2x col-1"></i>
-                    <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-                        @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
-                </div>
+
 
                 <!-- POST CARDS -->
                 <div id="btn-bar" class="row d-flex justify-content-center ">
@@ -90,6 +83,16 @@
                     </div>
                 </span>
                 <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="navbar fixed-bottom bg-white row justify-content-around">
+                <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+                    <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+                </a>
+                <i class="fas fa-users filters fa-2x col-1"></i>
+                <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+                    @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
             </div>
         </div>
     </div>
