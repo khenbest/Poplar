@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
     <div class="row">
       <div class="col">
-        <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
+        <h4 class="username d-flex justify-content-center">{{post.user || 'Unknown'}}</h4>
       </div>
     </div>
     <div class="row">
@@ -49,7 +49,20 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
+<<<<<<< HEAD
 
+=======
+    <!-- PROGRESS BAR GOES HERE -->
+    <button @click="go(10)">up</button>
+    <button @click="go(-10)">down</button>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: x + '%'}">
+        math.floor(% amount yes/total)
+      </div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+        :style="{width: 100-x + '%'}">math.floor(% amount no/total)</div>
+    </div>
+>>>>>>> 7fa72a949992c4136badf704ced90020002211f4
 
 
   </div>
