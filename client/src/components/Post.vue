@@ -21,12 +21,26 @@
     </div>
     <div class="row mb-2 mt-2 justify-content-between">
       <div class="col">
-        <button class="vote yes" @click="castVote(post._id, 'yes')">yes</button>
+        <button v-if="showVotes == false" class="vote yes"
+          @click="value(); castVote(post._id, 'yes'); showVotes=true">yes</button>
       </div>
       <div class="col">
-        <button class="vote no" @click="castVote(post._id, 'no')">no</button>
+        <button v-if="showVotes == false" class="vote no"
+          @click="value(); castVote(post._id, 'no'); showVotes=true">no</button>
       </div>
     </div>
+
+    <!-- PROGRESS BAR GOES HERE -->
+    <div v-if="showVotes == true" class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+    </div>
+
     <div class="row mb-2">
       <div class="col d-flex justify-content-center">
         <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
@@ -36,17 +50,6 @@
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
 
-
-    <!-- PROGRESS BAR GOES HERE -->
-    <button @click="go(10)">up</button>
-    <button @click="go(-10)">down</button>
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: x + '%'}">
-        math.floor(% amount yes/total)
-      </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-        :style="{width: 100-x + '%'}">math.floor(% amount no/total)</div>
-    </div>
 
 
   </div>
@@ -60,9 +63,15 @@
   export default {
     name: "post",
     props: ["post"],
+    mounted() {
+
+    },
     data() {
       return {
-        x: 100
+        x: 100,
+        totalNo: 0,
+        totalYes: 0,
+        showVotes: false
       };
     },
     computed: {
@@ -77,8 +86,15 @@
           data: { "vote": vote }
         });
       },
-      go(n) {
-        this.x += n;
+      value() {
+        let votesArr = Object.values(this.post.votes)
+        votesArr.forEach(vote => {
+          if (vote == 'yes') {
+            this.totalYes++
+          } else (
+            this.totalNo++
+          )
+        })
       }
     },
     components: {},
