@@ -75,26 +75,6 @@ router.put('/:id/vote', (req, res, next) => {
     })
 })
 
-// router.put('/:id', (req, res, next) => {
-//   Posts.findById(req.params.id)
-//     .then(post => {
-//       if (!post.authorId.equals(req.session.uid)) {
-//         return res.status(401).send("ACCESS DENIED!")
-//       }
-//       post.update(req.body, (err) => { 
-//         if (err) {
-//           console.log(err)
-//           next()
-//           return
-//         }
-//         res.send("Successfully Updated")
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       next()
-//     })
-// })
 //DELETE
 router.delete('/:id', (req, res, next) => {
   Posts.findById(req.params.id)
@@ -104,9 +84,9 @@ router.delete('/:id', (req, res, next) => {
 })
 
 // router.delete('/:id', (req, res, next) => {
-//   Posts.findOne({ _id: req.params.id, authorId: req.session.uid })
-//     .then(post => {
-//       post.remove(err => {
+//   User.findOne({ _id: req.params.id, authorId: req.session.uid })
+//     .then(user => {
+//       user.remove(err => {
 //         if (err) {
 //           console.log(err)
 //           next()

@@ -2,16 +2,17 @@
   <div class="posts container-fluid">
     <div class="row">
       <div class="col-12">
-
-        <!-- FILTERS -->
         <div class="navbar fixed-bottom bg-white row justify-content-around">
-          <i class="fas fa-globe-americas filters fa-2x col=1"></i>
+          <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+            <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+          </a>
           <i class="fas fa-users filters fa-2x col-1"></i>
-          <i class="fas fa-user filters fa-2x col-1"></i>
+          <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+            @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
         </div>
 
         <!-- CREATE POST FORM -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <form @submit.prevent="addPost">
               <input type="text" placeholder="title" v-model="newPost.title" required>
@@ -19,16 +20,14 @@
               <button type="submit">Create Post</button>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <!-- POST CARDS -->
         <div class="row">
           <post v-for="post in posts" :post="post"></post>
         </div>
-
-
-
       </div>
+
     </div>
   </div>
 </template>
@@ -49,9 +48,11 @@
       this.$store.dispatch("getPosts"); //without a second argument passed in this will get all the posts
     },
 
+
     data() {
       return {
-        newPost: {}
+        newPost: {},
+        activeClass: null
       };
     },
     computed: {
@@ -78,7 +79,10 @@
         this.$store.dispatch('castVote', {
           endpoint: 'posts/${postId}'
         })
-      }
+      },
+      friendPosts() {
+        this.$router.push({ path: '/posts/myPosts' })
+      },
     },
     components: {
       Chatroom,

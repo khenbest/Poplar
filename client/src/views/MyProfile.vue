@@ -4,9 +4,12 @@
             <div class="col-12">
                 <!-- FILTERS -->
                 <div class="navbar fixed-bottom bg-white row justify-content-around">
-                    <i class="fas fa-globe-americas filters fa-2x col=1"></i>
+                    <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+                        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+                    </a>
                     <i class="fas fa-users filters fa-2x col-1"></i>
-                    <i class="fas fa-user filters fa-2x col-1"></i>
+                    <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+                        @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
                 </div>
 
                 <!-- POST CARDS -->
@@ -19,13 +22,14 @@
                 </div>
                 <div class="row d-flex  justify-content-center">
                     <h1>{{this.$store.state.user.name}}'s Profile</h1>
+
+                </div>
+                <div class="row d-flex  justify-content-center">
+                    <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
                 </div>
                 <span v-show="showPosts">
                     <div class="row ">
-                        <div class="col-12">
-                            <h3 class="justify-self-center">My Posts</h3>
-                        </div>
-                        <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-4" v-for="post in posts" :key="post._id">
+                        <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-2" v-for="post in posts" :key="post._id">
                             <div class="row">
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="title">{{post.title}}</h4>
@@ -51,15 +55,16 @@
                 <span v-show="!showPosts">
                     <div class="row">
                         <div class="col-12">
-                            <h3>My Participated Posts</h3>
+                            <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3>
                         </div>
                     </div>
                     <div class="row">
-                        <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-4"
+                        <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-2"
                             v-for="(participated, index) in participated" :key="index">
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="username">__________{{participated.user || 'Unknown'}}__________</h4>
+                                    <h4 class="username d-flex justify-content-center">
+                                        {{participated.user || 'Unknown'}}</h4>
                                 </div>
                             </div>
                             <div class="row">
@@ -132,7 +137,13 @@
             },
             chatroom() {
                 this.$router.push({ name: 'postDetails' })
-            }
+            },
+            allPosts() {
+                this.$router.push({ path: '/' });
+            },
+            friendPosts() {
+                this.$router.push({ path: '/posts/myPosts' })
+            },
         },
         components: {
             Chatroom
@@ -140,6 +151,9 @@
         filters: {
             formatTime(date) {
                 return Moment(String(date)).startOf('hour').fromNow();
+            },
+            formatTime2(date) {
+                return Moment(String(date)).format('MMMM Do, YYYY')
             }
         }
     };
