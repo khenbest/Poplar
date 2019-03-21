@@ -49,9 +49,6 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
-<<<<<<< HEAD
-
-=======
     <!-- PROGRESS BAR GOES HERE -->
     <button @click="go(10)">up</button>
     <button @click="go(-10)">down</button>
@@ -62,7 +59,6 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
         :style="{width: 100-x + '%'}">math.floor(% amount no/total)</div>
     </div>
->>>>>>> 7fa72a949992c4136badf704ced90020002211f4
 
 
   </div>
