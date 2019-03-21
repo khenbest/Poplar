@@ -14,7 +14,8 @@
                     <h1>{{this.$store.state.user.name}}'s Posts</h1>
                 </div>
                 <button class="btn btn-primary" @click="showPosts = !showPosts">My Posts</button>
-                <button class="btn btn-primary" @click="showPosts = !showPosts">My Participated Posts</button>
+                <button class="btn btn-primary" @click="showParticipated = !showParticipated">My Participated
+                    Posts</button>
                 <span v-show="showPosts">
 
                     <div class="row">
@@ -32,6 +33,34 @@
                             <div class="row mb-2">
                                 <div class="col d-flex justify-content-center">
                                     <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
+                                </div>
+                            </div>
+                            <button @click="deletePost(post._id)">Delete</button>
+
+                        </div>
+                    </div>
+                </span>
+                <span v-show="showParticipated">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3"
+                            v-for="(participated, index) in participated" :key="index">
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    <h4 class="title">{{participated.title}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col px-0">
+                                    <img :src="participated.imgUrl1" class="photo">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col d-flex justify-content-center">
+                                    <h4 class="timestamp">{{participated.createdAt| formatTime}}</h4>
                                 </div>
                                 <div class="col d-flex justify-content-center">
                                     <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
@@ -69,12 +98,16 @@
         data() {
             return {
                 showPosts: false,
+                showParticipated: false,
                 newPost: {}
             };
         },
         computed: {
             posts() {
                 return this.$store.state.posts;
+            },
+            participated() {
+                return this.$store.state.user.participated
             }
         },
         methods: {
