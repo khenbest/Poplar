@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
     <div class="row">
       <div class="col">
-        <h4 class="username">__________{{post.user || 'Unknown'}}__________</h4>
+        <h4 class="username d-flex justify-content-center">{{post.user || 'Unknown'}}</h4>
       </div>
     </div>
     <div class="row">
