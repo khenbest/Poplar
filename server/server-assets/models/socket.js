@@ -54,7 +54,7 @@ class Socket {
         }
       })
 
-      //Not sure what this does
+      // Not sure what this does
       // socket.on('newBoard', data => {
       //   Boards.create(data)
       //     .then(res => {
