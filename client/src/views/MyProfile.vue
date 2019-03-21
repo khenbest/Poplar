@@ -45,7 +45,6 @@
                                 <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
                             </div>
                             <button @click="deletePost(post._id)">Delete</button>
-
                         </div>
                     </div>
                 </span>
@@ -53,6 +52,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3"
                             v-for="(participated, index) in participated" :key="index">
+                            <div class="row">
+                                <div class="col">
+                                    <h3>Participated</h3>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col">
                                     <h4 class="username">__________{{participated.user || 'Unknown'}}__________</h4>
