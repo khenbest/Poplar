@@ -51,6 +51,7 @@
                             <button class="btn btn-primary mt-3" type="submit">Create Post</button>
                         </form>
                     </div>
+                    <crop-image-form></crop-image-form>
                 </div>
             </div>
         </div>
@@ -76,6 +77,7 @@
 </template>
 
 <script>
+    import CropImageForm from '@/components/cropImageForm.vue'
     import '@babel/polyfill'; // es6 shim
     import Vue from 'vue';
     import myUpload from 'vue-image-crop-upload';
@@ -110,6 +112,7 @@
         },
         components: {
             'my-upload': myUpload,
+            CropImageForm
         },
         methods: {
             addPost() {

@@ -5,7 +5,7 @@ class Socket {
 
 
     io.on("connection", socket => {
-      console.log("Userv Connected")
+      console.log("User Connected")
 
       //notify user of successful connection
       socket.emit("CONNECTED", {
