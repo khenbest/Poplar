@@ -4,9 +4,12 @@
             <div class="col-12">
                 <!-- FILTERS -->
                 <div class="navbar fixed-bottom bg-white row justify-content-around">
-                    <i class="fas fa-globe-americas filters fa-2x col=1"></i>
+                    <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+                        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+                    </a>
                     <i class="fas fa-users filters fa-2x col-1"></i>
-                    <i class="fas fa-user filters fa-2x col-1"></i>
+                    <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+                        @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
                 </div>
 
                 <!-- POST CARDS -->
@@ -134,7 +137,13 @@
             },
             chatroom() {
                 this.$router.push({ name: 'postDetails' })
-            }
+            },
+            allPosts() {
+                this.$router.push({ path: '/' });
+            },
+            friendPosts() {
+                this.$router.push({ path: '/posts/myPosts' })
+            },
         },
         components: {
             Chatroom
