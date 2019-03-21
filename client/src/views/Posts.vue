@@ -23,12 +23,6 @@
 
         <!-- POST CARDS -->
         <post></post>
-
-        <div class="row">
-          <div class="col">
-            <button class="chatroom" @click="chatroom">Go to Chatroom!</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
