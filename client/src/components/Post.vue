@@ -98,7 +98,7 @@
       },
       chatroom() {
         this.$router.push({
-          path: 'posts/' + this.post._id,
+          path: '/get' + this.post._id,
           name: 'postDetails',
           params: {
             postId: this.post._id

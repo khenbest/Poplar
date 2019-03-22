@@ -80,7 +80,7 @@
 
         console.log(postId)
         this.$store.dispatch('castVote', {
-          endpoint: 'posts/${postId}'
+          endpoint: 'posts/get/${postId}'
         })
       },
       MyProfile() {
