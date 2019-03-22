@@ -62,6 +62,7 @@
     },
     methods: {
       join() {
+        debugger
         let payload = {
           name: this.name,
           postId: this.post._id
