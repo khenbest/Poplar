@@ -56,8 +56,6 @@
   </div>
 </template>
 
-
-
 <script>
   import Moment from "moment";
   import Chatroom from "@/views/Chatroom.vue"
@@ -119,8 +117,6 @@
     },
   };
 </script>
-
-
 <style scoped>
   .username {
     color: #a0b5c5;
@@ -177,23 +173,4 @@
   .progress {
     height: 10vh;
   }
-
-  /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
-  .chatroom {
-    border: none;
-    background-color: #3d6ea0;
-    color: white;
-    border-radius: 25px;
-    font-size: 1.5em;
-    min-width: 5em;
-    min-height: 1em;
-    font-family: "Kalam", cursive;
-  }
-
-  /* font-family: 'Amatic SC', cursive;
-font-family: 'Patrick Hand SC', cursive;
-font-family: 'Dekko', cursive;
-font-family: 'Itim', cursive;
-font-family: 'Kalam', cursive;
-font-family: 'Just Me Again Down Here', cursive; */
 </style>
