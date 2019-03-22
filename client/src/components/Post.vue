@@ -38,13 +38,10 @@
       </div>
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger h-75" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-      </div>
-      <div>
-        <div class="col">
-          hi
-        </div>
-        <div class="row h-100">
-          <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
+        <div class="row">
+          <div class="col-12">
+            <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
+          </div>
         </div>
       </div>
     </div>
