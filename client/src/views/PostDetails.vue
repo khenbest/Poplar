@@ -1,6 +1,6 @@
 <template>
    <div class="postDetails">
-      <chatroom :post="post"></chatroom>
+      <chatroom :post="post" :participated="participated"></chatroom>
    </div>
 </template>
 
@@ -16,8 +16,12 @@
       },
       computed: {
          post() {
-            return this.$store.state.posts.find(post => post._id == this.$route.params.postId)
-         }
+            return this.$store.state.myPosts.find(post => post._id == this.$route.params.postId)
+         },
+         participated() {
+            return this.$store.state.user.participated.find(participated => participated._id == this.$route.params.postId)
+         },
+
       },
       methods: {},
       components: {
