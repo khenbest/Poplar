@@ -48,7 +48,7 @@
                 <span v-show="!showPosts">
                     <div class="row">
                         <div class="col-12">
-                            <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3>
+                            <!-- <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3> -->
                         </div>
                     </div>
                     <div class="row">
@@ -134,6 +134,7 @@
             },
             deletePost(postId) {
                 this.$store.dispatch("deletePost", postId);
+<<<<<<< HEAD
             },
             chatroom() {
                 this.$router.push({ name: 'postDetails' })
@@ -141,6 +142,19 @@
             allPosts() {
                 this.$router.push({ path: '/' });
             },
+=======
+            },
+            chatroom() {
+                this.$router.push({ name: 'postDetails' })
+            },
+            allPosts() {
+                this.$router.push({ path: '/' });
+            },
+            myProfile() {
+                this.$router.push({ path: '/myProfile' })
+            },
+
+>>>>>>> a7d84c085079de8f5711d7f616f9263000042bf0
         },
         components: {
             Chatroom

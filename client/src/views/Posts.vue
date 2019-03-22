@@ -72,10 +72,7 @@
         this.$router.push({ name: 'postDetails' })
       },
       castVote(vote) {
-        debugger
         let postId = this.post.id
-
-        console.log(postId)
         this.$store.dispatch('castVote', {
           endpoint: 'posts/get/${postId}'
         })
