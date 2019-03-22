@@ -4,9 +4,9 @@ let User = require('../models/user')
 
 //GET
 
-router.get('/:myPosts?', (req, res, next) => {
+router.get('/:myProfile?', (req, res, next) => {
   let params = {}
-  if (req.params.myPosts) {
+  if (req.params.myProfile) {
     params['authorId'] = req.session.uid
   }
   Posts.find(params)
@@ -19,7 +19,7 @@ router.get('/:myPosts?', (req, res, next) => {
 }),
 
   // if you ever use this then add an additional path
-  router.get('/:activePostId', (req, res, next) => {
+  router.get('/get/:activePostId', (req, res, next) => {
     Posts.findById(req.params.id)
       .then(post => {
         res.send(post)

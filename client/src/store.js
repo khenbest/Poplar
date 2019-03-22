@@ -168,7 +168,7 @@ export default new Vuex.Store({
         })
     },
     getActivePost({ commit, dispatch }, postId) {
-      api.get('/:postId')
+      api.get('/get/:postId')
         .then(res => {
           commit('setActivePost', res.data)
         })

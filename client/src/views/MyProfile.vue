@@ -92,7 +92,7 @@
                 </a>
                 <i class="fas fa-users filters fa-2x col-1"></i>
                 <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-                    @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
+                    @click="activeClass = 3; myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
             </div>
         </div>
     </div>
@@ -144,8 +144,8 @@
             allPosts() {
                 this.$router.push({ path: '/' });
             },
-            friendPosts() {
-                this.$router.push({ path: '/posts/myPosts' })
+            myProfile() {
+                this.$router.push({ path: '/myProfile' })
             },
         },
         components: {

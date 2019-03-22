@@ -1,7 +1,7 @@
 <template>
   <div class="Chatroom">
     <div v-if="!joined" class="text-center">
-      {{post.title}}
+      <!-- {{post.title}} -->
       <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button>
     </div>
     <div v-else>

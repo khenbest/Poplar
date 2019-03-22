@@ -27,8 +27,8 @@
           <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
         </a>
         <i class="fas fa-users filters fa-2x col-1"></i>
-        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-          @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
+        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
+            class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
   </div>
@@ -83,8 +83,8 @@
           endpoint: 'posts/${postId}'
         })
       },
-      friendPosts() {
-        this.$router.push({ path: '/posts/myPosts' })
+      MyProfile() {
+        this.$router.push({ path: '/posts/myProfile' })
       },
     },
     components: {

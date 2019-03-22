@@ -19,7 +19,7 @@ export default new Router({
       component: Posts
     },
     {
-      path: '/posts/:postId',
+      path: '/posts/get/:postId',
       name: 'postDetails',
       props: true,
       component: PostDetails
