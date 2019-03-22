@@ -7,7 +7,7 @@ var cors = require('cors')
 var app = require("http").createServer(server)
 var io = require("socket.io")(app)
 let Socket = require('./server-assets/models/socket')
-let socket = new Socket(io)
+new Socket(io)
 
 //Sets the port to Heroku's, and the files to the built project 
 var port = process.env.PORT || 3000

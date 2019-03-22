@@ -21,7 +21,7 @@
             Posts
           </a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-            @click="activeClass = 3; friendPosts();">Profile</a>
+            @click="activeClass = 3; myProfile();">Profile</a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 5}"
             @click="activeClass = 5; makePost();">Make
             Post</a>
@@ -51,17 +51,14 @@
       logout() {
         this.$store.dispatch("logout");
       },
-      profile() {
-        this.$router.push({ path: '/profile' });
-      },
       allPosts() {
         this.$router.push({ path: '/' });
       },
       makePost() {
         this.$router.push({ path: '/makePost' })
       },
-      friendPosts() {
-        this.$router.push({ path: '/posts/myPosts' })
+      myProfile() {
+        this.$router.push({ path: '/posts/myProfile' })
       }
     },
     components: {}

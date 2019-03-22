@@ -42,6 +42,9 @@ export default new Vuex.Store({
     setPosts(state, posts) {
       state.posts = posts
     },
+    setActivePost(state, data) {
+      state.activePost = data
+    },
     //#region --SOCKETS--
     setJoined(state, payload) {
       state.joined = true
@@ -51,17 +54,18 @@ export default new Vuex.Store({
       state.roomData = payload
     },
     newUser(state, payload) {
-      Vue.set(state.roomData.connectedUsers, payload.userName, payload.userName)
+      Vue.set(state.roomData, 'connectedUsers', payload)
     },
     userLeft(state, payload) {
-      Vue.set(state.roomData.connectedUsers, payload, undefined)
+      debugger
+      Vue.set(state.roomData, 'connectedUsers', payload)
     },
     addMessage(state, payload) {
       state.messages.push(payload)
     },
-    leave(state) {
+    leave(state, payload) {
       state.joined = false,
-        state.name = '',
+        state.name = payload.name,
         state.messages = [],
         state.roomData = {}
     }
@@ -70,7 +74,8 @@ export default new Vuex.Store({
   actions: {
     //#region --SOCKETS--
     join({ commit, dispatch }, payload) {
-      commit('setJoined', payload);
+
+      commit('setJoined', payload.name);
       dispatch('socket', payload)
     },
     socket({ commit, dispatch }, payload) {
@@ -80,12 +85,16 @@ export default new Vuex.Store({
 
       //Register all listeners
       socket.on('CONNECTED', data => {
-        console.log('Connected to socket')
+        console.log('Connected to socket', payload)
         //connect to room 
-        socket.emit('join', { name: payload })
+        socket.emit('join', {
+          name: payload.name,
+          postId: payload.postId
+        })
       })
 
       socket.on('joinedRoom', data => {
+        console.log(data)
         commit('setRoom', data)
       })
 
@@ -99,6 +108,7 @@ export default new Vuex.Store({
       })
 
       socket.on('newMessage', data => {
+        console.log(data)
         commit('addMessage', data)
       })
     },
@@ -106,9 +116,9 @@ export default new Vuex.Store({
       socket.emit('message', payload)
     },
     leaveRoom({ commit, dispatch }, payload) {
-      socket.emit('leave')
+      socket.emit('leave', payload)
       socket.close()
-      commit('leave')
+      commit('leave', payload)
     },
     //#endregion
     //#region -- AUTH STUFF --
@@ -155,6 +165,12 @@ export default new Vuex.Store({
       api.get(query)
         .then(res => {
           commit('setPosts', res.data)
+        })
+    },
+    getActivePost({ commit, dispatch }, postId) {
+      api.get('/get/:postId')
+        .then(res => {
+          commit('setActivePost', res.data)
         })
     },
     addPost({ commit, dispatch }, postData) {

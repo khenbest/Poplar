@@ -1,15 +1,8 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div class="navbar fixed-bottom bg-white row justify-content-around">
-          <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
-            <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
-          </a>
-          <i class="fas fa-users filters fa-2x col-1"></i>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-            @click="activeClass = 3; friendPosts();"><i class="fas fa-user filters fa-2x col-1"></i></a>
-        </div>
+    <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
+      <div class="col-12 ">
+
 
         <!-- CREATE POST FORM -->
         <!-- <div class="row">
@@ -23,11 +16,18 @@
         </div> -->
 
         <!-- POST CARDS -->
-        <div class="row">
+        <div class="row bar">
           <post v-for="post in posts" :post="post"></post>
         </div>
       </div>
-
+    </div>
+    <div class="row pt-5">
+      <div class="navbar fixed-bottom bg-white row justify-content-around">
+        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+        <i class="fas fa-users filters fa-2x col-1"></i>
+        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
+            class="fas fa-user filters fa-2x col-1"></i></a>
+      </div>
     </div>
   </div>
 </template>
@@ -72,16 +72,16 @@
         this.$router.push({ name: 'postDetails' })
       },
       castVote(vote) {
-        debugger
         let postId = this.post.id
-
-        console.log(postId)
         this.$store.dispatch('castVote', {
-          endpoint: 'posts/${postId}'
+          endpoint: 'posts/get/${postId}'
         })
       },
-      friendPosts() {
-        this.$router.push({ path: '/posts/myPosts' })
+      allPosts() {
+        this.$router.push({ path: '/' });
+      },
+      myProfile() {
+        this.$router.push({ path: '/posts/myProfile' })
       },
     },
     components: {
@@ -148,6 +148,8 @@
   .fas:hover {
     cursor: pointer;
   }
+
+
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
   .chatroom {

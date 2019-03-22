@@ -19,8 +19,7 @@ export default new Router({
       component: Posts
     },
     {
-      // path: '/posts/:postId',
-      path: '/posts',
+      path: '/posts/get/:postId',
       name: 'postDetails',
       props: true,
       component: PostDetails
@@ -36,7 +35,7 @@ export default new Router({
       component: makePost
     },
     {
-      path: '/posts/myPosts',
+      path: '/posts/myProfile',
       name: 'MyProfile',
       component: MyProfile
     },

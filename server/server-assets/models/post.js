@@ -13,7 +13,7 @@ let schema = new Schema({
   imgUrl1: { type: String, required: true },
   imgUrl2: { type: String },
   votes: {},
-  tags: { type: String, enum: ["music", "sports", "fashion", "food", "movies"] }
+  tags: { type: String, enum: ["music", "sports", "fashion", "food", "movies", "meme-culture"] }
 }, { timestamps: true })
 
 //CASCADE ON DELETE

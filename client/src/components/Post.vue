@@ -31,13 +31,17 @@
     </div>
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes == true" class="progress">
+    <div v-if="showVotes == true" class="progress d-flex row">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+
+      <div class="col-12 mt-2">
+        <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
       </div>
     </div>
 
@@ -49,8 +53,11 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 11607734df7d8a843736e2287aa77c03f8b1a651
   </div>
 </template>
 
@@ -58,7 +65,7 @@
 
 <script>
   import Moment from "moment";
-
+  import Chatroom from "@/views/Chatroom.vue"
   export default {
     name: "post",
     props: ["post"],
@@ -94,16 +101,27 @@
             this.totalNo++
           )
         })
+      },
+      chatroom() {
+        this.$router.push({
+          path: '/get' + this.post._id,
+          name: 'postDetails',
+          params: {
+            postId: this.post._id
+          }
+        })
       }
     },
-    components: {},
+    components: {
+      Chatroom
+    },
     filters: {
       formatTime(date) {
         return Moment(String(date))
           .startOf("hour")
           .fromNow();
       }
-    }
+    },
   };
 </script>
 
@@ -159,6 +177,10 @@
 
   .fas:hover {
     cursor: pointer;
+  }
+
+  .progress {
+    height: 10vh;
   }
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */

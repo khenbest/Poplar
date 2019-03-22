@@ -4,9 +4,9 @@ let User = require('../models/user')
 
 //GET
 
-router.get('/:myPosts?', (req, res, next) => {
+router.get('/:myProfile?', (req, res, next) => {
   let params = {}
-  if (req.params.myPosts) {
+  if (req.params.myProfile) {
     params['authorId'] = req.session.uid
   }
   Posts.find(params)
@@ -16,7 +16,19 @@ router.get('/:myPosts?', (req, res, next) => {
     .catch(err => {
       console.log(err)
     })
-})
+}),
+
+  // if you ever use this then add an additional path
+  router.get('/get/:activePostId', (req, res, next) => {
+    Posts.findById(req.params.id)
+      .then(post => {
+        res.send(post)
+      }).catch(err => {
+        res.status(400).send(err)
+      })
+  })
+
+
 //get posts that you participated in is handled in your user routes
 
 //GET friends posts
