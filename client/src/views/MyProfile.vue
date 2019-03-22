@@ -119,7 +119,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getPosts", true); //without a second argument passed in this will get all the posts
+    this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
   },
   data() {
     return {
@@ -130,7 +130,7 @@ export default {
   },
   computed: {
     posts() {
-      return this.$store.state.posts;
+      return this.$store.state.myPosts;
     },
     participated() {
       return this.$store.state.user.participated;

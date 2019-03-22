@@ -2,7 +2,7 @@
   <div class="Chatroom">
     <div v-if="!joined" class="text-center">
       <!-- {{post.title}} -->
-      <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button>
+      <!-- <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button> -->
     </div>
     <div v-else>
       <div class="connected-users text-left">
@@ -47,12 +47,20 @@
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
-    props: ['post'],
+    props: ['post', 'participated'],
     data() {
       return {
         name: this.$store.state.user.name,
         message: ''
       }
+    },
+    mounted() {
+      let payload = {
+        name: this.name,
+        postId: this.post ? this.post._id : this.participated._id
+      }
+      console.log(payload)
+      this.$store.dispatch('join', payload)
     },
     computed: {
       joined() {
@@ -66,15 +74,6 @@
       }
     },
     methods: {
-      join() {
-        debugger
-        let payload = {
-          name: this.name,
-          postId: this.post._id
-        }
-        console.log(payload)
-        this.$store.dispatch('join', payload)
-      },
       leave() {
         let payload = {
           name: this.name,
