@@ -1,5 +1,19 @@
 <template>
    <div class="postDetails">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <chatroom :post="post" :participated="participated"></chatroom>
    </div>
 </template>

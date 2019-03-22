@@ -12,7 +12,7 @@ let schema = new Schema({
   user: { type: String, ref: 'User', required: true },
   imgUrl1: { type: String, required: true },
   imgUrl2: { type: String },
-  votes: {},
+  votes: { type: Object, default() { return {} } },
   tags: { type: String, enum: ["music", "sports", "fashion", "food", "movies", "meme-culture"] }
 }, { timestamps: true })
 
