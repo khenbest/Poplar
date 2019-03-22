@@ -54,10 +54,11 @@ export default new Vuex.Store({
       state.roomData = payload
     },
     newUser(state, payload) {
-      Vue.set(state.roomData.connectedUsers, payload.userName, payload.userName)
+      Vue.set(state.roomData, 'connectedUsers', payload)
     },
     userLeft(state, payload) {
-      Vue.set(state.roomData.connectedUsers, payload, undefined)
+      debugger
+      Vue.set(state.roomData, 'connectedUsers', payload)
     },
     addMessage(state, payload) {
       state.messages.push(payload)
