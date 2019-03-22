@@ -1,3 +1,5 @@
+let Message = require('./chatroomMessage')
+
 class Socket {
   constructor(io) {
     let connectedUsers = {}
@@ -41,6 +43,9 @@ class Socket {
 
           //adds connection to room, will change this value
           socket.join(data.postId)
+          Message.find({ postId: data.postId }).then(messages => {
+            socket.emit('roomHistory', messages)
+          })
 
           //adds user to connectedUsers
           if (!connectedUsers[data.postId]) {
@@ -69,7 +74,6 @@ class Socket {
           users.forEach((user, index) => {
             if (user == data.name) {
               connectedUsers[data.postId].splice(index, 1)
-
             }
           })
           //remove the user with the name == data.user || data.name 
@@ -79,10 +83,15 @@ class Socket {
 
       socket.on('message', data => {
         //must know the postId here which is the roomname
-        if (data.message && data.user) {
-          io.to(data.postId).emit('newMessage', data)
-          //save message to chat history in DB
-        }
+        // if (data.message && data.user) {
+
+        //save message to chat history in DB
+        Message.create(data)
+          .then((message) => io.to(data.postId).emit('newMessage', message))
+          .catch(e => socket.emit('messageError', e))
+
+
+        // }
       })
 
       // This is way to utilize socket connections instead of typically utilizing http requests

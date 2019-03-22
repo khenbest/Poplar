@@ -62,6 +62,9 @@ export default new Vuex.Store({
     addMessage(state, payload) {
       state.messages.push(payload)
     },
+    setMessages(state, messages) {
+      state.messages = messages
+    },
     leave(state, payload) {
       state.joined = false,
         state.name = payload.name,
@@ -110,6 +113,15 @@ export default new Vuex.Store({
         console.log(data)
         commit('addMessage', data)
       })
+
+      socket.on('roomHistory', messages => {
+        commit('setMessages', messages)
+      })
+
+      socket.on('messageError', err => {
+        console.log(err);
+      })
+
     },
     sendMessage({ commit, dispatch }, payload) {
       socket.emit('message', payload)
@@ -156,6 +168,7 @@ export default new Vuex.Store({
 
 
     //#region -- POSTS --
+
     getPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {
