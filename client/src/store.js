@@ -67,7 +67,6 @@ export default new Vuex.Store({
         state.name = payload.name,
         state.messages = [],
         state.roomData = {}
-      debugger
     }
     //#endregion --SOCKETS
   },

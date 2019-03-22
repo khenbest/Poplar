@@ -134,15 +134,6 @@
             },
             deletePost(postId) {
                 this.$store.dispatch("deletePost", postId);
-<<<<<<< HEAD
-            },
-            chatroom() {
-                this.$router.push({ name: 'postDetails' })
-            },
-            allPosts() {
-                this.$router.push({ path: '/' });
-            },
-=======
             },
             chatroom() {
                 this.$router.push({ name: 'postDetails' })
@@ -154,7 +145,6 @@
                 this.$router.push({ path: '/myProfile' })
             },
 
->>>>>>> a7d84c085079de8f5711d7f616f9263000042bf0
         },
         components: {
             Chatroom
