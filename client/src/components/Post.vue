@@ -53,11 +53,6 @@
     <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 11607734df7d8a843736e2287aa77c03f8b1a651
   </div>
 </template>
 
