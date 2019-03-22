@@ -60,7 +60,7 @@ class Socket {
           })
 
           //notify room of new connection
-          io.to(data.postId).emit("newUser", { userName: data.name })
+          io.to(data.postId).emit("newUser", connectedUsers[data.postId])
 
         }
       })
@@ -77,7 +77,7 @@ class Socket {
             }
           })
           //remove the user with the name == data.user || data.name 
-          io.to(data.postId).emit('left', socket.user)
+          io.to(data.postId).emit('left', connectedUsers[data.postId])
         }
       })
 
