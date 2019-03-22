@@ -128,35 +128,35 @@
             participated() {
                 return this.$store.state.user.participated
             },
-            methods: {
-                addPost() {
-                    this.$store.dispatch("addPost", this.newPost);
-                    event.target.reset()
-                },
-                deletePost(postId) {
-                    this.$store.dispatch("deletePost", postId);
-                },
-                chatroom() {
-                    this.$router.push({ name: 'postDetails' })
-                },
-                allPosts() {
-                    this.$router.push({ path: '/' });
-                },
-                myProfile() {
-                    this.$router.push({ path: '/myProfile' })
-                },
+        },
+        methods: {
+            addPost() {
+                this.$store.dispatch("addPost", this.newPost);
+                event.target.reset()
+            },
+            deletePost(postId) {
+                this.$store.dispatch("deletePost", postId);
+            },
+            chatroom() {
+                this.$router.push({ name: 'postDetails' })
+            },
+            allPosts() {
+                this.$router.push({ path: '/' });
+            },
+            myProfile() {
+                this.$router.push({ path: '/myProfile' })
+            },
 
+        },
+        components: {
+            Chatroom
+        },
+        filters: {
+            formatTime(date) {
+                return Moment(String(date)).startOf('hour').fromNow();
             },
-            components: {
-                Chatroom
-            },
-            filters: {
-                formatTime(date) {
-                    return Moment(String(date)).startOf('hour').fromNow();
-                },
-                formatTime2(date) {
-                    return Moment(String(date)).format('MMMM Do, YYYY')
-                }
+            formatTime2(date) {
+                return Moment(String(date)).format('MMMM Do, YYYY')
             }
         }
     }
