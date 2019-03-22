@@ -32,6 +32,7 @@ class Socket {
       })
 
       //join room
+      //add saved chat history in here
       socket.on("join", data => {
         //ensure connection passed name
         if (data.name) {
@@ -80,6 +81,7 @@ class Socket {
         //must know the postId here which is the roomname
         if (data.message && data.user) {
           io.to(data.postId).emit('newMessage', data)
+          //save message to chat history in DB
         }
       })
 

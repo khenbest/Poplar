@@ -31,18 +31,17 @@
     </div>
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes == true" class="progress d-flex row h-100">
-      <div class="progress-bar progress-bar-striped progress-bar-animated h-25" role="progressbar"
+    <div v-if="showVotes == true" class="progress d-flex row">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger h-25" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-        <div class="row">
-          <div class="col-12">
-            <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
-          </div>
-        </div>
+      </div>
+
+      <div class="col-12 mt-2">
+        <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
       </div>
     </div>
 
@@ -173,6 +172,10 @@
 
   .fas:hover {
     cursor: pointer;
+  }
+
+  .progress {
+    height: 10vh;
   }
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
