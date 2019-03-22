@@ -55,19 +55,20 @@ class Socket {
 
           //notify room of new connection
           io.to(data.postId).emit("newUser", { userName: data.name })
+
         }
       })
 
       //connection disconnectsd
       socket.on('leave', data => {
         //make sure have postId
-        console.log(data)
         if (socket.user) {
           //remove from connected room
           let users = connectedUsers[data.postId]
           users.forEach((user, index) => {
-            if (user.name == data.name) {
+            if (user == data.name) {
               connectedUsers[data.postId].splice(index, 1)
+
             }
           })
           //remove the user with the name == data.user || data.name 
@@ -78,8 +79,6 @@ class Socket {
       socket.on('message', data => {
         //must know the postId here which is the roomname
         if (data.message && data.user) {
-          console.log('message received')
-          console.log('yo yo yo')
           io.to(data.postId).emit('newMessage', data)
         }
       })
