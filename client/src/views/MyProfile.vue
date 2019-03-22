@@ -48,7 +48,7 @@
                 <span v-show="!showPosts">
                     <div class="row">
                         <div class="col-12">
-                            <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3>
+                            <!-- <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3> -->
                         </div>
                     </div>
                     <div class="row">
@@ -87,16 +87,13 @@
         </div>
         <div class="row pt-5">
             <div class="navbar fixed-bottom bg-white row justify-content-around">
-                <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+                <a class="curs" :class="{active : activeClass == 2}" @click="allPosts();">
                     <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
                 </a>
                 <i class="fas fa-users filters fa-2x col-1"></i>
-                <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-                    @click="activeClass = 3; myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
+                <i class="fas fa-user filters fa-2x col-1"></i>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </template>
 <script>
@@ -118,7 +115,8 @@
         data() {
             return {
                 showPosts: true,
-                newPost: {}
+                newPost: {},
+                activeClass: null
             };
         },
         computed: {
