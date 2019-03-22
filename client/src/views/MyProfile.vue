@@ -87,16 +87,13 @@
         </div>
         <div class="row pt-5">
             <div class="navbar fixed-bottom bg-white row justify-content-around">
-                <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+                <a class="curs" :class="{active : activeClass == 2}" @click="allPosts();">
                     <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
                 </a>
                 <i class="fas fa-users filters fa-2x col-1"></i>
-                <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-                    @click="activeClass = 3; myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
+                <i class="fas fa-user filters fa-2x col-1"></i>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </template>
 <script>
@@ -118,7 +115,8 @@
         data() {
             return {
                 showPosts: true,
-                newPost: {}
+                newPost: {},
+                activeClass: null
             };
         },
         computed: {
@@ -128,37 +126,34 @@
             participated() {
                 return this.$store.state.user.participated
             },
-            methods: {
-                addPost() {
-                    this.$store.dispatch("addPost", this.newPost);
-                    event.target.reset()
-                },
-                deletePost(postId) {
-                    this.$store.dispatch("deletePost", postId);
-                },
-                chatroom() {
-                    this.$router.push({ name: 'postDetails' })
-                },
-                allPosts() {
-                    this.$router.push({ path: '/' });
-                },
-                myProfile() {
-                    this.$router.push({ path: '/myProfile' })
-                },
-
+        },
+        methods: {
+            addPost() {
+                this.$store.dispatch("addPost", this.newPost);
+                event.target.reset()
             },
-            components: {
-                Chatroom
+            deletePost(postId) {
+                this.$store.dispatch("deletePost", postId);
             },
-            filters: {
-                formatTime(date) {
-                    return Moment(String(date)).startOf('hour').fromNow();
-                },
-                formatTime2(date) {
-                    return Moment(String(date)).format('MMMM Do, YYYY')
-                }
+            chatroom() {
+                this.$router.push({ name: 'postDetails' })
+            },
+            allPosts() {
+                this.$router.push({ path: '/' });
+            },
+        },
+        components: {
+            Chatroom
+        },
+        filters: {
+            formatTime(date) {
+                return Moment(String(date)).startOf('hour').fromNow();
+            },
+            formatTime2(date) {
+                return Moment(String(date)).format('MMMM Do, YYYY')
             }
-        };
+        }
+    }
 </script>
 
 <style scoped>

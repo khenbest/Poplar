@@ -23,15 +23,12 @@
     </div>
     <div class="row pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <a class="curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
-          <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
-        </a>
+        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
         <i class="fas fa-users filters fa-2x col-1"></i>
         <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
             class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
@@ -83,7 +80,10 @@
           endpoint: 'posts/get/${postId}'
         })
       },
-      MyProfile() {
+      allPosts() {
+        this.$router.push({ path: '/' });
+      },
+      myProfile() {
         this.$router.push({ path: '/posts/myProfile' })
       },
     },
