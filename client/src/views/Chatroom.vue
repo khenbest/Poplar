@@ -15,12 +15,16 @@
       </div>
       <div class="chat">
         <div class="row" v-for="item in messages">
-          <div class="col-sm-2 text-right">
-            <span class="name">{{ item.user }}</span>
+          <div class="col-sm-2 text-left">
+            <span class="name">{{ item.user }} </span>
           </div>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <span class="message">{{ item.message }}</span>
           </div>
+          <div class="col-sm-2 text-right">
+            <span class="name">{{item.createdAt | formatTime }}</span>
+          </div>
+
         </div>
       </div>
       <div class="text-center">
@@ -40,6 +44,7 @@
 
 
 <script>
+  import Moment from 'moment'
   export default {
     name: 'Chatroom',
     props: ['post'],
@@ -79,9 +84,16 @@
       },
       send() {
         this.$store.dispatch('sendMessage', { user: this.name, message: this.message, postId: this.$route.params.postId })
+        this.message = ''
       }
     },
-    components: {}
+    components: {},
+    filters: {
+      formatTime(date) {
+        return Moment(date)
+          .fromNow();
+      }
+    }
   }
 </script>
 

@@ -1,6 +1,7 @@
 let router = require('express').Router()
 let Posts = require('../models/post')
 let User = require('../models/user')
+let Messages = require('../models/chatroomMessage')
 
 //GET
 
