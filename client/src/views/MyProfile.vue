@@ -158,7 +158,8 @@
                     return Moment(String(date)).format('MMMM Do, YYYY')
                 }
             }
-        };
+        }
+    }
 </script>
 
 <style scoped>
