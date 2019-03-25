@@ -135,6 +135,7 @@ export default new Vuex.Store({
       socket.emit('leave', payload)
       socket.close()
       commit('leave', payload)
+      console.log('left room')
     },
     //#endregion
     //#region -- AUTH STUFF --
