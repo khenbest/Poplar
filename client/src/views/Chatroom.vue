@@ -48,7 +48,6 @@
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
-    props: ['post', 'participated'],
     data() {
       return {
         name: this.$store.state.user.name,
@@ -57,11 +56,11 @@
     },
     mounted() {
       let payload = {
-        name: this.name,
+        name: this.$store.state.user.name,
         postId: this.$route.params.postId
       }
-      console.log(payload)
       this.$store.dispatch('join', payload)
+      console.log(payload)
     },
     computed: {
       joined() {
