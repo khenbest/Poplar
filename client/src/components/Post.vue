@@ -15,8 +15,8 @@
         <img :src="post.imgUrl1" class="photo">
       </div>
       <div v-else class="col px-0">
-        <img :src="post.imgUrl1" class="photo">
-        <img :src="post.imgUrl2" class="photo">
+        <img style="height:270px;width:240px" :src="post.imgUrl1" class="photo">
+        <img style="height:270px;width:240px" :src="post.imgUrl2" class="photo">
       </div>
     </div>
     <div v-if="!showVotes" class="row mb-2 mt-2 justify-content-between">

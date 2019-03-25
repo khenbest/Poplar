@@ -26,7 +26,8 @@
                             <h4>THEN</H4>
                             <input class="form-control" type="text" placeholder="Ask your question"
                                 v-model="newPost.title" required>
-                            <button @click="addPost" class="btn btn-primary mt-3" type="submit">Create Post</button>
+                            <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
+                                type="submit">Create Post</button>
                         </div>
                     </div>
                     <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
@@ -189,13 +190,13 @@
                 this.croppa.refresh()
             },
             output1() {
-                this.dataUrl1 = this.croppa.generateDataUrl('image/jpeg')
+                this.dataUrl1 = this.croppa.generateDataUrl('image/jpeg', 0.5)
             },
             output2() {
-                this.dataUrl2 = this.croppa2.generateDataUrl('image/jpeg')
+                this.dataUrl2 = this.croppa2.generateDataUrl('image/jpeg', 0.5)
             },
             output3() {
-                this.dataUrl3 = this.croppa3.generateDataUrl('image/jpeg')
+                this.dataUrl3 = this.croppa3.generateDataUrl('image/jpeg', 0.5)
             },
         }
     }
