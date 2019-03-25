@@ -5,6 +5,7 @@ import router from './router'
 
 //sockets
 import io from 'socket.io-client'
+import { debug } from 'util';
 let socket = {}
 
 
@@ -81,7 +82,6 @@ export default new Vuex.Store({
   actions: {
     //#region --SOCKETS--
     join({ commit, dispatch }, payload) {
-
       commit('setJoined', payload.name);
       dispatch('socket', payload)
     },
@@ -195,11 +195,9 @@ export default new Vuex.Store({
           commit('setMyPosts', res.data)
         })
     },
-    setActivePost({ commit, dispatch }, post) {
-      commit('setActivePost', post)
-    },
     getActivePost({ commit, dispatch }, postId) {
-      api.get('/get/:postId')
+
+      api.get('posts/get/' + postId)
         .then(res => {
           commit('setActivePost', res.data)
         })
