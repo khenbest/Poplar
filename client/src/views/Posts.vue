@@ -5,7 +5,7 @@
 
 
         <!-- CREATE POST FORM -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <form @submit.prevent="addPost">
               <input type="text" placeholder="title" v-model="newPost.title" required>
@@ -13,7 +13,7 @@
               <button type="submit">Create Post</button>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <!-- POST CARDS -->
         <div class="row bar">
