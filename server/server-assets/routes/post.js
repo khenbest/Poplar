@@ -60,6 +60,15 @@ router.post('/', (req, res, next) => {
 })
 
 //PUT
+//for development
+router.put('/:id', async (req, res, next) => {
+  try {
+    let post = await Posts.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.send(post)
+  } catch (err) {
+    res.status(400).send(err)
+  }
+})
 
 //logic inside of your vote route will need to update the user document as well as including the post id in the user's participated array
 router.put('/:id/vote', (req, res, next) => {
