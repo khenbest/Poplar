@@ -30,11 +30,11 @@
 
     <!-- PROGRESS BAR GOES HERE -->
     <div v-else class="progress d-flex row">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bar-no" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
 
@@ -146,6 +146,18 @@
   }
 
   .no {
+    background-color: #fe3231;
+  }
+
+  .progress-bar {
+    border-radius: none;
+  }
+
+  .bar-yes {
+    background-color: #95c701;
+  }
+
+  .bar-no {
     background-color: #fe3231;
   }
 
