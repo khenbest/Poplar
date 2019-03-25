@@ -5,9 +5,9 @@ let schemaName = 'Message'
 
 
 let schema = new Schema({
-    message: { type: String, required: true },
-    user: { type: String, required: true },
-    postId: { type: ObjectId, ref: 'Post', required: true }
+  message: { type: String, required: true },
+  user: { type: String, required: true },
+  postId: { type: ObjectId, ref: 'Post', required: true }
 }, { timestamps: true })
 
 
