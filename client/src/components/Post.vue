@@ -19,19 +19,17 @@
         <img :src="post.imgUrl2" class="photo">
       </div>
     </div>
-    <div class="row mb-2 mt-2 justify-content-between">
+    <div v-if="!showVotes" class="row mb-2 mt-2 justify-content-between">
       <div class="col">
-        <button v-if="showVotes == false" class="vote yes"
-          @click="value(); castVote(post._id, 'yes'); showVotes=true">yes</button>
+        <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
       </div>
       <div class="col">
-        <button v-if="showVotes == false" class="vote no"
-          @click="value(); castVote(post._id, 'no'); showVotes=true">no</button>
+        <button class="vote no" @click="castVote(post._id, 'no');">no</button>
       </div>
     </div>
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes == true" class="progress d-flex row">
+    <div v-else class="progress d-flex row">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
@@ -74,19 +72,26 @@
       };
     },
     computed: {
+      user() {
+        return this.$store.state.user
+      }
     },
     methods: {
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
       },
       castVote(postId, vote) {
+        this.post.votes = this.post.votes || {}
+        this.post.votes[this.user._id] = vote
         this.$store.dispatch("castVote", {
           endpoint: `posts/${postId}/vote`,
           data: { "vote": vote }
         });
+        this.value()
+        this.showVotes = true
       },
       value() {
-        let votesArr = Object.values(this.post.votes)
+        let votesArr = Object.values(this.post.votes || {}) || []
         votesArr.forEach(vote => {
           if (vote == 'yes') {
             this.totalYes++

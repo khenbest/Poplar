@@ -29,6 +29,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     posts: [],
+    myPosts: [],
     activePost: {},
     joined: false,
     name: '',
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     setPosts(state, posts) {
       state.posts = posts
+    },
+    setMyPosts(state, posts) {
+      state.myPosts = posts
     },
     setActivePost(state, data) {
       state.activePost = data
@@ -57,7 +61,6 @@ export default new Vuex.Store({
       Vue.set(state.roomData, 'connectedUsers', payload)
     },
     userLeft(state, payload) {
-      debugger
       Vue.set(state.roomData, 'connectedUsers', payload)
     },
     addMessage(state, payload) {
@@ -178,6 +181,16 @@ export default new Vuex.Store({
       api.get(query)
         .then(res => {
           commit('setPosts', res.data)
+        })
+    },
+    getMyPosts({ commit, dispatch }, myPosts) {
+      let query = 'posts'
+      if (myPosts) {
+        query += '/myPosts'
+      }
+      api.get(query)
+        .then(res => {
+          commit('setMyPosts', res.data)
         })
     },
     getActivePost({ commit, dispatch }, postId) {

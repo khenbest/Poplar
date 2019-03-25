@@ -82,26 +82,11 @@ class Socket {
       })
 
       socket.on('message', data => {
-        //must know the postId here which is the roomname
-        // if (data.message && data.user) {
-
         //save message to chat history in DB
         Message.create(data)
           .then((message) => io.to(data.postId).emit('newMessage', message))
           .catch(e => socket.emit('messageError', e))
-
-
-        // }
       })
-
-      // This is way to utilize socket connections instead of typically utilizing http requests
-      // socket.on('newBoard', data => {
-      //   Boards.create(data)
-      //     .then(res => {
-      //       io.to('POSTROOM').emit('boardCreated', res)
-      //     })
-      // })
-
     });
   }
 }
