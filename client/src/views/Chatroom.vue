@@ -44,10 +44,18 @@
 
 
 <script>
+  import router from "@/router.js"
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
     beforeRouteLeave(to, from, next) {
+      if (this.message) {
+        let leave = window.confirm('Do you really want to leave? you have unsaved changes!')
+        if (!leave) return next(false)
+      }
+      else {
+        next({ path: '/' })
+      }
       // called when the route that renders this component is about to
       // be navigated away from.
       // has access to `this` component instance.
