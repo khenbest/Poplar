@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col d-flex justify-content-start">
+      <div class="col d-flex justify-content-center">
         <h4 class="title">{{post.title}}</h4>
       </div>
     </div>
@@ -14,9 +14,9 @@
       <div v-if="!post.imgUrl2" class="col px-0">
         <img :src="post.imgUrl1" class="photo">
       </div>
-      <div v-else class="col px-0">
-        <img style="height:270px;width:240px" :src="post.imgUrl1" class="photo">
-        <img style="height:270px;width:240px" :src="post.imgUrl2" class="photo">
+      <div v-else class="col-12 flex-nowrap" style="min-width: 480px">
+        <img class="mr-2 photos" :src="post.imgUrl1">
+        <img class="photos" :src="post.imgUrl2">
       </div>
     </div>
     <div v-if="!showVotes" class="row mb-2 mt-2 justify-content-between">
@@ -177,5 +177,10 @@
 
   .progress {
     height: 10vh;
+  }
+
+  .photos {
+    max-height: 271px;
+    max-width: 241px;
   }
 </style>
