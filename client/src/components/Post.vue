@@ -48,7 +48,7 @@
       </div>
 
       <div class="col-12 mt-2">
-        <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
+        <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
     <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row">

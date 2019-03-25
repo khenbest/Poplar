@@ -1,7 +1,6 @@
 let router = require('express').Router()
 let Posts = require('../models/post')
 let User = require('../models/user')
-let Messages = require('../models/chatroomMessage')
 
 //GET
 
@@ -21,8 +20,11 @@ router.get('/:myProfile?', (req, res, next) => {
 
   // if you ever use this then add an additional path
   router.get('/get/:activePostId', (req, res, next) => {
-    Posts.findById(req.params.id)
+    Posts.findById(req.params.activePostId)
       .then(post => {
+        if (!post) {
+          return res.status(400).send('Bad Post Id')
+        }
         res.send(post)
       }).catch(err => {
         res.status(400).send(err)
@@ -60,6 +62,15 @@ router.post('/', (req, res, next) => {
 })
 
 //PUT
+//for development
+router.put('/:id', async (req, res, next) => {
+  try {
+    let post = await Posts.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.send(post)
+  } catch (err) {
+    res.status(400).send(err)
+  }
+})
 
 //logic inside of your vote route will need to update the user document as well as including the post id in the user's participated array
 router.put('/:id/vote', (req, res, next) => {
