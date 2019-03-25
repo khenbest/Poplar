@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col d-flex justify-content-start">
+      <div class="col d-flex justify-content-center">
         <h4 class="title">{{post.title}}</h4>
       </div>
     </div>
@@ -14,9 +14,9 @@
       <div v-if="!post.imgUrl2" class="col px-0">
         <img :src="post.imgUrl1" class="photo">
       </div>
-      <div v-else class="col px-0">
-        <img :src="post.imgUrl1" class="photo">
-        <img :src="post.imgUrl2" class="photo">
+      <div v-else class="col-12 flex-nowrap" style="min-width: 480px">
+        <img class="mr-2 photos" :src="post.imgUrl1">
+        <img class="photos" :src="post.imgUrl2">
       </div>
     </div>
     <div v-if="!showVotes" class="row mb-2 mt-2 justify-content-between">
@@ -30,11 +30,11 @@
 
     <!-- PROGRESS BAR GOES HERE -->
     <div v-else class="progress d-flex row">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bar-no" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
 
@@ -149,6 +149,18 @@
     background-color: #fe3231;
   }
 
+  .progress-bar {
+    border-radius: none;
+  }
+
+  .bar-yes {
+    background-color: #95c701;
+  }
+
+  .bar-no {
+    background-color: #fe3231;
+  }
+
   .vote {
     border: none;
     color: white;
@@ -177,5 +189,10 @@
 
   .progress {
     height: 10vh;
+  }
+
+  .photos {
+    max-height: 271px;
+    max-width: 241px;
   }
 </style>
