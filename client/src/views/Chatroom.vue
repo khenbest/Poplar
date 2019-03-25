@@ -45,7 +45,6 @@
 
 
 <script>
-  import router from "@/router.js"
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
