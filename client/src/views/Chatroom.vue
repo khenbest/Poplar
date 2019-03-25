@@ -47,6 +47,11 @@
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
+    beforeRouteLeave(to, from, next) {
+      // called when the route that renders this component is about to
+      // be navigated away from.
+      // has access to `this` component instance.
+    },
     props: ['post', 'participated'],
     data() {
       return {
@@ -80,6 +85,8 @@
           postId: this.post ? this.post._id : this.participated._id
         }
         this.$store.dispatch('leaveRoom', payload)
+        // this.$router.push({ name: 'posts' })
+
       },
       send() {
         this.$store.dispatch('sendMessage', { user: this.name, message: this.message, postId: this.$route.params.postId })
