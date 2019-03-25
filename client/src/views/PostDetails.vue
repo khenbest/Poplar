@@ -72,9 +72,19 @@
          // be navigated away from. 
          // has access to `this` component instance.
       },
-      mounted() {
+      beforeMount() {
          let refreshPostID = this.$route.params.postId
          this.$store.dispatch('getActivePost', refreshPostID)
+      },
+      mounted() {
+         let votesArr = Object.values(this.$store.state.activePost.votes || {}) || []
+         votesArr.forEach(vote => {
+            if (vote == 'yes') {
+               this.totalYes++
+            } else (
+               this.totalNo++
+            )
+         })
       },
       data() {
          return {
@@ -87,7 +97,6 @@
          activePost() {
             return this.$store.state.activePost
          }
-
       },
       methods: {
          leave() {
