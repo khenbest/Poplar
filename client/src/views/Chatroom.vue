@@ -36,7 +36,8 @@
         </form>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary btn-lg" type="button" @click="leave">Leave Chat</button>
+        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Leave
+          Chat</button>
       </div>
     </div>
   </div>
@@ -47,11 +48,6 @@
   import Moment from 'moment'
   export default {
     name: 'Chatroom',
-    beforeRouteLeave(to, from, next) {
-      // called when the route that renders this component is about to
-      // be navigated away from.
-      // has access to `this` component instance.
-    },
     props: ['post', 'participated'],
     data() {
       return {
@@ -79,15 +75,6 @@
       }
     },
     methods: {
-      leave() {
-        let payload = {
-          name: this.name,
-          postId: this.post ? this.post._id : this.participated._id
-        }
-        this.$store.dispatch('leaveRoom', payload)
-        // this.$router.push({ name: 'posts' })
-
-      },
       send() {
         this.$store.dispatch('sendMessage', { user: this.name, message: this.message, postId: this.$route.params.postId })
         this.message = ''
