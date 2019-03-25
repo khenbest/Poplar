@@ -14,12 +14,12 @@
       <div v-if="!post.imgUrl2" class="col px-0">
         <img :src="post.imgUrl1" class="photo">
       </div>
-      <div v-else class="col-12 flex-nowrap" style="min-width: 480px">
-        <img class="mr-2 photos" :src="post.imgUrl1">
+      <div v-else class="col px-0" style="max-width: 481px">
+        <img class="photos" :src="post.imgUrl1">
         <img class="photos" :src="post.imgUrl2">
       </div>
     </div>
-    <div v-if="!showVotes" class="row mb-2 mt-2 justify-content-between">
+    <div v-if="!showVotes && !post.imgUrl2" class="row mb-2 mt-2 justify-content-between">
       <div class="col">
         <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
       </div>
@@ -27,14 +27,36 @@
         <button class="vote no" @click="castVote(post._id, 'no');">no</button>
       </div>
     </div>
+    <div v-else-if="!showVotes && post.imgUrl2" class="row mb-2 mt-2 justify-content-between">
+      <div class="col">
+        <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
+      </div>
+      <div class="col">
+        <button class="vote that" @click="castVote(post._id, 'no');">That</button>
+      </div>
+    </div>
+
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-else class="progress d-flex row">
+    <div v-else-if="showVotes && !post.imgUrl2" class="progress d-flex row">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bar-no" role="progressbar"
+      <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+
+      <div class="col-12 mt-2">
+        <button class="chatroom" @click="chatroom()">Go to Chatroom!</button>
+      </div>
+    </div>
+    <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
+        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
+      </div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
 
@@ -68,7 +90,7 @@
         x: 100,
         totalNo: 0,
         totalYes: 0,
-        showVotes: false
+        showVotes: false,
       };
     },
     computed: {
@@ -149,6 +171,14 @@
     background-color: #fe3231;
   }
 
+  .this {
+    background-color: #a0b5c4;
+  }
+
+  .that {
+    background-color: #3c6ea0;
+  }
+
   .progress-bar {
     border-radius: none;
   }
@@ -159,6 +189,14 @@
 
   .bar-no {
     background-color: #fe3231;
+  }
+
+  .bar-this {
+    background-color: #a0b5c4;
+  }
+
+  .bar-that {
+    background-color: #3c6ea0;
   }
 
   .vote {
@@ -192,7 +230,8 @@
   }
 
   .photos {
-    max-height: 271px;
-    max-width: 241px;
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
   }
 </style>
