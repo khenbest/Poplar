@@ -9,83 +9,89 @@
                                 @click="showForm = false">Back</button> -->
                         <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                         <h3 v-if="!showForm">Yes or No?</h3>
-                        <p v-if="showForm">Upload image: <button class="btn btn-secondary" @click="toggleShow1">Choose
-                                File</button></p>
-                        <h4 v-if="showForm" class="muted">OR</h4>
-                        <form v-if="showForm" @submit.prevent="addPost">
-                            <p v-if="showForm">Enter image Url: <input v-model="newPost.imgUrl1" type="text"
-                                    placeholder="URL" /></p>
-                            <H4>THEN</H4>
+                        <p v-if="showForm">Upload image:</p>
+                        <div v-if="showForm">
+                            <form @submit.prevent="">
+                                <input v-model="url" type="text" placeholder="image Url"> </input>
+                            </form>
+                            <!-- <button @click="choose()"> -->
+                            </button>
+                            <croppa v-model="croppa" :width="480" :height="270">
+                                <img crossOrigin="anonymous" :src="url" slot="initial">
+                            </croppa>
+                            </croppa>
+                            <button @click="output1()">Crop</button>
+                        </div>
+                        <div v-if="showForm">
+                            <h4>THEN</H4>
                             <input class="form-control" type="text" placeholder="Ask your question"
                                 v-model="newPost.title" required>
-                            <button class="btn btn-primary mt-3" type="submit">Create Post</button>
-                        </form>
+                            <button @click="addPost" class="btn btn-primary mt-3" type="submit">Create Post</button>
+                        </div>
                     </div>
                     <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
                         <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                         <h3 v-if="!showForm1">This or That?</h3>
-                        <form v-if="showForm1" @submit.prevent="addPost2">
+                        <div v-if="showForm1" @submit.prevent="addPost2">
                             <div class="row">
-                                <div class="col-6 card w-100 justify-content-center">
-                                    <h4 class="m-2">Image 1</h4>
-                                    <button v-if="showForm1" class="btn btn-secondary w-50 offset-3"
-                                        @click="toggleShow2">Choose
-                                        File</button>
-                                    <h5 v-if="showForm1" class="muted p-3">OR</h5>
-                                    <p v-if="showForm1">Enter image Url: <input v-model="newPost.imgUrl1" type="text"
-                                            placeholder="URL" /></p>
+                                <p v-if="showForm1">Upload image:</p>
+                                <div v-if="showForm1">
+                                    <form @submit.prevent="">
+                                        <input v-model="url2" type="text" placeholder="image Url"> </input>
+                                    </form>
+                                    <!-- <button @click="choose()"> -->
+                                    </button>
+                                    <croppa v-model="croppa2" :width="240" :height="270">
+                                        <img crossOrigin="anonymous" :src="url2" slot="initial">
+                                    </croppa>
+                                    <button @click="output2()">Crop</button>
                                 </div>
-                                <div class="col-6 card w-100 justify-content-center">
-                                    <h4 class="m-2">Image 2</h4>
-                                    <button v-if="showForm1" class="btn btn-secondary w-50 offset-3"
-                                        @click="toggleShow3">Choose
-                                        File</button>
-                                    <h5 v-if="showForm1" class="muted p-3">OR</h5>
-                                    <p v-if="showForm1">Enter image Url: <input v-model="newPost.imgUrl2" type="text"
-                                            placeholder="URL" /></p>
+                                <h4 class="m-2">Image 2</h4>
+                                <p v-if="showForm1">Upload image:</p>
+                                <div v-if="showForm1">
+                                    <form @submit.prevent="">
+                                        <input v-model="url3" type="text" placeholder="image Url"> </input>
+                                    </form>
+                                    <!-- <button @click="choose()"> -->
+                                    <croppa v-model="croppa3" :width="240" :height="270">
+                                        <img crossOrigin="anonymous" :src="url3" slot="initial">
+                                    </croppa>
+                                    <button @click="output3()">Crop</button>
                                 </div>
                             </div>
                             <H4 class="m-2">THEN</H4>
                             <input class="form-control" type="text" placeholder="Ask your question"
                                 v-model="newPost.title" required>
-                            <button class="btn btn-primary mt-3" type="submit">Create Post</button>
-                        </form>
+                            <button v-if="dataUrl2 != '' && dataUrl3 != ''" class="btn btn-primary mt-3"
+                                @click="addPost2">Create Post</button>
+                        </div>
                     </div>
-                    <crop-image-form></crop-image-form>
                 </div>
             </div>
         </div>
-        <my-upload field="imgUrlData1" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadSuccess" v-model="show1" :width="600" :noCircle='noCircle' :height="375" url=""
-            :params="params" :langType="langType" :headers="headers" img-format="jpg">
-        </my-upload>
-        <my-upload field="imgUrlData2" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadSuccess" v-model="show2" :width="300" :noCircle='noCircle' :height="375" url=""
-            :params="params" :langType="langType" :headers="headers" img-format="jpg">
-        </my-upload>
-        <my-upload field="imgUrlData3" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
-            @crop-upload-fail="cropUploadSuccess" v-model="show3" :width="300" :noCircle='noCircle' :height="375" url=""
-            :params="params" :langType="langType" :headers="headers" img-format="jpg">
-        </my-upload>
-        <!-- <img :src="imgUrlData">
-        <p>{{imgUrlData1}}</p>
-        <p>{{imgUrlData2}}</p>
-        <img :src="imgUrlData2" /> -->
-        <p>{{imgUrlData3}}</p>
-        <img :src="imgUrlData3" />
     </div>
 </template>
 
 <script>
     import CropImageForm from '@/components/cropImageForm.vue'
     import '@babel/polyfill'; // es6 shim
-    import Vue from 'vue';
     import myUpload from 'vue-image-crop-upload';
+    import Croppa from 'vue-croppa'
     export default {
         name: "makePost",
         props: [],
         data() {
             return {
+                croppa: {},
+                croppa2: {},
+                croppa3: {},
+                showCroppa: false,
+                url: '',
+                url2: '',
+                url3: '',
+                dataUrl1: '',
+                dataUrl2: '',
+                dataUrl3: '',
                 newPost: {
 
                 },
@@ -115,23 +121,26 @@
             CropImageForm
         },
         methods: {
+            choose() {
+                this.croppa.chooseFile()
+            },
             addPost() {
-                if (this.imgUrlData1 != "") {
-                    this.newPost.imgUrl1 = this.imgUrlData1
+                let payload = {
+                    title: this.newPost.title,
+                    imgUrl1: this.dataUrl1
                 }
-                console.log(this.newPost)
-                this.$store.dispatch("addPost", this.newPost);
+                console.log(payload)
+                this.$store.dispatch("addPost", payload);
                 event.target.reset()
             },
             addPost2() {
-                if (this.imgUrlData2 != "") {
-                    this.newPost.imgUrl1 = this.imgUrlData2
+                let payload = {
+                    title: this.newPost.title,
+                    imgUrl1: this.dataUrl2,
+                    imgUrl2: this.dataUrl3
                 }
-                if (this.imgUrlData3 != "") {
-                    this.newPost.imgUrl2 = this.imgUrlData3
-                }
-                console.log(this.newPost)
-                this.$store.dispatch("addPost", this.newPost);
+                console.log(payload)
+                this.$store.dispatch("addPost", payload);
             },
             toggleShow2() {
                 this.show2 = !this.show2;
@@ -179,7 +188,20 @@
                 console.log('-------- upload failed --------');
                 console.log(status);
                 console.log('field: ' + field);
-            }
+            },
+            refresh() {
+                console.log(this.croppa)
+                this.croppa.refresh()
+            },
+            output1() {
+                this.dataUrl1 = this.croppa.generateDataUrl('image/jpeg')
+            },
+            output2() {
+                this.dataUrl2 = this.croppa2.generateDataUrl('image/jpeg')
+            },
+            output3() {
+                this.dataUrl3 = this.croppa3.generateDataUrl('image/jpeg')
+            },
         }
     }
 </script>

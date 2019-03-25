@@ -1,74 +1,47 @@
 <template>
   <div id="app" style="text-align: center">
-    <img :src="defaultImage" style="width: 100px;height: 100px">
-    <form @submit.prevent="toBase64();toBase64();">
-      <input v-model="defaultImage" type="text" placeholder="image Url"> </input>
-      <button type="submit">submit</button>
-      <img :src="base64" id="image" />
+    <form @submit.prevent="">
+      <input v-model="url" type="text" placeholder="image Url"> </input>
     </form>
-    <VueImageUploadCroppie :defaultImage.sync="defaultImage" :height="100" :width="100" :circle="false" :trans="trans">
-    </VueImageUploadCroppie>
-    <img v-if="this.base64.length > 0" :src="base64" id="image" />
+    <button @click="refresh()">Refresh</button>
+    <croppa crossOrigin='anonymous' v-model="croppa" :width="300" :height="375">
+      <img crossOrigin="anonymous" :src="url" slot="initial">
+    </croppa>
+    </croppa>
+    <button @click="output()">Output</button>
   </div>
 </template>
 
 <script>
   import VueImageUploadCroppie from 'vue-image-upload-croppie'
+  import VueCroppie from 'vue-croppie';
+  import Croppa from 'vue-croppa'
   export default {
-    name: 'app',
-    props: {
-      'height': {
-        type: Number,
-        default: 200
-      },
-      'circle': { // crop circle or square image
-        type: Boolean,
-        default: false
-      },
-      'width': {
-        type: Number,
-        default: 200
-      },
-      'trans': { // button text translation
-        type: Object,
-        default: function () {
-          return {
-            'cropImage': 'Crop Image',
-            'chooseImage': 'Choose Image',
-            'confirmCutting': 'Confirm Cutting'
-          }
-        }
-      }
+    mounted() {
+      console.log(this)
     },
     data() {
       return {
-        base64: '',
-        'defaultImage': '',
-        'trans': {
-          'cropImage': '裁剪图片',
-          'chooseImage': '选择图片',
-          'confirmCutting': '确认裁剪'
-        }
+        croppa: {},
+        url: '',
+        dataUrl: ''
       }
-    },
-    watch: {
-      'defaultImage': function (value) {
-        if (value) {
-          // do whatever you want with image value,(upload ..)
-        }
-      }
-    },
-    components: {
-      VueImageUploadCroppie
     },
     methods: {
-      toBase64() {
-        let img = document.getElementById('image')
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        this.base64 = canvas.toDataURL("image/png");
-      }
+      uploadCroppedImage() {
+        this.myCroppa.generateBlob((blob) => {
+          // write code to upload the cropped image file (a file is a blob)
+        }, 'image/jpeg', 0.8) // 80% compressed jpeg file
+      },
+      refresh() {
+        console.log(this.croppa)
+        this.croppa.refresh()
+      },
+      output() {
+        this.dataUrl = this.croppa.generateDataUrl('image/jpeg')
+      },
+    },
+    components: {
     }
-  }
+  }     
 </script>
