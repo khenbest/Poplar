@@ -1,41 +1,43 @@
 <template>
   <div class="posts container-fluid">
     <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
-      <div class="col-12 ">
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger">Action</button>
-          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+      <div class="col-4 offset-4">
+        <div class="dropdown m-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
+            Sort
           </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger">Action</button>
-          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
+            <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
+            <a class="dropdown-item text-dark" @click="reset()">Reset</a>
 
-        <!-- POST CARDS -->
-        <div class="row bar">
-          <post v-for="post in posts" :post="post"></post>
+          </div>
         </div>
+        <div class="dropdown m-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Filter
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
+            <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
+            <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
+          </div>
+        </div>
+        <form v-if="showForm" @submit.prevent="filterbyUser">
+          <input type="text" v-model="username" placeholder="type username here" />
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
       </div>
+    </div>
+
+    <!-- POST CARDS -->
+    <div v-if="filtered == ''" class="row bar">
+      <post v-for="post in posts" :post="post"></post>
+    </div>
+    <div v-else class="row bar">
+      <post v-for="filter in filtered" :post="filter"></post>
     </div>
     <div class="row pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
@@ -61,22 +63,43 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts"); //without a second argument passed in this will get all the posts
-    },
-
-
+      this.$store.dispatch("getPosts");
+    }, //without a second argument passed in this will get all the posts
     data() {
       return {
         newPost: {},
-        activeClass: null
-      };
+        activeClass: null,
+        showForm: false,
+        username: '',
+      }
     },
     computed: {
       posts() {
-        return this.$store.state.posts;
+        return this.$store.state.posts
+      },
+      filtered() {
+        return this.$store.state.filteredPosts
       }
     },
     methods: {
+      yesNo() {
+        this.$store.dispatch('yesNo')
+      },
+      thisThat() {
+        this.$store.dispatch('thisThat')
+      },
+      filterbyUser() {
+        this.$store.dispatch('filterUser', this.username)
+      },
+      activity() {
+        this.$store.dispatch('activity')
+      },
+      oldest() {
+        this.$store.dispatch('oldest')
+      },
+      reset() {
+        this.$store.dispatch('reset')
+      },
       addPost() {
         this.$store.dispatch("addPost", this.newPost);
         event.target.reset()
@@ -103,7 +126,7 @@
         return Moment(String(date)).startOf('hour').fromNow();
       }
     }
-  };
+  }
 </script>
 
 <style scoped>

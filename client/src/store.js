@@ -31,6 +31,7 @@ export default new Vuex.Store({
     user: {},
     posts: [],
     myPosts: [],
+    filteredPosts: [],
     activePost: {},
     joined: false,
     name: '',
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     setPosts(state, posts) {
       state.posts = posts
+    },
+    setFiltered(state, posts) {
+      state.filteredPosts = posts
     },
     setMyPosts(state, posts) {
       state.myPosts = posts
@@ -171,7 +175,48 @@ export default new Vuex.Store({
         })
     },
     //#endregion
-
+    //#region -- SORT --
+    activity({ commit, dispatch }) {
+      let sorted = this.state.posts.sort((a, b) => {
+        return Object.values(b.votes).length - Object.values(a.votes).length
+      })
+      console.log(sorted)
+      commit('setFiltered', sorted)
+    },
+    oldest({ commit, dispatch }) {
+      let sorted = this.state.posts.sort((a, b) => {
+        return new Date(a.createdAt) - new Date(b.createdAt)
+      })
+      commit('setPosts', sorted)
+    },
+    filterUser({ commit, dispatch }, payload) {
+      let filtered = this.state.posts.filter(post => {
+        return post.user.toLowerCase() == payload.toLowerCase()
+      })
+      console.log(filtered)
+      commit('setFiltered', filtered)
+    },
+    yesNo({ commit, dispatch }) {
+      let filtered = this.state.posts.filter(post => {
+        return !post.imgUrl2
+      })
+      console.log(filtered)
+      commit('setFiltered', filtered)
+    },
+    thisThat({ commit, dispatch }) {
+      let filtered = this.state.posts.filter(post => {
+        return post.imgUrl2
+      })
+      console.log(filtered)
+      commit('setFiltered', filtered)
+    },
+    reset({ commit, dispatch }) {
+      let sorted = this.state.posts.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      })
+      commit('setPosts', sorted)
+    },
+    //#endregion
 
     //#region -- POSTS --
 
@@ -182,7 +227,15 @@ export default new Vuex.Store({
       }
       api.get(query)
         .then(res => {
-          commit('setPosts', res.data)
+          let addVotes = res.data.map(post => {
+            if (!post.votes) {
+              post.votes = {}
+            }
+            return post
+          })
+          commit('setPosts', addVotes.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          }))
         })
     },
     getMyPosts({ commit, dispatch }, myPosts) {
