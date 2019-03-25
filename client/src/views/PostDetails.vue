@@ -36,7 +36,7 @@
          leave() {
             let payload = {
                name: this.name,
-               postId: this.post ? this.post._id : this.participated._id
+               postId: this.$route.params.postId
             }
             this.$store.dispatch('leaveRoom', payload)
          }

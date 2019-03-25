@@ -75,6 +75,7 @@ class Socket {
             if (user == data.name) {
               connectedUsers[data.postId].splice(index, 1)
             }
+
           })
           //remove the user with the name == data.user || data.name 
           io.to(data.postId).emit('left', connectedUsers[data.postId])
