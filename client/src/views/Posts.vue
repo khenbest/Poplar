@@ -2,18 +2,34 @@
   <div class="posts container-fluid">
     <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
       <div class="col-12 ">
-
-
-        <!-- CREATE POST FORM -->
-        <!-- <div class="row">
-          <div class="col">
-            <form @submit.prevent="addPost">
-              <input type="text" placeholder="title" v-model="newPost.title" required>
-              <input type="text" placeholder="Image URL" v-model="newPost.imgUrl1" required>
-              <button type="submit">Create Post</button>
-            </form>
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger">Action</button>
+          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
           </div>
-        </div> -->
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger">Action</button>
+          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>
 
         <!-- POST CARDS -->
         <div class="row bar">
