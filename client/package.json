@@ -18,9 +18,6 @@
     "vodal": "^2.4.0",
     "vue": "^2.6.10",
     "vue-croppa": "^1.3.8",
-    "vue-croppie": "^1.3.13",
-    "vue-image-crop-upload": "^2.5.0",
-    "vue-image-upload-croppie": "^1.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

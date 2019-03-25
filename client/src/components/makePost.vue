@@ -73,9 +73,6 @@
 </template>
 
 <script>
-    import CropImageForm from '@/components/cropImageForm.vue'
-    import '@babel/polyfill'; // es6 shim
-    import myUpload from 'vue-image-crop-upload';
     import Croppa from 'vue-croppa'
     export default {
         name: "makePost",
@@ -117,8 +114,6 @@
             }
         },
         components: {
-            'my-upload': myUpload,
-            CropImageForm
         },
         methods: {
             choose() {
