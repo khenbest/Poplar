@@ -2,6 +2,9 @@
    <div class="postDetails">
 
 
+
+
+
       <chatroom :post="post" :participated="participated"></chatroom>
    </div>
 </template>
@@ -30,6 +33,9 @@
          participated() {
             return this.$store.state.user.participated.find(participated => participated._id == this.$route.params.postId)
          },
+         activePost() {
+            return this.$store.state.activePost
+         }
 
       },
       methods: {

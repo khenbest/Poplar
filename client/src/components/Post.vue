@@ -101,6 +101,7 @@
         })
       },
       chatroom() {
+        this.$store.dispatch('setActivePost', this.post)
         this.$router.push({
           path: '/get' + this.post._id,
           name: 'postDetails',
@@ -108,6 +109,7 @@
             postId: this.post._id
           }
         })
+
       }
     },
     components: {
