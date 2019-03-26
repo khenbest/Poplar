@@ -1,35 +1,33 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row d-flex align-items-center py-1 bg-light text-center">
-      <div class="col-2 offset-5">
-        <div class="dropdown m-2 float-left">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
-            <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
-            <a class="dropdown-item text-dark" @click="reset()">Reset</a>
+    <div class="row align-items-center justify-content-center no-wrap py-1 bg-light">
+      <div class="dropdown mr-2">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
+          <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
+          <a class="dropdown-item text-dark" @click="reset()">Reset</a>
 
-          </div>
         </div>
-        <div class="dropdown m-2 float-right">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Filter
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
-            <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
-            <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
-          </div>
-        </div>
-        <form v-if="showForm" @submit.prevent="filterbyUser">
-          <input type="text" v-model="username" placeholder="type username here" />
-          <button class="btn btn-secondary" type="submit">Search</button>
-        </form>
       </div>
+      <div class="dropdown">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
+          <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
+          <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
+        </div>
+      </div>
+      <form v-if="showForm" @submit.prevent="filterbyUser">
+        <input type="text" v-model="username" placeholder="type username here" />
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
     </div>
 
     <!-- POST CARDS -->
@@ -39,7 +37,7 @@
     <div v-else class="row bar">
       <post v-for="filter in filtered" :post="filter"></post>
     </div>
-    <div class="row pt-5">
+    <div id='bottom-nav' class="row mt-4 pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
         <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
         <i class="fas fa-users filters fa-2x col-1"></i>
@@ -130,6 +128,13 @@
 </script>
 
 <style scoped>
+  @media only screen and (min-width: 700px) {
+
+    #bottom-nav {
+      display: none
+    }
+  }
+
   .username {
     color: #a0b5c5;
     font-family: 'Amatic SC', cursive;

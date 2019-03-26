@@ -34,7 +34,7 @@ class Socket {
           //attaches name to socket
           socket.user = data.name
 
-          //adds connection to room, will change this value
+          //adds connection to room
           socket.join(data.postId)
           Message.find({ postId: data.postId }).then(messages => {
             socket.emit('roomHistory', messages)
@@ -84,5 +84,8 @@ class Socket {
     });
   }
 }
+socket.on('vote', data => {
+
+})
 
 module.exports = Socket
