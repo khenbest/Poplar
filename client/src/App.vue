@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-light">
     <navbar />
     <router-view />
   </div>
@@ -9,10 +9,6 @@
   import Navbar from '@/components/Navbar.vue'
   export default {
     name: 'App',
-    mounted() {
-      //Authenticate on startup
-      this.$store.dispatch('authenticate')
-    },
     components: {
       Navbar
     }

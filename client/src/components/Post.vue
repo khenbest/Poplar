@@ -39,7 +39,7 @@
 
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-else-if="showVotes && !post.imgUrl2" class="progress d-flex row">
+    <div v-if="showVotes && !post.imgUrl2" class="progress d-flex row">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
@@ -52,6 +52,8 @@
         <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
+
+
     <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
