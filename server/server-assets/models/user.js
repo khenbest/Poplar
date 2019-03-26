@@ -12,7 +12,7 @@ let schema = new Schema({
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
   participated: [{ type: ObjectId, ref: "Post" }],
-  followers: { type: String },
+  following: [{ type: ObjectId, ref: 'User' }],
   followedBy: { type: String }
 }, { timestamps: true })
 

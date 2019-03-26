@@ -3,7 +3,7 @@
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
         <h4 class="username mx-2">{{post.user || 'Unknown'}}</h4>
-        <button class="mx-2"><i class="fas fa-user-plus"></i> follow</button>
+        <button class="mx-2" @click="follow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button>
       </div>
     </div>
     <div class="row">
@@ -102,6 +102,9 @@
     methods: {
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
+      },
+      addFollower() {
+
       },
       castVote(postId, vote) {
         this.post.votes = this.post.votes || {}
