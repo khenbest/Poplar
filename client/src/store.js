@@ -150,7 +150,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'posts' })
+          // router.push({ name: 'posts' }) //reroutes to posts upon refresh
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -195,8 +195,10 @@ export default new Vuex.Store({
           commit('setMyPosts', res.data)
         })
     },
+    clearActivePost({ commit, dispatch }, object) {
+      commit('setActivePost', object)
+    },
     getActivePost({ commit, dispatch }, postId) {
-
       api.get('posts/get/' + postId)
         .then(res => {
           commit('setActivePost', res.data)

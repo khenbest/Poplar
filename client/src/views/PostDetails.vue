@@ -67,6 +67,7 @@
       name: "postDetails",
       beforeRouteLeave(to, from, next) {
          this.leave()
+         this.clearActivePost()
          next()
          // called when the route that renders this component is about to
          // be navigated away from. 
@@ -76,26 +77,38 @@
          let refreshPostID = this.$route.params.postId
          this.$store.dispatch('getActivePost', refreshPostID)
       },
-      mounted() {
-         let votesArr = Object.values(this.$store.state.activePost.votes || {}) || []
-         votesArr.forEach(vote => {
-            if (vote == 'yes') {
-               this.totalYes++
-            } else (
-               this.totalNo++
-            )
-         })
-      },
       data() {
          return {
-            x: 100,
-            totalNo: 0,
-            totalYes: 0,
+            x: 100
          }
       },
       computed: {
          activePost() {
             return this.$store.state.activePost
+         },
+         totalNo() {
+            let no = 0
+            if (this.$store.state.activePost.votes) {
+               let votesArr = Object.values(this.$store.state.activePost.votes || {}) || []
+               votesArr.forEach(vote => {
+                  if (vote != 'yes') {
+                     no++
+                  }
+               })
+            }
+            return no
+         },
+         totalYes() {
+            let yes = 0
+            if (this.$store.state.activePost.votes) {
+               let votesArr = Object.values(this.$store.state.activePost.votes || {}) || []
+               votesArr.forEach(vote => {
+                  if (vote == 'yes') {
+                     yes++
+                  }
+               })
+            }
+            return yes
          }
       },
       methods: {
@@ -105,6 +118,9 @@
                postId: this.$route.params.postId
             }
             this.$store.dispatch('leaveRoom', payload)
+         },
+         clearActivePost() {
+            this.$store.dispatch('clearActivePost', {})
          },
          value() {
             let votesArr = Object.values(this.activePost.votes || {}) || []
