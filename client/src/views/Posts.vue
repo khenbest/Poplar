@@ -1,10 +1,10 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
-      <div class="col-4 offset-4">
-        <div class="dropdown m-2">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+    <div class="row py-1 bg-light justify-content-center text-center">
+      <div class="col d-flex justify-content-center m-1">
+        <div class=" dropdown m-2">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -14,9 +14,9 @@
 
           </div>
         </div>
-        <div class="dropdown m-2">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <div class=" dropdown m-2">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -182,6 +182,18 @@
     cursor: pointer;
   }
 
+  .btn-outline-primary {
+    border-color: #6496c7
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #6496c7
+  }
+
+  .btn-outline-primary:active {
+    background-color: #3d6ea0
+  }
+
 
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
@@ -194,6 +206,12 @@
     min-width: 5em;
     min-height: 1em;
     font-family: 'Kalam', cursive;
+  }
+
+  .sortButtons {
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
   }
 
   /* font-family: 'Amatic SC', cursive;
