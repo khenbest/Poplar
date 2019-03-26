@@ -5,7 +5,6 @@ import router from './router'
 
 //sockets
 import io from 'socket.io-client'
-import { debug } from 'util';
 let socket = {}
 
 
