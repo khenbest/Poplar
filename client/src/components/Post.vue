@@ -85,19 +85,45 @@
     name: "post",
     props: ["post"],
     mounted() {
-
+      if (this.user.participated.find(post => {
+        return post._id == this.post._id
+      })) {
+        this.showVotes = true
+      }
     },
     data() {
       return {
         x: 100,
-        totalNo: 0,
-        totalYes: 0,
         showVotes: false,
       };
     },
     computed: {
       user() {
         return this.$store.state.user
+      },
+      totalNo() {
+        let no = 0
+        if (this.post.votes) {
+          let votesArr = Object.values(this.post.votes || {}) || []
+          votesArr.forEach(vote => {
+            if (vote != 'yes') {
+              no++
+            }
+          })
+        }
+        return no
+      },
+      totalYes() {
+        let yes = 0
+        if (this.post.votes) {
+          let votesArr = Object.values(this.post.votes || {}) || []
+          votesArr.forEach(vote => {
+            if (vote == 'yes') {
+              yes++
+            }
+          })
+        }
+        return yes
       }
     },
     methods: {
