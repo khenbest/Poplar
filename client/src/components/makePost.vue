@@ -126,8 +126,7 @@
                     imgUrl1: this.dataUrl1
                 }
                 console.log(payload)
-                this.$store.dispatch("addPost", payload);
-                event.target.reset()
+                this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
             },
             addPost2() {
                 let payload = {
@@ -136,7 +135,7 @@
                     imgUrl2: this.dataUrl3
                 }
                 console.log(payload)
-                this.$store.dispatch("addPost", payload);
+                this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
             },
             toggleShow2() {
                 this.show2 = !this.show2;

@@ -121,7 +121,7 @@
     },
     filters: {
       formatTime(date) {
-        return Moment(String(date)).startOf('hour').fromNow();
+        return Moment(String(date)).fromNow();
       }
     }
   }
