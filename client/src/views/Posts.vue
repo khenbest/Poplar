@@ -1,10 +1,10 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row py-1 bg-light justify-content-center text-center">
-      <div class="col d-flex justify-content-center m-1">
-        <div class=" dropdown m-2">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
+      <div class="col-4 offset-4">
+        <div class="dropdown m-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -14,15 +14,30 @@
 
           </div>
         </div>
-        <div class=" dropdown m-2">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown m-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             Filter
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
             <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
             <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
+          </div>
+        </div>
+        <div class="dropdown m-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Filter
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item text-dark" @click="filterbyTag('music')">Music</a>
+            <a class="dropdown-item text-dark" @click=" filterbyTag('sports')">Sports</a>
+            <a class="dropdown-item text-dark" @click=" filterbyTag('movies')">Movies</a>
+            <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
+            <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
+            <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
+
           </div>
         </div>
         <form v-if="showForm" @submit.prevent="filterbyUser">
@@ -90,6 +105,9 @@
       },
       filterbyUser() {
         this.$store.dispatch('filterUser', this.username)
+      },
+      filterbyTag(tag) {
+        this.$store.dispatch('filterTags', tag)
       },
       activity() {
         this.$store.dispatch('activity')
@@ -182,18 +200,6 @@
     cursor: pointer;
   }
 
-  .btn-outline-primary {
-    border-color: #6496c7
-  }
-
-  .btn-outline-primary:hover {
-    background-color: #6496c7
-  }
-
-  .btn-outline-primary:active {
-    background-color: #3d6ea0
-  }
-
 
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
@@ -206,12 +212,6 @@
     min-width: 5em;
     min-height: 1em;
     font-family: 'Kalam', cursive;
-  }
-
-  .sortButtons {
-    margin-right: 0;
-    margin-left: 0;
-    width: 50%;
   }
 
   /* font-family: 'Amatic SC', cursive;
