@@ -49,7 +49,7 @@
 </template>
 <script>
   import Moment from 'moment';
-  import Chatroom from "./Chatroom.vue"
+  import Chatroom from "@/components/Chatroom.vue"
   import Post from "@/components/Post.vue"
 
   export default {
@@ -61,6 +61,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch("getPosts");
     }, //without a second argument passed in this will get all the posts
     data() {
       return {

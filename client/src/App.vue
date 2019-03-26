@@ -12,7 +12,6 @@
     mounted() {
       //Authenticate on startup
       this.$store.dispatch('authenticate')
-      this.$store.dispatch("getPosts");
     },
     components: {
       Navbar

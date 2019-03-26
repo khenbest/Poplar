@@ -11,7 +11,9 @@ let schema = new Schema({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
-  participated: [{ type: ObjectId, ref: "Post" }]
+  participated: [{ type: ObjectId, ref: "Post" }],
+  followers: { type: String },
+  followedBy: { type: String }
 }, { timestamps: true })
 
 
