@@ -62,7 +62,7 @@
 
 <script>
    import Moment from "moment";
-   import Chatroom from "./Chatroom.vue"
+   import Chatroom from "@/components/Chatroom.vue"
    export default {
       name: "postDetails",
       beforeRouteLeave(to, from, next) {

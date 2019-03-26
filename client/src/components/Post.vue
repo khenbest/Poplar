@@ -1,8 +1,9 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-    <div class="row">
-      <div class="col">
-        <h4 class="username d-flex justify-content-center">{{post.user || 'Unknown'}}</h4>
+    <div class="row d-flex justify-content-center">
+      <div class="col d-flex justify-content-center">
+        <h4 class="username mx-2">{{post.user || 'Unknown'}}</h4>
+        <button class="mx-2" @click="follow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button>
       </div>
     </div>
     <div class="row">
@@ -80,7 +81,7 @@
 
 <script>
   import Moment from "moment";
-  import Chatroom from "@/views/Chatroom.vue"
+  import Chatroom from "@/components/Chatroom.vue"
   export default {
     name: "post",
     props: ["post"],
@@ -129,6 +130,9 @@
     methods: {
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
+      },
+      addFollower() {
+
       },
       castVote(postId, vote) {
         this.post.votes = this.post.votes || {}

@@ -52,8 +52,10 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
+let userRoutes = require('./server-assets/routes/user')
 let postRoutes = require('./server-assets/routes/post')
 server.use('/api/posts', postRoutes)
+server.use('/api/users', userRoutes)
 
 
 

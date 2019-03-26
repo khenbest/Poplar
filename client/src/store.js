@@ -196,11 +196,16 @@ export default new Vuex.Store({
       commit('setFiltered', filtered)
     },
     filterTags({ commit, dispatch }, payload) {
-      let filtered = this.state.posts.filter(post => {
-        return post.tags == payload
-      })
-      console.log(filtered)
-      commit('setFiltered', filtered)
+      if (payload == '') {
+        return this.state.posts
+
+      } else {
+        let filtered = this.state.posts.filter(post => {
+          return post.tags == payload
+        })
+        console.log(filtered)
+        commit('setFiltered', filtered)
+      }
     },
     yesNo({ commit, dispatch }) {
       let filtered = this.state.posts.filter(post => {
