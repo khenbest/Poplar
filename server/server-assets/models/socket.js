@@ -4,21 +4,14 @@ class Socket {
   constructor(io) {
     let connectedUsers = {}
     let rooms = {
-
       postId: []
-
       /**
        * postId: {
-       *    roomName: 'kimJon' //post title,
+       *    roomName: //post title,
        *    members: [{socket user}, ]
-       * }
-       * 
-       * postId: [{socket user}, ]
-       * 
+       * postId: [{socket user},  
        * to join a room you must send the post information needed above and any user information to make a socket user
-       * 
-       * 
-       * 
+ 
        *  */
     }
 
@@ -41,7 +34,7 @@ class Socket {
           //attaches name to socket
           socket.user = data.name
 
-          //adds connection to room, will change this value
+          //adds connection to room
           socket.join(data.postId)
           Message.find({ postId: data.postId }).then(messages => {
             socket.emit('roomHistory', messages)
@@ -91,5 +84,8 @@ class Socket {
     });
   }
 }
+socket.on('vote', data => {
+
+})
 
 module.exports = Socket
