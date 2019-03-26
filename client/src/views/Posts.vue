@@ -1,10 +1,10 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row d-flex align-items-center py-5 h-100 bg-light text-center">
-      <div class="col-4 offset-4">
-        <div class="dropdown m-2">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+    <div class="row d-flex align-items-center py-1 bg-light text-center">
+      <div class="col-2 offset-5">
+        <div class="dropdown m-2 float-left">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -14,9 +14,9 @@
 
           </div>
         </div>
-        <div class="dropdown m-2">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown m-2 float-right">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
