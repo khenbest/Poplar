@@ -36,8 +36,8 @@
         </form>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Leave
-          Chat</button>
+        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Back to
+          Posts</button>
       </div>
     </div>
   </div>
