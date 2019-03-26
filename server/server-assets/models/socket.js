@@ -43,8 +43,11 @@ class Socket {
           //adds user to connectedUsers
           if (!connectedUsers[data.postId]) {
             connectedUsers[data.postId] = []
+            connectedUsers[data.postId].push(data.name)
+          } else if (!connectedUsers[data.postId].includes(data.name)) {
+            connectedUsers[data.postId].push(data.name)
           }
-          connectedUsers[data.postId].push(data.name)
+
 
           //notify connection of room connection
           socket.emit("joinedRoom", {
@@ -65,7 +68,7 @@ class Socket {
           //remove from connected room
           let users = connectedUsers[data.postId]
           users.forEach((user, index) => {
-            if (user == data.name) {
+            if (user == socket.user) {
               connectedUsers[data.postId].splice(index, 1)
             }
 
