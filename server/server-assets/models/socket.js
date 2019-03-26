@@ -84,8 +84,8 @@ class Socket {
     });
   }
 }
-socket.on('vote', data => {
+// socket.on('vote', data => {
 
-})
+// })
 
 module.exports = Socket

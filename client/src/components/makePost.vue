@@ -16,7 +16,7 @@
                             </form>
                             <!-- <button @click="choose()"> -->
                             </button>
-                            <croppa v-model="croppa" :width="480" :height="270">
+                            <croppa v-model="croppa" canvas-color="white" :width="480" :height="270">
                                 <img crossOrigin="anonymous" :src="url" slot="initial">
                             </croppa>
                             </croppa>
@@ -42,7 +42,7 @@
                                     </form>
                                     <!-- <button @click="choose()"> -->
                                     </button>
-                                    <croppa v-model="croppa2" :width="240" :height="270">
+                                    <croppa v-model="croppa2" canvas-color="white" :width="240" :height="270">
                                         <img crossOrigin="anonymous" :src="url2" slot="initial">
                                     </croppa>
                                     <button @click="output2()">Crop</button>
@@ -54,7 +54,7 @@
                                         <input v-model="url3" type="text" placeholder="image Url"> </input>
                                     </form>
                                     <!-- <button @click="choose()"> -->
-                                    <croppa v-model="croppa3" :width="240" :height="270">
+                                    <croppa v-model="croppa3" canvas-color="white" :width="240" :height="270">
                                         <img crossOrigin="anonymous" :src="url3" slot="initial">
                                     </croppa>
                                     <button @click="output3()">Crop</button>
@@ -126,8 +126,7 @@
                     imgUrl1: this.dataUrl1
                 }
                 console.log(payload)
-                this.$store.dispatch("addPost", payload);
-                event.target.reset()
+                this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
             },
             addPost2() {
                 let payload = {
@@ -136,7 +135,7 @@
                     imgUrl2: this.dataUrl3
                 }
                 console.log(payload)
-                this.$store.dispatch("addPost", payload);
+                this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
             },
             toggleShow2() {
                 this.show2 = !this.show2;
@@ -239,5 +238,9 @@
     span {
         color: black !important;
         padding-right: 10%;
+    }
+
+    .croppa-container {
+        background-color: white;
     }
 </style>

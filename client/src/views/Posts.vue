@@ -67,7 +67,7 @@
 </template>
 <script>
   import Moment from 'moment';
-  import Chatroom from "./Chatroom.vue"
+  import Chatroom from "@/components/Chatroom.vue"
   import Post from "@/components/Post.vue"
 
   export default {
@@ -142,7 +142,7 @@
     },
     filters: {
       formatTime(date) {
-        return Moment(String(date)).startOf('hour').fromNow();
+        return Moment(String(date)).fromNow();
       }
     }
   }
