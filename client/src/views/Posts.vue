@@ -187,6 +187,18 @@
     cursor: pointer;
   }
 
+  .btn-outline-primary {
+    border-color: #6496c7
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #6496c7
+  }
+
+  .btn-outline-primary:active {
+    background-color: #3d6ea0
+  }
+
 
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
@@ -199,6 +211,12 @@
     min-width: 5em;
     min-height: 1em;
     font-family: 'Kalam', cursive;
+  }
+
+  .sortButtons {
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
   }
 
   /* font-family: 'Amatic SC', cursive;
