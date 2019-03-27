@@ -1,6 +1,6 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row d-flex align-items-center h-100 bg-light text-center">
+    <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
         <!-- FILTERS -->
         <!-- POST CARDS -->
@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(post._id)">Go to Chatroom!</button>
+                <button class="chatroom" @click="chatroom(post._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -91,7 +91,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(participated._id)">Go to Chatroom!</button>
+                <button class="chatroom" @click="chatroom(participated._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -100,13 +100,13 @@
         <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
       </div>
     </div>
-    <div class="row pt-5">
+    <div id='bottom-nav' class="row mt-4 pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <a class="curs" :class="{active : activeClass == 2}" @click="allPosts();">
-          <i class="fas fa-globe-americas filters fa-2x col=1"></i>
-        </a>
+        <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"><i
+            class=" fas fa-globe-americas filters fa-2x col=1"></i></a>
         <i class="fas fa-users filters fa-2x col-1"></i>
-        <i class="fas fa-user filters fa-2x col-1"></i>
+        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
+            class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
   </div>
@@ -207,6 +207,7 @@
 </script>
 
 <style scoped>
+<<<<<<< HEAD
   .username {
     color: #a0b5c5;
     font-family: "Amatic SC", cursive;
@@ -218,6 +219,13 @@
     border-bottom: 0.2px solid #a0b5c5;
     color: #3d6ea0;
     cursor: pointer;
+=======
+  @media only screen and (min-width: 700px) {
+
+    #bottom-nav {
+      display: none
+    }
+>>>>>>> 4305acd4b557374249c2e7a2490c3217c902ea2d
   }
 
   #post {

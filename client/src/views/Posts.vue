@@ -1,7 +1,7 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row align-items-center justify-content-center no-wrap py-1 bg-light">
-      <div class="dropdown mr-2">
+    <div class="row py-1 bg-light justify-content-center text-center">
+      <div class=" dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -13,7 +13,7 @@
 
         </div>
       </div>
-      <div class="dropdown">
+      <div class="dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
@@ -27,7 +27,11 @@
       <div class="dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
           Category
+=======
+          Tags
+>>>>>>> 4305acd4b557374249c2e7a2490c3217c902ea2d
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="filterbyTag('music')">Music</a>
@@ -36,6 +40,8 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag()">Reset</a>
+
 
         </div>
       </div>
@@ -44,6 +50,7 @@
         <button class="btn btn-secondary" type="submit">Search</button>
       </form>
     </div>
+
 
     <!-- POST CARDS -->
     <div v-if="filtered == ''" class="row bar">
@@ -54,7 +61,8 @@
     </div>
     <div id='bottom-nav' class="row mt-4 pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <i class=" fas fa-globe-americas filters fa-2x col=1"></i>
+        <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"><i
+            class=" fas fa-globe-americas filters fa-2x col=1"></i></a>
         <i class="fas fa-users filters fa-2x col-1"></i>
         <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
             class="fas fa-user filters fa-2x col-1"></i></a>
@@ -159,6 +167,18 @@
     margin-bottom: -0.2em;
   }
 
+  .btn-outline-primary {
+    border-color: #6496c7
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #6496c7
+  }
+
+  .btn-outline-primary:active {
+    background-color: #3d6ea0
+  }
+
   .title {
     color: #3d6ea0;
     font-family: 'Patrick Hand SC', cursive;
@@ -203,6 +223,12 @@
 
   .fas:hover {
     cursor: pointer;
+  }
+
+  .sortButtons {
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
   }
 
 

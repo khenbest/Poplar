@@ -36,8 +36,8 @@
         </form>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Leave
-          Chat</button>
+        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Back to
+          Posts</button>
       </div>
     </div>
   </div>
@@ -71,7 +71,18 @@
       },
       connectedUsers() {
         return this.$store.state.roomData.connectedUsers
-      }
+      },
+      // votedColor: function () {
+
+      //   return {
+      //     voteNo: this.$store.state.activePost.votes.find(userId => {
+      //       return userId == this.$store.state.user._id
+      //     })
+      //   }
+      // }
+
+
+
     },
     methods: {
       send() {
@@ -91,5 +102,11 @@
 
 
 <style scoped>
+  .voteNo {
+    color: red !important;
+  }
 
+  .voteYes {
+    color: green !important;
+  }
 </style>
