@@ -36,5 +36,3 @@ auth.get('authenticate')
       render: h => h(App)
     }).$mount('#app')
   })
-
-
