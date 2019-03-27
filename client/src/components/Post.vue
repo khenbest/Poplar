@@ -73,7 +73,6 @@
         <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
       </div>
     </div>
-    <button @click="deletePost(post._id)">Delete</button>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
 
   </div>
@@ -137,9 +136,6 @@
             id: user
           }
         })
-      },
-      deletePost(postId) {
-        this.$store.dispatch("deletePost", postId);
       },
       addFollow(author) {
         let payload = {

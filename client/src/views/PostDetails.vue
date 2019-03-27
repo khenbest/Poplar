@@ -6,6 +6,8 @@
          <div class="row">
             <div class="col">
                <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
+               <button v-if="post.authorId == this.$store.state.user._id"
+                  @click="deletePost(activePost._id)">Delete</button>
             </div>
          </div>
          <div class="row">
@@ -112,6 +114,9 @@
          }
       },
       methods: {
+         deletePost(postId) {
+            this.$store.dispatch("deletePost", postId);
+         },
          leave() {
             let payload = {
                name: this.name,
