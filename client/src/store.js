@@ -272,12 +272,6 @@ export default new Vuex.Store({
       commit('setFiltered', filtered)
     },
     filterTags({ commit, dispatch }, payload) {
-<<<<<<< HEAD
-      let filtered = this.state.posts.filter(post => {
-        return post.tags == payload
-      })
-      commit('setFiltered', filtered)
-=======
       if (payload == '') {
         return this.state.posts
 
@@ -288,7 +282,6 @@ export default new Vuex.Store({
         console.log(filtered)
         commit('setFiltered', filtered)
       }
->>>>>>> 4305acd4b557374249c2e7a2490c3217c902ea2d
     },
     yesNo({ commit, dispatch }) {
       let filtered = this.state.posts.filter(post => {

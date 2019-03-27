@@ -207,25 +207,11 @@
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-  .username {
-    color: #a0b5c5;
-    font-family: "Amatic SC", cursive;
-    margin-bottom: -0.2em;
-    transition: all 0.3s linear;
-  }
-
-  .username:hover {
-    border-bottom: 0.2px solid #a0b5c5;
-    color: #3d6ea0;
-    cursor: pointer;
-=======
   @media only screen and (min-width: 700px) {
 
     #bottom-nav {
       display: none
     }
->>>>>>> 4305acd4b557374249c2e7a2490c3217c902ea2d
   }
 
   #post {

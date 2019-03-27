@@ -27,11 +27,7 @@
       <div class="dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
-          Category
-=======
           Tags
->>>>>>> 4305acd4b557374249c2e7a2490c3217c902ea2d
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="filterbyTag('music')">Music</a>
