@@ -23,10 +23,15 @@
         <button class="btn btn-outline-primary" @click="unfollow(user)"><i class="fas fa-user-minus"></i>
           Unfollow</button>
         <div class="card col-2">
-          <!-- <div v-for="follows in following">
+          <div v-for="follows in following">
             <li class="card-title">{{follows.name}}</li>
             <button class="btn btn-danger" @click="unfollow(follows)">unfollow</button>
-          </div> -->
+          </div>
+        </div>
+        <div class="card col-2">
+          <div v-for="follows in followers">
+            <li class="card-title">{{follows.name}}</li>
+          </div>
         </div>
         <span v-show="showPosts">
           <div class="row">

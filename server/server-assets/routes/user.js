@@ -19,6 +19,22 @@ router.put('/:id/follow', (req, res, next) => {
     })
 })
 
+router.put('/:id/follower', (req, res, next) => {
+  Users.findById(req.params.id)
+    .then(user => {
+      return user.update({ $addToSet: { followedBy: req.body.user } })
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+    .then(user => {
+      Users.findById(req.body.user)
+        .then(user => {
+          res.send(user)
+        })
+    })
+})
+
 router.get('/all', (req, res, next) => {
   Users.find()
     .then(users => {

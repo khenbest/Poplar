@@ -13,7 +13,7 @@ let schema = new Schema({
   hash: { type: String, required: true },
   participated: [{ type: ObjectId, ref: "Post" }],
   following: [{ type: String }],
-  followedBy: { type: String }
+  followedBy: [{ type: String }]
 }, { timestamps: true })
 
 

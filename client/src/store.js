@@ -38,6 +38,7 @@ export default new Vuex.Store({
     messages: [],
     roomData: {},
     following: [],
+    followers: [],
     allUsers: []
   },
   mutations: {
@@ -54,13 +55,30 @@ export default new Vuex.Store({
         let user = state.allUsers.find(user => user._id == id)
         newArray.push(user)
       })
-      console.log(newArray)
       state.following = newArray
+    },
+    followers(state, user) {
+      let newArray = []
+      if (!state.user.followers) {
+        state.user['followers'] = []
+      }
+      state.user.followers.forEach(id => {
+        let user = state.allUsers.find(user => user._id == id)
+        newArray.push(user)
+      })
+      state.followers = newArray
     },
     setFollowing(state, user) {
       console.log(user)
       state.following.push(user)
       state.user.following.push(user)
+    },
+    setFollowers(state, user) {
+      state.followers.push(user)
+      if (!state.user.followers) {
+        state.user['followers'] = []
+      }
+      state.user.followers.push(user)
     },
     setUser(state, user) {
       state.user = user
@@ -229,6 +247,11 @@ export default new Vuex.Store({
         .then(res => {
           commit('setFollowing', res.data)
         })
+      api.put('users/' + payload.id + '/follower', payload)
+        .then(res => {
+          console.log(res.data)
+          commit('setFollowers', res.data)
+        })
     },
     activity({ commit, dispatch }) {
       let sorted = this.state.posts.sort((a, b) => {
@@ -294,6 +317,9 @@ export default new Vuex.Store({
     },
     getFollowing({ commit, dispatch }) {
       commit('following')
+    },
+    getFollowers({ commit, dispatch }) {
+      commit('followers')
     },
     getMyPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'

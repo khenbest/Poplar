@@ -28,6 +28,14 @@
 
           </div>
         </div>
+        <div class="col-2">
+          <h6>Followers:</h6>
+        </div>
+        <div class="card col-2">
+          <div v-for="follows in followers">
+            <li class="username text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+          </div>
+        </div>
         <span v-show="showPosts">
           <div class="row">
             <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-2" v-for="post in posts" :key="post._id">
@@ -118,8 +126,6 @@
     },
     mounted() {
       this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
-      this.$store.dispatch('getFollowing')
-      this.$store.dispatch('getUser')
     },
     data() {
       return {
@@ -137,6 +143,9 @@
       },
       following() {
         return this.$store.state.following
+      },
+      followers() {
+        return this.$store.state.followers
       },
       user() {
       }
