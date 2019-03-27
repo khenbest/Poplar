@@ -122,8 +122,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getMyPosts", true);
-      this.$store.dispatch('getUsers') //without a second argument passed in this will get all the posts
+      this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
+      this.$store.dispatch('getUsers')
     },
     data() {
       return {
@@ -174,12 +174,30 @@
             newArray.splice(index, 1)
           }
         })
-        console.log(newArray)
         return newArray
       },
       user() {
-        console.log(this.$store.state.allUsers.find(user => user._id == this.$route.params.id))
         return this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+      },
+      following() {
+        let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+        let following1 = []
+        user.following.forEach(user => {
+          let user2 = this.$store.state.allUsers.find(user1 => user1._id == user)
+          following1.push(user2)
+        })
+        console.log(following1)
+        return following1
+      },
+      followers() {
+        let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+        let followedBy1 = []
+        user.followedBy.forEach(user => {
+          let user2 = this.$store.state.allUsers.find(user1 => user1._id == user)
+          followedBy1.push(user2)
+        })
+        console.log(followedBy1)
+        return followedBy1
       }
     },
     methods: {

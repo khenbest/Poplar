@@ -22,6 +22,12 @@ let auth = Axios.create({
 auth.get('authenticate')
   .then(res => {
     store.commit("setUser", res.data)
+  })
+  .catch(err => {
+    console.error(err)
+    router.push({ name: "login" })
+  })
+  .finally(err => {
     // @ts-ignore
     new Vue({
       router,
@@ -30,8 +36,5 @@ auth.get('authenticate')
       render: h => h(App)
     }).$mount('#app')
   })
-  .catch(err => {
-    console.error(err)
-    router.push({ name: "login" })
-  })
+
 
