@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <h1>{{user.name}}'s Profile</h1>
+          <h1 class="my-2">{{user.name}}</h1>
         </div>
         <div class="row d-flex justify-content-center">
           <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
@@ -164,9 +164,16 @@
             newArray.splice(index, 1)
           }
         })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        console.log(newArray)
         return newArray
       },
       user() {
+        console.log(this.$store.state.allUsers.find(user => user._id == this.$route.params.id))
         return this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
       }
     },

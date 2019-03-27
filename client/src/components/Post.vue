@@ -103,6 +103,7 @@
     },
     methods: {
       goProfile(user) {
+        console.log(user)
         this.$router.push({
           path: '/posts/profile/' + user,
           name: 'friendProfile',

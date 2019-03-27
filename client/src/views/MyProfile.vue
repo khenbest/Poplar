@@ -19,12 +19,13 @@
         <div class="row d-flex justify-content-center">
           <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
         </div>
-        <h1>FOLLOWING:</h1>
+        <div class="col-2">
+          <h6>Following:</h6>
+        </div>
         <div class="card col-2">
           <div v-for="follows in following">
-            <li class="username" @click="goProfile(follows)">{{follows.name}}</li>
-            <!-- <button class="btn btn-outline-primary" @click="unfollow(follows)"><i class="fas fa-user-minus"></i>
-              Unfollow</button> -->
+            <li class="username text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+
           </div>
         </div>
         <span v-show="showPosts">
@@ -218,6 +219,7 @@
     color: #a0b5c5;
     font-family: "Amatic SC", cursive;
     margin-bottom: -0.2em;
+    font-size: 24px;
   }
 
   .btn-my {
