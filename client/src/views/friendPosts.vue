@@ -91,14 +91,14 @@
       }
     },
     computed: {
-      posts() {
-        this.$store.state.allUsers.filter(user => {
-
-        })
-        this.$store.state.posts.filter(post => {
-          post.authorId == this.$store.state.following.find(user => user._id == post.authorId)._id
-        })
-      },
+      //       posts() {
+      //         this.$store.state.allUsers.filter(user => {
+      // user._id == this.$store.state
+      //         })
+      //         this.$store.state.posts.filter(post => {
+      //           post.authorId == this.$store.state.following.find(user => user._id == post.authorId)._id
+      //         })
+      // },
       filtered() {
         return this.$store.state.filteredPosts
       }
