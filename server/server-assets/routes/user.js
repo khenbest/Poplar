@@ -68,6 +68,12 @@ router.put('/user/:id/delete/:toDelete', (req, res, next) => {
     .then(user => {
       res.send(user.following)
     })
+    .then(user => {
+      Users.findById(req.body.name)
+        .then(user1 => {
+          return user1.update({ $pullAll: { followers: [req.body.id] } })
+        })
+    })
     .catch(err => res.status(400).send(err))
 })
 
