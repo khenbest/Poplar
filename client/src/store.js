@@ -36,11 +36,37 @@ export default new Vuex.Store({
     joined: false,
     name: '',
     messages: [],
-    roomData: {}
+    roomData: {},
+    following: [],
+    allUsers: []
   },
   mutations: {
+    remFollow(state, user) {
+      state.following.forEach((user1, index) => {
+        if (user.name._id == user1._id)
+          state.following.splice(index, 1)
+      })
+      console.log(state.following)
+    },
+    following(state, user) {
+      let newArray = []
+      state.user.following.forEach(id => {
+        let user = state.allUsers.find(user => user._id == id)
+        newArray.push(user)
+      })
+      console.log(newArray)
+      state.following = newArray
+    },
+    setFollowing(state, user) {
+      console.log(user)
+      state.following.push(user)
+      state.user.following.push(user)
+    },
     setUser(state, user) {
       state.user = user
+    },
+    setUsers(state, users) {
+      state.allUsers = users
     },
     setPosts(state, posts) {
       state.posts = posts
@@ -141,6 +167,28 @@ export default new Vuex.Store({
       console.log('left room')
     },
     //#endregion
+    getUser({ commit, dispatch }, payload) {
+      auth.get('authenticate')
+        .then(res => {
+          commit('setUser', res.data)
+          // router.push({ name: 'posts' }) //reroutes to posts upon refresh
+        })
+    },
+    getUsers({ commit, dispatch }) {
+      api.get('users/all')
+        .then(res => {
+          commit('setUsers', res.data)
+        })
+        .then(res => {
+          commit('following')
+        })
+    },
+    unfollow({ commit, dispatch }, payload) {
+      api.put('users/user/' + payload.id + '/delete/' + payload.name, payload)
+        .then(res => {
+          commit('remFollow', payload)
+        })
+    },
     //#region -- AUTH STUFF --
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
@@ -175,11 +223,17 @@ export default new Vuex.Store({
     },
     //#endregion
     //#region -- SORT --
+    addFollow({ commit, dispatch }, payload) {
+      // if(this.state.following.find(post => post == payload))
+      api.put('users/' + payload.user + '/follow', payload)
+        .then(res => {
+          commit('setFollowing', res.data)
+        })
+    },
     activity({ commit, dispatch }) {
       let sorted = this.state.posts.sort((a, b) => {
         return Object.values(b.votes).length - Object.values(a.votes).length
       })
-      console.log(sorted)
       commit('setFiltered', sorted)
     },
     oldest({ commit, dispatch }) {
@@ -192,28 +246,24 @@ export default new Vuex.Store({
       let filtered = this.state.posts.filter(post => {
         return post.user.toLowerCase() == payload.toLowerCase()
       })
-      console.log(filtered)
       commit('setFiltered', filtered)
     },
     filterTags({ commit, dispatch }, payload) {
       let filtered = this.state.posts.filter(post => {
         return post.tags == payload
       })
-      console.log(filtered)
       commit('setFiltered', filtered)
     },
     yesNo({ commit, dispatch }) {
       let filtered = this.state.posts.filter(post => {
         return !post.imgUrl2
       })
-      console.log(filtered)
       commit('setFiltered', filtered)
     },
     thisThat({ commit, dispatch }) {
       let filtered = this.state.posts.filter(post => {
         return post.imgUrl2
       })
-      console.log(filtered)
       commit('setFiltered', filtered)
     },
     reset({ commit, dispatch }) {
@@ -223,9 +273,7 @@ export default new Vuex.Store({
       commit('setPosts', sorted)
     },
     //#endregion
-
     //#region -- POSTS --
-
     getPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {
@@ -244,6 +292,9 @@ export default new Vuex.Store({
           }))
         })
     },
+    getFollowing({ commit, dispatch }) {
+      commit('following')
+    },
     getMyPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {
@@ -253,6 +304,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('setMyPosts', res.data)
         })
+      console.log(query)
     },
     clearActivePost({ commit, dispatch }, object) {
       commit('setActivePost', object)

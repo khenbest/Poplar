@@ -6,26 +6,27 @@
         <!-- POST CARDS -->
         <div id="btn-bar" class="row d-flex justify-content-center">
           <div class="row d-flex justify-content-center">
-            <button class="btn btn-my" @click="showPosts = true">My Posts</button>
+            <button class="btn btn-my" @click="showPosts = true">{{user.name}}'s Posts</button>
             <button class="btn btn-my" @click="showPosts = false">
-              My
               Participated Posts
             </button>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <h1>{{this.$store.state.user.name}}'s Profile</h1>
+          <h1>{{user.name}}'s Profile</h1>
         </div>
         <div class="row d-flex justify-content-center">
-          <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
+          <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
         </div>
-        <h1>FOLLOWING:</h1>
+        <button class="mx-2 btn btn-outline-primary" @click="addFollow(user._id)"><i class="fas fa-user-plus"></i>
+          follow</button>
+        <button class="btn btn-outline-primary" @click="unfollow(user)"><i class="fas fa-user-minus"></i>
+          Unfollow</button>
         <div class="card col-2">
-          <div v-for="follows in following">
-            <li class="username" @click="goProfile(follows)">{{follows.name}}</li>
-            <!-- <button class="btn btn-outline-primary" @click="unfollow(follows)"><i class="fas fa-user-minus"></i>
-              Unfollow</button> -->
-          </div>
+          <!-- <div v-for="follows in following">
+            <li class="card-title">{{follows.name}}</li>
+            <button class="btn btn-danger" @click="unfollow(follows)">unfollow</button>
+          </div> -->
         </div>
         <span v-show="showPosts">
           <div class="row">
@@ -116,9 +117,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
-      this.$store.dispatch('getFollowing')
-      this.$store.dispatch('getUser')
+      this.$store.dispatch("getMyPosts", true);
+      this.$store.dispatch('getUsers') //without a second argument passed in this will get all the posts
     },
     data() {
       return {
@@ -129,24 +129,68 @@
     },
     computed: {
       posts() {
-        return this.$store.state.myPosts;
+        return this.$store.state.posts.filter(post => post.authorId == this.$route.params.id);
       },
       participated() {
-        return this.$store.state.user.participated;
-      },
-      following() {
-        return this.$store.state.following
+        let user1 = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+        // if (participated.length > 0) {
+        let newArray = []
+        let participated = user1.participated.forEach(id => {
+          let post = this.$store.state.posts.find(post => post._id == id)
+          newArray.push(post)
+        })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1)
+          }
+        })
+        return newArray
       },
       user() {
+        return this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
       }
     },
     methods: {
+      unfollow(unfollow) {
+        let payload = {
+          name: unfollow,
+          id: this.$store.state.user._id
+        }
+        this.$store.dispatch('unfollow', payload)
+      },
       addPost() {
         this.$store.dispatch("addPost", this.newPost);
         event.target.reset();
       },
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
+      },
+      addFollow(userId) {
+        let payload = {
+          user: this.$store.state.user._id,
+          id: userId
+        }
+        this.$store.dispatch('addFollow', payload)
       },
       chatroom(postId) {
         this.$router.push({
@@ -157,22 +201,13 @@
           }
         });
       },
-      goProfile(user) {
-        this.$router.push({
-          path: '/posts/profile/' + user._id,
-          name: 'friendProfile',
-          params: {
-            id: user._id
-          }
-        })
+      unfollow(unfollow) {
+        let payload = {
+          name: unfollow,
+          id: this.$store.state.user._id
+        }
+        this.$store.dispatch('unfollow', payload)
       },
-      // unfollow(unfollow) {
-      //   let payload = {
-      //     name: unfollow,
-      //     id: this.$store.state.user._id
-      //   }
-      //   this.$store.dispatch('unfollow', payload)
-      // },
       allPosts() {
         this.$router.push({ path: "/" });
       },
@@ -197,19 +232,6 @@
 </script>
 
 <style scoped>
-  .username {
-    color: #a0b5c5;
-    font-family: "Amatic SC", cursive;
-    margin-bottom: -0.2em;
-    transition: all 0.3s linear;
-  }
-
-  .username:hover {
-    border-bottom: 0.2px solid #a0b5c5;
-    color: #3d6ea0;
-    cursor: pointer;
-  }
-
   #post {
     border: #3d6ea0 1px solid;
   }
@@ -274,12 +296,6 @@
 
   .fas:hover {
     cursor: pointer;
-  }
-
-  .title {
-    color: #3d6ea0;
-    font-family: 'Patrick Hand SC', cursive;
-    margin-bottom: -0.05em;
   }
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */

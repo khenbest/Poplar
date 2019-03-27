@@ -58,6 +58,7 @@
         this.$router.push({ path: '/makePost' })
       },
       myProfile() {
+        this.$store.dispatch('getUser')
         this.$router.push({ path: '/posts/myProfile' })
       }
     },

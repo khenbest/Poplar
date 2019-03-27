@@ -2,8 +2,8 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
-        <h4 class="username mx-2">{{post.user || 'Unknown'}}</h4>
-        <button class="mx-2" @click="follow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button>
+        <h4 class="username mx-2" @click="goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
+        <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
       </div>
     </div>
     <div class="row">
@@ -102,11 +102,24 @@
       }
     },
     methods: {
+      goProfile(user) {
+        this.$router.push({
+          path: '/posts/profile/' + user,
+          name: 'friendProfile',
+          params: {
+            id: user
+          }
+        })
+      },
       deletePost(postId) {
         this.$store.dispatch("deletePost", postId);
       },
-      addFollower() {
-
+      addFollow(author) {
+        let payload = {
+          user: this.user._id,
+          name: author
+        }
+        this.$store.dispatch('addFollow', payload)
       },
       castVote(postId, vote) {
         this.post.votes = this.post.votes || {}
@@ -157,6 +170,13 @@
     color: #a0b5c5;
     font-family: "Amatic SC", cursive;
     margin-bottom: -0.2em;
+    transition: all 0.3s linear;
+  }
+
+  .username:hover {
+    border-bottom: 0.2px solid #a0b5c5;
+    color: #3d6ea0;
+    cursor: pointer;
   }
 
   .title {

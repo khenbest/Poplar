@@ -55,7 +55,6 @@ router.post('/auth/login', (req, res) => {
     })
 })
 
-
 //REMOVE THE ACTIVE SESSION FROM THE DATABASE
 router.delete('/auth/logout', (req, res) => {
   req.session.destroy(err => {

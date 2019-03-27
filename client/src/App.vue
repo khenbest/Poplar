@@ -9,6 +9,9 @@
   import Navbar from '@/components/Navbar.vue'
   export default {
     name: 'App',
+    mounted() {
+      this.$store.dispatch('getUsers')
+    },
     components: {
       Navbar
     }
