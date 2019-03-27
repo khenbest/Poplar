@@ -38,7 +38,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(post._id)">Go to Chatroom!</button>
+                <button class="chatroom" @click="chatroom(post._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -74,7 +74,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(participated._id)">Go to Chatroom!</button>
+                <button class="chatroom" @click="chatroom(participated._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>

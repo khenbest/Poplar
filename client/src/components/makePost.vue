@@ -6,7 +6,7 @@
                     <h3>Which type of question would you like to ask?</h3>
                     <div class="col-12 p-5 card" :class="{question : showForm == false}" @click="showForm=true">
                         <!-- <button class="btn btn-secondary col-3" v-if="showForm"
-                                @click="showForm = false">Back</button> -->
+                            @click="showForm = false">Back</button> -->
                         <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                         <h3 v-if="!showForm">Yes or No?</h3>
                         <p v-if="showForm">Upload image:</p>
@@ -24,6 +24,20 @@
                         </div>
                         <div v-if="showForm">
                             <h4>THEN</H4>
+                            <div>
+                                <form class="mb-3">
+                                    <select name="tags" v-model="newPost.tags">
+                                        <option :value="null">Please select a Tag</option>
+                                        <option value=music>Music</option>
+                                        <option value="sports">Sports</option>
+                                        <option value="movies">Movies</option>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="food">Food</option>
+                                        <option value="meme-culture">Meme-Culture</option>
+                                    </select>
+                                </form>
+
+                            </div>
                             <input class="form-control" type="text" placeholder="Ask your question"
                                 v-model="newPost.title" required>
                             <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
@@ -33,6 +47,7 @@
                     <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
                         <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                         <h3 v-if="!showForm1">This or That?</h3>
+
                         <div v-if="showForm1" @submit.prevent="addPost2">
                             <div class="row">
                                 <p v-if="showForm1">Upload image:</p>
@@ -61,6 +76,19 @@
                                 </div>
                             </div>
                             <H4 class="m-2">THEN</H4>
+                            <div>
+                                <form class="mb-3">
+                                    <select name="tags" v-model="newPost.tags">
+                                        <option :value="null">Please select a Tag</option>
+                                        <option value=music>Music</option>
+                                        <option value="sports">Sports</option>
+                                        <option value="movies">Movies</option>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="food">Food</option>
+                                        <option value="meme-culture">Meme-Culture</option>
+                                    </select>
+                                </form>
+                            </div>
                             <input class="form-control" type="text" placeholder="Ask your question"
                                 v-model="newPost.title" required>
                             <button v-if="dataUrl2 != '' && dataUrl3 != ''" class="btn btn-primary mt-3"
@@ -123,7 +151,8 @@
             addPost() {
                 let payload = {
                     title: this.newPost.title,
-                    imgUrl1: this.dataUrl1
+                    imgUrl1: this.dataUrl1,
+                    tags: this.newPost.tags
                 }
                 console.log(payload)
                 this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
@@ -132,7 +161,8 @@
                 let payload = {
                     title: this.newPost.title,
                     imgUrl1: this.dataUrl2,
-                    imgUrl2: this.dataUrl3
+                    imgUrl2: this.dataUrl3,
+                    tags: this.newPost.tags
                 }
                 console.log(payload)
                 this.$store.dispatch("addPost", payload).then(((this.$router.push({ name: 'posts' }))))
