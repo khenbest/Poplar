@@ -9,6 +9,7 @@ import Login from './views/Login.vue'
 import makePost from './components/makePost.vue'
 import MyProfile from "./views/MyProfile.vue"
 import friendProfile from '@/views/friendProfile.vue'
+import friendPosts from '@/views/friendPosts.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,12 @@ export default new Router({
       name: 'postDetails',
       props: true,
       component: PostDetails
+    },
+    {
+      path: '/posts/friendPosts/',
+      name: 'friendPosts',
+      props: true,
+      component: friendPosts
     },
     {
       path: '/login',

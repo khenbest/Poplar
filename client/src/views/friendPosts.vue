@@ -92,8 +92,9 @@
     },
     computed: {
       posts() {
+        this.$store.state.allUsers.filter(user => {
 
-
+        })
         this.$store.state.posts.filter(post => {
           post.authorId == this.$store.state.following.find(user => user._id == post.authorId)._id
         })

@@ -16,7 +16,7 @@
             All
             Posts
           </a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; ">
+          <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; goPosts()">
             Friends
             Posts
           </a>
@@ -45,6 +45,9 @@
     },
     computed: {},
     methods: {
+      goPosts() {
+        this.$router.push({ path: '/posts/friendPosts/' })
+      },
       goHome() {
         this.$router.push({ path: "/" });
       },
