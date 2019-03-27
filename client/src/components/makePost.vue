@@ -118,6 +118,7 @@
                 dataUrl1: '',
                 dataUrl2: '',
                 dataUrl3: '',
+                tags: '',
                 newPost: {
 
                 },
@@ -149,6 +150,7 @@
                 this.croppa.chooseFile()
             },
             addPost() {
+                debugger
                 let payload = {
                     title: this.newPost.title,
                     imgUrl1: this.dataUrl1,
