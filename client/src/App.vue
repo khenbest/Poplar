@@ -11,9 +11,7 @@
     name: 'App',
     mounted() {
       this.$store.dispatch('getUsers')
-      this.$store.dispatch('getFollowing')
       this.$store.dispatch('getUser')
-      this.$store.dispatch('getFollowers')
     },
     components: {
       Navbar
