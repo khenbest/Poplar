@@ -31,7 +31,7 @@
         </div>
         <div class="card col-2">
           <h6>Followers:</h6>
-          <div v-for="follows in followers">
+          <div v-for="follows in user.followers">
             <li class="card-title">{{follows.name}}</li>
           </div>
         </div>

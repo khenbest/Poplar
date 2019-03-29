@@ -199,13 +199,15 @@ export default new Vuex.Store({
     },
     addFollow({ commit, dispatch }, payload) {
       // if(this.state.following.find(post => post == payload))
-      api.put('users/' + payload.user + '/follow', payload)
+      api.put('users/follow', payload)
         .then(res => {
+          console.log(res.data)
           dispatch('getUsers')
           dispatch('getUser')
         })
-      api.put('users/' + payload.id + '/follower', payload)
+      api.put('users/follower', payload)
         .then(res => {
+          console.log(res.data)
           dispatch('getUsers')
           dispatch('getUser')
         })
@@ -213,7 +215,7 @@ export default new Vuex.Store({
     unfollow({ commit, dispatch }, payload) {
       api.put('users/user/' + payload.id + '/delete/' + payload.name, payload)
         .then(res => {
-          // commit('remFollow', payload)
+          console.log(res.data)
           dispatch('getUsers')
           dispatch('getUser')
         })

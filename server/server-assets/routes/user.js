@@ -3,36 +3,44 @@ let Posts = require('../models/post')
 let Users = require('../models/user')
 
 
-router.put('/:id/follow', (req, res, next) => {
+router.put('/follow', (req, res, next) => {
   Users.findById(req.body.user)
     .then(user => {
-      return user.update({ $addToSet: { following: req.body.id } })
+      return user.update({ $addToSet: { following: req.body.id } }).then(() => {
+        res.send(user)
+      })
     })
     .catch(err => {
       res.status(400).send(err)
     })
-    .then(user => {
+    .then(() => {
       Users.findById(req.body.id)
         .then(user => {
-          res.send(user)
+          return user.update({ $addToSet: { followedBy: req.body.user } }).then(() => {
+            res.send(user)
+          })
         })
+    })
+    .catch(err => {
+      res.status(400).send(err)
     })
 })
 
-router.put('/:id/follower', (req, res, next) => {
-  Users.findById(req.params.id)
+router.put('/user/:id/delete/:toDelete', (req, res, next) => {
+  Users.findById(req.body.id)
     .then(user => {
-      return user.update({ $addToSet: { followedBy: req.body.user } })
-    })
-    .catch(err => {
-      res.status(400).send(err)
-    })
-    .then(user => {
-      Users.findById(req.body.user)
-        .then(user => {
-          res.send(user)
+      return user.update({ $pullAll: { following: [req.body.name] } }).then(() => {
+        res.send(user)
+      })
+    }).then(() => {
+      Users.findById(req.body.name)
+        .then(user1 => {
+          return user1.update({ $pullAll: { followers: [req.body.id] } }).then(() => {
+            res.send(user1)
+          })
         })
     })
+    .catch(err => res.status(400).send(err))
 })
 
 router.get('/all', (req, res, next) => {
@@ -60,22 +68,7 @@ router.get('/all', (req, res, next) => {
 //     })
 // })
 
-router.put('/user/:id/delete/:toDelete', (req, res, next) => {
-  Users.findById(req.body.id)
-    .then(user => {
-      return user.update({ $pullAll: { following: [req.body.name] } })
-    })
-    .then(user => {
-      res.send(user.following)
-    })
-    .then(user => {
-      Users.findById(req.body.name)
-        .then(user1 => {
-          return user1.update({ $pullAll: { followers: [req.body.id] } })
-        })
-    })
-    .catch(err => res.status(400).send(err))
-})
+
 
 // users.forEach((user, index) => {
 //   if (user == data.name) {
