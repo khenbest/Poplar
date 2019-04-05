@@ -37,8 +37,6 @@ export default new Vuex.Store({
     name: '',
     messages: [],
     roomData: {},
-    following: [],
-    followedBy: [],
     allUsers: []
   },
   mutations: {
@@ -210,6 +208,7 @@ export default new Vuex.Store({
           console.log(res.data)
           commit('setUser', res.data.user)
           commit('setFollower', res.data.follower)
+          dispatch('getUsers')
         })
     },
     unfollow({ commit, dispatch }, payload) {
@@ -219,6 +218,7 @@ export default new Vuex.Store({
           console.log(res.data)
           commit('setUser', res.data.user)
           commit('setFollower', res.data.follower)
+          dispatch('getUsers')
         })
     },
     //#region -- AUTH STUFF --

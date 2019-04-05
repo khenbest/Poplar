@@ -1,7 +1,7 @@
 <template>
   <div class="posts container-fluid">
     <div class="row py-1 bg-light justify-content-center text-center">
-      <div class=" dropdown m-2">
+      <!-- <div class=" dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -12,8 +12,8 @@
           <a class="dropdown-item text-dark" @click="reset()">Reset</a>
 
         </div>
-      </div>
-      <div class="dropdown m-2">
+    </div> -->
+      <!-- <div class="dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
@@ -21,10 +21,9 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
           <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
-          <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
         </div>
-      </div>
-      <div class="dropdown m-2">
+      </div> -->
+      <!-- <div class="dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Tags
@@ -37,10 +36,8 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag()">Reset</a>
-
-
         </div>
-      </div>
+      </div> -->
       <form v-if="showForm" @submit.prevent="filterbyUser">
         <input type="text" v-model="username" placeholder="type username here" />
         <button class="btn btn-secondary" type="submit">Search</button>
@@ -91,14 +88,25 @@
       }
     },
     computed: {
-      //       posts() {
-      //         this.$store.state.allUsers.filter(user => {
-      // user._id == this.$store.state
-      //         })
-      //         this.$store.state.posts.filter(post => {
-      //           post.authorId == this.$store.state.following.find(user => user._id == post.authorId)._id
-      //         })
-      // },
+      posts() {
+        let friends = []
+        this.$store.state.user.following.forEach(id => {
+          let friend = this.$store.state.allUsers.find(person => person._id == id)
+          friends.push(friend)
+        })
+        let friendPosts = []
+        friends.forEach(friend => {
+          this.$store.state.posts.forEach(post => {
+            if (post.authorId == friend._id) {
+              friendPosts.push(post)
+            }
+            // { $addToSet: { friendPosts: post } }
+
+          })
+        })
+        console.log(friendPosts)
+        return friendPosts
+      },
       filtered() {
         return this.$store.state.filteredPosts
       }

@@ -23,15 +23,14 @@
         <button class="btn btn-outline-primary" @click="unfollow(user)"><i class="fas fa-user-minus"></i>
           Unfollow</button>
         <div class="card col-2">
-          <h6>Following:</h6>
-          <div v-for="follows in user.Following">
+          <h6>Followers:</h6>
+          <div v-for="follows in followedBy">
             <li class="card-title">{{follows.name}}</li>
-            <button class="btn btn-danger" @click="unfollow(follows)">unfollow</button>
           </div>
         </div>
         <div class="card col-2">
-          <h6>Followers:</h6>
-          <div v-for="follows in user.followers">
+          <h6>Following:</h6>
+          <div v-for="follows in followers">
             <li class="card-title">{{follows.name}}</li>
           </div>
         </div>
@@ -124,7 +123,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
+      this.$store.dispatch("getPosts")
       this.$store.dispatch('getUsers')
     },
     data() {
@@ -181,26 +180,26 @@
       user() {
         return this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
       },
-      // following() {
-      //   let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
-      //   let following1 = []
-      //   user.following.forEach(user => {
-      //     let user2 = this.$store.state.allUsers.find(user1 => user1._id == user)
-      //     following1.push(user2)
-      //   })
-      //   console.log(following1)
-      //   return following1
-      // },
-      // followers() {
-      //   let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
-      //   let followedBy1 = []
-      //   user.followedBy.forEach(user => {
-      //     let user2 = this.$store.state.allUsers.find(user1 => user1._id == user)
-      //     followedBy1.push(user2)
-      //   })
-      //   console.log(followedBy1)
-      //   return followedBy1
-      // }
+      followedBy() {
+        let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+        let followedByArray = []
+        let followedBy = user.followedBy.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id)
+          followedByArray.push(user)
+        })
+        console.log(followedByArray)
+        return followedByArray
+      },
+      followers() {
+        let user = this.$store.state.allUsers.find(user => user._id == this.$route.params.id)
+        let followingArray = []
+        let following = user.following.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id)
+          followingArray.push(user)
+        })
+        console.log(followingArray)
+        return followingArray
+      }
     },
     methods: {
       unfollow(unfollow) {

@@ -23,8 +23,8 @@
           <h6>Following:</h6>
         </div>
         <div class="card col-2">
-          <div v-for="follows in following">
-            <li class="username text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+          <div v-for="follows in followedBy">
+            <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
 
           </div>
         </div>
@@ -32,8 +32,8 @@
           <h6>Followers:</h6>
         </div>
         <div class="card col-2">
-          <div v-for="follows in followers">
-            <li class="username text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+          <div v-for="follows in following">
+            <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
           </div>
         </div>
         <span v-show="showPosts">
@@ -125,14 +125,16 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getMyPosts", true); //without a second argument passed in this will get all the posts
+      this.$store.dispatch("getUser")
+      this.$store.dispatch("getUsers") //without a second argument passed in this will get all the posts
+      this.$store.dispatch("getMyPosts", true);
     },
     data() {
       return {
         showPosts: true,
         newPost: {},
         activeClass: null
-      };
+      }
     },
     computed: {
       posts() {
@@ -142,12 +144,22 @@
         return this.$store.state.user.participated;
       },
       following() {
-        return this.$store.state.following
+        let user = this.$store.state.user
+        let followedByArray = []
+        let followedBy = user.followedBy.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id)
+          followedByArray.push(user)
+        })
+        return followedByArray
       },
-      followers() {
-        return this.$store.state.followers
-      },
-      user() {
+      followedBy() {
+        let user = this.$store.state.user
+        let followingArray = []
+        let following = user.following.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id)
+          followingArray.push(user)
+        })
+        return followingArray
       }
     },
     methods: {
@@ -203,7 +215,7 @@
         return Moment(String(date)).format("MMMM Do, YYYY");
       }
     }
-  };
+  }
 </script>
 
 <style scoped>
