@@ -37,6 +37,8 @@ export default new Vuex.Store({
     name: '',
     messages: [],
     roomData: {},
+    following: [],
+    followedBy: [],
     allUsers: []
   },
   mutations: {
@@ -206,7 +208,6 @@ export default new Vuex.Store({
           console.log(res.data)
           commit('setUser', res.data.user)
           commit('setFollower', res.data.follower)
-          dispatch('getUsers')
         })
     },
     unfollow({ commit, dispatch }, payload) {
@@ -216,7 +217,6 @@ export default new Vuex.Store({
           console.log(res.data)
           commit('setUser', res.data.user)
           commit('setFollower', res.data.follower)
-          dispatch('getUsers')
         })
     },
     //#region -- AUTH STUFF --
@@ -286,9 +286,11 @@ export default new Vuex.Store({
       commit('setFiltered', filtered)
     },
     filterTags({ commit, dispatch }, payload) {
-      if (payload == '') {
-        return this.state.posts
-
+      if (!payload) {
+        debugger
+        let filtered = this.state.posts
+        console.log(filtered)
+        commit('setFiltered', filtered)
       } else {
         let filtered = this.state.posts.filter(post => {
           return post.tags == payload
