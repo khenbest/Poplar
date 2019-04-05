@@ -254,7 +254,7 @@ export default new Vuex.Store({
     //#endregion
     //#region -- SORT --
     addFollow({ commit, dispatch }, payload) {
-      debugger
+
       // if(this.state.following.find(post => post == payload))
       api.put('users/' + payload.user + '/follow', payload)
         .then(res => {
@@ -287,7 +287,6 @@ export default new Vuex.Store({
     },
     filterTags({ commit, dispatch }, payload) {
       if (!payload) {
-        debugger
         let filtered = this.state.posts
         console.log(filtered)
         commit('setFiltered', filtered)
