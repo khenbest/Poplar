@@ -16,13 +16,13 @@ let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/'
 
 let auth = Axios.create({
   baseURL: base + "auth/",
-  timeout: 10000,
+  timeout: 100000,
   withCredentials: true
 })
 
 let api = Axios.create({
   baseURL: base + "api/",
-  timeout: 3000,
+  timeout: 100000,
   withCredentials: true
 })
 
@@ -82,6 +82,14 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user
     },
+    setFollower(state, follower) {
+      state.allUsers.forEach((user, index) => {
+        if (user._id == follower._id) {
+          state.allUsers.splice(index, 1)
+          state.allUsers.push(user)
+        }
+      })
+    },
     setUsers(state, users) {
       state.allUsers = users
     },
@@ -134,8 +142,6 @@ export default new Vuex.Store({
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
       socket = io('//localhost:3000')
-
-
       //Register all listeners
       socket.on('CONNECTED', data => {
         console.log('Connected to socket', payload)
@@ -199,25 +205,20 @@ export default new Vuex.Store({
     },
     addFollow({ commit, dispatch }, payload) {
       // if(this.state.following.find(post => post == payload))
-      api.put('users/follow', payload)
+      api.put('users/follow/' + payload.toFollow, payload)
         .then(res => {
           console.log(res.data)
-          dispatch('getUsers')
-          dispatch('getUser')
-        })
-      api.put('users/follower', payload)
-        .then(res => {
-          console.log(res.data)
-          dispatch('getUsers')
-          dispatch('getUser')
+          commit('setUser', res.data.user)
+          commit('setFollower', res.data.follower)
         })
     },
     unfollow({ commit, dispatch }, payload) {
-      api.put('users/user/' + payload.id + '/delete/' + payload.name, payload)
+      console.log(payload)
+      api.put('users/unfollow/' + payload.toUnfollowId, payload)
         .then(res => {
           console.log(res.data)
-          dispatch('getUsers')
-          dispatch('getUser')
+          commit('setUser', res.data.user)
+          commit('setFollower', res.data.follower)
         })
     },
     //#region -- AUTH STUFF --
