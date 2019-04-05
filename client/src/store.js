@@ -22,7 +22,7 @@ let auth = Axios.create({
 
 let api = Axios.create({
   baseURL: base + "api/",
-  timeout: 3000,
+  timeout: 100000,
   withCredentials: true
 })
 
@@ -81,6 +81,14 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user
     },
+    setFollower(state, follower) {
+      state.allUsers.forEach((user, index) => {
+        if (user._id == follower._id) {
+          state.allUsers.splice(index, 1)
+          state.allUsers.push(user)
+        }
+      })
+    },
     setUsers(state, users) {
       state.allUsers = users
     },
@@ -133,8 +141,6 @@ export default new Vuex.Store({
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
       socket = io('//localhost:3000')
-
-
       //Register all listeners
       socket.on('CONNECTED', data => {
         console.log('Connected to socket', payload)
@@ -194,17 +200,23 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUsers', res.data)
         })
+    },
+    addFollow({ commit, dispatch }, payload) {
+      // if(this.state.following.find(post => post == payload))
+      api.put('users/follow/' + payload.toFollow, payload)
         .then(res => {
-          commit('following')
-          commit('followers')
+          console.log(res.data)
+          commit('setUser', res.data.user)
+          commit('setFollower', res.data.follower)
         })
     },
     unfollow({ commit, dispatch }, payload) {
-      api.put('users/user/' + payload.id + '/delete/' + payload.name, payload)
+      console.log(payload)
+      api.put('users/unfollow/' + payload.toUnfollowId, payload)
         .then(res => {
-          // commit('remFollow', payload)
-          dispatch('getUsers')
-          dispatch('getUser')
+          console.log(res.data)
+          commit('setUser', res.data.user)
+          commit('setFollower', res.data.follower)
         })
     },
     //#region -- AUTH STUFF --

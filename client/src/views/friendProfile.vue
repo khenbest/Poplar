@@ -205,7 +205,7 @@
     methods: {
       unfollow(unfollow) {
         let payload = {
-          name: unfollow,
+          toUnfollowId: unfollow._id,
           id: this.$store.state.user._id
         }
         this.$store.dispatch('unfollow', payload)
@@ -220,7 +220,7 @@
       addFollow(userId) {
         let payload = {
           user: this.$store.state.user._id,
-          id: userId
+          toFollow: userId
         }
         this.$store.dispatch('addFollow', payload)
       },
@@ -232,13 +232,6 @@
             postId: postId
           }
         });
-      },
-      unfollow(unfollow) {
-        let payload = {
-          name: unfollow,
-          id: this.$store.state.user._id
-        }
-        this.$store.dispatch('unfollow', payload)
       },
       allPosts() {
         this.$router.push({ path: "/" });

@@ -3,44 +3,28 @@ let Posts = require('../models/post')
 let Users = require('../models/user')
 
 
-router.put('/follow', (req, res, next) => {
-  Users.findById(req.body.user)
-    .then(user => {
-      return user.update({ $addToSet: { following: req.body.id } }).then(() => {
-        res.send(user)
-      })
+router.put('/follow/:id', (req, res, next) => {
+  Users.findByIdAndUpdate(req.session.uid, { $addToSet: { following: req.params.id } }, { new: true }, (err, user) => {
+    if (err) {
+      return res.status(400).send("Failed to update user")
+    }
+    Users.findByIdAndUpdate(req.params.id, { $addToSet: { followedBy: req.session.uid } }, { new: true }, (err, follower) => {
+      if (err) return res.status(400).send("Failed to update follower")
+      res.send({ user, follower })
     })
-    .catch(err => {
-      res.status(400).send(err)
-    })
-    .then(() => {
-      Users.findById(req.body.id)
-        .then(user => {
-          return user.update({ $addToSet: { followedBy: req.body.user } }).then(() => {
-            res.send(user)
-          })
-        })
-    })
-    .catch(err => {
-      res.status(400).send(err)
-    })
+  })
 })
 
-router.put('/user/:id/delete/:toDelete', (req, res, next) => {
-  Users.findById(req.body.id)
-    .then(user => {
-      return user.update({ $pullAll: { following: [req.body.name] } }).then(() => {
-        res.send(user)
-      })
-    }).then(() => {
-      Users.findById(req.body.name)
-        .then(user1 => {
-          return user1.update({ $pullAll: { followers: [req.body.id] } }).then(() => {
-            res.send(user1)
-          })
-        })
+router.put('/unfollow/:id', (req, res, next) => {
+  Users.findByIdAndUpdate(req.session.uid, { $pullAll: { following: [req.params.id] } }, { new: true }, (err, user) => {
+    if (err) {
+      return res.status(400).send("Failed to update user")
+    }
+    Users.findByIdAndUpdate(req.params.id, { $pullAll: { followedBy: [req.session.uid] } }, { new: true }, (err, follower) => {
+      if (err) return res.status(400).send("Failed to update follower")
+      res.send({ user, follower })
     })
-    .catch(err => res.status(400).send(err))
+  })
 })
 
 router.get('/all', (req, res, next) => {

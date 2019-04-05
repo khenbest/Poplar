@@ -2,6 +2,7 @@
   <div class="posts container-fluid">
     <div class="row py-1 bg-light justify-content-center text-center">
       <div class=" dropdown m-2">
+        <button class="btn btn-outline-primary mx-2" @click="reset()">Reset</button>
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -9,7 +10,6 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
           <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
-          <a class="dropdown-item text-dark" @click="reset()">Reset</a>
 
         </div>
       </div>
