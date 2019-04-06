@@ -10,7 +10,6 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
           <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
-
         </div>
       </div>
       <div class="dropdown m-2">
@@ -47,7 +46,6 @@
       </form>
     </div>
 
-
     <!-- POST CARDS -->
     <div v-if="filtered == ''" class="row bar">
       <post v-for="post in posts" :post="post"></post>
@@ -63,6 +61,8 @@
         <a class="nav-item nav-link curs" @click="myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
+    <!-- <button @click="pageUp()" class="btn btn-outline-primary">Next</button>
+    <button @click="pageDown()" class="btn btn-outline-primary">Previous</button> -->
   </div>
 </template>
 <script>
@@ -79,7 +79,12 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts");
+      Promise.all(this.$store.dispatch("getPosts"))
+      // this.$store.state.posts.forEach((post, index) => {
+      //   if (index < this.lessThan && index > this.greaterThan) {
+      //     this.visiblePosts.push(post)
+      //   }
+      // }}
     }, //without a second argument passed in this will get all the posts
     data() {
       return {
@@ -87,6 +92,9 @@
         activeClass: null,
         showForm: false,
         username: '',
+        visiblePosts: [],
+        lessThan: 8,
+        greaterThan: -1,
       }
     },
     computed: {
@@ -98,6 +106,14 @@
       },
     },
     methods: {
+      // pageUp() {
+      //   this.lessThan += 8
+      //   this.greaterThan += 8
+      // },
+      // pageDown() {
+      //   this.lessThan -= 8
+      //   this.greaterThan -= 8
+      // },
       yesNo() {
         this.$store.dispatch('yesNo')
       },
