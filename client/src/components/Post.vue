@@ -1,8 +1,10 @@
 <template>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
-        <h4 class="username mx-2" @click="goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
+        <h4 :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
+          @click="
+          goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
         <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
       </div>
     </div>
@@ -15,8 +17,8 @@
       <div v-if="!post.imgUrl2" :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
         <img :src="post.imgUrl1" :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
       </div>
-      <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col px-0', lg: 'col px-0'})"
-        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: 'max-width: 481px', lg: 'max-width: 481px'})">
+      <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
+        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})">
         <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})" :src="post.imgUrl1">
         <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})" :src="post.imgUrl2">
       </div>
@@ -30,7 +32,8 @@
         <button class="vote no" @click="castVote(post._id, 'no');">no</button>
       </div>
     </div>
-    <div v-else-if="!showVotes && post.imgUrl2" class="row mb-2 mt-2 justify-content-between">
+    <div v-else-if="!showVotes && post.imgUrl2"
+      :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
       <div class="col">
         <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
       </div>
@@ -70,7 +73,8 @@
       </div>
     </div>
 
-    <div :class="$mq | mq({xs: 'row mb-2', sm: 'row mb-2', md: 'row mb-2', lg: 'row mb-2'})">
+    <div
+      :class="$mq | mq({xs: 'row pb-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
       <div class="col d-flex justify-content-center">
         <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
       </div>
@@ -264,6 +268,10 @@
   .timestamp {
     color: #3d6ea0;
     font-size: 1em;
+  }
+
+  .bottom-line {
+    border-bottom: #3c6ea0a1 solid 0.5px;
   }
 
   .filters {
