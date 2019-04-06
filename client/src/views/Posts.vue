@@ -35,13 +35,9 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
-<<<<<<< HEAD
-          <a class="dropdown-item text-dark" @click=" filterbyTag()">Reset</a>
-=======
 
 
 
->>>>>>> fa74293fd9b29aa23818fb61b41044e6f203ba10
         </div>
       </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
