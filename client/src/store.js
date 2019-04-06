@@ -16,7 +16,7 @@ let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/'
 
 let auth = Axios.create({
   baseURL: base + "auth/",
-  timeout: 3000,
+  timeout: 100000,
   withCredentials: true
 })
 
@@ -37,47 +37,9 @@ export default new Vuex.Store({
     name: '',
     messages: [],
     roomData: {},
-    following: [],
-    followedBy: [],
     allUsers: []
   },
   mutations: {
-    remFollow(state, user) {
-      state.following.forEach((user1, index) => {
-        if (user.name._id == user1._id)
-          state.following.splice(index, 1)
-      })
-    },
-    following(state, user) {
-      let newArray = []
-      state.user.following.forEach(id => {
-        let user = state.allUsers.find(user => user._id == id)
-        newArray.push(user)
-      })
-      state.following = newArray
-    },
-    followers(state, user) {
-      let newArray = []
-      if (!state.user.followedBy) {
-        state.user['followedBy'] = []
-      }
-      state.user.followedBy.forEach(id => {
-        let user = state.allUsers.find(user => user._id == id)
-        newArray.push(user)
-      })
-      state.followedBy = newArray
-    },
-    // setFollowing(state, user) {
-    //   console.log(user)
-    //   dispatch('getUser')
-    // },
-    // setFollowers(state, user) {
-    //   state.followers.push(user)
-    //   if (!state.allUsers.) {
-    //     state.user['followers'] = []
-    //   }
-    //   state.user.followers.push(user)
-    // },
     setUser(state, user) {
       state.user = user
     },
@@ -150,7 +112,6 @@ export default new Vuex.Store({
           postId: payload.postId
         })
       })
-
       socket.on('joinedRoom', data => {
         console.log(data)
         commit('setRoom', data)
@@ -177,7 +138,6 @@ export default new Vuex.Store({
       socket.on('messageError', err => {
         console.log(err);
       })
-
     },
     sendMessage({ commit, dispatch }, payload) {
       socket.emit('message', payload)
@@ -206,8 +166,8 @@ export default new Vuex.Store({
       api.put('users/follow/' + payload.toFollow, payload)
         .then(res => {
           console.log(res.data)
-          commit('setUser', res.data.user)
-          commit('setFollower', res.data.follower)
+          dispatch("getUser")
+          dispatch("getUsers")
         })
     },
     unfollow({ commit, dispatch }, payload) {
@@ -215,8 +175,8 @@ export default new Vuex.Store({
       api.put('users/unfollow/' + payload.toUnfollowId, payload)
         .then(res => {
           console.log(res.data)
-          commit('setUser', res.data.user)
-          commit('setFollower', res.data.follower)
+          dispatch("getUser")
+          dispatch("getUsers")
         })
     },
     //#region -- AUTH STUFF --
@@ -253,19 +213,7 @@ export default new Vuex.Store({
     },
     //#endregion
     //#region -- SORT --
-    addFollow({ commit, dispatch }, payload) {
-      // if(this.state.following.find(post => post == payload))
-      api.put('users/' + payload.user + '/follow', payload)
-        .then(res => {
-          dispatch('getUsers')
-          dispatch('getUser')
-        })
-      api.put('users/' + payload.id + '/follower', payload)
-        .then(res => {
-          dispatch('getUsers')
-          dispatch('getUser')
-        })
-    },
+
     activity({ commit, dispatch }) {
       let sorted = this.state.posts.sort((a, b) => {
         return Object.values(b.votes).length - Object.values(a.votes).length

@@ -126,8 +126,9 @@
     },
     mounted() {
       this.$store.dispatch("getUser")
-      this.$store.dispatch("getUsers") //without a second argument passed in this will get all the posts
-      this.$store.dispatch("getMyPosts", true);
+        .then(
+          this.$store.dispatch("getMyPosts", true),
+          this.$store.dispatch("getUsers"))
     },
     data() {
       return {

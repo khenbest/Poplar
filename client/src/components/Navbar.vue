@@ -65,7 +65,6 @@
   };
 </script>
 
-
 <style>
   .curs {
     cursor: pointer;
@@ -81,10 +80,6 @@
 
   .poplarIMG:hover {
     cursor: pointer;
-  }
-
-  .active {
-    color: black;
   }
 
   .fas:hover {
