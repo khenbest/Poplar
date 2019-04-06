@@ -55,14 +55,14 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-
-      <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})">
-        <button :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
-          @click="chatroom()">What Are People Saying?</button>
-      </div>
+    </div>
+    <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})">
+      <button v-if="showVotes && !post.imgUrl2"
+        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+        @click="chatroom()">What Are People Saying?</button>
     </div>
 
-    <div v-else-if="showVotes && post.imgUrl2"
+    <div v-if="showVotes && post.imgUrl2"
       :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
@@ -70,11 +70,12 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
-      <div
-        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 mt-2 border-left border-right border-bottom'})">
-        <button :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
-          @click="chatroom()">What Are People Saying?</button>
-      </div>
+    </div>
+    <div
+      :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
+      <button v-if="showVotes && post.imgUrl2"
+        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+        @click="chatroom()">What Are People Saying?</button>
     </div>
 
     <div
@@ -300,10 +301,6 @@
     margin-left: 0;
     width: 50%;
   }
-
-
-
-
 
   .chat-button {
     background-color: #3d6ea0;
