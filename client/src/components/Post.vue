@@ -47,7 +47,7 @@
 
     <!-- PROGRESS BAR GOES HERE -->
     <div v-if="showVotes && !post.imgUrl2"
-      :class="$mq | mq({xs: 'd-flex row', sm: 'd-flex row', md: 'd-flex row', lg: 'd-flex row'})">
+      :class="$mq | mq({xs: 'progress d-flex row', sm: ' progress d-flex row', md: ' progress d-flex row', lg: 'progress d-flex row'})">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
@@ -64,7 +64,7 @@
     </div>
 
     <div v-else-if="showVotes && post.imgUrl2"
-      :class="$mq | mq({xs: 'd-flex row', sm: 'd-flex row', md: 'd-flex row', lg: 'd-flex row'})">
+      :class="$mq | mq({xs: 'progress d-flex row', sm: ' progress d-flex row', md: 'progress d-flex row', lg: ' progress d-flex row'})">
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
@@ -241,10 +241,6 @@
     background-color: #3c6ea0;
   }
 
-  .progress-bar {
-    border-radius: none;
-  }
-
   .bar-yes {
     background-color: #719700c1;
   }
@@ -292,7 +288,7 @@
   }
 
   .progress {
-    height: 10vh;
+    border-radius: 0 !important;
   }
 
   .photos {
