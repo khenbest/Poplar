@@ -1,5 +1,7 @@
 <template>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3 border rounded">
+  <div
+    :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3 border', lg: 'col-3 mt-2 border px-0 mx-1 shadow-sm rounded'})"
+  >
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
         <h4 class="username mx-2" @click="goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
@@ -50,7 +52,10 @@
         <button class="vote no" @click="castVote(post._id, 'no');">no</button>
       </div>
     </div>
-    <div v-else-if="!showVotes && post.imgUrl2" class="row mb-2 mt-2 justify-content-between">
+    <div
+      v-else-if="!showVotes && post.imgUrl2"
+      :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})"
+    >
       <div class="col">
         <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
       </div>
@@ -60,7 +65,10 @@
     </div>
 
     <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes && !post.imgUrl2" class="progress d-flex row">
+    <div
+      v-if="showVotes && !post.imgUrl2"
+      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})"
+    >
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-yes"
         role="progressbar"
@@ -72,12 +80,17 @@
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
       >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
-      <div class="col-12 mt-2 border-left border-right border-bottom">
+      <div
+        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})"
+      >
         <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
 
-    <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row px-3">
+    <div
+      v-else-if="showVotes && post.imgUrl2"
+      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})"
+    >
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-this"
         role="progressbar"
@@ -97,7 +110,9 @@
     </div>
 
     <div :class="$mq | mq({xs: 'row mb-2', sm: 'row mb-2', md: 'row mb-2', lg: 'row mb-2'})">
-      <div class="col d-flex justify-content-center">
+      <div
+        :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})"
+      >
         <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
       </div>
     </div>
@@ -256,8 +271,12 @@ img {
   background-color: #3c6ea0;
 }
 
+.progress {
+  border-radius: 0 !important;
+}
+
 .progress-bar {
-  border-radius: none;
+  border-radius: 0;
 }
 
 .bar-yes {

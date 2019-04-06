@@ -18,9 +18,11 @@
         <div class="row d-flex justify-content-center">
           <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
         </div>
-        <button class="mx-2 btn btn-outline-primary" @click="addFollow(user._id)"><i class="fas fa-user-plus"></i>
+        <button v-if="showFollowToggle" class="mx-2 btn btn-outline-primary"
+          @click="addFollow(user._id); showFollowToggle = !showFollowToggle;"><i class="fas fa-user-plus"></i>
           follow</button>
-        <button class="btn btn-outline-primary" @click="unfollow(user)"><i class="fas fa-user-minus"></i>
+        <button v-else class="btn btn-outline-primary" @click="unfollow(user); showFollowToggle = !showFollowToggle;"><i
+            class="fas fa-user-minus"></i>
           Unfollow</button>
         <div class="card col-2">
           <h6>Followers:</h6>
@@ -122,15 +124,18 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts")
-      this.$store.dispatch('getUsers')
+      Promise.all(this.$store.dispatch("getPosts"),
+        this.$store.dispatch('getUsers'),
+      )
+
     },
     data() {
       return {
         showPosts: true,
         newPost: {},
-        activeClass: null
-      };
+        activeClass: null,
+        showFollowToggle: (this.$store.state.allUsers.find(user => user._id == this.$route.params.id).following.contains(this.$store.state.user._id))
+      }
     },
     computed: {
       posts() {
