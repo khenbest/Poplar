@@ -7,9 +7,20 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Croppa from 'vue-croppa'
 import Axios from 'axios'
+import MQ from 'vue-mq'
+
 Vue.use(Croppa)
 
 Vue.config.productionTip = false
+
+Vue.use(MQ, {
+  breakpoints: {
+    xs: 575.98,
+    sm: 767.98,
+    md: 991.98,
+    lg: 1199.98
+  }
+})
 
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
 
