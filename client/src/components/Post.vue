@@ -1,10 +1,14 @@
 <template>
   <div
-    :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3 border', lg: 'col-3 mt-2 border px-0 mx-1 shadow-sm rounded'})"
+    :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-3 mt-2 border px-0 mx-1 shadow-sm rounded'})"
   >
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
-        <h4 class="username mx-2" @click="goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
+        <h4
+          :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
+          @click="
+          goProfile(post.authorId)"
+        >{{post.user || 'Unknown'}}</h4>
         <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
       </div>
     </div>
@@ -67,7 +71,7 @@
     <!-- PROGRESS BAR GOES HERE -->
     <div
       v-if="showVotes && !post.imgUrl2"
-      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})"
+      :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})"
     >
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-yes"
@@ -83,13 +87,16 @@
       <div
         :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})"
       >
-        <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
+        <button
+          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+          @click="chatroom()"
+        >What Are People Saying?</button>
       </div>
     </div>
 
     <div
       v-else-if="showVotes && post.imgUrl2"
-      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})"
+      :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})"
     >
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-this"
@@ -101,15 +108,19 @@
         role="progressbar"
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
       >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
-
       <div
         :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 mt-2 border-left border-right border-bottom'})"
       >
-        <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
+        <button
+          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+          @click="chatroom()"
+        >What Are People Saying?</button>
       </div>
     </div>
 
-    <div :class="$mq | mq({xs: 'row mb-2', sm: 'row mb-2', md: 'row mb-2', lg: 'row mb-2'})">
+    <div
+      :class="$mq | mq({xs: 'row pb-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})"
+    >
       <div
         :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})"
       >
@@ -271,12 +282,8 @@ img {
   background-color: #3c6ea0;
 }
 
-.progress {
-  border-radius: 0 !important;
-}
-
 .progress-bar {
-  border-radius: 0;
+  border-radius: none;
 }
 
 .bar-yes {
@@ -309,6 +316,10 @@ img {
   font-size: 1em;
 }
 
+.bottom-line {
+  border-bottom: #3c6ea0a1 solid 0.5px;
+}
+
 .filters {
   color: #c2c2c3;
 }
@@ -330,9 +341,30 @@ img {
   margin-left: 0;
   width: 50%;
 }
+
 .photos2 {
   margin-right: 0;
   margin-left: 0;
   width: 50%;
+}
+
+.chat-button {
+  background-color: #3d6ea0;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+
+.chat-button:hover {
+  background-color: #3979b9;
+}
+
+.chat-button:active {
+  background-color: #36608a;
 }
 </style>

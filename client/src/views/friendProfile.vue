@@ -100,14 +100,6 @@
         <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
       </div>
     </div>
-    <div id='bottom-nav' class="row mt-4 pt-5">
-      <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <a class="nav-item nav-link curs" @click="allPosts();"><i
-            class=" fas fa-globe-americas filters fa-2x col=1"></i></a>
-        <a class="nav-item nav-link curs" @click="goPosts();"><i class="fas fa-users filters fa-2x col-1"></i></a>
-        <a class="nav-item nav-link curs" @click="myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
-      </div>
-    </div>
   </div>
 </template>
 <script>

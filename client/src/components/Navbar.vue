@@ -1,14 +1,42 @@
 <template>
   <div class="navComponent">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
-      <img class="poplarIMG pr-2" href="#" @click="goHome()" src="../assets/poplarLogo.jpg">
+    <nav
+      :class="$mq | mq({xs: 'navbar fixed-top poplarBG', sm: 'navbar fixed-top poplarBG', md: 'navbar fixed-top navbar-expand-lg poplarBG', lg: 'navbar fixed-top navbar-expand-lg poplarBG'})">
+
+      <mq-layout mq="xs">
+        <i class="far fa-plus-square fa-2x" @click="makePost()"></i>
+      </mq-layout>
+      <mq-layout mq="sm">
+        <i class="far fa-plus-square fa-2x" @click="makePost()"></i>
+      </mq-layout>
+      <mq-layout mq="md">
+        <img class="poplarIMG pr-2" href="#" @click="goHome()" src="../assets/poplarLogo.jpg">
+      </mq-layout>
+      <mq-layout mq="lg">
+        <img class="poplarIMG pr-2" href="#" @click="goHome()" src="../assets/poplarLogo.jpg">
+      </mq-layout>
+
       <img class="poplarIMG curs" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
-      <div>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
+      <mq-layout mq="xs">
+        <i class="fas fa-sign-out-alt fa-2x" @click="logout()"></i>
+      </mq-layout>
+      <mq-layout mq="sm">
+        <i class="fas fa-sign-out-alt fa-2x" @click="logout()"></i>
+      </mq-layout>
+      <mq-layout mq="md">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </mq-layout>
+      <mq-layout mq="lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </mq-layout>
+
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
           <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
@@ -93,5 +121,10 @@
 
   a {
     color: white !important;
+  }
+
+  .far,
+  .fas {
+    color: white;
   }
 </style>
