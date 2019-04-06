@@ -56,7 +56,7 @@
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
     </div>
-    <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})">
+    <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
       <button v-if="showVotes && !post.imgUrl2"
         :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
         @click="chatroom()">What Are People Saying?</button>
