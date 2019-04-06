@@ -1,5 +1,5 @@
 <template>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3 border rounded">
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
         <h4 class="username mx-2" @click="goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
@@ -14,7 +14,7 @@
         <h4 class="title">{{post.title.substring(0,31)}}...</h4>
       </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div
         v-if="!post.imgUrl2"
         :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
@@ -26,15 +26,15 @@
       </div>
       <div
         v-else
-        :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col px-0', lg: 'col px-0'})"
-        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: 'max-width: 481px', lg: 'max-width: 481px'})"
+        :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
+        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})"
       >
         <img
-          :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})"
+          :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
           :src="post.imgUrl1"
         >
         <img
-          :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})"
+          :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
           :src="post.imgUrl2"
         >
       </div>
@@ -72,12 +72,12 @@
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
       >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
-      <div class="col-12 mt-1">
+      <div class="col-12 mt-2 border-left border-right border-bottom">
         <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
 
-    <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row">
+    <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row px-3">
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-this"
         role="progressbar"
@@ -90,9 +90,9 @@
       >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
       <div
-        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})"
+        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 mt-2 border-left border-right border-bottom'})"
       >
-        <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
+        <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
 
@@ -307,6 +307,11 @@ img {
 }
 
 .photos {
+  margin-right: 0;
+  margin-left: 0;
+  width: 50%;
+}
+.photos2 {
   margin-right: 0;
   margin-left: 0;
   width: 50%;
