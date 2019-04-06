@@ -89,7 +89,7 @@
 
     <div
       v-else-if="showVotes && post.imgUrl2"
-      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})"
+      :class="$mq | mq({xs: 'progress d-flex row px-3', sm: 'progress d-flex row px-3', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})"
     >
       <div
         class="progress-bar progress-bar-striped progress-bar-animated bar-this"
