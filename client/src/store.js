@@ -254,10 +254,6 @@ export default new Vuex.Store({
     //#endregion
     //#region -- SORT --
     addFollow({ commit, dispatch }, payload) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 79575ebc72927863f417b5f434b12b82895b4f5a
       // if(this.state.following.find(post => post == payload))
       api.put('users/' + payload.user + '/follow', payload)
         .then(res => {

@@ -25,7 +25,8 @@
                         <div v-if="showForm">
                             <h4>THEN</H4>
                             <div>
-                                <form class="mb-3">
+                                <h4>Select a Tag!</h4>
+                                <form class="mb-3 ">
                                     <select name="tags" v-model="newPost.tags">
                                         <option :value="null">Please select a Tag</option>
                                         <option value=music>Music</option>
@@ -47,6 +48,7 @@
                     <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
                         <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                         <h3 v-if="!showForm1">This or That?</h3>
+
 
                         <div v-if="showForm1" @submit.prevent="addPost2">
                             <div class="row">
@@ -77,6 +79,7 @@
                             </div>
                             <H4 class="m-2">THEN</H4>
                             <div>
+                                <h4>Select a Tag!</h4>
                                 <form class="mb-3">
                                     <select name="tags" v-model="newPost.tags">
                                         <option :value="null">Please select a Tag</option>
