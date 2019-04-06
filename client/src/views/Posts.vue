@@ -1,8 +1,11 @@
 <template>
   <div class="posts container-fluid">
-    <div class="row py-1 bg-light justify-content-center text-center">
-      <div class=" dropdown m-2">
-        <button class="btn btn-outline-primary mx-2" @click="filterbyTag()">Reset</button>
+    <div
+      :class="$mq | mq({xs: 'row py-1 bg-light justify-content-center text-center', sm: 'row py-1 bg-light justify-content-center text-center', md: 'row py-1 bg-light justify-content-center text-center', lg: 'row py-1 bg-light justify-content-center text-center'})">
+      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
+        <button
+          :class="$mq | mq({xs: 'btn btn-outline-primary mx-2', sm: 'btn btn-outline-primary mx-2', md: 'btn btn-outline-primary mx-2', lg: 'btn btn-outline-primary mx-2'})"
+          @click="filterbyTag()">Reset</button>
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -12,7 +15,7 @@
           <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
         </div>
       </div>
-      <div class="dropdown m-2">
+      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
@@ -23,7 +26,7 @@
           <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
         </div>
       </div>
-      <div class="dropdown m-2">
+      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Tags
@@ -35,9 +38,6 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
-
-
-
         </div>
       </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
@@ -53,19 +53,11 @@
     <div v-else class="row bar">
       <post v-for="filter in filtered" :post="filter"></post>
     </div>
-    <div id='bottom-nav' class="row mt-4 pt-5">
-      <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"><i
-            class=" fas fa-globe-americas filters fa-2x col=1"></i></a>
-        <i class="fas fa-users filters fa-2x col-1"></i>
-        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
-            class="fas fa-user filters fa-2x col-1"></i></a>
-      </div>
-    </div>
     <!-- <button @click="pageUp()" class="btn btn-outline-primary">Next</button>
     <button @click="pageDown()" class="btn btn-outline-primary">Previous</button> -->
   </div>
 </template>
+
 <script>
   import Moment from 'moment';
   import Chatroom from "@/components/Chatroom.vue"
@@ -104,7 +96,7 @@
       },
       filtered() {
         return this.$store.state.filteredPosts
-      }
+      },
     },
     methods: {
       // pageUp() {
@@ -152,6 +144,9 @@
       myProfile() {
         this.$router.push({ path: '/posts/myProfile' })
       },
+      goPosts() {
+        this.$router.push({ path: '/posts/friendPosts/' })
+      },
     },
     components: {
       Chatroom,
@@ -166,12 +161,12 @@
 </script>
 
 <style scoped>
-  @media only screen and (min-width: 700px) {
+  /* @media only screen and (min-width: 700px) {
 
     #bottom-nav {
       display: none
     }
-  }
+  } */
 
   .username {
     color: #a0b5c5;
@@ -223,14 +218,6 @@
   .timestamp {
     color: #3d6ea0;
     font-size: 1em;
-  }
-
-  .filters {
-    color: #c2c2c3;
-  }
-
-  .filters:active {
-    color: #3d6ea0
   }
 
   .fas:hover {

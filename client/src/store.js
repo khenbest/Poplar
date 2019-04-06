@@ -213,7 +213,6 @@ export default new Vuex.Store({
     },
     //#endregion
     //#region -- SORT --
-
     activity({ commit, dispatch }) {
       let sorted = this.state.posts.sort((a, b) => {
         return Object.values(b.votes).length - Object.values(a.votes).length

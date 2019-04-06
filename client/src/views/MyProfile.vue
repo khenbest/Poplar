@@ -102,11 +102,10 @@
     </div>
     <div id='bottom-nav' class="row mt-4 pt-5">
       <div class="navbar fixed-bottom bg-white row justify-content-around">
-        <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();"><i
+        <a class="nav-item nav-link curs" @click="allPosts();"><i
             class=" fas fa-globe-americas filters fa-2x col=1"></i></a>
-        <i class="fas fa-users filters fa-2x col-1"></i>
-        <a class="nav-item nav-link curs" :class="{active : activeClass == 3}" @click="activeClass = 3; myProfile();"><i
-            class="fas fa-user filters fa-2x col-1"></i></a>
+        <a class="nav-item nav-link curs" @click="goPosts();"><i class="fas fa-users filters fa-2x col-1"></i></a>
+        <a class="nav-item nav-link curs" @click="myProfile();"><i class="fas fa-user filters fa-2x col-1"></i></a>
       </div>
     </div>
   </div>
@@ -201,7 +200,10 @@
       },
       myProfile() {
         this.$router.push({ path: "/myProfile" });
-      }
+      },
+      goPosts() {
+        this.$router.push({ path: '/posts/friendPosts/' })
+      },
     },
     components: {
       Chatroom

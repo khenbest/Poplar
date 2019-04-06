@@ -15,15 +15,17 @@
       </div>
     </div>
     <div class="row">
-      <div v-if="!post.imgUrl2" class="col px-0">
-        <img :src="post.imgUrl1" class="photo">
+      <div v-if="!post.imgUrl2" :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
+        <img :src="post.imgUrl1" :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
       </div>
-      <div v-else class="col px-0" style="max-width: 481px">
-        <img class="photos" :src="post.imgUrl1">
-        <img class="photos" :src="post.imgUrl2">
+      <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col px-0', lg: 'col px-0'})"
+        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: 'max-width: 481px', lg: 'max-width: 481px'})">
+        <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})" :src="post.imgUrl1">
+        <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos', lg: 'photos'})" :src="post.imgUrl2">
       </div>
     </div>
-    <div v-if="!showVotes && !post.imgUrl2" class="row mb-2 mt-2 justify-content-between">
+    <div v-if="!showVotes && !post.imgUrl2"
+      :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
       <div class="col">
         <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
       </div>
@@ -70,12 +72,17 @@
         :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
       >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
+<<<<<<< HEAD
       <div class="col-12 mt-1">
         <button class="chatroom p-2 mt-2 rounded" @click="chatroom()">What Are People Saying?</button>
+=======
+      <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12 mt-2'})">
+        <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
+>>>>>>> aa29331c9f02454ee6cb9854fc328c521ea8474e
       </div>
     </div>
 
-    <div class="row mb-2">
+    <div :class="$mq | mq({xs: 'row mb-2', sm: 'row mb-2', md: 'row mb-2', lg: 'row mb-2'})">
       <div class="col d-flex justify-content-center">
         <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
       </div>
