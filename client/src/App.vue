@@ -1,6 +1,14 @@
 <template>
   <div id="app" class="bg-light">
-    <navbar />
+
+    <mq-layout mq="lg">
+      <navbar />
+    </mq-layout>
+    <mq-layout mq="md">
+      <navbar />
+    </mq-layout>
+
+
     <router-view />
   </div>
 </template>
