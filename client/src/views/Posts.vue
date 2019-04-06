@@ -2,7 +2,7 @@
   <div class="posts container-fluid">
     <div class="row py-1 bg-light justify-content-center text-center">
       <div class=" dropdown m-2">
-        <button class="btn btn-outline-primary mx-2" @click="reset()">Reset</button>
+        <button class="btn btn-outline-primary mx-2" @click="filterbyTag()">Reset</button>
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -35,7 +35,13 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
+<<<<<<< HEAD
           <a class="dropdown-item text-dark" @click=" filterbyTag()">Reset</a>
+=======
+
+
+
+>>>>>>> fa74293fd9b29aa23818fb61b41044e6f203ba10
         </div>
       </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
