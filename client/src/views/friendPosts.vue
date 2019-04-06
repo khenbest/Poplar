@@ -71,14 +71,13 @@
   export default {
     name: "posts",
     created() {
-      //blocks users not logged in
       if (!this.$store.state.user._id) {
         this.$router.push({ name: "login" });
       }
     },
     mounted() {
       this.$store.dispatch("getPosts");
-    }, //without a second argument passed in this will get all the posts
+    },
     data() {
       return {
         newPost: {},
@@ -100,8 +99,6 @@
             if (post.authorId == friend._id) {
               friendPosts.push(post)
             }
-            // { $addToSet: { friendPosts: post } }
-
           })
         })
         console.log(friendPosts)

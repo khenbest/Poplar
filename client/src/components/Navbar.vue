@@ -4,7 +4,6 @@
       <img class="poplarIMG pr-2" href="#" @click="goHome()" src="../assets/poplarLogo.jpg">
       <img class="poplarIMG curs" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
       <div>
-
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +15,7 @@
             All
             Posts
           </a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; goPosts()">
+          <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; goPosts();">
             Friends
             Posts
           </a>
@@ -27,12 +26,9 @@
             Post</a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 4}"
             @click="logout(); activeClass = null">Logout</a>
-
         </ul>
       </div>
     </nav>
-    <!-- <i class="fas fa-user"></i> -->
-    <!-- <i class="fas fa-users"></i> -->
   </div>
 </template>
 <script>
@@ -69,7 +65,6 @@
   };
 </script>
 
-
 <style>
   .curs {
     cursor: pointer;
@@ -85,10 +80,6 @@
 
   .poplarIMG:hover {
     cursor: pointer;
-  }
-
-  .active {
-    color: black;
   }
 
   .fas:hover {
