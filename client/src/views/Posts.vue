@@ -36,9 +36,6 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
-
-
-
         </div>
       </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
@@ -66,6 +63,7 @@
     </div>
   </div>
 </template>
+
 <script>
   import Moment from 'moment';
   import Chatroom from "@/components/Chatroom.vue"
