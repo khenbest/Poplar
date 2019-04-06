@@ -58,8 +58,7 @@
 
       <div
         :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 mt-2 border-left border-right border-bottom'})">
-        <button
-          :class="$mq | mq({xs: 'chatroom mt-2 p-2 rounded', sm: 'chatroom mt-2 p-2 rounded', md: 'chatroom mt-2 p-2 rounded', lg: 'chatroom mt-2 p-2 rounded'})"
+        <button :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
           @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
@@ -76,8 +75,7 @@
 
       <div
         :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 mt-2 border-left border-right border-bottom'})">
-        <button
-          :class="$mq | mq({xs: 'chatroom mt-2 p-2 rounded', sm: 'chatroom mt-2 p-2 rounded', md: 'chatroom mt-2 p-2 rounded', lg: 'chatroom mt-2 p-2 rounded'})"
+        <button :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
           @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
@@ -307,5 +305,29 @@
     margin-right: 0;
     margin-left: 0;
     width: 50%;
+  }
+
+
+
+
+
+  .chat-button {
+    background-color: #3d6ea0;
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  .chat-button:hover {
+    background-color: #3979b9;
+  }
+
+  .chat-button:active {
+    background-color: #36608a;
   }
 </style>

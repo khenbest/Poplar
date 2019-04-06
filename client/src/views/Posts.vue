@@ -1,7 +1,7 @@
 <template>
   <div class="posts container-fluid">
     <div
-      :class="$mq | mq({xs: 'row py-1 bg-light justify-content-center text-center', sm: 'row py-1 bg-light justify-content-center text-center', md: 'row py-1 bg-light justify-content-center text-center', lg: 'row py-1 bg-light justify-content-center text-center'})">
+      :class="$mq | mq({xs: 'row pt-5 pb-1 bg-light justify-content-center text-center', sm: 'row pt-5 pb-1 bg-light justify-content-center text-center', md: 'row py-1 bg-light justify-content-center text-center', lg: 'row py-1 bg-light justify-content-center text-center'})">
       <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
         <button
           :class="$mq | mq({xs: 'btn btn-outline-primary mx-2', sm: 'btn btn-outline-primary mx-2', md: 'btn btn-outline-primary mx-2', lg: 'btn btn-outline-primary mx-2'})"

@@ -1,6 +1,7 @@
 <template>
   <div class="navComponent">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark poplarBG">
+    <nav
+      :class="$mq | mq({xs: 'navbar fixed-top poplarBG', sm: 'navbar fixed-top poplarBG', md: 'navbar fixed-top navbar-expand-lg poplarBG', lg: 'navbar fixed-top navbar-expand-lg poplarBG'})">
 
       <mq-layout mq="xs">
         <i class="far fa-plus-square fa-2x" @click="makePost()"></i>
@@ -17,7 +18,6 @@
 
       <img class="poplarIMG curs" href="#" @click="goHome(); activeClass = null;" src="../assets/poplarName.jpg">
 
-
       <mq-layout mq="xs">
         <i class="fas fa-sign-out-alt fa-2x" @click="logout()"></i>
       </mq-layout>
@@ -36,9 +36,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </mq-layout>
-
-
-
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
