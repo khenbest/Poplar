@@ -12,17 +12,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-4">
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 2}" @click="activeClass = 2; allPosts();">
+          <a class="nav-item nav-link curs" data-toggle="collapse" :class="{active : activeClass == 2}"
+            @click="activeClass = 2; allPosts();">
             All
             Posts
           </a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; goPosts()">
+          <a class="nav-item nav-link curs" data-toggle="collapse" :class="{active : activeClass == 1}"
+            @click="activeClass = 1; goPosts()">
             Friends
             Posts
           </a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+          <a class="nav-item nav-link curs" data-toggle="collapse" :class="{active : activeClass == 3}"
             @click="activeClass = 3; myProfile();">Profile</a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 5}"
+          <a class="nav-item nav-link curs" data-toggle="collapse" :class="{active : activeClass == 5}"
             @click="activeClass = 5; makePost();">Make
             Post</a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 4}"
