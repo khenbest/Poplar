@@ -7,8 +7,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col d-flex justify-content-center">
+      <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
         <h4 class="title">{{post.title}}</h4>
+      </div>
+      <div v-else class="col d-flex justify-content-left">
+        <h4 class="title">{{post.title.substring(0,31)}}...</h4>
       </div>
     </div>
     <div class="row">
@@ -37,34 +40,38 @@
       </div>
     </div>
 
-
     <!-- PROGRESS BAR GOES HERE -->
     <div v-if="showVotes && !post.imgUrl2" class="progress d-flex row">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
-        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
-      </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-      </div>
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bar-yes"
+        role="progressbar"
+        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}"
+      >{{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bar-no"
+        role="progressbar"
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
+      >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
-      <div class="col-12 mt-2">
-        <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
+      <div class="col-12 mt-1">
+        <button class="chatroom mt-2 p-2 rounded" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
 
-
     <div v-else-if="showVotes && post.imgUrl2" class="progress d-flex row">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
-        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
-      </div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-      </div>
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bar-this"
+        role="progressbar"
+        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}"
+      >{{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bar-that"
+        role="progressbar"
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}"
+      >{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%</div>
 
-      <div class="col-12 mt-2">
-        <button class="chatroom" @click="chatroom()">What Are People Saying?</button>
+      <div class="col-12 mt-1">
+        <button class="chatroom p-2 mt-2 rounded" @click="chatroom()">What Are People Saying?</button>
       </div>
     </div>
 
@@ -74,215 +81,213 @@
       </div>
     </div>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
-
   </div>
 </template>
 
 <script>
-  import Moment from "moment";
-  import Chatroom from "@/components/Chatroom.vue"
-  export default {
-    name: "post",
-    props: ["post"],
-    mounted() {
-      if (this.user.participated.find(post => {
-        return post._id == this.post._id
-      })) {
-        this.showVotes = true
-      }
+import Moment from "moment";
+import Chatroom from "@/components/Chatroom.vue";
+export default {
+  name: "post",
+  props: ["post"],
+  mounted() {
+    if (
+      this.user.participated.find(post => {
+        return post._id == this.post._id;
+      })
+    ) {
+      this.showVotes = true;
+    }
+  },
+  data() {
+    return {
+      x: 100,
+      showVotes: false
+    };
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
     },
-    data() {
-      return {
-        x: 100,
-        showVotes: false,
-      };
-    },
-    computed: {
-      user() {
-        return this.$store.state.user
-      },
-      totalNo() {
-        let no = 0
-        if (this.post.votes) {
-          let votesArr = Object.values(this.post.votes || {}) || []
-          votesArr.forEach(vote => {
-            if (vote != 'yes') {
-              no++
-            }
-          })
-        }
-        return no
-      },
-      totalYes() {
-        let yes = 0
-        if (this.post.votes) {
-          let votesArr = Object.values(this.post.votes || {}) || []
-          votesArr.forEach(vote => {
-            if (vote == 'yes') {
-              yes++
-            }
-          })
-        }
-        return yes
-      }
-    },
-    methods: {
-      goProfile(user) {
-        console.log(user)
-        this.$router.push({
-          path: '/posts/profile/' + user,
-          name: 'friendProfile',
-          params: {
-            id: user
-          }
-        })
-      },
-      addFollow(author) {
-        let payload = {
-          user: this.user._id,
-          name: author
-        }
-        this.$store.dispatch('addFollow', payload)
-      },
-      castVote(postId, vote) {
-        this.post.votes = this.post.votes || {}
-        this.post.votes[this.user._id] = vote
-        this.$store.dispatch("castVote", {
-          endpoint: `posts/${postId}/vote`,
-          data: { "vote": vote }
-        });
-        this.value()
-        this.showVotes = true
-      },
-      value() {
-        let votesArr = Object.values(this.post.votes || {}) || []
+    totalNo() {
+      let no = 0;
+      if (this.post.votes) {
+        let votesArr = Object.values(this.post.votes || {}) || [];
         votesArr.forEach(vote => {
-          if (vote == 'yes') {
-            this.totalYes++
-          } else (
-            this.totalNo++
-          )
-        })
-      },
-      chatroom() {
-        this.$store.dispatch('setActivePost', this.post)
-        this.$router.push({
-          path: '/get' + this.post._id,
-          name: 'postDetails',
-          params: {
-            postId: this.post._id
+          if (vote != "yes") {
+            no++;
           }
-        })
-
+        });
       }
+      return no;
     },
-    components: {
-      Chatroom
-    },
-    filters: {
-      formatTime(date) {
-        return Moment(String(date))
-          .startOf("hour")
-          .fromNow();
+    totalYes() {
+      let yes = 0;
+      if (this.post.votes) {
+        let votesArr = Object.values(this.post.votes || {}) || [];
+        votesArr.forEach(vote => {
+          if (vote == "yes") {
+            yes++;
+          }
+        });
       }
+      return yes;
+    }
+  },
+  methods: {
+    goProfile(user) {
+      console.log(user);
+      this.$router.push({
+        path: "/posts/profile/" + user,
+        name: "friendProfile",
+        params: {
+          id: user
+        }
+      });
     },
-  };
+    addFollow(author) {
+      let payload = {
+        user: this.user._id,
+        name: author
+      };
+      this.$store.dispatch("addFollow", payload);
+    },
+    castVote(postId, vote) {
+      this.post.votes = this.post.votes || {};
+      this.post.votes[this.user._id] = vote;
+      this.$store.dispatch("castVote", {
+        endpoint: `posts/${postId}/vote`,
+        data: { vote: vote }
+      });
+      this.value();
+      this.showVotes = true;
+    },
+    value() {
+      let votesArr = Object.values(this.post.votes || {}) || [];
+      votesArr.forEach(vote => {
+        if (vote == "yes") {
+          this.totalYes++;
+        } else this.totalNo++;
+      });
+    },
+    chatroom() {
+      this.$store.dispatch("setActivePost", this.post);
+      this.$router.push({
+        path: "/get" + this.post._id,
+        name: "postDetails",
+        params: {
+          postId: this.post._id
+        }
+      });
+    }
+  },
+  components: {
+    Chatroom
+  },
+  filters: {
+    formatTime(date) {
+      return Moment(String(date))
+        .startOf("hour")
+        .fromNow();
+    }
+  }
+};
 </script>
 <style scoped>
-  .username {
-    color: #a0b5c5;
-    font-family: "Amatic SC", cursive;
-    margin-bottom: -0.2em;
-    transition: all 0.3s linear;
-  }
+.username {
+  color: #a0b5c5;
+  font-family: "Amatic SC", cursive;
+  margin-bottom: -0.2em;
+  transition: all 0.3s linear;
+}
 
-  .username:hover {
-    border-bottom: 0.2px solid #a0b5c5;
-    color: #3d6ea0;
-    cursor: pointer;
-  }
+.username:hover {
+  border-bottom: 0.2px solid #a0b5c5;
+  color: #3d6ea0;
+  cursor: pointer;
+}
 
-  .title {
-    color: #3d6ea0;
-    font-family: "Patrick Hand SC", cursive;
-    margin-bottom: -0.05em;
-  }
+.title {
+  color: #3d6ea0;
+  font-family: "Patrick Hand SC", cursive;
+  margin-bottom: -0.05em;
+}
 
-  img {
-    max-width: 100%;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
+img {
+  max-width: 100%;
+  margin-left: -15px;
+  margin-right: -15px;
+}
 
-  .yes {
-    background-color: #95c701;
-  }
+.yes {
+  background-color: #95c701;
+}
 
-  .no {
-    background-color: #fe3231;
-  }
+.no {
+  background-color: #fe3231;
+}
 
-  .this {
-    background-color: #a0b5c4;
-  }
+.this {
+  background-color: #a0b5c4;
+}
 
-  .that {
-    background-color: #3c6ea0;
-  }
+.that {
+  background-color: #3c6ea0;
+}
 
-  .progress-bar {
-    border-radius: none;
-  }
+.progress-bar {
+  border-radius: none;
+}
 
-  .bar-yes {
-    background-color: #95c701;
-  }
+.bar-yes {
+  background-color: #719700c1;
+}
 
-  .bar-no {
-    background-color: #fe3231;
-  }
+.bar-no {
+  background-color: #aa0000be;
+}
 
-  .bar-this {
-    background-color: #a0b5c4;
-  }
+.bar-this {
+  background-color: #a0b5c4;
+}
 
-  .bar-that {
-    background-color: #3c6ea0;
-  }
+.bar-that {
+  background-color: #3c6ea0;
+}
 
-  .vote {
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    min-width: 5em;
-    min-height: 1em;
-    font-family: "Kalam", cursive;
-  }
+.vote {
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  min-width: 5em;
+  min-height: 1em;
+  font-family: "Kalam", cursive;
+}
 
-  .timestamp {
-    color: #3d6ea0;
-    font-size: 1em;
-  }
+.timestamp {
+  color: #3d6ea0;
+  font-size: 1em;
+}
 
-  .filters {
-    color: #c2c2c3;
-  }
+.filters {
+  color: #c2c2c3;
+}
 
-  .filters:active {
-    color: #3d6ea0;
-  }
+.filters:active {
+  color: #3d6ea0;
+}
 
-  .fas:hover {
-    cursor: pointer;
-  }
+.fas:hover {
+  cursor: pointer;
+}
 
-  .progress {
-    height: 10vh;
-  }
+.progress {
+  height: 10vh;
+}
 
-  .photos {
-    margin-right: 0;
-    margin-left: 0;
-    width: 50%;
-  }
+.photos {
+  margin-right: 0;
+  margin-left: 0;
+  width: 50%;
+}
 </style>
