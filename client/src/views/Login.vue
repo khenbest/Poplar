@@ -1,5 +1,5 @@
 <template>
-  <div class="login container-fluid">
+  <div class="login container-fluid" id="addMargin">
     <div class="row">
       <div class="col">
         <img :src="logo" id="logo">

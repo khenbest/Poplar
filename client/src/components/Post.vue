@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-3 mt-2 border px-0 mx-1 shadow-sm rounded'})">
+    :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-4 mt-2 border px-0 mx-0 shadow-sm rounded'})">
     <div class="row d-flex justify-content-center">
       <div class="col d-flex justify-content-center">
         <h4 :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
@@ -53,12 +53,13 @@
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+        {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
     </div>
     <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
       <button v-if="showVotes && !post.imgUrl2"
-        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
         @click="chatroom()">What Are People Saying?</button>
     </div>
 
@@ -68,13 +69,14 @@
         :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
         {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
       <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">{{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+        {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
       </div>
     </div>
     <div
       :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
       <button v-if="showVotes && post.imgUrl2"
-        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button', lg: 'chat-button'})"
+        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
         @click="chatroom()">What Are People Saying?</button>
     </div>
 
@@ -86,6 +88,7 @@
       </div>
     </div>
     <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
+  </div>
   </div>
 </template>
 

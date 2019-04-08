@@ -1,5 +1,5 @@
 <template>
-  <div class="posts container-fluid">
+  <div class="posts container-fluid" id="addMargin">
     <div class="row py-1 bg-light justify-content-center text-center">
       <!-- <div class=" dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"

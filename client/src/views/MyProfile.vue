@@ -1,5 +1,5 @@
 <template>
-  <div class="posts container-fluid">
+  <div class="posts container-fluid" id="addMargin">
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
         <!-- FILTERS -->
@@ -14,9 +14,9 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <h1>{{this.$store.state.user.name}}'s Profile</h1>
+          <h1 id="changeFont">{{this.$store.state.user.name}}'s Profile</h1>
         </div>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" id="changeFont">
           <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
         </div>
         <div class="col-2">
@@ -213,6 +213,12 @@
   }
 </script>
 
+<style>
+  #addMargin {
+    margin-top: 60px;
+  }
+</style>
+
 <style scoped>
   @media only screen and (min-width: 700px) {
 
@@ -269,6 +275,11 @@
     min-width: 5em;
     min-height: 1em;
     font-family: "Kalam", cursive;
+  }
+
+  #changeFont {
+    color: #8396a4;
+    font-family: "Amatic SC", cursive;
   }
 
   .timestamp {

@@ -1,5 +1,5 @@
 <template>
-  <div class="posts container-fluid">
+  <div class="posts container-fluid" id="addMargin">
     <div
       :class="$mq | mq({xs: 'row pt-5 pb-1 bg-light justify-content-center text-center', sm: 'row pt-5 pb-1 bg-light justify-content-center text-center', md: 'row py-1 bg-light justify-content-center text-center', lg: 'row py-1 bg-light justify-content-center text-center'})">
       <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
@@ -47,7 +47,7 @@
     </div>
 
     <!-- POST CARDS -->
-    <div v-if="filtered == ''" class="row bar">
+    <div v-if="filtered == ''" class="row bar justify-content-center mx-0">
       <post v-for="post in posts" :post="post"></post>
     </div>
     <div v-else class="row bar">

@@ -1,5 +1,5 @@
 <template>
-  <div class="posts container-fluid">
+  <div class="posts container-fluid" id="addMargin">
     <div class="row d-flex align-items-center h-100 bg-light text-center">
       <div class="col-12">
         <!-- FILTERS -->
