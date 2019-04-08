@@ -1,5 +1,5 @@
 <template>
-  <div class="Chatroom p-5 mt-0 py-5 border rounded" id="addMargin">
+  <div class="Chatroom p-5 mt-0 py-5 border rounded bg-white" id="addMargin">
     <div v-if="!joined" class="text-center">
       <!-- {{post.title}} -->
       <!-- <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button> -->
@@ -17,7 +17,7 @@
       <div class="chat">
         <div class="row" v-for="item in messages">
           <div class="col-sm-2 my-2 text-left">
-            <span class="name">{{ item.user }} </span>
+            <span class="name" style="font-weight: bold;">{{ item.user }} </span>
           </div>
           <div class="col-sm-7 my-2 text-left">
             <span class="message">{{ item.message }}</span>
