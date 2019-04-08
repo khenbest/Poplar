@@ -1,93 +1,95 @@
 <template>
-  <div
-    :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-4 mt-2 border px-0 mx-0 shadow-sm rounded'})">
-    <div class="row d-flex justify-content-center">
-      <div class="col d-flex justify-content-center">
-        <h4 :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
-          @click="
+  <div :class="$mq | mq({xs: '', sm: '', md: '', lg: 'col-4'})">
+    <div
+      :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
+      <div class="row d-flex justify-content-center">
+        <div class="col d-flex justify-content-center">
+          <h4 :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
+            @click="
           goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
-        <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
+          <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
-        <h4 class="title">{{post.title}}</h4>
+      <div class="row">
+        <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
+          <h4 class="title">{{post.title}}</h4>
+        </div>
+        <div v-else class="col d-flex justify-content-left">
+          <h4 class="title">{{post.title.substring(0,31)}}...</h4>
+        </div>
       </div>
-      <div v-else class="col d-flex justify-content-left">
-        <h4 class="title">{{post.title.substring(0,31)}}...</h4>
+      <div class="row justify-content-center">
+        <div v-if="!post.imgUrl2" :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
+          <img :src="post.imgUrl1" :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
+        </div>
+        <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
+          :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})">
+          <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl1">
+          <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl2">
+        </div>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <div v-if="!post.imgUrl2" :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
-        <img :src="post.imgUrl1" :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
+      <div v-if="!showVotes && !post.imgUrl2"
+        :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
+        <div class="col">
+          <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
+        </div>
+        <div class="col">
+          <button class="vote no" @click="castVote(post._id, 'no');">no</button>
+        </div>
       </div>
-      <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
-        :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})">
-        <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl1">
-        <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl2">
+      <div v-else-if="!showVotes && post.imgUrl2"
+        :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
+        <div class="col">
+          <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
+        </div>
+        <div class="col">
+          <button class="vote that" @click="castVote(post._id, 'no');">That</button>
+        </div>
       </div>
-    </div>
-    <div v-if="!showVotes && !post.imgUrl2"
-      :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
-      <div class="col">
-        <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
-      </div>
-      <div class="col">
-        <button class="vote no" @click="castVote(post._id, 'no');">no</button>
-      </div>
-    </div>
-    <div v-else-if="!showVotes && post.imgUrl2"
-      :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
-      <div class="col">
-        <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
-      </div>
-      <div class="col">
-        <button class="vote that" @click="castVote(post._id, 'no');">That</button>
-      </div>
-    </div>
 
-    <!-- PROGRESS BAR GOES HERE -->
-    <div v-if="showVotes && !post.imgUrl2"
-      :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
-        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-        {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      <!-- PROGRESS BAR GOES HERE -->
+      <div v-if="showVotes && !post.imgUrl2"
+        :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
+          :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+          {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
+          :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+          {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+        </div>
       </div>
-    </div>
-    <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
-      <button v-if="showVotes && !post.imgUrl2"
-        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
-        @click="chatroom()">What Are People Saying?</button>
-    </div>
-
-    <div v-if="showVotes && post.imgUrl2"
-      :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
-        :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-        {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
-      <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
-        :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-        {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
+        <button v-if="showVotes && !post.imgUrl2"
+          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
+          @click="chatroom()">What Are People Saying?</button>
       </div>
-    </div>
-    <div
-      :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
-      <button v-if="showVotes && post.imgUrl2"
-        :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
-        @click="chatroom()">What Are People Saying?</button>
-    </div>
 
-    <div
-      :class="$mq | mq({xs: 'row pb-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
+      <div v-if="showVotes && post.imgUrl2"
+        :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
+          :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+          {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
+          :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+          {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+        </div>
+      </div>
       <div
-        :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})">
-        <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
+        <button v-if="showVotes && post.imgUrl2"
+          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
+          @click="chatroom()">What Are People Saying?</button>
       </div>
+
+      <div
+        :class="$mq | mq({xs: 'row pb-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
+        <div
+          :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})">
+          <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+        </div>
+      </div>
+      <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
     </div>
-    <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
   </div>
   </div>
 </template>
@@ -306,7 +308,7 @@
   }
 
   .chat-button {
-    background-color: #3d6ea0;
+    background-color: #6496c7;
     border: none;
     border-radius: 50px;
     color: #FFF;
@@ -315,13 +317,16 @@
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
+    transition: all 0.2s linear;
   }
 
   .chat-button:hover {
     background-color: #3979b9;
+    transform: scale(1.05)
   }
 
   .chat-button:active {
+
     background-color: #36608a;
   }
 </style>
