@@ -14,8 +14,11 @@
         <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
           <h4 class="title">{{post.title}}</h4>
         </div>
-        <div v-else class="col d-flex justify-content-left">
-          <h4 class="title">{{post.title.substring(0,31)}}...</h4>
+        <div v-else class="col d-flex justify-content-center">
+          <h4 type="text" class="title" data-toggle="tooltip" data-placement="top" :title="post.title">{{post.title.substring(0,28)}}...
+          </h4>
+          <div class="text-center my-3">
+          </div>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -101,6 +104,9 @@
     name: "post",
     props: ["post"],
     mounted() {
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
       if (
         this.user.participated.find(post => {
           return post._id == this.post._id;
@@ -221,6 +227,11 @@
     color: #3d6ea0;
     font-family: "Patrick Hand SC", cursive;
     margin-bottom: -0.05em;
+    transition:all 0.2s linear;
+  }
+
+  .title:hover {
+    cursor: default;
   }
 
   img {
@@ -243,6 +254,10 @@
 
   .that {
     background-color: #3c6ea0;
+  }
+
+  .mobile {
+    font-size: 5px;
   }
 
   .bar-yes {
@@ -301,10 +316,21 @@
     width: 50%;
   }
 
+  .col-4{
+    transition:all 0.5s linear;
+  }
+  .col-4:hover{
+    transform:rotate(360deg);
+  }
+
   .photos2 {
     margin-right: 0;
     margin-left: 0;
     width: 50%;
+  }
+
+  .longText {
+    
   }
 
   .chat-button {
@@ -317,12 +343,13 @@
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
   }
 
   .chat-button:hover {
     background-color: #3979b9;
-    transform: scale(1.05)
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
   }
 
   .chat-button:active {
