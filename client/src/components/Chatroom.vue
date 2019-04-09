@@ -1,5 +1,5 @@
 <template>
-  <div class="Chatroom">
+  <div class="Chatroom p-5 mt-0 py-5 border rounded bg-white" id="addMargin">
     <div v-if="!joined" class="text-center">
       <!-- {{post.title}} -->
       <!-- <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button> -->
@@ -13,31 +13,28 @@
           </li>
         </ul>
       </div>
+      <hr>
       <div class="chat">
         <div class="row" v-for="item in messages">
-          <div class="col-sm-2 text-left">
-            <span class="name">{{ item.user }} </span>
+          <div class="col-sm-2 my-2 text-left">
+            <span class="name" style="font-weight: bold;">{{ item.user }} </span>
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-7 my-2 text-left">
             <span class="message">{{ item.message }}</span>
           </div>
-          <div class="col-sm-2 text-right">
+          <div class="col-sm-3 my-2 text-right">
             <span class="name">{{item.createdAt | formatTime }}</span>
           </div>
-
         </div>
       </div>
+      <br>
       <div class="text-center">
         <form @submit.prevent="send">
           <div class="form-group">
             <input type="text" class="form-control input-lg text-center" placeholder="Message" v-model="message">
           </div>
-          <button class="btn btn-primary btn-lg" type="submit">Send</button>
+          <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
         </form>
-      </div>
-      <div class="text-center">
-        <button class="btn btn-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })">Back to
-          Posts</button>
       </div>
     </div>
   </div>
@@ -108,5 +105,9 @@
 
   .voteYes {
     color: green !important;
+  }
+
+  .Chatroom {
+    font-family: default;
   }
 </style>
