@@ -34,6 +34,10 @@
                                         <option value="movies">Movies</option>
                                         <option value="fashion">Fashion</option>
                                         <option value="food">Food</option>
+                                        <option value="tv">TV</option>
+                                        <option value="kimspiration">Kimspiration</option>
+                                        <option value="question">Question's</option>
+                                        <option value="developer">Developer Meme's</option>
                                         <option value="meme-culture">Meme-Culture</option>
                                     </select>
                                 </form>
@@ -88,6 +92,10 @@
                                         <option value="movies">Movies</option>
                                         <option value="fashion">Fashion</option>
                                         <option value="food">Food</option>
+                                        <option value="tv">TV</option>
+                                        <option value="kimspiration">Kimspiration</option>
+                                        <option value="question">Question's</option>
+                                        <option value="developer">Developer Meme's</option>
                                         <option value="meme-culture">Meme-Culture</option>
                                     </select>
                                 </form>

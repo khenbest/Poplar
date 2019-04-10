@@ -37,6 +37,10 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('movies')">Movies</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('tv')">TV</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('kimspiration')">Kimspiration</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('developer')">Developer Meme's</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('question')">Questions</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
         </div>
       </div>

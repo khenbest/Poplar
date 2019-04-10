@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(post._id)">What Are People Saying?</button>
+                <button class="chat-button" @click="chatroom(post._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -91,7 +91,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(participated._id)">What Are People Saying?</button>
+                <button class="chat-button" @click="chatroom(participated._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -306,16 +306,17 @@
   }
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
-  .chatroom {
+  .chat-button {
+    background-color: #6496c7;
     border: none;
-    background-color: #3d6ea0;
-    color: white;
-    border-radius: 25px;
-    font-size: 1.5em;
-    min-width: 5em;
-    min-height: 1em;
-    font-family: "Kalam", cursive;
-  }
+    border-radius: 50px;
+    color: #FFF;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    transition: all 0.2s linear;}
 
   /* font-family: 'Amatic SC', cursive;
 font-family: 'Patrick Hand SC', cursive;

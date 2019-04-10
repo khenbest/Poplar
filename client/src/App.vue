@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-light vh-100">
+  <div id="app" class="bg-light">
     <navbar />
     <router-view />
 
