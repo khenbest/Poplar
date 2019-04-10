@@ -14,8 +14,12 @@
         <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
           <h4 class="title">{{post.title}}</h4>
         </div>
-        <div v-else class="col d-flex justify-content-left">
-          <h4 class="title">{{post.title.substring(0,31)}}...</h4>
+        <div v-else class="col d-flex justify-content-center">
+          <h4 type="text" class="title" data-toggle="tooltip" data-placement="top" :title="post.title">
+            {{post.title.substring(0,28)}}...
+          </h4>
+          <div class="text-center my-3">
+          </div>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -28,7 +32,7 @@
           <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl2">
         </div>
       </div>
-      <div v-if="!showVotes && !post.imgUrl2"
+      <div v-if="!participated && !post.imgUrl2"
         :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
         <div class="col">
           <button class="vote yes" @click="castVote(post._id, 'yes');">yes</button>
@@ -37,7 +41,7 @@
           <button class="vote no" @click="castVote(post._id, 'no');">no</button>
         </div>
       </div>
-      <div v-else-if="!showVotes && post.imgUrl2"
+      <div v-else-if="!participated && post.imgUrl2"
         :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
         <div class="col">
           <button class="vote this" @click="castVote(post._id, 'yes');">This</button>
@@ -48,7 +52,7 @@
       </div>
 
       <!-- PROGRESS BAR GOES HERE -->
-      <div v-if="showVotes && !post.imgUrl2"
+      <div v-if="participated && !post.imgUrl2"
         :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})">
         <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
           :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
@@ -59,12 +63,12 @@
         </div>
       </div>
       <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
-        <button v-if="showVotes && !post.imgUrl2"
+        <button v-if="participated && !post.imgUrl2"
           :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
           @click="chatroom()">What Are People Saying?</button>
       </div>
 
-      <div v-if="showVotes && post.imgUrl2"
+      <div v-if="participated && post.imgUrl2"
         :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
         <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
           :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
@@ -76,7 +80,7 @@
       </div>
       <div
         :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
-        <button v-if="showVotes && post.imgUrl2"
+        <button v-if="participated && post.imgUrl2"
           :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
           @click="chatroom()">What Are People Saying?</button>
       </div>
@@ -97,27 +101,26 @@
 <script>
   import Moment from "moment";
   import Chatroom from "@/components/Chatroom.vue";
+  import $ from "jquery";
   export default {
     name: "post",
     props: ["post"],
     mounted() {
-      if (
-        this.user.participated.find(post => {
-          return post._id == this.post._id;
-        })
-      ) {
-        this.showVotes = true;
-      }
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
     },
     data() {
       return {
         x: 100,
-        showVotes: false
       };
     },
     computed: {
       user() {
         return this.$store.state.user;
+      },
+      participated() {
+        return this.user.participated.find(post => post._id == this.post._id) || false;
       },
       totalNo() {
         let no = 0;
@@ -169,16 +172,6 @@
           endpoint: `posts/${postId}/vote`,
           data: { vote: vote }
         });
-        this.value();
-        this.showVotes = true;
-      },
-      value() {
-        let votesArr = Object.values(this.post.votes || {}) || [];
-        votesArr.forEach(vote => {
-          if (vote == "yes") {
-            this.totalYes++;
-          } else this.totalNo++;
-        });
       },
       chatroom() {
         this.$store.dispatch("setActivePost", this.post);
@@ -221,6 +214,11 @@
     color: #3d6ea0;
     font-family: "Patrick Hand SC", cursive;
     margin-bottom: -0.05em;
+    transition: all 0.2s linear;
+  }
+
+  .title:hover {
+    cursor: default;
   }
 
   img {
@@ -243,6 +241,10 @@
 
   .that {
     background-color: #3c6ea0;
+  }
+
+  .mobile {
+    font-size: 5px;
   }
 
   .bar-yes {
@@ -301,11 +303,20 @@
     width: 50%;
   }
 
+  /* .col-4{
+    transition:all 0.5s linear;
+  }
+  .col-4:hover{
+    transform:rotate(360deg);
+  } */
+
   .photos2 {
     margin-right: 0;
     margin-left: 0;
     width: 50%;
   }
+
+  .longText {}
 
   .chat-button {
     background-color: #6496c7;
@@ -317,12 +328,13 @@
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
   }
 
   .chat-button:hover {
     background-color: #3979b9;
-    transform: scale(1.05)
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
   }
 
   .chat-button:active {

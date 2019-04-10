@@ -325,6 +325,8 @@ export default new Vuex.Store({
       api.put(payload.endpoint, payload.data)
         .then(res => {
           dispatch('getPosts')
+          console.log(res.data)
+          commit('setUser', res.data)
         })
     }
     //#endregion

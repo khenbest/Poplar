@@ -44,6 +44,11 @@ auth.get('authenticate')
       router,
       store,
       Croppa,
+      mounted() {
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+      },
       render: h => h(App)
     }).$mount('#app')
   })
