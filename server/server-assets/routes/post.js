@@ -91,7 +91,10 @@ router.put('/:id/vote', (req, res, next) => {
           return user.update({ $addToSet: { participated: req.params.id } })
         })
         .then(() => {
-          return res.send({ message: "post and user updated" })
+          User.findById(req.session.uid)
+            .then(user2 => {
+              return res.send(user2)
+            })
         })
     })
     .catch(err => {
