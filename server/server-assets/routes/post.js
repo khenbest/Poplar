@@ -74,8 +74,13 @@ router.put('/:id', async (req, res, next) => {
 
 //logic inside of your vote route will need to update the user document as well as including the post id in the user's participated array
 router.put('/:id/vote', (req, res, next) => {
+  let post;
   Posts.findById(req.params.id)
-    .then(post => {
+    .then(p => {
+      if (!p) {
+        return Promise.reject("No Post Found")
+      }
+      post = p;
       //updated the post's votes
       //save the updated post
       if (!post.votes) post.votes = {} //this logic is for if not a single vote yet
@@ -86,12 +91,9 @@ router.put('/:id/vote', (req, res, next) => {
     .then(() => {
       //this logic runs after the post has been updated
       //add the post._id to the user's participated array
-      User.findById(req.session.uid)
-        .then(user => {
-          return user.update({ $addToSet: { participated: req.params.id } })
-        })
-        .then(() => {
-          return res.send({ message: "post and user updated" })
+      User.findByIdAndUpdate(req.session.uid, { $addToSet: { participated: req.params.id } }, { new: true })
+        .then((user) => {
+          return res.send({ user, post })
         })
     })
     .catch(err => {

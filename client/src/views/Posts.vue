@@ -37,12 +37,27 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('movies')">Movies</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('tv')">TV</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('kimspiration')">Kimspiration</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('developer')">Developer Meme's</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('question')">Questions</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
         </div>
       </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option1" @change="activity"> Most Poplar
+        </label>
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option2" @change="reset"> Newest
+        </label>
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option3"> Oldest
+        </label>
+      </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
         <input type="text" v-model="username" placeholder="type username here" />
-        <button class="btn btn-secondary" type="submit">Search</button>
+        <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
     </div>
 
@@ -72,7 +87,7 @@
       }
     },
     mounted() {
-      Promise.all(this.$store.dispatch("getPosts"))
+      this.$store.dispatch("getPosts")
       // this.$store.state.posts.forEach((post, index) => {
       //   if (index < this.lessThan && index > this.greaterThan) {
       //     this.visiblePosts.push(post)
@@ -85,6 +100,7 @@
         activeClass: null,
         showForm: false,
         username: '',
+        filter: '',
         visiblePosts: [],
         lessThan: 8,
         greaterThan: -1,

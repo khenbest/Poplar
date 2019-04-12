@@ -1,5 +1,5 @@
 <template>
-  <div class="posts container-fluid" id="addMargin">
+  <div class="posts container-fluid" id="addMargin" v-if="user._id">
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
         <!-- FILTERS -->
@@ -14,10 +14,10 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <h1 id="changeFont">{{this.$store.state.user.name}}'s Profile</h1>
+          <h1 id="changeFont">{{user.name}}'s Profile</h1>
         </div>
         <div class="row d-flex justify-content-center" id="changeFont">
-          <h3>Member Since: {{this.$store.state.user.createdAt | formatTime2}}</h3>
+          <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
         </div>
         <div class="col-2">
           <h6>Following:</h6>
@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(post._id)">What Are People Saying?</button>
+                <button class="chat-button" @click="chatroom(post._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -64,6 +64,10 @@
         <span v-show="!showPosts">
           <div class="row">
             <div class="col-12">
+<<<<<<< HEAD
+=======
+              <!-- <h3>Total Participated: {{user.participated.length}}</h3> -->
+>>>>>>> 94f0f56d1720d3a3c31828bd426ec781ff593577
             </div>
           </div>
           <div class="row">
@@ -90,7 +94,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(participated._id)">What Are People Saying?</button>
+                <button class="chat-button" @click="chatroom(participated._id)">What Are People Saying?</button>
               </div>
               <button @click="deletePost(post._id)">Delete</button>
             </div>
@@ -109,15 +113,16 @@
     props: ["post"],
     created() {
       //blocks users not logged in
-      if (!this.$store.state.user._id) {
+      if (!this.user._id) {
         this.$router.push({ name: "login" });
       }
     },
     mounted() {
-      this.$store.dispatch("getUser")
-        .then(
-          this.$store.dispatch("getMyPosts", true),
-          this.$store.dispatch("getUsers"))
+      this.$store.dispatch("getMyPosts", true)
+      this.$store.dispatch("getUsers")
+      if (!this.$store.state.posts.length) {
+        this.$store.dispatch("getPosts")
+      }
     },
     data() {
       return {
@@ -127,27 +132,28 @@
       }
     },
     computed: {
+      user() {
+        return this.$store.state.user
+      },
       posts() {
         return this.$store.state.myPosts;
       },
       participated() {
-        return this.$store.state.user.participated;
+        return this.$store.getters.participated;
       },
       following() {
-        let user = this.$store.state.user
         let followedByArray = []
-        let followedBy = user.followedBy.forEach(id => {
+        let followedBy = this.user.followedBy.forEach(id => {
           let user = this.$store.state.allUsers.find(user => user._id == id)
-          followedByArray.push(user)
+          followedByArray.push(user || {})
         })
         return followedByArray
       },
       followedBy() {
-        let user = this.$store.state.user
         let followingArray = []
-        let following = user.following.forEach(id => {
+        let following = this.user.following.forEach(id => {
           let user = this.$store.state.allUsers.find(user => user._id == id)
-          followingArray.push(user)
+          followingArray.push(user || {})
         })
         return followingArray
       }
@@ -181,7 +187,7 @@
       // unfollow(unfollow) {
       //   let payload = {
       //     name: unfollow,
-      //     id: this.$store.state.user._id
+      //     id: user._id
       //   }
       //   this.$store.dispatch('unfollow', payload)
       // },
@@ -304,15 +310,17 @@
   }
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
-  .chatroom {
+  .chat-button {
+    background-color: #6496c7;
     border: none;
-    background-color: #3d6ea0;
-    color: white;
-    border-radius: 25px;
-    font-size: 1.5em;
-    min-width: 5em;
-    min-height: 1em;
-    font-family: "Kalam", cursive;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    transition: all 0.2s linear;
   }
 
   /* font-family: 'Amatic SC', cursive;

@@ -1,64 +1,65 @@
 <template>
-   <div class="postDetails" id="addMargin">
-
-
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-         <div class="row">
-            <div class="col">
-               <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
-               <button v-if="activePost.authorId == this.$store.state.user._id"
-                  @click="deletePost(activePost._id)">Delete</button>
-            </div>
+   <div>
+      <div style="position: absolute; top: 55px; left: 20px; z-index: 999;">
+         <div class="text-center">
+            <button class="btn btn-outline-primary" type="button" @click="$router.back()"><i
+                  class="fas fa-chevron-left text-dark"></i> Back</button>
          </div>
-         <div class="row">
-            <div class="col d-flex justify-content-center">
-               <h4 class="title">{{activePost.title}}</h4>
-            </div>
-         </div>
-         <div class="row">
-            <div v-if="!activePost.imgUrl2" class="col px-0">
-               <img :src="activePost.imgUrl1" class="photo">
-            </div>
-            <div v-else class="col px-0" style="max-width: 481px">
-               <img class="photos" :src="activePost.imgUrl1">
-               <img class="photos" :src="activePost.imgUrl2">
-            </div>
-         </div>
-
-
-         <!-- PROGRESS BAR GOES HERE -->
-         <div v-if="!activePost.imgUrl2" class="progress d-flex row">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
-               :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-               {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
-            </div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
-               :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-               {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-            </div>
-         </div>
-         <div v-else="activePost.imgUrl2" class="progress d-flex row">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
-               :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-               {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
-            </div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
-               :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-               {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-            </div>
-         </div>
-
-         <div class="row mb-2">
-            <div class="col d-flex justify-content-center">
-               <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
-            </div>
-         </div>
-         <button @click="deletePost(activePost._id)">Delete</button>
-         <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
-
       </div>
-
-      <chatroom></chatroom>
+      <div :class="$mq | mq({xs: 'postDetails', sm: 'postDetails', md: 'postDetails row', lg: 'postDetails row'})"
+         id="addMargin">
+         <div :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3', lg: 'col-4 border offset-1'})">
+            <div class="row d-flex flex-row">
+               <div class="col">
+                  <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
+               </div>
+            </div>
+            <div class="row">
+               <div
+                  :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})">
+                  <h4 class="title">{{activePost.title}}</h4>
+               </div>
+            </div>
+            <div class="row">
+               <div v-if="!activePost.imgUrl2" class="col px-0">
+                  <img :src="activePost.imgUrl1" class="photo">
+               </div>
+               <div v-else class="col px-0 justify-content-center">
+                  <img class="photos" :src="activePost.imgUrl1">
+                  <img class="photos" :src="activePost.imgUrl2">
+               </div>
+            </div>
+            <!-- PROGRESS BAR GOES HERE -->
+            <div v-if="!activePost.imgUrl2" class="progress d-flex row">
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes h-25" role="progressbar"
+                  :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+                  {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
+               </div>
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no h-25" role="progressbar"
+                  :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+                  {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+               </div>
+            </div>
+            <div v-else="activePost.imgUrl2" class="progress d-flex row justify-content-center">
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-this h-25" role="progressbar"
+                  :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+                  {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
+               </div>
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-that h-25" role="progressbar"
+                  :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+                  {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+               </div>
+               <div class="col-12" style="font-size:20px;">
+                  <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
+               </div>
+               <button class="btn btn-outline-primary px-4 mb-2" @click="deletePost(activePost._id)">Delete</button>
+            </div>
+            <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
+         </div>
+         <div class="col-6">
+            <chatroom></chatroom>
+         </div>
+      </div>
    </div>
 </template>
 
