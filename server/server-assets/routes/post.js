@@ -107,22 +107,6 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => res.status(400).send(err))
 })
 
-// router.delete('/:id', (req, res, next) => {
-//   User.findOne({ _id: req.params.id, authorId: req.session.uid })
-//     .then(user => {
-//       user.remove(err => {
-//         if (err) {
-//           console.log(err)
-//           next()
-//           return
-//         }
-//       })
-//       res.send("Successfully Deleted")
-//     })
-//     .catch(err => {
-//       res.status(400).send('ACCESS DENIED; Invalid Request')
-//     })
-// })
 
 
 module.exports = router

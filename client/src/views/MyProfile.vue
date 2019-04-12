@@ -22,16 +22,16 @@
         <div class="col-2">
           <h6>Following:</h6>
         </div>
-        <div class="card col-2">
+        <div class="card col-12">
           <div v-for="follows in followedBy">
             <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
 
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-2 mt-3">
           <h6>Followers:</h6>
         </div>
-        <div class="card col-2">
+        <div class="card col-12">
           <div v-for="follows in following">
             <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
           </div>
@@ -64,7 +64,6 @@
         <span v-show="!showPosts">
           <div class="row">
             <div class="col-12">
-              <!-- <h3>Total Participated: {{this.$store.state.user.participated.length}}</h3> -->
             </div>
           </div>
           <div class="row">
@@ -97,7 +96,6 @@
             </div>
           </div>
         </span>
-        <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
       </div>
     </div>
   </div>
