@@ -83,7 +83,7 @@
       }
     },
     mounted() {
-      Promise.all(this.$store.dispatch("getPosts"))
+      this.$store.dispatch("getPosts")
       // this.$store.state.posts.forEach((post, index) => {
       //   if (index < this.lessThan && index > this.greaterThan) {
       //     this.visiblePosts.push(post)

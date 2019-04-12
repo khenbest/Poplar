@@ -57,6 +57,11 @@ export default new Vuex.Store({
     setPosts(state, posts) {
       state.posts = posts
     },
+    UpdatePost(state, post) {
+      let i = state.posts.findIndex(p => p._id == post._id)
+      if (i == -1) { return "Unable to update a post that doesnt exist" }
+      return state.posts.splice(i, 1, post)
+    },
     setFiltered(state, posts) {
       state.filteredPosts = posts
     },
@@ -324,9 +329,10 @@ export default new Vuex.Store({
     castVote({ commit, dispatch }, payload) {
       api.put(payload.endpoint, payload.data)
         .then(res => {
-          dispatch('getPosts')
-          console.log(res.data)
-          commit('setUser', res.data)
+          console.log(res.data.post)
+          console.log(res.data.user)
+          commit('setUser', res.data.user)
+          commit('UpdatePost', res.data.post)
         })
     }
     //#endregion
