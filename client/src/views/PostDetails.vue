@@ -1,10 +1,9 @@
 <template>
    <div>
-      <div class="row mt-5">
-         <div class="text-center mt-5 ml-5">
-            <button class="btn btn-outline-primary btn-lg" type="button" @click="$router.push({ name: 'posts' })"><i
-                  class="fas fa-chevron-left text-dark"></i> Back to
-               Posts</button>
+      <div style="position: absolute; top: 55px; left: 20px; z-index: 999;">
+         <div class="text-center">
+            <button class="btn btn-outline-primary" type="button" @click="$router.back()"><i
+                  class="fas fa-chevron-left text-dark"></i> Back</button>
          </div>
       </div>
       <div :class="$mq | mq({xs: 'postDetails', sm: 'postDetails', md: 'postDetails row', lg: 'postDetails row'})"

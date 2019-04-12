@@ -32,6 +32,8 @@
           <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})" :src="post.imgUrl2">
         </div>
       </div>
+
+      <!-- SHOW BUTTONS -->
       <div v-if="!participated && !post.imgUrl2"
         :class="$mq | mq({xs: 'row mb-2 mt-2 justify-content-between', sm: 'row mb-2 mt-2 justify-content-between', md: 'row mb-2 mt-2 justify-content-between', lg: 'row mb-2 mt-2 justify-content-between'})">
         <div class="col">
@@ -52,38 +54,41 @@
       </div>
 
       <!-- PROGRESS BAR GOES HERE -->
-      <div v-if="participated && !post.imgUrl2"
-        :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
-          :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-          {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
-        <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
-          :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-          {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+      <div v-if="participated">
+
+        <!-- YES/NO -->
+        <div v-if="!post.imgUrl2"
+          :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row px-3', lg: 'progress d-flex row mx-0'})">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
+            :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+            {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
+            :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+            {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+          </div>
         </div>
-      </div>
-      <div :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2', lg: 'col-12'})">
-        <button v-if="participated && !post.imgUrl2"
-          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
-          @click="chatroom()">What Are People Saying?</button>
+
+        <!-- THIS/THAT -->
+        <div v-if="post.imgUrl2"
+          :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
+            :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
+            {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
+            :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
+            {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
+          </div>
+        </div>
+
+        <!-- GO TO CHAT -->
+        <div
+          :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
+          <button
+            :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
+            @click="chatroom()">What Are People Saying?</button>
+        </div>
       </div>
 
-      <div v-if="participated && post.imgUrl2"
-        :class="$mq | mq({xs: 'progress d-flex row', sm: 'progress d-flex row', md: 'progress d-flex row mx-0', lg: 'progress d-flex row mx-0'})">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
-          :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
-          {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%</div>
-        <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
-          :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
-          {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
-        </div>
-      </div>
-      <div
-        :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
-        <button v-if="participated && post.imgUrl2"
-          :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
-          @click="chatroom()">What Are People Saying?</button>
-      </div>
 
       <div
         :class="$mq | mq({xs: 'row pb-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
@@ -120,7 +125,7 @@
         return this.$store.state.user;
       },
       participated() {
-        return this.user.participated.find(post => post._id == this.post._id) || false;
+        return this.post.votes[this.user._id] ? true : false
       },
       totalNo() {
         let no = 0;

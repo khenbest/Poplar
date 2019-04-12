@@ -70,7 +70,7 @@ router.delete('/auth/logout', (req, res) => {
 
 //Validates req.session.uid
 router.get('/auth/authenticate', (req, res) => {
-  Users.findById(req.session.uid).populate('participated')
+  Users.findById(req.session.uid)//.populate('participated')
     .then(user => {
       if (!user) {
         return res.status(401).send({

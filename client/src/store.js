@@ -336,5 +336,11 @@ export default new Vuex.Store({
         })
     }
     //#endregion
+  },
+  getters: {
+    participated(state) {
+      let mine = state.posts.filter(p => p.votes[state.user._id])
+      return mine || []
+    }
   }
 })
