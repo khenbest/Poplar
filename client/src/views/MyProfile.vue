@@ -64,10 +64,7 @@
         <span v-show="!showPosts">
           <div class="row">
             <div class="col-12">
-<<<<<<< HEAD
-=======
               <!-- <h3>Total Participated: {{user.participated.length}}</h3> -->
->>>>>>> 94f0f56d1720d3a3c31828bd426ec781ff593577
             </div>
           </div>
           <div class="row">

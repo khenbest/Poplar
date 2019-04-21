@@ -2,7 +2,6 @@
   <div class="navComponent">
     <nav
       :class="$mq | mq({xs: 'navbar fixed-top poplarBG', sm: 'navbar fixed-top poplarBG', md: 'navbar fixed-top navbar-expand-lg poplarBG', lg: 'navbar fixed-top navbar-expand-lg poplarBG'})">
-
       <mq-layout mq="xs">
         <i class="far fa-plus-square fa-2x" @click="makePost()"></i>
       </mq-layout>

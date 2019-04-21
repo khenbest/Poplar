@@ -1,9 +1,6 @@
 <template>
   <div class="posts container-fluid text-muted" id="poplarFont" style="margin-top: 60px;">
-    <div
-      class="row d-flex align-items-center h-100 bg-light text-center"
-      style="font-family: default;"
-    >
+    <div class="row d-flex align-items-center h-100 bg-light text-center" style="font-family: default;">
       <div class="col-12">
         <!-- FILTERS -->
         <!-- POST CARDS -->
@@ -19,19 +16,12 @@
         <div class="row d-flex justify-content-center">
           <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
         </div>
-        <button
-          v-if="showFollowToggle"
-          class="mx-2 btn btn-outline-primary"
-          @click="addFollow(user._id); showFollowToggle = !showFollowToggle;"
-        >
+        <button v-if="showFollowToggle" class="mx-2 btn btn-outline-primary"
+          @click="addFollow(user._id); showFollowToggle = !showFollowToggle;">
           <i class="fas fa-user-plus"></i>
           follow
         </button>
-        <button
-          v-else
-          class="btn btn-outline-primary"
-          @click="unfollow(user); showFollowToggle = !showFollowToggle;"
-        >
+        <button v-else class="btn btn-outline-primary" @click="unfollow(user); showFollowToggle = !showFollowToggle;">
           <i class="fas fa-user-minus text-dark"></i>
           Unfollow
         </button>
@@ -57,12 +47,7 @@
         </div>
         <span v-show="showPosts">
           <div class="row">
-            <div
-              id="post"
-              class="col-xs-12 col-sm-6 col-md-3 m-2"
-              v-for="post in posts"
-              :key="post._id"
-            >
+            <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-2" v-for="post in posts" :key="post._id">
               <div class="row">
                 <div class="col d-flex justify-content-center">
                   <h4 class="title">{{post.title}}</h4>
@@ -91,17 +76,11 @@
             </div>
           </div>
           <div class="row">
-            <div
-              id="post"
-              class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-2"
-              v-for="(participated, index) in participated"
-              :key="index"
-            >
+            <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-2"
+              v-for="(participated, index) in participated" :key="index">
               <div class="row">
                 <div class="col">
-                  <h4
-                    class="username d-flex justify-content-center"
-                  >{{participated.user || 'Unknown'}}</h4>
+                  <h4 class="username d-flex justify-content-center">{{participated.user || 'Unknown'}}</h4>
                 </div>
               </div>
               <div class="row">
@@ -120,7 +99,7 @@
                 </div>
               </div>
               <div class="row d-flex justify-content-center">
-                <button class="chatroom" @click="chatroom(participated._id)">What are people say?</button>
+                <button class="chatroom" @click="chatroom(participated._id)">What are people saying?</button>
               </div>
             </div>
           </div>
@@ -131,254 +110,254 @@
   </div>
 </template>
 <script>
-import Moment from "moment";
-import Chatroom from "@/components/Chatroom.vue";
+  import Moment from "moment";
+  import Chatroom from "@/components/Chatroom.vue";
 
-export default {
-  name: "posts",
-  props: ["post"],
-  created() {
-    //blocks users not logged in
-    if (!this.$store.state.user._id) {
-      this.$router.push({ name: "login" });
-    }
-  },
-  mounted() {
-    Promise.all(
-      this.$store.dispatch("getPosts"),
-      this.$store.dispatch("getUsers")
-    );
-  },
-  data() {
-    return {
-      showPosts: true,
-      newPost: {},
-      showFollowedBy: false,
-      showFollowers: false,
-      activeClass: null,
-      showFollowToggle: this.$store.state.allUsers
-        .find(user => user._id == this.$route.params.id)
-        .following.contains(this.$store.state.user._id)
-    };
-  },
-  computed: {
-    posts() {
-      return this.$store.state.posts.filter(
-        post => post.authorId == this.$route.params.id
+  export default {
+    name: "posts",
+    props: ["post"],
+    created() {
+      //blocks users not logged in
+      if (!this.$store.state.user._id) {
+        this.$router.push({ name: "login" });
+      }
+    },
+    mounted() {
+      Promise.all(
+        this.$store.dispatch("getPosts"),
+        this.$store.dispatch("getUsers")
       );
     },
-    participated() {
-      let user1 = this.$store.state.allUsers.find(
-        user => user._id == this.$route.params.id
-      );
-      // if (participated.length > 0) {
-      let newArray = [];
-      let participated = user1.participated.forEach(id => {
-        let post = this.$store.state.posts.find(post => post._id == id);
-        newArray.push(post);
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      newArray.forEach((post, index) => {
-        if (post == undefined) {
-          newArray.splice(index, 1);
-        }
-      });
-      return newArray;
-    },
-    user() {
-      return this.$store.state.allUsers.find(
-        user => user._id == this.$route.params.id
-      );
-    },
-    followedBy() {
-      let user = this.$store.state.allUsers.find(
-        user => user._id == this.$route.params.id
-      );
-      let followedByArray = [];
-      let followedBy = user.followedBy.forEach(id => {
-        let user = this.$store.state.allUsers.find(user => user._id == id);
-        followedByArray.push(user);
-      });
-      console.log(followedByArray);
-      return followedByArray;
-    },
-    followers() {
-      let user = this.$store.state.allUsers.find(
-        user => user._id == this.$route.params.id
-      );
-      let followingArray = [];
-      let following = user.following.forEach(id => {
-        let user = this.$store.state.allUsers.find(user => user._id == id);
-        followingArray.push(user);
-      });
-      console.log(followingArray);
-      return followingArray;
-    }
-  },
-  methods: {
-    unfollow(unfollow) {
-      let payload = {
-        toUnfollowId: unfollow._id,
-        id: this.$store.state.user._id
+    data() {
+      return {
+        showPosts: true,
+        newPost: {},
+        showFollowedBy: false,
+        showFollowers: false,
+        activeClass: null,
+        showFollowToggle: this.$store.state.allUsers
+          .find(user => user._id == this.$route.params.id)
+          .following.contains(this.$store.state.user._id)
       };
-      this.$store.dispatch("unfollow", payload);
     },
-    addPost() {
-      this.$store.dispatch("addPost", this.newPost);
-      event.target.reset();
+    computed: {
+      posts() {
+        return this.$store.state.posts.filter(
+          post => post.authorId == this.$route.params.id
+        );
+      },
+      participated() {
+        let user1 = this.$store.state.allUsers.find(
+          user => user._id == this.$route.params.id
+        );
+        // if (participated.length > 0) {
+        let newArray = [];
+        let participated = user1.participated.forEach(id => {
+          let post = this.$store.state.posts.find(post => post._id == id);
+          newArray.push(post);
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        newArray.forEach((post, index) => {
+          if (post == undefined) {
+            newArray.splice(index, 1);
+          }
+        });
+        return newArray;
+      },
+      user() {
+        return this.$store.state.allUsers.find(
+          user => user._id == this.$route.params.id
+        );
+      },
+      followedBy() {
+        let user = this.$store.state.allUsers.find(
+          user => user._id == this.$route.params.id
+        );
+        let followedByArray = [];
+        let followedBy = user.followedBy.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id);
+          followedByArray.push(user);
+        });
+        console.log(followedByArray);
+        return followedByArray;
+      },
+      followers() {
+        let user = this.$store.state.allUsers.find(
+          user => user._id == this.$route.params.id
+        );
+        let followingArray = [];
+        let following = user.following.forEach(id => {
+          let user = this.$store.state.allUsers.find(user => user._id == id);
+          followingArray.push(user);
+        });
+        console.log(followingArray);
+        return followingArray;
+      }
     },
-    deletePost(postId) {
-      this.$store.dispatch("deletePost", postId);
+    methods: {
+      unfollow(unfollow) {
+        let payload = {
+          toUnfollowId: unfollow._id,
+          id: this.$store.state.user._id
+        };
+        this.$store.dispatch("unfollow", payload);
+      },
+      addPost() {
+        this.$store.dispatch("addPost", this.newPost);
+        event.target.reset();
+      },
+      deletePost(postId) {
+        this.$store.dispatch("deletePost", postId);
+      },
+      addFollow(userId) {
+        let payload = {
+          user: this.$store.state.user._id,
+          toFollow: userId
+        };
+        this.$store.dispatch("addFollow", payload);
+      },
+      chatroom(postId) {
+        this.$router.push({
+          path: "/posts/get/" + postId,
+          name: "postDetails",
+          params: {
+            postId: postId
+          }
+        });
+      },
+      allPosts() {
+        this.$router.push({ path: "/" });
+      },
+      myProfile() {
+        this.$router.push({ path: "/myProfile" });
+      }
     },
-    addFollow(userId) {
-      let payload = {
-        user: this.$store.state.user._id,
-        toFollow: userId
-      };
-      this.$store.dispatch("addFollow", payload);
+    components: {
+      Chatroom
     },
-    chatroom(postId) {
-      this.$router.push({
-        path: "/posts/get/" + postId,
-        name: "postDetails",
-        params: {
-          postId: postId
-        }
-      });
-    },
-    allPosts() {
-      this.$router.push({ path: "/" });
-    },
-    myProfile() {
-      this.$router.push({ path: "/myProfile" });
+    filters: {
+      formatTime(date) {
+        return Moment(String(date))
+          .startOf("hour")
+          .fromNow();
+      },
+      formatTime2(date) {
+        return Moment(String(date)).format("MMMM Do, YYYY");
+      }
     }
-  },
-  components: {
-    Chatroom
-  },
-  filters: {
-    formatTime(date) {
-      return Moment(String(date))
-        .startOf("hour")
-        .fromNow();
-    },
-    formatTime2(date) {
-      return Moment(String(date)).format("MMMM Do, YYYY");
-    }
-  }
-};
+  };
 </script>
 
 <style scoped>
-#post {
-  border: #3d6ea0 1px solid;
-}
+  #post {
+    border: #3d6ea0 1px solid;
+  }
 
-.username {
-  color: #a0b5c5;
-  font-family: "Amatic SC", cursive;
-  margin-bottom: -0.2em;
-}
+  .username {
+    color: #a0b5c5;
+    font-family: "Amatic SC", cursive;
+    margin-bottom: -0.2em;
+  }
 
-.btn-my {
-  background: #6496c7;
-  color: white;
-}
+  .btn-my {
+    background: #6496c7;
+    color: white;
+  }
 
-#btn-bar {
-  background-color: #6496c7;
-  color: black;
-}
+  #btn-bar {
+    background-color: #6496c7;
+    color: black;
+  }
 
-.title {
-  color: #3d6ea0;
-  font-family: "Patrick Hand SC", cursive;
-  margin-bottom: -0.05em;
-}
+  .title {
+    color: #3d6ea0;
+    font-family: "Patrick Hand SC", cursive;
+    margin-bottom: -0.05em;
+  }
 
-img {
-  max-width: 100%;
-  margin-left: -15px;
-  margin-right: -15px;
-}
+  img {
+    max-width: 100%;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 
-#poplarFont {
-  font-family: "Amatic SC", cursive;
-}
+  #poplarFont {
+    font-family: "Amatic SC", cursive;
+  }
 
-.yes {
-  background-color: #95c701;
-}
+  .yes {
+    background-color: #95c701;
+  }
 
-.no {
-  background-color: #fe3231;
-}
+  .no {
+    background-color: #fe3231;
+  }
 
-.vote {
-  border: none;
-  color: white;
-  font-size: 1.5em;
-  min-width: 5em;
-  min-height: 1em;
-  font-family: "Kalam", cursive;
-}
+  .vote {
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    min-width: 5em;
+    min-height: 1em;
+    font-family: "Kalam", cursive;
+  }
 
-.timestamp {
-  color: #3d6ea0;
-  font-size: 1em;
-}
+  .timestamp {
+    color: #3d6ea0;
+    font-size: 1em;
+  }
 
-.filters {
-  color: #c2c2c3;
-}
+  .filters {
+    color: #c2c2c3;
+  }
 
-.filters:active {
-  color: #3d6ea0;
-}
+  .filters:active {
+    color: #3d6ea0;
+  }
 
-.fas:hover {
-  cursor: pointer;
-}
+  .fas:hover {
+    cursor: pointer;
+  }
 
-/* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
-.chat-button {
-  background-color: #6496c7;
-  border: none;
-  border-radius: 50px;
-  color: #FFF;
-  padding: 10px 50px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  transition: all 0.2s linear;
-}
+  /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
+  .chat-button {
+    background-color: #6496c7;
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    transition: all 0.2s linear;
+  }
 
-/* font-family: 'Amatic SC', cursive;
+  /* font-family: 'Amatic SC', cursive;
 font-family: 'Patrick Hand SC', cursive;
 font-family: 'Dekko', cursive;
 font-family: 'Itim', cursive;
