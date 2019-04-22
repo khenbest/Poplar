@@ -67,7 +67,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getPosts");
+      this.$store.dispatch("getUsers")
     },
     data() {
       return {

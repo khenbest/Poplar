@@ -321,7 +321,6 @@
     width: 50%;
   }
 
-
   .chat-button {
     background-color: #6496c7;
     border: none;
