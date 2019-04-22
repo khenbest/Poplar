@@ -1,28 +1,28 @@
 <template>
-  <div class="login container-fluid" id="addMargin">
-    <div class="row">
+  <div class="login container-fluid vh-100">
+    <div class="row align-content-center">
       <div class="col">
         <img :src="logo" id="logo">
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col">
         <img :src="name" id="name">
       </div>
     </div>
 
     <div class="row">
-      <div class="col">
-        <form v-if="loginForm" @submit.prevent="loginUser">
-          <input type="email" v-model="creds.email" placeholder="email">
-          <input type="password" v-model="creds.password" placeholder="password">
-          <button type="submit">Login</button>
+      <div class="col 12">
+        <form v-if="loginForm" class="form-inline justify-content-center mb-2" @submit.prevent="loginUser">
+          <input type="email" v-model="creds.email" class="form-control" placeholder="email">
+          <input type="password" v-model="creds.password" class="form-control" placeholder="password">
+          <button class="btn btn-outline-light form-control" type="submit">Login</button>
         </form>
-        <form v-else @submit.prevent="register">
-          <input type="text" v-model="newUser.name" placeholder="name">
-          <input type="email" v-model="newUser.email" placeholder="email">
-          <input type="password" v-model="newUser.password" placeholder="password">
-          <button type="submit">Create Account</button>
+        <form v-else @submit.prevent="register" class="form-inline justify-content-center mb-2">
+          <input class="form-control" type="text" v-model="newUser.name" placeholder="name">
+          <input class="form-control" type="email" v-model="newUser.email" placeholder="email">
+          <input class="form-control" type="password" v-model="newUser.password" placeholder="password">
+          <button class="btn btn-outline-light form-control" type="submit">Create Account</button>
         </form>
         <div class="action" @click="loginForm = !loginForm">
           <p v-if="loginForm">No account? Click here to Register</p>
@@ -30,11 +30,11 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
+  import Post from '@/components/Post.vue'
   import router from '@/router.js'
   import logo from '@/assets/poplarLogo.jpg'
   import name from '@/assets/poplarName.jpg'
@@ -56,13 +56,22 @@
         name
       };
     },
+    mounted() {
+      this.$store.dispatch("getPublicPosts")
+    },
     methods: {
       register() {
         this.$store.dispatch("register", this.newUser);
       },
       loginUser() {
         this.$store.dispatch("login", this.creds);
+      },
+      posts() {
+        return this.$store.state.posts
       }
+    },
+    components: {
+      Post
     }
   };
 </script>
@@ -75,6 +84,7 @@
   #logo {
     max-width: 50vh;
     max-height: 20vh;
+    margin-top: 20vh;
   }
 
   #name {
@@ -83,7 +93,11 @@
   }
 
   .login {
-    min-height: 100vh;
+    height: 100vh;
     background-color: #6496c7;
+  }
+
+  p {
+    color: white;
   }
 </style>

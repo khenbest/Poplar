@@ -1,6 +1,7 @@
 <template>
-  <div id="app" class="bg-light">
-    <navbar />
+  <div id="app">
+    <navbar v-if="$route.name != 'login'" />
+
     <router-view />
 
     <mq-layout mq="xs">
@@ -61,34 +62,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     overflow: hidden;
-  }
-
-  .navbar {
-    min-height: 35px;
-  }
-
-
-
-  #nav {
-    padding: 30px;
-  }
-
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
-
-  .filters {
-    color: #aaaaaa;
-  }
-
-  .filters:active {
-    color: #3d6ea0
   }
 </style>

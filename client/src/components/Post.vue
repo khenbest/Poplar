@@ -321,7 +321,6 @@
     width: 50%;
   }
 
-  .longText {}
 
   .chat-button {
     background-color: #6496c7;
