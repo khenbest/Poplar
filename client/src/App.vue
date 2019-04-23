@@ -4,7 +4,7 @@
 
     <router-view />
 
-    <mq-layout mq="xs">
+    <mq-layout mq="xs" v-if="$route.name != 'login'">
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0  navbar fixed-bottom bg-white row justify-content-around">
@@ -18,7 +18,7 @@
       </div>
     </mq-layout>
 
-    <mq-layout mq="sm">
+    <mq-layout mq="sm" v-if="$route.name != 'login'">
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row  py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0 navbar fixed-bottom bg-white row justify-content-around">
