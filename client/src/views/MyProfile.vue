@@ -20,26 +20,35 @@
           </button>
         </div>
 
-        <!-- FOLLOWING -->
-        <div class="col-2">
-          <h6>Following:</h6>
-        </div>
-        <div class="card col-12">
-          <div v-for="follows in followedBy">
-            <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
 
-          </div>
+
+
+
+        <!-- TOTAL POSTS -->
+        <div class="col-2 mt-3">
+          <h6>Total Posts: {{posts.length}}</h6>
         </div>
 
         <!-- FOLLOWERS -->
         <div class="col-2 mt-3">
-          <h6>Followers:</h6>
+          <h6 class="clickable" @click="showFollowers = !showFollowers">Followers: {{following.length}}</h6>
         </div>
-        <div class="card col-12">
+        <div class="card col-12" v-show="showFollowers">
           <div v-for="follows in following">
-            <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+            <li class="clickable username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
           </div>
         </div>
+
+        <!-- FOLLOWING -->
+        <div class="col-2">
+          <h6 class="clickable" @click="showFollowing = !showFollowing">Following: {{followedBy.length}}</h6>
+        </div>
+        <div class="card col-12" v-show="showFollowing">
+          <div v-for="follows in followedBy">
+            <li class="clickable username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+          </div>
+        </div>
+
 
         <!-- MY POSTS -->
         <span v-show="showPosts">
@@ -198,6 +207,8 @@
     data() {
       return {
         showPosts: true,
+        showFollowing: false,
+        showFollowers: false,
         newPost: {},
         activeClass: null
       }
@@ -288,13 +299,19 @@
   }
 </script>
 
-<style>
-  #addMargin {
-    margin-top: 60px;
-  }
-</style>
-
 <style scoped>
+  #addMargin {
+    margin-top: 50px;
+  }
+
+  .clickable:hover {
+    cursor: pointer;
+  }
+
+  .sample {
+    color: black !important;
+  }
+
   .username {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
