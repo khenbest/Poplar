@@ -4,20 +4,19 @@
       <div class="col-12">
         <!-- FILTERS -->
         <!-- POST CARDS -->
-        <div id="btn-bar" class="row d-flex justify-content-center">
-          <div class="row d-flex justify-content-center">
-            <button class="btn btn-my" @click="showPosts = true">My Posts</button>
-            <button class="btn btn-my" @click="showPosts = false">
-              My
-              Participated Posts
-            </button>
-          </div>
-        </div>
-        <div class="row d-flex justify-content-center">
+
+        <div class="row d-flex justify-content-center mt-2">
           <h1 id="changeFont">{{user.name}}'s Profile</h1>
         </div>
         <div class="row d-flex justify-content-center" id="changeFont">
           <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <button class="btn btn-outline-primary m-2" @click="showPosts = true">My Posts</button>
+          <button class="btn btn-outline-primary m-2" @click="showPosts = false">
+            My
+            Participated Posts
+          </button>
         </div>
         <div class="col-2">
           <h6>Following:</h6>
@@ -68,7 +67,7 @@
             </div>
           </div>
           <div class="row">
-            <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-2"
+            <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-1"
               v-for="(participated, index) in participated" :key="index">
               <div class="row">
                 <div class="col">
@@ -233,20 +232,22 @@
   }
 
   .username {
-    color: #a0b5c5;
+    color: #8396a4;
     font-family: "Amatic SC", cursive;
     margin-bottom: -0.2em;
     font-size: 24px;
   }
 
-  .btn-my {
-    background: #6496c7;
-    color: white;
+  .btn-outline-primary {
+    border-color: #6496c7
   }
 
-  #btn-bar {
-    background-color: #6496c7;
-    color: black;
+  .btn-outline-primary:hover {
+    background-color: #6496c7
+  }
+
+  .btn-outline-primary:active {
+    background-color: #3d6ea0
   }
 
   .title {

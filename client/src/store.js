@@ -5,6 +5,7 @@ import router from './router'
 
 //sockets
 import io from 'socket.io-client'
+import { error } from 'util';
 let socket = {}
 
 
@@ -263,6 +264,14 @@ export default new Vuex.Store({
     },
     //#endregion
     //#region -- POSTS --
+    getPublicPosts({ commit, dispatch }) {
+      api.get('posts').then(res => {
+        debugger
+        commit("setPosts")
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     getPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {

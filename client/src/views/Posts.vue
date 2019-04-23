@@ -1,8 +1,8 @@
 <template>
   <div class="posts container-fluid" id="addMargin">
-    <div
-      :class="$mq | mq({xs: 'row pt-5 pb-1 bg-light justify-content-center text-center', sm: 'row pt-5 pb-1 bg-light justify-content-center text-center', md: 'row py-1 bg-light justify-content-center text-center', lg: 'row py-1 bg-light justify-content-center text-center'})">
-      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
+    <div class="row bg-light justify-content-center text-center"
+      :class="$mq | mq({xs: 'py-1 fixed-top mt-5 mobile-filter-bg', sm: 'py-1 fixed-top mt-5 mobile-filter-bg', md: 'py-1', lg: 'py-1'})">
+      <div class="dropdown m-2" :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})">
         <button
           :class="$mq | mq({xs: 'btn btn-outline-primary mx-2', sm: 'btn btn-outline-primary mx-2', md: 'btn btn-outline-primary mx-2', lg: 'btn btn-outline-primary mx-2'})"
           @click="filterbyTag()">Reset</button>
@@ -183,6 +183,11 @@
     color: #a0b5c5;
     font-family: 'Amatic SC', cursive;
     margin-bottom: -0.2em;
+  }
+
+  .mobile-filter-bg {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.479);
+    background-color: rgb(246, 246, 248);
   }
 
   .btn-outline-primary {

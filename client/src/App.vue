@@ -1,31 +1,32 @@
 <template>
-  <div id="app" class="bg-light">
-    <navbar />
+  <div id="app">
+    <navbar v-if="$route.name != 'login'" />
+
     <router-view />
 
-    <mq-layout mq="xs">
+    <mq-layout mq="xs" v-if="$route.name != 'login'">
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0  navbar fixed-bottom bg-white row justify-content-around">
-          <a class="py-0 nav-item nav-link curs" @click="allPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="allPosts();"><i
               class=" fas fa-globe-americas filters fa-lg col=1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="goPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="goPosts();"><i
               class="fas fa-users filters fa-lg col-1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="myProfile();"><i
+          <a class="py-1 nav-item nav-link curs" @click="myProfile();"><i
               class="fas fa-user filters fa-lg col-1"></i></a>
         </div>
       </div>
     </mq-layout>
 
-    <mq-layout mq="sm">
+    <mq-layout mq="sm" v-if="$route.name != 'login'">
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row  py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0 navbar fixed-bottom bg-white row justify-content-around">
-          <a class="py-0 nav-item nav-link curs" @click="allPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="allPosts();"><i
               class=" fas fa-globe-americas filters fa-lg col=1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="goPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="goPosts();"><i
               class="fas fa-users filters fa-lg col-1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="myProfile();"><i
+          <a class="py-1 nav-item nav-link curs" @click="myProfile();"><i
               class="fas fa-user filters fa-lg col-1"></i></a>
         </div>
       </div>
@@ -61,34 +62,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     overflow: hidden;
   }
 
+  .fas {
+    color: #9cadb9c2;
+  }
+
   .navbar {
-    min-height: 35px;
-  }
-
-
-
-  #nav {
-    padding: 30px;
-  }
-
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
-
-  .filters {
-    color: #aaaaaa;
-  }
-
-  .filters:active {
-    color: #3d6ea0
+    border-top: 0.5px solid rgba(0, 0, 0, 0.479);
+    background-color: rgb(246, 246, 248);
   }
 </style>
