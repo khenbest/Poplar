@@ -2,15 +2,16 @@
   <div class="posts container-fluid" id="addMargin" v-if="user._id">
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
-        <!-- FILTERS -->
-        <!-- POST CARDS -->
 
+        <!-- PROFILE NAME AND JOIN DATE -->
         <div class="row d-flex justify-content-center mt-2">
           <h1 id="changeFont">{{user.name}}'s Profile</h1>
         </div>
         <div class="row d-flex justify-content-center" id="changeFont">
           <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
         </div>
+
+        <!-- MY POSTS AND PARTICIPATED BUTTONS -->
         <div class="row d-flex justify-content-center">
           <button class="btn btn-outline-primary m-2" @click="showPosts = true">My Posts</button>
           <button class="btn btn-outline-primary m-2" @click="showPosts = false">
@@ -18,6 +19,8 @@
             Participated Posts
           </button>
         </div>
+
+        <!-- FOLLOWING -->
         <div class="col-2">
           <h6>Following:</h6>
         </div>
@@ -27,6 +30,8 @@
 
           </div>
         </div>
+
+        <!-- FOLLOWERS -->
         <div class="col-2 mt-3">
           <h6>Followers:</h6>
         </div>
@@ -76,7 +81,6 @@
                       :src="post.imgUrl2">
                   </div>
                 </div>
-
                 <!-- GO TO CHAT -->
                 <div v-if="participated">
                   <div
@@ -99,30 +103,11 @@
           </div>
         </span>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- MY PARTICIPATED -->
         <span v-show="!showPosts">
           <div class="row">
             <div :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-3', lg: 'col-4'})"
               v-for="(participated, index) in participated" :key="index">
-
-
-
               <div
                 :class="$mq | mq({xs: 'col-12 px-0 mx-0', sm: 'col-12 px-0 mx-0', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
                 <div class="row d-flex justify-content-center">
@@ -161,7 +146,6 @@
                       :src="participated.imgUrl2">
                   </div>
                 </div>
-
                 <!-- GO TO CHAT -->
                 <div v-if="participated">
                   <div
