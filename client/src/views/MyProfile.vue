@@ -1,54 +1,161 @@
 <template>
-  <div class="posts container-fluid" id="addMargin" v-if="user._id">
+  <div class="posts container-fluid"
+    :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})" v-if="user._id">
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
 
-        <!-- PROFILE NAME AND JOIN DATE -->
-        <div class="row d-flex justify-content-center mt-2">
-          <h1 id="changeFont">{{user.name}}'s Profile</h1>
-        </div>
-        <div class="row d-flex justify-content-center" id="changeFont">
-          <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
+
+        <div class="row mt-1 profile-stats">
+          <div class="col-5">
+            <div class="row">
+              <div class="col-12">
+                <p class="username-page-top">{{user.name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <p class="joined-page-top">Member Since: {{user.createdAt | formatTime2}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="row">
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-12 text-center stat-boxes">
+                    <div class="row">
+                      <div class="col-12 font-weight-bold">
+                        {{posts.length}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 px-0">
+                        posts
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                <div class="row">
+                  <div class="col-12 text-center stat-boxes">
+                    <div class="row">
+                      <div class="col-12  text-center justify-content-center font-weight-bold">
+                        {{followedBy.length}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 text-center justify-content-center px-0">
+                        followers </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                <div class="row">
+                  <div class="col-12 text-center stat-boxes">
+                    <div class="row">
+                      <div class="col-12 font-weight-bold text-center justify-content-center">
+                        {{following.length}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 text-center justify-content-center px-0">
+                        following </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 d-flex justify-content-center px-0">
+                <button class="btn btn-outline-primary m-2" @click="showPosts = true">My Posts</button>
+              </div>
+              <div class="col-6 d-flex justify-content-center px-0">
+                <button class="btn btn-outline-primary m-2" @click="showPosts = false">
+                  Participated
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
+
+
+        <!-- PROFILE NAME AND JOIN DATE -->
+        <!-- <div class="row d-flex justify-content-center mt-2">
+          <h1 id="changeFont">{{user.name}}'s Profile</h1>
+        </div> -->
+        <!-- <div class="row d-flex justify-content-center" id="changeFont">
+          <h3>Member Since: {{user.createdAt | formatTime2}}</h3>
+        </div> -->
+
         <!-- MY POSTS AND PARTICIPATED BUTTONS -->
-        <div class="row d-flex justify-content-center">
+        <!-- <div class="row d-flex justify-content-center">
           <button class="btn btn-outline-primary m-2" @click="showPosts = true">My Posts</button>
           <button class="btn btn-outline-primary m-2" @click="showPosts = false">
             My
             Participated Posts
           </button>
-        </div>
-
-
-
-
+        </div> -->
 
         <!-- TOTAL POSTS -->
-        <div class="col-2 mt-3">
+        <!-- <div class="col-2 mt-3">
           <h6>Total Posts: {{posts.length}}</h6>
-        </div>
+        </div> -->
 
-        <!-- FOLLOWERS -->
-        <div class="col-2 mt-3">
-          <h6 class="clickable" @click="showFollowers = !showFollowers">Followers: {{following.length}}</h6>
+        <!-- FOLLOWERS/FOLLOWING MODAL BUTTONS -->
+        <!-- <div class="col-2 mt-3">
+          <h6 class="clickable" data-toggle="modal" data-target="#followersModal">Followers: {{following.length}}</h6>
         </div>
-        <div class="card col-12" v-show="showFollowers">
-          <div v-for="follows in following">
-            <li class="clickable username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
-          </div>
-        </div>
-
-        <!-- FOLLOWING -->
         <div class="col-2">
-          <h6 class="clickable" @click="showFollowing = !showFollowing">Following: {{followedBy.length}}</h6>
-        </div>
-        <div class="card col-12" v-show="showFollowing">
-          <div v-for="follows in followedBy">
-            <li class="clickable username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
+          <h6 class="clickable" data-toggle="modal" data-target="#followingModal">Following: {{followedBy.length}}</h6>
+        </div> -->
+
+
+        <!-- Followers Modal -->
+        <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal3Label">Followers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div v-for="follows in followedBy">
+                  <li class="clickable username text-dark text-left p-2" data-dismiss="modal"
+                    @click="goProfile(follows)">{{follows.name}}
+                  </li>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
+        <!-- Following Modal -->
+        <div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal3Label">Following</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div v-for="follows in following">
+                  <li class="clickable username text-dark text-left p-2" data-dismiss="modal"
+                    @click="goProfile(follows)">{{follows.name}}
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- MY POSTS -->
         <span v-show="showPosts">
@@ -207,8 +314,6 @@
     data() {
       return {
         showPosts: true,
-        showFollowing: false,
-        showFollowers: false,
         newPost: {},
         activeClass: null
       }
@@ -300,8 +405,17 @@
 </script>
 
 <style scoped>
-  #addMargin {
+  .profile-stats {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.479);
+    background-color: rgb(252, 251, 255);
+  }
+
+  .margin-mobile {
     margin-top: 50px;
+  }
+
+  .margin-comp {
+    margin-top: 66px;
   }
 
   .clickable:hover {
@@ -331,8 +445,12 @@
     background-color: #3d6ea0
   }
 
+  .username-page-top {
+    color: #8396a4;
+    font-family: "Amatic SC", cursive;
+  }
 
-  #changeFont {
+  .joined-page-top {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
   }

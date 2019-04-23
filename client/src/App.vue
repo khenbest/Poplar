@@ -71,6 +71,6 @@
 
   .navbar {
     border-top: 0.5px solid rgba(0, 0, 0, 0.479);
-    background-color: rgb(246, 246, 248);
+    background-color: rgb(252, 251, 255);
   }
 </style>

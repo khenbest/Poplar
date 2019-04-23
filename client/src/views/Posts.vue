@@ -187,7 +187,7 @@
 
   .mobile-filter-bg {
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.479);
-    background-color: rgb(246, 246, 248);
+    background-color: rgb(252, 251, 255);
   }
 
   .btn-outline-primary {
@@ -245,8 +245,6 @@
     margin-left: 0;
     width: 50%;
   }
-
-
 
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
   .chatroom {
