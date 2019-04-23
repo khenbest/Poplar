@@ -209,13 +209,7 @@ export default new Vuex.Store({
           router.push({ name: 'posts' })
         })
     },
-    logout({ commit, dispatch }) {
-      auth.delete('logout')
-        .then(res => {
-          commit('setUser', res.data)
-          router.push({ name: 'login' })
-        })
-    },
+
     //#endregion
     //#region -- SORT --
     activity({ commit, dispatch }) {
