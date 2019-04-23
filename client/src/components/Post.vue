@@ -1,7 +1,7 @@
 <template>
   <div :class="$mq | mq({xs: '', sm: '', md: '', lg: 'col-4'})">
     <div
-      :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
+      :class="$mq | mq({xs: 'col-12 px-0 mx-0', sm: 'col-12 px-0 mx-0', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
       <div class="row d-flex justify-content-center">
         <div class="col d-flex justify-content-center">
           <h4 :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
@@ -99,7 +99,6 @@
       </div>
       <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
     </div>
-  </div>
   </div>
 </template>
 
@@ -201,6 +200,7 @@
     }
   };
 </script>
+
 <style scoped>
   .username {
     color: #a0b5c5;

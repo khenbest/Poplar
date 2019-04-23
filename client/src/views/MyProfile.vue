@@ -35,71 +35,162 @@
             <li class="username text-dark text-left p-2" @click="goProfile(follows)">{{follows.name}}</li>
           </div>
         </div>
+
+        <!-- MY POSTS -->
         <span v-show="showPosts">
           <div class="row">
-            <div id="post" class="col-xs-12 col-sm-6 col-md-3 m-2" v-for="post in posts" :key="post._id">
-              <div class="row">
-                <div class="col d-flex justify-content-center">
-                  <h4 class="title">{{post.title}}</h4>
+            <div :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-3', lg: 'col-4'})" v-for="post in posts"
+              :key="post._id">
+              <div
+                :class="$mq | mq({xs: 'col-12 px-0 mx-0', sm: 'col-12 px-0 mx-0', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
+                <div class="row d-flex justify-content-center">
+                  <div class="col d-flex justify-content-center">
+                    <h4
+                      :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
+                      @click="
+          goProfile(post.authorId)">{{post.user || 'Unknown'}}</h4>
+                    <!-- <button class="mx-2 btn btn" @click="addFollow(post.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col px-0">
-                  <img :src="post.imgUrl1" class="photo">
+                <div class="row">
+                  <div v-if="post.title.length < 28" class="col d-flex justify-content-center">
+                    <h4 class="title">{{post.title}}</h4>
+                  </div>
+                  <div v-else class="col d-flex justify-content-center">
+                    <h4 type="text" class="title" data-toggle="tooltip" data-placement="top" :title="post.title">
+                      {{post.title.substring(0,28)}}...
+                    </h4>
+                    <div class="text-center my-3">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col d-flex justify-content-center">
-                  <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+                <div class="row justify-content-center">
+                  <div v-if="!post.imgUrl2" :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
+                    <img :src="post.imgUrl1" :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
+                  </div>
+                  <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
+                    :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})">
+                    <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
+                      :src="post.imgUrl1">
+                    <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
+                      :src="post.imgUrl2">
+                  </div>
                 </div>
+
+                <!-- GO TO CHAT -->
+                <div v-if="participated">
+                  <div
+                    :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
+                    <button
+                      :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
+                      @click="chatroom(post._id)">What Are People Saying?</button>
+                  </div>
+                </div>
+                <div
+                  :class="$mq | mq({xs: 'row py-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
+                  <div
+                    :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})">
+                    <h4 class="timestamp">{{post.createdAt| formatTime}}</h4>
+                  </div>
+                </div>
+                <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
               </div>
-              <div class="row d-flex justify-content-center">
-                <button class="chat-button" @click="chatroom(post._id)">What Are People Saying?</button>
-              </div>
-              <button @click="deletePost(post._id)">Delete</button>
             </div>
           </div>
         </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <span v-show="!showPosts">
           <div class="row">
-            <div class="col-12">
-              <!-- <h3>Total Participated: {{user.participated.length}}</h3> -->
-            </div>
-          </div>
-          <div class="row">
-            <div id="post" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-1"
+            <div :class="$mq | mq({xs: 'col-12', sm: 'col-12', md: 'col-3', lg: 'col-4'})"
               v-for="(participated, index) in participated" :key="index">
-              <div class="row">
-                <div class="col">
-                  <h4 class="username d-flex justify-content-center">{{participated.user || 'Unknown'}}</h4>
+
+
+
+              <div
+                :class="$mq | mq({xs: 'col-12 px-0 mx-0', sm: 'col-12 px-0 mx-0', md: 'col-4 mt-3 border', lg: 'col-12 mt-2 border px-0 mx-0 shadow-sm rounded'})">
+                <div class="row d-flex justify-content-center">
+                  <div class="col d-flex justify-content-center">
+                    <h4
+                      :class="$mq | mq({xs: 'username mx-2', sm: 'username mx-2', md: 'username mx-2', lg: 'username mx-2'})"
+                      @click="
+          goProfile(participated.authorId)">{{participated.user || 'Unknown'}}</h4>
+                    <!-- <button class="mx-2 btn btn" @click="addFollow(participated.authorId)"><i class="fas fa-user-plus"></i> follow</button> -->
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col d-flex justify-content-center">
-                  <h4 class="title">{{participated.title}}</h4>
+                <div class="row">
+                  <div v-if="participated.title.length < 28" class="col d-flex justify-content-center">
+                    <h4 class="title">{{participated.title}}</h4>
+                  </div>
+                  <div v-else class="col d-flex justify-content-center">
+                    <h4 type="text" class="title" data-toggle="tooltip" data-placement="top"
+                      :title="participated.title">
+                      {{participated.title.substring(0,28)}}...
+                    </h4>
+                    <div class="text-center my-3">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col px-0">
-                  <img :src="participated.imgUrl1" class="photo">
+                <div class="row justify-content-center">
+                  <div v-if="!participated.imgUrl2"
+                    :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})">
+                    <img :src="participated.imgUrl1"
+                      :class="$mq | mq({xs: 'photo', sm: 'photo', md: 'photo', lg: 'photo'})">
+                  </div>
+                  <div v-else :class="$mq | mq({xs: 'col px-0', sm: 'col px-0', md: 'col', lg: 'col'})"
+                    :style="$mq | mq({xs: 'max-width: 481px', sm: 'max-width: 481px', md: '', lg: ''})">
+                    <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
+                      :src="participated.imgUrl1">
+                    <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
+                      :src="participated.imgUrl2">
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col d-flex justify-content-center">
-                  <h4 class="timestamp">{{participated.createdAt| formatTime}}</h4>
+
+                <!-- GO TO CHAT -->
+                <div v-if="participated">
+                  <div
+                    :class="$mq | mq({xs: 'col-12 mt-2', sm: 'col-12 mt-2', md: 'col-12 mt-2 border-left border-right border-bottom', lg: 'col-12 border-left border-right border-bottom'})">
+                    <button
+                      :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
+                      @click="chatroom(participated._id)">What Are People Saying?</button>
+                  </div>
                 </div>
+                <div
+                  :class="$mq | mq({xs: 'row py-1 mb-3 bottom-line', sm: 'row pb-1 mb-3 bottom-line', md: 'row mb-2', lg: 'row mb-2'})">
+                  <div
+                    :class="$mq | mq({xs: 'col d-flex justify-content-center', sm: 'col d-flex justify-content-center', md: 'col d-flex justify-content-center', lg: 'col d-flex justify-content-center'})">
+                    <h4 class="timestamp">{{participated.createdAt| formatTime}}</h4>
+                  </div>
+                </div>
+                <!-- <router-link :to="{name: 'participated', params: {participatedId: participated._id}}">{{participated.title}}</router-link> -->
               </div>
-              <div class="row d-flex justify-content-center">
-                <button class="chat-button" @click="chatroom(participated._id)">What Are People Saying?</button>
-              </div>
-              <button @click="deletePost(post._id)">Delete</button>
             </div>
           </div>
         </span>
       </div>
     </div>
   </div>
+
+  <!-- :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})" -->
+
 </template>
+
 <script>
   import Moment from "moment";
   import Chatroom from "@/components/Chatroom.vue";
@@ -220,17 +311,6 @@
 </style>
 
 <style scoped>
-  @media only screen and (min-width: 700px) {
-
-    #bottom-nav {
-      display: none
-    }
-  }
-
-  #post {
-    border: #3d6ea0 1px solid;
-  }
-
   .username {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
@@ -250,34 +330,6 @@
     background-color: #3d6ea0
   }
 
-  .title {
-    color: #3d6ea0;
-    font-family: "Patrick Hand SC", cursive;
-    margin-bottom: -0.05em;
-  }
-
-  img {
-    max-width: 100%;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-
-  .yes {
-    background-color: #95c701;
-  }
-
-  .no {
-    background-color: #fe3231;
-  }
-
-  .vote {
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    min-width: 5em;
-    min-height: 1em;
-    font-family: "Kalam", cursive;
-  }
 
   #changeFont {
     color: #8396a4;
@@ -297,17 +349,125 @@
     color: #3d6ea0;
   }
 
-  .fas:hover {
+  /* font-family: 'Amatic SC', cursive;
+font-family: 'Patrick Hand SC', cursive;
+font-family: 'Dekko', cursive;
+font-family: 'Itim', cursive;
+font-family: 'Kalam', cursive;
+font-family: 'Just Me Again Down Here', cursive; */
+
+  .username {
+    color: #a0b5c5;
+    font-family: "Amatic SC", cursive;
+    margin-bottom: -0.2em;
+    transition: all 0.3s linear;
+  }
+
+  .username:hover {
+    border-bottom: 0.2px solid #a0b5c5;
+    color: #3d6ea0;
     cursor: pointer;
   }
 
   .title {
     color: #3d6ea0;
-    font-family: 'Patrick Hand SC', cursive;
+    font-family: "Patrick Hand SC", cursive;
     margin-bottom: -0.05em;
+    transition: all 0.2s linear;
   }
 
-  /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
+  .title:hover {
+    cursor: default;
+  }
+
+  img {
+    max-width: 100%;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .yes {
+    background-color: #95c701;
+  }
+
+  .no {
+    background-color: #fe3231;
+  }
+
+  .this {
+    background-color: #a0b5c4;
+  }
+
+  .that {
+    background-color: #3c6ea0;
+  }
+
+  .mobile {
+    font-size: 5px;
+  }
+
+  .bar-yes {
+    background-color: #719700c1;
+  }
+
+  .bar-no {
+    background-color: #aa0000be;
+  }
+
+  .bar-this {
+    background-color: #a0b5c4;
+  }
+
+  .bar-that {
+    background-color: #3c6ea0;
+  }
+
+  .vote {
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    min-width: 5em;
+    min-height: 1em;
+    font-family: "Kalam", cursive;
+  }
+
+  .timestamp {
+    color: #3d6ea0;
+    font-size: 1em;
+  }
+
+  .bottom-line {
+    border-bottom: #3c6ea0a1 solid 0.5px;
+  }
+
+  .filters {
+    color: #c2c2c3;
+  }
+
+  .filters:active {
+    color: #3d6ea0;
+  }
+
+  .fas:hover {
+    cursor: pointer;
+  }
+
+  .progress {
+    border-radius: 0 !important;
+  }
+
+  .photos {
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
+  }
+
+  .photos2 {
+    margin-right: 0;
+    margin-left: 0;
+    width: 50%;
+  }
+
   .chat-button {
     background-color: #6496c7;
     border: none;
@@ -318,13 +478,17 @@
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
   }
 
-  /* font-family: 'Amatic SC', cursive;
-font-family: 'Patrick Hand SC', cursive;
-font-family: 'Dekko', cursive;
-font-family: 'Itim', cursive;
-font-family: 'Kalam', cursive;
-font-family: 'Just Me Again Down Here', cursive; */
+  .chat-button:hover {
+    background-color: #3979b9;
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
+  }
+
+  .chat-button:active {
+
+    background-color: #36608a;
+  }
 </style>
