@@ -448,11 +448,18 @@
   .username-page-top {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
+    width: 100%;
+    font-size: 300%;
+    font-weight: 600;
+    padding-top: 0px;
   }
 
   .joined-page-top {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
+    font-size: 1em;
+    font-weight: 400;
+
   }
 
   .timestamp {
