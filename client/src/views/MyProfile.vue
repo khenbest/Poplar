@@ -232,7 +232,7 @@
   }
 
   .username {
-    color: #a0b5c5;
+    color: #8396a4;
     font-family: "Amatic SC", cursive;
     margin-bottom: -0.2em;
     font-size: 24px;

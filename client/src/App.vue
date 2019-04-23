@@ -8,11 +8,11 @@
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0  navbar fixed-bottom bg-white row justify-content-around">
-          <a class="py-0 nav-item nav-link curs" @click="allPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="allPosts();"><i
               class=" fas fa-globe-americas filters fa-lg col=1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="goPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="goPosts();"><i
               class="fas fa-users filters fa-lg col-1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="myProfile();"><i
+          <a class="py-1 nav-item nav-link curs" @click="myProfile();"><i
               class="fas fa-user filters fa-lg col-1"></i></a>
         </div>
       </div>
@@ -22,11 +22,11 @@
       <div id='bottom-nav'
         :class="$mq | mq({xs: 'row  py-0', sm: 'row py-0', md: 'row mt-4 pt-5', lg: 'row mt-4 pt-5'})">
         <div style="font-size: 20px" class="py-0 navbar fixed-bottom bg-white row justify-content-around">
-          <a class="py-0 nav-item nav-link curs" @click="allPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="allPosts();"><i
               class=" fas fa-globe-americas filters fa-lg col=1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="goPosts();"><i
+          <a class="py-1 nav-item nav-link curs" @click="goPosts();"><i
               class="fas fa-users filters fa-lg col-1"></i></a>
-          <a class="py-0 nav-item nav-link curs" @click="myProfile();"><i
+          <a class="py-1 nav-item nav-link curs" @click="myProfile();"><i
               class="fas fa-user filters fa-lg col-1"></i></a>
         </div>
       </div>
@@ -63,5 +63,14 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     overflow: hidden;
+  }
+
+  .fas {
+    color: #9cadb9c2;
+  }
+
+  .navbar {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.479);
+    background-color: rgb(246, 246, 248);
   }
 </style>
