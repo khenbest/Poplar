@@ -1,5 +1,7 @@
 <template>
-  <div class="posts container-fluid" id="addMargin">
+
+  <div class="posts container-fluid"
+    :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
     <div class="row py-1 bg-light justify-content-center text-center">
       <!-- <div class=" dropdown m-2">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -151,11 +153,12 @@
 </script>
 
 <style scoped>
-  @media only screen and (min-width: 700px) {
+  .margin-mobile {
+    margin-top: 160px;
+  }
 
-    #bottom-nav {
-      display: none
-    }
+  .margin-comp {
+    margin-top: 66px;
   }
 
   .username {

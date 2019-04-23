@@ -1,5 +1,6 @@
 <template>
-  <div class="posts container-fluid" id="addMargin">
+  <div class="posts container-fluid"
+    :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
     <div class="row bg-light justify-content-center text-center"
       :class="$mq | mq({xs: 'py-1 fixed-top mt-5 mobile-filter-bg', sm: 'py-1 fixed-top mt-5 mobile-filter-bg', md: 'py-1', lg: 'py-1'})">
       <div class="dropdown m-2" :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})">
@@ -178,6 +179,14 @@
       display: none
     }
   } */
+
+  .margin-mobile {
+    margin-top: 160px;
+  }
+
+  .margin-comp {
+    margin-top: 66px;
+  }
 
   .username {
     color: #a0b5c5;
