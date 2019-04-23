@@ -5,80 +5,331 @@
       <div class="col-12">
 
 
-        <div class="row mt-1 profile-stats">
-          <div class="col-5">
-            <div class="row">
-              <div class="col-12">
-                <p class="username-page-top">{{user.name}}</p>
+
+        <mq-layout mq="xs">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.3}">
+                    {{user.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:0.8}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12">
-                <p class="joined-page-top">Member Since: {{user.createdAt | formatTime2}}</p>
+            <div class="col-7">
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = true">My Posts</button>
+                </div>
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = false">
+                    Participated
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-7">
-            <div class="row">
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-12 text-center stat-boxes">
-                    <div class="row">
-                      <div class="col-12 font-weight-bold">
-                        {{posts.length}}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 px-0">
-                        posts
-                      </div>
-                    </div>
-                  </div>
+        </mq-layout>
+
+        <mq-layout mq="sm">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.3}">
+                    {{user.name}}</p>
                 </div>
               </div>
-              <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
-                <div class="row">
-                  <div class="col-12 text-center stat-boxes">
-                    <div class="row">
-                      <div class="col-12  text-center justify-content-center font-weight-bold">
-                        {{followedBy.length}}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 text-center justify-content-center px-0">
-                        followers </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
-                <div class="row">
-                  <div class="col-12 text-center stat-boxes">
-                    <div class="row">
-                      <div class="col-12 font-weight-bold text-center justify-content-center">
-                        {{following.length}}
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 text-center justify-content-center px-0">
-                        following </div>
-                    </div>
-                  </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:0.8}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-6 d-flex justify-content-center px-0">
-                <button class="btn btn-outline-primary m-2" @click="showPosts = true">My Posts</button>
+            <div class="col-7">
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-6 d-flex justify-content-center px-0">
-                <button class="btn btn-outline-primary m-2" @click="showPosts = false">
-                  Participated
-                </button>
+              <div class="row">
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = true">My Posts</button>
+                </div>
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = false">
+                    Participated
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </mq-layout>
+
+        <mq-layout mq="md">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.6}">
+                    {{user.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:2}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = true">My Posts</button>
+                </div>
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = false">
+                    Participated
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mq-layout>
+
+        <mq-layout mq="lg">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.6}">
+                    {{user.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:2}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = true">My Posts</button>
+                </div>
+                <div class="col-6 d-flex justify-content-center mt-2">
+                  <button class="btn profile-sort-btn" @click="showPosts = false">
+                    Participated
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mq-layout>
+
 
 
 
@@ -445,13 +696,36 @@
     background-color: #3d6ea0
   }
 
+  .profile-sort-btn {
+    background-color: #6496c7;
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 0.5vh 4.5vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    transition: all 0.1s linear;
+  }
+
+  .profile-sort-btn:hover {
+    background-color: #3979b9;
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
+    color: white;
+  }
+
+  .profile-sort-btn:active {
+    background-color: #36608a;
+  }
+
   .username-page-top {
     color: #8396a4;
     font-family: "Amatic SC", cursive;
     width: 100%;
-    font-size: 300%;
-    font-weight: 600;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
 
   .joined-page-top {

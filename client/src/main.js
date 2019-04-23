@@ -8,8 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Croppa from 'vue-croppa'
 import Axios from 'axios'
 import MQ from 'vue-mq'
+import VueResizeText from 'vue-resize-text'
 
 Vue.use(Croppa)
+Vue.use(VueResizeText)
 
 Vue.config.productionTip = false
 

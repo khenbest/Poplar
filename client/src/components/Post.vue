@@ -341,7 +341,6 @@
   }
 
   .chat-button:active {
-
     background-color: #36608a;
   }
 </style>
