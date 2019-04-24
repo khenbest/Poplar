@@ -705,7 +705,7 @@
     border: none;
     border-radius: 50px;
     color: #FFF;
-    padding: 0.5vh 4.5vw;
+    padding: 0.5vh 3.8vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
