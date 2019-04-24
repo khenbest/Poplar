@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="col-7">
-              <div class="row">
+              <div class="row pt-3">
                 <div class="col-4">
                   <div class="row">
                     <div class="col-12 text-center stat-boxes">
@@ -659,6 +659,10 @@
   .profile-stats {
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.479);
     background-color: rgb(252, 251, 255);
+  }
+
+  .stat-boxes {
+    color: #3d6ea0;
   }
 
   .margin-mobile {
