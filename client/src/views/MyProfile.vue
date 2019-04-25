@@ -737,7 +737,6 @@
     font-family: "Amatic SC", cursive;
     font-size: 1em;
     font-weight: 400;
-
   }
 
   .timestamp {
@@ -892,7 +891,6 @@ font-family: 'Just Me Again Down Here', cursive; */
   }
 
   .chat-button:active {
-
     background-color: #36608a;
   }
 </style>
