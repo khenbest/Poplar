@@ -1,14 +1,14 @@
 {
-  "name": "kanban",
+  "name": "poplar",
   "version": "1.0.0",
-  "description": "Kanban a tool for organizing projects",
+  "description": "It is poplar, live it love it.",
   "main": "index.js",
   "scripts": {
     "debug": "node index.js",
     "start": "node index.js",
     "dev": "node index.js"
   },
-  "author": "Mark Ohnsman <mark.ohnsman@gmail.com>",
+  "author": "CDSK <dom@dom.com>",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
