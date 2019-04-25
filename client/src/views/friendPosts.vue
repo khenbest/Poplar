@@ -2,7 +2,7 @@
 
   <div class="posts container-fluid"
     :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
-    <div class="row bg-light justify-content-center text-center"
+    <!-- <div class="row bg-light justify-content-center text-center"
       :class="$mq | mq({xs: 'py-1 fixed-top mt-5 mobile-filter-bg', sm: 'py-1 fixed-top mt-5 mobile-filter-bg', md: 'py-1', lg: 'py-1'})">
       <div class="dropdown m-2" :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})">
         <button
@@ -61,7 +61,7 @@
         <input type="text" v-model="username" placeholder="type username here" />
         <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
-    </div>
+    </div> -->
 
 
     <!-- POST CARDS -->
@@ -171,7 +171,7 @@
 
 <style scoped>
   .margin-mobile {
-    margin-top: 160px;
+    margin-top: 80px;
   }
 
   .margin-comp {
