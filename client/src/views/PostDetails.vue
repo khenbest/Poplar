@@ -16,7 +16,7 @@
 
       <div class="postDetails row justify-content-center">
          <div
-            :class="$mq | mq({xs: 'col-12 mt-1  bottom-line', sm: 'col-12 mt-1  bottom-line', md: 'col-4 mt-3  bottom-line', lg: 'col-4 border offset-1  bottom-line'})">
+            :class="$mq | mq({xs: 'col-12 mt-1  bottom-line', sm: 'col-12 mt-1  bottom-line', md: 'col-4 mt-3 bottom-line', lg: 'col-4 border offset-1  bottom-line'})">
             <div class="row d-flex flex-row">
                <div class="col">
                   <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
@@ -38,18 +38,18 @@
                </div>
             </div>
             <!-- PROGRESS BAR GOES HERE -->
-            <div v-if="!activePost.imgUrl2" class="progress d-flex row justify"
+            <div v-if="!activePost.imgUrl2" class="progress d-flex row justify-content-center noMargin"
                :class="$mq | mq({xs: '', sm: '', md: ' px-3', lg: ' mx-0'})">
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes " role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no " role="progressbar"
                   :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
                   {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
             </div>
-            <div v-else="activePost.imgUrl2" class="progress d-flex row justify-content-center">
+            <div v-else="activePost.imgUrl2" class="progress d-flex row justify-content-center noMargin">
                <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
@@ -237,6 +237,10 @@
       background-color: #ce4e4e;
    }
 
+   .noMargin {
+      margin-left: -15px !important;
+      margin-right: -15px !important;
+   }
 
    .fas {
       color: #FFF !important;
