@@ -1,11 +1,21 @@
+.DS_Store
 node_modules
-.idea/.idea.Poplar/.idea/misc.xml
-.idea/.idea.Poplar/riderModule.iml
-.idea/.idea.Poplar/.idea/contentModel.xml
-.idea/.idea.Poplar/.idea/dbnavigator.xml
-.idea/.idea.Poplar/.idea/encodings.xml
-.idea/.idea.Poplar/.idea/indexLayout.xml
-.idea/.idea.Poplar/.idea/modules.xml
-.idea/.idea.Poplar/.idea/vcs.xml
-.idea/.idea.Poplar/.idea/workspace.xml
-.idea/.idea.Poplar/.idea/codeStyles/Project.xml
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
