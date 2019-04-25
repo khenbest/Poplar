@@ -12,7 +12,7 @@ Vue.use(Vuex)
 
 
 //Allows axios to work locally or live
-let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '//poplr.herokuapp.com'
+let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : 'https://poplr.herokuapp.com'
 
 let auth = Axios.create({
   baseURL: base + "auth/",
