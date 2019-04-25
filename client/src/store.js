@@ -55,6 +55,10 @@ export default new Vuex.Store({
     setUsers(state, users) {
       state.allUsers = users
     },
+    deletePost(state, postId) {
+      let deleted = state.myPosts.findIndex(post => post._id == postId)
+      state.myPosts.splice(deleted, 1)
+    },
     setPosts(state, posts) {
       state.posts = posts
     },
@@ -333,7 +337,7 @@ export default new Vuex.Store({
     deletePost({ commit, dispatch }, postId) {
       api.delete('posts/' + postId)
         .then(res => {
-          dispatch('getPosts')
+          commit('deletePost', postId)
         })
     },
     castVote({ commit, dispatch }, payload) {

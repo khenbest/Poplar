@@ -9,6 +9,7 @@ import Croppa from 'vue-croppa'
 import Axios from 'axios'
 import MQ from 'vue-mq'
 import VueResizeText from 'vue-resize-text'
+import './registerServiceWorker'
 
 Vue.use(Croppa)
 Vue.use(VueResizeText)

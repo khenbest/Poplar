@@ -248,7 +248,6 @@
             </div>
           </div>
         </mq-layout>
-
         <mq-layout mq="lg">
           <div class="row mt-1 profile-stats">
             <div class="col-5">
@@ -455,6 +454,7 @@
                     <button
                       :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
                       @click="chatroom(post._id)">What Are People Saying?</button>
+                    <button class="btn delete-btn mb-2" @click="deletePost(post._id)">Delete Post</button>
                   </div>
                 </div>
                 <div
@@ -668,6 +668,41 @@
   .margin-mobile {
     margin-top: 50px;
   }
+
+  .delete-btn {
+    background-color: #e05757;
+  }
+
+  .delete-btn:hover {
+    background-color: #e64646;
+  }
+
+  .delete-btn:active {
+    background-color: #ce4e4e;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 0.5vh 4vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    transition: all 0.1s linear;
+  }
+
+  .btn:hover {
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
+    color: white;
+  }
+
+  .btn:active {
+    background-color: #36608a;
+  }
+
 
   .margin-comp {
     margin-top: 66px;
