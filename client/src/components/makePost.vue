@@ -1,8 +1,6 @@
 <template>
     <div class="makePost container-fluid"
         :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
-
-
         <mq-layout mq="xs">
             <div class="row justify-content-center">
                 <div :class="$mq | mq({xs: 'col-12 px-0', sm: 'col-12 px-0', md: 'col-8', lg: 'col-8'})">
@@ -11,12 +9,13 @@
                     <div class="col-12 p-5 card" :class="{question : showForm == false}" @click="showForm=true">
                         <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                         <h3 v-if="!showForm">Yes or No?</h3>
-                        <p v-if="showForm">Upload "YES/NO" Image:</p>
+                        <h4 v-if="showForm">Upload "YES/NO" Image:</h4>
                         <div v-if="showForm" class="">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center">
                                     <form @submit.prevent="">
-                                        <input v-model="url" type="text" placeholder="image Url"> </input>
+                                        <input class="form-control" v-model="url" type="text" placeholder="image Url">
+                                        </input>
                                     </form>
                                 </div>
                             </div>
@@ -27,9 +26,9 @@
                                     </croppa>
                                 </div>
                             </div>
-                            <div class="row mx-2">
-                                <div class="col-12 m-5">
-                                    <button class="btn btn-danger" @click="output1()">Crop</button>
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" @click="output1()">Crop</button>
                                 </div>
                             </div>
                         </div>
@@ -143,12 +142,13 @@
                     <div class="col-12 p-5 card" :class="{question : showForm == false}" @click="showForm=true">
                         <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                         <h3 v-if="!showForm">Yes or No?</h3>
-                        <p v-if="showForm">Upload "YES/NO" Image:</p>
+                        <h3 v-if="showForm">Upload "YES/NO" Image:</h3>
                         <div v-if="showForm" class="">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-center">
-                                    <form @submit.prevent="">
-                                        <input v-model="url" type="text" placeholder="image Url"> </input>
+                                    <form class="row" @submit.prevent="">
+                                        <input class="form-control" v-model="url" type="text" placeholder="image Url">
+                                        </input>
                                     </form>
                                 </div>
                             </div>
@@ -159,7 +159,11 @@
                                     </croppa>
                                 </div>
                             </div>
-                            <button @click="output1()" class="mb-2">Crop</button>
+                            <div class="row justify-content-center">
+                                <div class="col-4">
+                                    <button class="btn btn-primary my-2" @click="output1()">Crop</button>
+                                </div>
+                            </div>
                         </div>
                         <div v-if="showForm">
                             <h4>THEN</H4>
@@ -181,11 +185,13 @@
                                     </select>
                                 </form>
                             </div>
-                            <input class="form-control" type="text" placeholder="Ask your question"
-                                v-model="newPost.title" required>
-                            <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
-                                type="submit">Create
-                                Post</button>
+                            <div class="row justify-content-center">
+                                <input class="col-10 form-control" type="text" placeholder="Ask your question"
+                                    v-model="newPost.title" required>
+                                <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
+                                    type="submit">Create
+                                    Post</button>
+                            </div>
                         </div>
                     </div>
 
@@ -198,11 +204,10 @@
                             <div class="row justify-content-center">
                                 <div v-if="showForm1">
                                     <div class="row">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <form @submit.prevent="">
-                                                <input v-model="url2" type="text" placeholder="image Url"> </input>
-                                            </form>
-                                        </div>
+                                        <form class="row" @submit.prevent="">
+                                            <input class="form-control" v-model="url2" type="text"
+                                                placeholder="image Url" />
+                                        </form>
                                     </div>
                                     <div class="row my-2">
                                         <div class="col-12 d-flex justify-content-center">
@@ -274,20 +279,25 @@
                                 @click="showForm = false">Back</button> -->
                             <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                             <h3 v-if="!showForm">Yes or No?</h3>
-                            <p v-if="showForm">Upload image:</p>
+                            <h4 class="mb-3" v-if="showForm">Upload "Yes/No" Image</h4>
                             <div v-if="showForm">
-                                <form @submit.prevent="">
-                                    <input v-model="url" type="text" placeholder="image Url"> </input>
+                                <form class="row justify-content-center mb-3" @submit.prevent="">
+                                    <input class="col-6 form-control" v-model="url" type="text" placeholder="image Url">
+                                    </input>
                                 </form>
                                 <!-- <button @click="choose()"> -->
                                 <!-- </button> -->
                                 <croppa v-model="croppa" canvas-color="#e9ecee" :width="480" :height="270">
                                     <img crossOrigin="anonymous" :src="url" slot="initial">
                                 </croppa>
-                                <button @click="output1()">Crop</button>
+                                <div class="row justify-content-center my-2">
+                                    <div class="col-4">
+                                        <button class="btn btn-primary" @click="output1()">Crop</button>
+                                    </div>
+                                </div>
                             </div>
                             <div v-if="showForm">
-                                <h4>THEN</H4>
+                                <h3>THEN</h3>
                                 <div>
                                     <h4>Select a Tag!</h4>
                                     <form class="mb-3 ">
@@ -307,19 +317,17 @@
                                     </form>
 
                                 </div>
-                                <input class="form-control" type="text" placeholder="Ask your question"
-                                    v-model="newPost.title" required>
-                                <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
-                                    type="submit">Create Post</button>
+                                <form class="row justify-content-center">
+                                    <input class="form-control col-10" type="text" placeholder="Ask your question"
+                                        v-model="newPost.title" required>
+                                    <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
+                                        type="submit">Create Post</button>
+                                </form>
                             </div>
                         </div>
-
-
                         <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
                             <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                             <h3 v-if="!showForm1">This or That?</h3>
-
-
                             <div v-if="showForm1" @submit.prevent="addPost2">
                                 <div class="row">
                                     <p v-if="showForm1">Upload image:</p>
@@ -388,20 +396,30 @@
                                 @click="showForm = false">Back</button> -->
                             <h3 v-if="!showForm" class="text-muted">(1 image)</h3>
                             <h3 v-if="!showForm">Yes or No?</h3>
-                            <p v-if="showForm">Upload image:</p>
+                            <h4 v-if="showForm">Upload "Yes/No" Image</h4 style="text-decoration: underline;">
                             <div v-if="showForm">
-                                <form @submit.prevent="">
-                                    <input v-model="url" type="text" placeholder="image Url"> </input>
+                                <form class="row mb-3 justify-content-center align-items-center" @submit.prevent="">
+                                    <input class="col-4 form-control" v-model="url" type="text" placeholder="image Url">
+                                    </input>
                                 </form>
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <h6>OR</h6>
+                                    </div>
+                                </div>
                                 <!-- <button @click="choose()"> -->
                                 <!-- </button> -->
                                 <croppa v-model="croppa" canvas-color="#e9ecee" :width="480" :height="270">
                                     <img crossOrigin="anonymous" :src="url" slot="initial">
                                 </croppa>
-                                <button @click="output1()">Crop</button>
                             </div>
                             <div v-if="showForm">
                                 <h4>THEN</H4>
+                                <div class="row justify-content-center">
+                                    <div class="col-4 mb-2">
+                                        <button class="btn btn-primary" @click="output1()">Crop</button>
+                                    </div>
+                                </div>
                                 <div>
                                     <h4>Select a Tag!</h4>
                                     <form class="mb-3 ">
@@ -421,19 +439,17 @@
                                     </form>
 
                                 </div>
-                                <input class="form-control" type="text" placeholder="Ask your question"
-                                    v-model="newPost.title" required>
-                                <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
-                                    type="submit">Create Post</button>
+                                <form class="row justify-content-center">
+                                    <input class="form-control col-6" type="text" placeholder="Ask your question"
+                                        v-model="newPost.title" required>
+                                    <button v-if="this.dataUrl1 != ''" @click="addPost" class="btn btn-primary mt-3"
+                                        type="submit">Create Post</button>
+                                </form>
                             </div>
                         </div>
-
-
                         <div class="col-12 p-5 card" :class="{question : showForm1==false}" @click="showForm1 = true">
                             <h3 v-if="!showForm1" class="text-muted">(2 images)</h3>
                             <h3 v-if="!showForm1">This or That?</h3>
-
-
                             <div v-if="showForm1" @submit.prevent="addPost2">
                                 <div class="row">
                                     <p v-if="showForm1">Upload image:</p>
@@ -669,6 +685,10 @@
 
     .vicp-preview {
         padding-right: 60px;
+    }
+
+    .btn-primary {
+        background-color: #6496c6 !important;
     }
 
     span {
