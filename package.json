@@ -1,14 +1,14 @@
 {
     "name": "kanban",
     "version": "1.0.0",
-    "description": "Kanban a tool for organizing projects",
+    "description": "The most Poplar app out there!",
     "main": "index.js",
     "scripts": {
         "debug": "node index.js",
         "start": "node server/index.js",
         "dev": "node index.js"
     },
-    "author": "Mark Ohnsman <mark.ohnsman@gmail.com>",
+    "author": "SCKD <email@gmail.com>",
     "dependencies": {
         "axios": "^0.18.0",
         "bcryptjs": "^2.4.3",
