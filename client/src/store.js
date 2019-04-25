@@ -5,7 +5,6 @@ import router from './router'
 
 //sockets
 import io from 'socket.io-client'
-import { error } from 'util';
 let socket = {}
 
 
@@ -13,7 +12,7 @@ Vue.use(Vuex)
 
 
 //Allows axios to work locally or live
-let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
+let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '//poplr.herokuapp.com'
 
 let auth = Axios.create({
   baseURL: base + "auth/",
@@ -110,10 +109,12 @@ export default new Vuex.Store({
       commit('setJoined', payload.name);
       dispatch('socket', payload)
     },
+    // @ts-ignore
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
       socket = io('//localhost:3000')
       //Register all listeners
+      // @ts-ignore
       socket.on('CONNECTED', data => {
         console.log('Connected to socket', payload)
         //connect to room 
@@ -149,9 +150,11 @@ export default new Vuex.Store({
         console.log(err);
       })
     },
+    // @ts-ignore
     sendMessage({ commit, dispatch }, payload) {
       socket.emit('message', payload)
     },
+    // @ts-ignore
     leaveRoom({ commit, dispatch }, payload) {
       socket.emit('leave', payload)
       socket.close()
@@ -159,18 +162,21 @@ export default new Vuex.Store({
       console.log('left room')
     },
     //#endregion
+    // @ts-ignore
     getUser({ commit, dispatch }, payload) {
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
         })
     },
+    // @ts-ignore
     getUsers({ commit, dispatch }) {
       api.get('users/all')
         .then(res => {
           commit('setUsers', res.data)
         })
     },
+    // @ts-ignore
     addFollow({ commit, dispatch }, payload) {
       // if(this.state.following.find(post => post == payload))
       api.put('users/follow/' + payload.toFollow, payload)
@@ -180,6 +186,7 @@ export default new Vuex.Store({
           dispatch("getUsers")
         })
     },
+    // @ts-ignore
     unfollow({ commit, dispatch }, payload) {
       console.log(payload)
       api.put('users/unfollow/' + payload.toUnfollowId, payload)
@@ -190,6 +197,7 @@ export default new Vuex.Store({
         })
     },
     //#region -- AUTH STUFF --
+    // @ts-ignore
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -197,16 +205,19 @@ export default new Vuex.Store({
           router.push({ name: 'posts' })
         })
     },
+    // @ts-ignore
     authenticate({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
           // router.push({ name: 'posts' }) //reroutes to posts upon refresh
         })
+        // @ts-ignore
         .catch(res => {
           router.push({ name: 'login' })
         })
     },
+    // @ts-ignore
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
@@ -214,6 +225,7 @@ export default new Vuex.Store({
           router.push({ name: 'posts' })
         })
     },
+    // @ts-ignore
     logout({ commit, dispatch }) {
       auth.delete('logout')
         .then(res => {
@@ -224,30 +236,40 @@ export default new Vuex.Store({
 
     //#endregion
     //#region -- SORT --
+    // @ts-ignore
     activity({ commit, dispatch }) {
+      // @ts-ignore
       let sorted = this.state.posts.sort((a, b) => {
         return Object.values(b.votes).length - Object.values(a.votes).length
       })
       commit('setFiltered', sorted)
     },
+    // @ts-ignore
     oldest({ commit, dispatch }) {
+      // @ts-ignore
       let sorted = this.state.posts.sort((a, b) => {
+        // @ts-ignore
         return new Date(a.createdAt) - new Date(b.createdAt)
       })
       commit('setPosts', sorted)
     },
+    // @ts-ignore
     filterUser({ commit, dispatch }, payload) {
+      // @ts-ignore
       let filtered = this.state.posts.filter(post => {
         return post.user.toLowerCase() == payload.toLowerCase()
       })
       commit('setFiltered', filtered)
     },
+    // @ts-ignore
     filterTags({ commit, dispatch }, payload) {
       if (!payload) {
+        // @ts-ignore
         let filtered = this.state.posts
         console.log(filtered)
         commit('setFiltered', filtered)
       } else {
+        // @ts-ignore
         let filtered = this.state.posts.filter(post => {
           return post.tags == payload
         })
@@ -255,27 +277,36 @@ export default new Vuex.Store({
         commit('setFiltered', filtered)
       }
     },
+    // @ts-ignore
     yesNo({ commit, dispatch }) {
+      // @ts-ignore
       let filtered = this.state.posts.filter(post => {
         return !post.imgUrl2
       })
       commit('setFiltered', filtered)
     },
+    // @ts-ignore
     thisThat({ commit, dispatch }) {
+      // @ts-ignore
       let filtered = this.state.posts.filter(post => {
         return post.imgUrl2
       })
       commit('setFiltered', filtered)
     },
+    // @ts-ignore
     reset({ commit, dispatch }) {
+      // @ts-ignore
       let sorted = this.state.posts.sort((a, b) => {
+        // @ts-ignore
         return new Date(b.createdAt) - new Date(a.createdAt)
       })
       commit('setPosts', sorted)
     },
     //#endregion
     //#region -- POSTS --
+    // @ts-ignore
     getPublicPosts({ commit, dispatch }) {
+      // @ts-ignore
       api.get('posts').then(res => {
         debugger
         commit("setPosts")
@@ -283,6 +314,7 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
+    // @ts-ignore
     getPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {
@@ -297,16 +329,20 @@ export default new Vuex.Store({
             return post
           })
           commit('setPosts', addVotes.sort((a, b) => {
+            // @ts-ignore
             return new Date(b.createdAt) - new Date(a.createdAt)
           }))
         })
     },
+    // @ts-ignore
     getFollowing({ commit, dispatch }) {
       commit('following')
     },
+    // @ts-ignore
     getFollowers({ commit, dispatch }) {
       commit('followers')
     },
+    // @ts-ignore
     getMyPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {
@@ -318,15 +354,18 @@ export default new Vuex.Store({
         })
       console.log(query)
     },
+    // @ts-ignore
     clearActivePost({ commit, dispatch }, object) {
       commit('setActivePost', object)
     },
+    // @ts-ignore
     getActivePost({ commit, dispatch }, postId) {
       api.get('posts/get/' + postId)
         .then(res => {
           commit('setActivePost', res.data)
         })
     },
+    // @ts-ignore
     addPost({ commit, dispatch }, postData) {
       api.post('posts', postData)
         .then(serverPost => {
@@ -334,12 +373,15 @@ export default new Vuex.Store({
           console.log(serverPost.data)
         })
     },
+    // @ts-ignore
     deletePost({ commit, dispatch }, postId) {
       api.delete('posts/' + postId)
+        // @ts-ignore
         .then(res => {
           commit('deletePost', postId)
         })
     },
+    // @ts-ignore
     castVote({ commit, dispatch }, payload) {
       api.put(payload.endpoint, payload.data)
         .then(res => {
