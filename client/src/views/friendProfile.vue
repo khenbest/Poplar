@@ -1,17 +1,8 @@
 <template>
-
-
-
-
-
-
-
   <div class="posts container-fluid"
     :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})" v-if="user._id">
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
-
-
 
         <mq-layout mq="xs">
           <div class="row mt-1 profile-stats">
@@ -33,6 +24,176 @@
             </div>
             <div class="col-7">
               <div class="row pt-3">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 d-flex justify-content-center mt-2">
+                  <button v-if="showFollowToggle" class="btn profile-sort-btn"
+                    @click="addFollow(user._id); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-plus"></i>
+                    follow
+                  </button>
+                  <button v-else class="btn profile-sort-btn"
+                    @click="unfollow(user); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-minus text-dark"></i>
+                    Unfollow
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mq-layout>
+
+        <mq-layout mq="sm">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.3}">
+                    {{user.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:0.8}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="row pt-3">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold">
+                          {{posts.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 px-0">
+                          posts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followersModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12  text-center justify-content-center font-weight-bold">
+                          {{followedBy.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          followers </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clickable col-4" data-toggle="modal" data-target="#followingModal">
+                  <div class="row">
+                    <div class="col-12 text-center stat-boxes">
+                      <div class="row">
+                        <div class="col-12 font-weight-bold text-center justify-content-center">
+                          {{following.length}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center justify-content-center px-0">
+                          following </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 d-flex justify-content-center mt-2">
+                  <button v-if="showFollowToggle" class="btn profile-sort-btn"
+                    @click="addFollow(user._id); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-plus"></i>
+                    follow
+                  </button>
+                  <button v-else class="btn profile-sort-btn"
+                    @click="unfollow(user); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-minus text-dark"></i>
+                    Unfollow
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mq-layout>
+
+        <mq-layout mq="md">
+          <div class="row mt-1 profile-stats">
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12">
+                  <p class="username-page-top" v-resize-text="{ratio:0.6}">
+                    {{user.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="joined-page-top" v-resize-text="{ratio:2}">
+                    Joined:
+                    {{user.createdAt | formatTime2}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="row">
                 <div class="col-4">
                   <div class="row">
                     <div class="col-12 text-center stat-boxes">
@@ -166,12 +327,16 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-6 d-flex justify-content-center mt-2">
-                  <button class="btn profile-sort-btn" @click="showPosts = true">My Posts</button>
-                </div>
-                <div class="col-6 d-flex justify-content-center mt-2">
-                  <button class="btn profile-sort-btn" @click="showPosts = false">
-                    Participated
+                <div class="col-12 d-flex justify-content-center mt-2">
+                  <button v-if="showFollowToggle" class="btn profile-sort-btn"
+                    @click="addFollow(user._id); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-plus"></i>
+                    follow
+                  </button>
+                  <button v-else class="btn profile-sort-btn"
+                    @click="unfollow(user); showFollowToggle = !showFollowToggle;">
+                    <i class="fas mr-1 fa-user-minus text-dark"></i>
+                    Unfollow
                   </button>
                 </div>
               </div>
@@ -284,7 +449,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
