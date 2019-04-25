@@ -45,17 +45,7 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
         </div>
       </div>
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-primary" active>
-          <input type="radio" name="option" v-model="filter" id="option1" @change="activity"> Most Poplar
-        </label>
-        <label class="btn btn-outline-primary" active>
-          <input type="radio" name="option" v-model="filter" id="option2" @change="reset"> Newest
-        </label>
-        <label class="btn btn-outline-primary" active>
-          <input type="radio" name="option" v-model="filter" id="option3"> Oldest
-        </label>
-      </div>
+
       <form v-if="showForm" @submit.prevent="filterbyUser">
         <input type="text" v-model="username" placeholder="type username here" />
         <button class="btn btn-outline-primary" type="submit">Search</button>
