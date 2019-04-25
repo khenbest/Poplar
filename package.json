@@ -1,7 +1,7 @@
 {
-  "name": "kanban",
+  "name": "poplar",
   "version": "1.0.0",
-  "description": "Kanban a tool for organizing projects",
+  "description": "Poplar, very fun.",
   "main": "index.js",
   "scripts": {
     "debug": "node index.js",
