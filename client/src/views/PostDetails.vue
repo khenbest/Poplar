@@ -1,14 +1,22 @@
 <template>
-   <div>
-      <div style="position: absolute; top: 55px; left: 20px; z-index: 999;">
-         <div class="text-center">
-            <button class="btn btn-outline-primary" type="button" @click="$router.back()"><i
-                  class="fas fa-chevron-left text-dark"></i> Back</button>
+   <div
+      :class="$mq | mq({xs: 'container-fluid margin-mobile', sm: 'container-fluid margin-mobile', md: 'container-fluid margin-comp', lg: 'container-fluid margin-comp'})">
+      <div class="row">
+         <div class="col-6 d-flex justify-content-start">
+            <div class="text-center">
+               <button class="btn back-btn" type="button" @click="$router.back()"><i
+                     class="fas fa-chevron-left text-dark"></i> Back</button>
+            </div>
+         </div>
+         <div class="col-6 d-flex justify-content-end">
+            <button class="btn delete-btn" @click="deletePost(activePost._id)" v-if="userPost">Delete My Post</button>
          </div>
       </div>
-      <div :class="$mq | mq({xs: 'postDetails', sm: 'postDetails', md: 'postDetails row', lg: 'postDetails row'})"
-         id="addMargin">
-         <div :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3', lg: 'col-4 border offset-1'})">
+
+
+      <div class="postDetails row justify-content-center">
+         <div
+            :class="$mq | mq({xs: 'col-12 mt-1  bottom-line', sm: 'col-12 mt-1  bottom-line', md: 'col-4 mt-3  bottom-line', lg: 'col-4 border offset-1  bottom-line'})">
             <div class="row d-flex flex-row">
                <div class="col">
                   <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
@@ -30,34 +38,50 @@
                </div>
             </div>
             <!-- PROGRESS BAR GOES HERE -->
-            <div v-if="!activePost.imgUrl2" class="progress d-flex row">
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes h-25" role="progressbar"
+            <div v-if="!activePost.imgUrl2" class="progress d-flex row justify"
+               :class="$mq | mq({xs: '', sm: '', md: ' px-3', lg: ' mx-0'})">
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
                   :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
                   {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
             </div>
             <div v-else="activePost.imgUrl2" class="progress d-flex row justify-content-center">
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-this h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-that h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
                   :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
                   {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="col-12" style="font-size:20px;">
-                  <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
-               </div>
-               <button class="btn btn-outline-primary px-4 mb-2" @click="deletePost(activePost._id)">Delete</button>
+            </div>
+            <div class="" style="font-size:20px;"
+               :class="$mq | mq({xs: 'col-12 m-2', sm: 'col-12 m-2', md: 'col-12', lg: 'col-12'})">
+               <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
             </div>
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
          </div>
-         <div class="col-6">
-            <chatroom></chatroom>
+         <div class=""
+            :class="$mq | mq({xs: 'row justify-content-center mt-3', sm: 'row justify-content-center mt-3', md: 'col-6 mt-3', lg: 'col-6 mt-3'})">
+            <mq-layout mq="xs" class="col-12 d-flex justify-content-center">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="sm" class="col-12 d-flex justify-content-center">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="md">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="lg">
+               <chatroom></chatroom>
+            </mq-layout>
          </div>
       </div>
    </div>
@@ -82,7 +106,8 @@
       },
       data() {
          return {
-            x: 100
+            x: 100,
+
          }
       },
       computed: {
@@ -112,6 +137,9 @@
                })
             }
             return yes
+         },
+         userPost() {
+            return this.$store.state.activePost.authorId == this.$store.state.user._id
          }
       },
       methods: {
@@ -153,6 +181,67 @@
 
 
 <style scoped>
+   .margin-mobile {
+      margin-top: 55px;
+   }
+
+   .margin-comp {
+      margin-top: 66px;
+   }
+
+   .btn {
+      background-color: #6496c7;
+      border: none;
+      border-radius: 50px;
+      color: #FFF;
+      padding: 0.5vh 4vw;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      transition: all 0.1s linear;
+   }
+
+   .btn:hover {
+      background-color: #3979b9;
+      transform: scale(1.03, 1);
+      box-shadow: 2px 2px 2px grey;
+      color: white;
+   }
+
+   .btn:active {
+      background-color: #36608a;
+   }
+
+   .back-btn {
+      background-color: #6496c7;
+   }
+
+   .back-btn:hover {
+      background-color: #3979b9;
+   }
+
+   .back-btn:active {
+      background-color: #36608a;
+   }
+
+   .delete-btn {
+      background-color: #e05757;
+   }
+
+   .delete-btn:hover {
+      background-color: #e64646;
+   }
+
+   .delete-btn:active {
+      background-color: #ce4e4e;
+   }
+
+
+   .fas {
+      color: #FFF !important;
+   }
+
    .username {
       color: #a0b5c5;
       font-family: "Amatic SC", cursive;
@@ -217,8 +306,9 @@
    }
 
    .timestamp {
-      color: #3d6ea0;
-      font-size: 1em;
+      color: #8396a4;
+      font-size: 0.9em;
+      font-family: "Kalam", cursive;
    }
 
    .filters {
@@ -234,7 +324,11 @@
    }
 
    .progress {
-      height: 10vh;
+      border-radius: 0 !important;
+   }
+
+   .bottom-line {
+      border-bottom: #3c6ea0a1 solid 0.5px;
    }
 
    .photos {

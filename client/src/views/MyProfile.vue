@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="col-7">
-              <div class="row">
+              <div class="row pt-3">
                 <div class="col-4">
                   <div class="row">
                     <div class="col-12 text-center stat-boxes">
@@ -661,6 +661,10 @@
     background-color: rgb(252, 251, 255);
   }
 
+  .stat-boxes {
+    color: #3d6ea0;
+  }
+
   .margin-mobile {
     margin-top: 50px;
   }
@@ -701,7 +705,7 @@
     border: none;
     border-radius: 50px;
     color: #FFF;
-    padding: 0.5vh 4.5vw;
+    padding: 0.5vh 3.8vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -733,7 +737,6 @@
     font-family: "Amatic SC", cursive;
     font-size: 1em;
     font-weight: 400;
-
   }
 
   .timestamp {
@@ -888,7 +891,6 @@ font-family: 'Just Me Again Down Here', cursive; */
   }
 
   .chat-button:active {
-
     background-color: #36608a;
   }
 </style>

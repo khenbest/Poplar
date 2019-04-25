@@ -2,8 +2,12 @@
 
   <div class="posts container-fluid"
     :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
-    <div class="row py-1 bg-light justify-content-center text-center">
-      <!-- <div class=" dropdown m-2">
+    <div class="row bg-light justify-content-center text-center"
+      :class="$mq | mq({xs: 'py-1 fixed-top mt-5 mobile-filter-bg', sm: 'py-1 fixed-top mt-5 mobile-filter-bg', md: 'py-1', lg: 'py-1'})">
+      <div class="dropdown m-2" :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})">
+        <button
+          :class="$mq | mq({xs: 'btn btn-outline-primary mx-2', sm: 'btn btn-outline-primary mx-2', md: 'btn btn-outline-primary mx-2', lg: 'btn btn-outline-primary mx-2'})"
+          @click="filterbyTag()">Reset</button>
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort
@@ -11,11 +15,9 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
           <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
-          <a class="dropdown-item text-dark" @click="reset()">Reset</a>
-
         </div>
-    </div> -->
-      <!-- <div class="dropdown m-2">
+      </div>
+      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
@@ -23,9 +25,10 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="yesNo(); showForm = false">Yes or no</a>
           <a class="dropdown-item text-dark" @click="thisThat();showForm = false">This or that</a>
+          <a class="dropdown-item text-dark" @click="showForm = true">Filter by Username</a>
         </div>
-      </div> -->
-      <!-- <div class="dropdown m-2">
+      </div>
+      <div :class="$mq | mq({xs: 'dropdown m-2', sm: 'dropdown m-2', md: 'dropdown m-2', lg: 'dropdown m-2'})">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Tags
@@ -36,13 +39,27 @@
           <a class="dropdown-item text-dark" @click=" filterbyTag('movies')">Movies</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('fashion')">Fashion</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('food')">Food</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('tv')">TV</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('kimspiration')">Kimspiration</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('developer')">Developer Meme's</a>
+          <a class="dropdown-item text-dark" @click=" filterbyTag('question')">Questions</a>
           <a class="dropdown-item text-dark" @click=" filterbyTag('meme-culture')">Meme-Culture</a>
-          <a class="dropdown-item text-dark" @click=" filterbyTag()">Reset</a>
         </div>
-      </div> -->
+      </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option1" @change="activity"> Most Poplar
+        </label>
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option2" @change="reset"> Newest
+        </label>
+        <label class="btn btn-outline-primary" active>
+          <input type="radio" name="option" v-model="filter" id="option3"> Oldest
+        </label>
+      </div>
       <form v-if="showForm" @submit.prevent="filterbyUser">
         <input type="text" v-model="username" placeholder="type username here" />
-        <button class="btn btn-secondary" type="submit">Search</button>
+        <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
     </div>
 
