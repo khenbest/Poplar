@@ -10,7 +10,7 @@ let Socket = require('./server-assets/models/socket')
 new Socket(io)
 
 //Sets the port to Heroku's, and the files to the built project 
-var port = process.env.PORT || 5000
+var port = process.env.PORT || 3000
 server.use(express.static(__dirname + '/../client/dist'))
 
 
