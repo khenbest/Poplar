@@ -1,12 +1,21 @@
 <template>
-   <div>
-      <div style="position: absolute; top: 55px; left: 20px; z-index: 999;">
-         <div class="text-center">
-            <button class="btn btn-outline-primary" type="button" @click="$router.back()"><i
-                  class="fas fa-chevron-left text-dark"></i> Back</button>
+   <div
+      :class="$mq | mq({xs: 'container-fluid margin-mobile', sm: 'container-fluid margin-mobile', md: 'container-fluid margin-comp', lg: 'container-fluid margin-comp'})">
+      <div class="row">
+         <div class="col-6 d-flex justify-content-start">
+            <div class="text-center">
+               <button class="btn back-btn" type="button" @click="$router.back()"><i
+                     class="fas fa-chevron-left text-dark"></i> Back</button>
+            </div>
+         </div>
+         <div class="col-6 d-flex justify-content-end">
+            <button class="btn delete-btn" @click="deletePost(activePost._id)" v-if="userPost">Delete My Post</button>
          </div>
       </div>
-      <div :class="$mq | mq({xs: 'postDetails', sm: 'postDetails', md: 'postDetails row', lg: 'postDetails row'})"
+
+
+      <div
+         :class="$mq | mq({xs: 'postDetails row', sm: 'postDetails row', md: 'postDetails row', lg: 'postDetails row'})"
          id="addMargin">
          <div :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3', lg: 'col-4 border offset-1'})">
             <div class="row d-flex flex-row">
@@ -52,7 +61,6 @@
                <div class="col-12" style="font-size:20px;">
                   <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
                </div>
-               <button class="btn btn-outline-primary px-4 mb-2" @click="deletePost(activePost._id)">Delete</button>
             </div>
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
          </div>
@@ -82,7 +90,8 @@
       },
       data() {
          return {
-            x: 100
+            x: 100,
+
          }
       },
       computed: {
@@ -112,6 +121,9 @@
                })
             }
             return yes
+         },
+         userPost() {
+            return this.$store.state.activePost.authorId == this.$store.state.user._id
          }
       },
       methods: {
@@ -153,6 +165,67 @@
 
 
 <style scoped>
+   .margin-mobile {
+      margin-top: 80px;
+   }
+
+   .margin-comp {
+      margin-top: 66px;
+   }
+
+   .btn {
+      background-color: #6496c7;
+      border: none;
+      border-radius: 50px;
+      color: #FFF;
+      padding: 0.5vh 4vw;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      transition: all 0.1s linear;
+   }
+
+   .btn:hover {
+      background-color: #3979b9;
+      transform: scale(1.03, 1);
+      box-shadow: 2px 2px 2px grey;
+      color: white;
+   }
+
+   .btn:active {
+      background-color: #36608a;
+   }
+
+   .back-btn {
+      background-color: #6496c7;
+   }
+
+   .back-btn:hover {
+      background-color: #3979b9;
+   }
+
+   .back-btn:active {
+      background-color: #36608a;
+   }
+
+   .delete-btn {
+      background-color: #e05757;
+   }
+
+   .delete-btn:hover {
+      background-color: #e64646;
+   }
+
+   .delete-btn:active {
+      background-color: #ce4e4e;
+   }
+
+
+   .fas {
+      color: #FFF !important;
+   }
+
    .username {
       color: #a0b5c5;
       font-family: "Amatic SC", cursive;
@@ -235,6 +308,7 @@
 
    .progress {
       height: 10vh;
+      border-radius: 0 !important;
    }
 
    .photos {

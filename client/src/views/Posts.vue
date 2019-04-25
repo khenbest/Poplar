@@ -255,6 +255,7 @@
     width: 50%;
   }
 
+
   /* TEMPORARY STYLING FOR TEMPORARY CHATROOM BUTTON */
   .chatroom {
     border: none;
