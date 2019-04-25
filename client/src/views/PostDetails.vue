@@ -14,10 +14,9 @@
       </div>
 
 
-      <div
-         :class="$mq | mq({xs: 'postDetails row', sm: 'postDetails row', md: 'postDetails row', lg: 'postDetails row'})"
-         id="addMargin">
-         <div :class="$mq | mq({xs: 'col-12 mt-3', sm: 'col-6 mt-3', md: 'col-4 mt-3', lg: 'col-4 border offset-1'})">
+      <div class="postDetails row justify-content-center">
+         <div
+            :class="$mq | mq({xs: 'col-12 mt-1  bottom-line', sm: 'col-12 mt-1  bottom-line', md: 'col-4 mt-3  bottom-line', lg: 'col-4 border offset-1  bottom-line'})">
             <div class="row d-flex flex-row">
                <div class="col">
                   <h4 class="username d-flex justify-content-center">{{activePost.user || 'Unknown'}}</h4>
@@ -39,33 +38,50 @@
                </div>
             </div>
             <!-- PROGRESS BAR GOES HERE -->
-            <div v-if="!activePost.imgUrl2" class="progress d-flex row">
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes h-25" role="progressbar"
+            <div v-if="!activePost.imgUrl2" class="progress d-flex row justify"
+               :class="$mq | mq({xs: '', sm: '', md: ' px-3', lg: ' mx-0'})">
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-yes" role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-no" role="progressbar"
                   :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
                   {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
             </div>
             <div v-else="activePost.imgUrl2" class="progress d-flex row justify-content-center">
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-this h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-this" role="progressbar"
                   :style="{width: (totalYes/(totalYes + totalNo) *100) + '%'}">
                   {{(totalYes/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="progress-bar progress-bar-striped progress-bar-animated bar-that h-25" role="progressbar"
+               <div class="progress-bar progress-bar-striped progress-bar-animated bar-that" role="progressbar"
                   :style="{width: (totalNo/(totalYes + totalNo) *100) + '%'}">
                   {{(totalNo/(totalYes + totalNo) *100).toFixed(0)}}%
                </div>
-               <div class="col-12" style="font-size:20px;">
-                  <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
-               </div>
+            </div>
+            <div class="" style="font-size:20px;"
+               :class="$mq | mq({xs: 'col-12 m-2', sm: 'col-12 m-2', md: 'col-12', lg: 'col-12'})">
+               <h4 class="timestamp">{{activePost.createdAt| formatTime}}</h4>
             </div>
             <!-- <router-link :to="{name: 'post', params: {postId: post._id}}">{{post.title}}</router-link> -->
          </div>
-         <div class="col-6">
-            <chatroom></chatroom>
+         <div class=""
+            :class="$mq | mq({xs: 'row justify-content-center mt-3', sm: 'row justify-content-center mt-3', md: 'col-6 mt-3', lg: 'col-6 mt-3'})">
+            <mq-layout mq="xs" class="col-12 d-flex justify-content-center">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="sm" class="col-12 d-flex justify-content-center">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="md">
+               <chatroom></chatroom>
+            </mq-layout>
+
+            <mq-layout mq="lg">
+               <chatroom></chatroom>
+            </mq-layout>
          </div>
       </div>
    </div>
@@ -166,7 +182,7 @@
 
 <style scoped>
    .margin-mobile {
-      margin-top: 80px;
+      margin-top: 55px;
    }
 
    .margin-comp {
@@ -290,8 +306,9 @@
    }
 
    .timestamp {
-      color: #3d6ea0;
-      font-size: 1em;
+      color: #8396a4;
+      font-size: 0.9em;
+      font-family: "Kalam", cursive;
    }
 
    .filters {
@@ -307,8 +324,11 @@
    }
 
    .progress {
-      height: 10vh;
       border-radius: 0 !important;
+   }
+
+   .bottom-line {
+      border-bottom: #3c6ea0a1 solid 0.5px;
    }
 
    .photos {

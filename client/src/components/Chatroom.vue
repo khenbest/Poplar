@@ -1,41 +1,38 @@
 <template>
-  <div class="Chatroom p-5 mt-0 py-5 border rounded bg-white" id="addMargin">
-    <div v-if="!joined" class="text-center">
-      <!-- {{post.title}} -->
-      <!-- <button class="btn btn-primary btn-lg" @click="join()">Join Chatroom</button> -->
+  <div class="Chatroom"
+    :class="$mq | mq({xs: 'mb-5', sm: 'mb-5', md: 'border rounded mb-5', lg: 'border rounded mb-5'})">
+    <div class="connected-users text-left">
+      <h5 class="message text-center">Connected Users</h5>
+      <ul>
+        <li v-for="user in connectedUsers">
+          {{user}}
+        </li>
+      </ul>
     </div>
-    <div v-else>
-      <div class="connected-users text-left">
-        <h5>Connected Users</h5>
-        <ul>
-          <li v-for="user in connectedUsers">
-            {{user}}
-          </li>
-        </ul>
-      </div>
-      <hr>
-      <div class="chat">
-        <div class="row" v-for="item in messages">
-          <div class="col-sm-2 my-2 text-left">
-            <span class="name" style="font-weight: bold;">{{ item.user }} </span>
-          </div>
-          <div class="col-sm-7 my-2 text-left">
-            <span class="message">{{ item.message }}</span>
-          </div>
-          <div class="col-sm-3 my-2 text-right">
-            <span class="name">{{item.createdAt | formatTime }}</span>
-          </div>
+
+    <div class="chat">
+      <div class="row" v-for="item in messages">
+        <div class="col-sm-2 text-left">
+          <span class="name" style="font-weight: bold;">{{ item.user }} </span>
+        </div>
+        <div class="col-sm-7 text-left">
+          <span class="message">{{ item.message }}</span>
+        </div>
+        <div class="col-sm-3 text-right">
+          <span class="chat-date">{{item.createdAt | formatTime }}</span>
         </div>
       </div>
-      <br>
-      <div class="text-center">
-        <form @submit.prevent="send">
-          <div class="form-group">
-            <input type="text" class="form-control input-lg text-center" placeholder="Message" v-model="message">
-          </div>
-          <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
-        </form>
-      </div>
+    </div>
+
+    <br>
+    <div class="text-center">
+      <form @submit.prevent="send">
+        <div class="form-group">
+          <input type="text" class="form-control input-lg text-center chat-input" placeholder="Message"
+            v-model="message">
+        </div>
+        <button class="btn send-btn mb-3" type="submit">Send</button>
+      </form>
     </div>
   </div>
 </template>
@@ -108,6 +105,55 @@
   }
 
   .Chatroom {
-    font-family: default;
+    color: #8396a4;
+    font-family: "Amatic SC", cursive;
+    font-size: 1.5em;
+  }
+
+  .name {
+    font-size: 0.8em;
+    color: #8396a4 !important;
+  }
+
+  .chat-date {
+    font-size: 0.6em;
+    color: #8396a4 !important;
+  }
+
+  .chat-input {
+    font-size: 0.9em;
+  }
+
+  .send-btn {
+    background-color: #6496c7;
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 0.5vh 6vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+    transition: all 0.1s linear;
+  }
+
+  .send-btn:hover {
+    background-color: #3979b9;
+    transform: scale(1.03, 1);
+    box-shadow: 2px 2px 2px grey;
+    color: white;
+  }
+
+  .send-btn:active {
+    background-color: #36608a;
+  }
+
+  .connected-users {
+    border-bottom: #3c6ea0a1 solid 0.5px;
+  }
+
+  .message {
+    color: #3d6ea0 !important;
+    font-family: "Patrick Hand SC", cursive;
   }
 </style>
