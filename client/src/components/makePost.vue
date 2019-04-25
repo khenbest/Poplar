@@ -27,7 +27,11 @@
                                     </croppa>
                                 </div>
                             </div>
-                            <button @click="output1()" class="mb-2">Crop</button>
+                            <div class="row mx-2">
+                                <div class="col-12 m-5">
+                                    <button class="btn btn-danger" @click="output1()">Crop</button>
+                                </div>
+                            </div>
                         </div>
                         <div v-if="showForm">
                             <h4>THEN</H4>
@@ -43,8 +47,8 @@
                                         <option value="food">Food</option>
                                         <option value="tv">TV</option>
                                         <option value="kimspiration">Kimspiration</option>
-                                        <option value="question">Question's</option>
-                                        <option value="developer">Developer Meme's</option>
+                                        <option value="question">Questions</option>
+                                        <option value="developer">Developer Memes</option>
                                         <option value="meme-culture">Meme-Culture</option>
                                     </select>
                                 </form>
