@@ -42,12 +42,12 @@
             All
             Posts
           </a>
+          <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
+            @click="activeClass = 3; myProfile();">Profile</a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 1}" @click="activeClass = 1; goPosts();">
             Friends
             Posts
           </a>
-          <a class="nav-item nav-link curs" :class="{active : activeClass == 3}"
-            @click="activeClass = 3; myProfile();">Profile</a>
           <a class="nav-item nav-link curs" :class="{active : activeClass == 5}"
             @click="activeClass = 5; makePost();">Make
             Post</a>
