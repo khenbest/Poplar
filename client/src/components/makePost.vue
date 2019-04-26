@@ -647,6 +647,11 @@
     }
 </script>
 <style>
+    .makePost {
+        color: #3d6ea0;
+        font-family: "Amatic SC", cursive;
+    }
+
     .fix {
         margin-left: -48px;
     }
