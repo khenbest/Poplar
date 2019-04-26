@@ -115,7 +115,7 @@
 
   .active {
     color: rgb(1, 1, 157);
-    border-bottom: 3px solid rgb(51, 51, 211);
+    border-bottom: 3px solid white;
   }
 
   a {
