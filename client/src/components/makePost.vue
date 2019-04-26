@@ -22,7 +22,7 @@
                             <div class="row my-2">
                                 <div class="col-12 d-flex justify-content-center">
                                     <croppa v-model="croppa" canvas-color="#e9ecee" :width="374" :height="210.375">
-                                        <img crossOrigin="anonymous" :src="url" slot="initial">
+                                        <img crossOrigin="anonymous" :src="cUrl" slot="initial">
                                     </croppa>
                                 </div>
                             </div>
@@ -523,6 +523,7 @@
                 showCroppa: false,
                 url: '',
                 url2: '',
+                cors: 'https://crossorigin.me/',
                 url3: '',
                 dataUrl1: '',
                 dataUrl2: '',
@@ -550,6 +551,11 @@
                 makePost: null,
                 showForm: false,
                 showForm1: false
+            }
+        },
+        computed: {
+            cUrl() {
+                return this.cors + this.url
             }
         },
         components: {
