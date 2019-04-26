@@ -5,7 +5,7 @@ var cors = require('cors')
 
 //SOCKETS
 var app = require("http").createServer(server)
-var io = require("socket.io")(app)
+var io = require("socket.io")(app).listen(server)
 let Socket = require('./server-assets/models/socket')
 new Socket(io)
 
