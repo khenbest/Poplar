@@ -8,7 +8,7 @@
     "start": "node server/index.js",
     "dev": "node index.js"
   },
-  "author": "SDKC <dom@dom.com>",
+  "author": "SDKC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
