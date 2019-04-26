@@ -454,7 +454,7 @@
                     <button
                       :class="$mq | mq({xs: 'chat-button', sm: 'chat-button', md: 'chat-button my-4', lg: 'chat-button my-2'})"
                       @click="chatroom(post._id)">What Are People Saying?</button>
-                    <button class="btn delete-btn mb-2" @click="deletePost(post._id)">Delete Post</button>
+                    <button class="btn delete-btn my-2" @click="deletePost(post._id)">Delete Post</button>
                   </div>
                 </div>
                 <div
