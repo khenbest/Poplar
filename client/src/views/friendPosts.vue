@@ -1,6 +1,5 @@
 <template>
-
-  <div class="posts container-fluid"
+  <div class="posts container-fluid mb-3"
     :class="$mq | mq({xs: 'margin-mobile', sm: 'margin-mobile', md: 'margin-comp', lg: 'margin-comp'})">
     <!-- <div class="row bg-light justify-content-center text-center"
       :class="$mq | mq({xs: 'py-1 fixed-top mt-5 mobile-filter-bg', sm: 'py-1 fixed-top mt-5 mobile-filter-bg', md: 'py-1', lg: 'py-1'})">
