@@ -112,7 +112,7 @@ export default new Vuex.Store({
     // @ts-ignore
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
-      socket = io('//localhost:3000')
+      socket = io('//poplr.herokuapp.com')
       //Register all listeners
       // @ts-ignore
       socket.on('CONNECTED', data => {
