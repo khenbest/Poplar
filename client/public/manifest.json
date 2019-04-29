@@ -48,7 +48,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "poplr.herokuapp.com",
   "display": "fullscreen",
   "background_color": "#6496c7",
   "theme_color": "#6496c7"
