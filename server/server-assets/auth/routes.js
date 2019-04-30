@@ -32,15 +32,21 @@ router.post('/auth/register', (req, res) => {
     })
 })
 
+<<<<<<< HEAD
 router.post('/auth/login', (req, res) => {
+=======
+
+router.post('/auth/login', async (req, res) => {
+>>>>>>> 0e16b962893276762de0255d7d6bc1c50ef92c0b
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
-    email: req.body.email
+    email: req.body.email,
   }).populate('participated')
     .then(user => {
       if (!user) {
         return res.status(400).send(loginError)
       }
+<<<<<<< HEAD
       if (!user.validatePassword(req.body.password)) {
         return res.status(400).send(loginError)
       }
@@ -53,6 +59,22 @@ router.post('/auth/login', (req, res) => {
       res.send(user)
     }).catch(err => {
       res.status(400).send(loginError)
+=======
+      user.validatePassword(req.body.password).then(validPass => {
+        if (!validPass) {
+          return res.status(400).send(loginError)
+        }
+        //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
+        delete user._doc.hash
+        req.session.uid = user._id
+        req.session.username = user.name
+        res.send(user)
+      }).catch(err => {
+        res.status(400).send(loginError)
+      }).catch(err => {
+        res.status(400).send(loginError)
+      })
+>>>>>>> 0e16b962893276762de0255d7d6bc1c50ef92c0b
     })
 })
 
@@ -71,7 +93,7 @@ router.delete('/auth/logout', (req, res) => {
 
 //Validates req.session.uid
 router.get('/auth/authenticate', (req, res) => {
-  Users.findById(req.session.uid)//.populate('participated')
+  Users.findById(req.session.uid)
     .then(user => {
       if (!user) {
         return res.status(401).send({

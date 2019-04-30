@@ -66,9 +66,7 @@
         name
       };
     },
-    mounted() {
-      this.$store.dispatch("getPublicPosts")
-    },
+
     methods: {
       register() {
         this.$store.dispatch("register", this.newUser);
