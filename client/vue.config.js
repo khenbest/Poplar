@@ -7,6 +7,6 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: '#6496c7',
     // configure the workbox plugin
     workboxPluginMode: 'GenerateSW',
-    manifestPath: 'manifest.json'
+    manifestPath: '/manifest.json'
   }
 }
