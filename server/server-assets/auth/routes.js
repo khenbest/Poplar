@@ -36,7 +36,9 @@ router.post('/auth/register', (req, res) => {
 router.post('/auth/login', (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
-    email: req.body.email
+    email: req.body.email,
+    password: req.body.password
+
   }).populate('participated')
     .then(user => {
       if (!user) {
