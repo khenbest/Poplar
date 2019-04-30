@@ -37,26 +37,6 @@ router.get('/all', (req, res, next) => {
     })
 })
 
-// router.get('/auth/authenticate', (req, res) => {
-//   Users.findById(req.session.uid).populate('participated')
-//     .then(user => {
-//       if (!user) {
-//         return res.status(401).send({
-//           error: 'Please login to continue'
-//         })
-//       }
-//       delete user._doc.hash
-//       res.send(user)
-//     }).catch(err => {
-//       res.status(500).send(err)
-//     })
-// })
 
-
-
-// users.forEach((user, index) => {
-//   if (user == data.name) {
-//     connectedUsers[data.postId].splice(index, 1)
-//   }
 
 module.exports = router
