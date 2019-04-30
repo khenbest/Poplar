@@ -210,7 +210,6 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          // router.push({ name: 'posts' }) //reroutes to posts upon refresh
         })
         // @ts-ignore
         .catch(res => {
@@ -223,7 +222,7 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'posts' })
-        })
+        }).catch(window.alert("We're sorry, you have entered invalid information. Please try again!"))
     },
     // @ts-ignore
     logout({ commit, dispatch }) {
