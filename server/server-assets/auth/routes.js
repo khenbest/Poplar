@@ -33,20 +33,17 @@ router.post('/auth/register', (req, res) => {
 })
 
 
-router.post('/auth/login', (req, res) => {
+router.post('/auth/login', async (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
     email: req.body.email,
-    password: req.body.password
-
   }).populate('participated')
     .then(user => {
       if (!user) {
-        window.alert("We're sorry, you seem to have entered invalid information. Please try again!")
         return res.status(400).send(loginError)
       }
-      if (!user.validatePassword(req.body.password)) {
-        window.alert("We're sorry, you seem to have entered invalid information. Please try again!")
+      let isValidPassword = await user.validatePassword(req.body.password)
+      if (!isValidPassword) {
         return res.status(400).send(loginError)
       }
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
@@ -74,7 +71,7 @@ router.delete('/auth/logout', (req, res) => {
 
 //Validates req.session.uid
 router.get('/auth/authenticate', (req, res) => {
-  Users.findById(req.session.uid)//.populate('participated')
+  Users.findById(req.session.uid)
     .then(user => {
       if (!user) {
         return res.status(401).send({
