@@ -32,7 +32,6 @@ router.post('/auth/register', (req, res) => {
     })
 })
 
-
 router.post('/auth/login', (req, res) => {
   //FIND A USER BASED ON PROVIDED EMAIL
   Users.findOne({
@@ -45,6 +44,8 @@ router.post('/auth/login', (req, res) => {
       if (!user.validatePassword(req.body.password)) {
         return res.status(400).send(loginError)
       }
+
+
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
       delete user._doc.hash
       req.session.uid = user._id

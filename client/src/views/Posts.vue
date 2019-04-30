@@ -13,6 +13,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item text-dark" @click="activity()">Most Activity</a>
+          <a class="dropdown-item text-dark" @click="newest()">Newest</a>
           <a class="dropdown-item text-dark" @click="oldest()">Oldest</a>
         </div>
       </div>
@@ -126,6 +127,9 @@
       },
       oldest() {
         this.$store.dispatch('oldest')
+      },
+      newest() {
+        this.$store.dispatch('newest')
       },
       reset() {
         this.$store.dispatch('reset')
