@@ -220,6 +220,7 @@ export default new Vuex.Store({
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
+          console.log(res.data)
           commit('setUser', res.data)
           router.push({ name: 'posts' })
         }).catch(window.alert("We're sorry, you have entered invalid information. Please try again."))
