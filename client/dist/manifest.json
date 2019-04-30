@@ -1,7 +1,8 @@
 {
   "name": "Poplar",
   "short_name": "Poplar",
-  "theme_color": "black",
-  "background_color": "black",
-  "display": "fullscreen"
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color": "#6496c7",
+  "theme_color": "#6496c7"
 }
