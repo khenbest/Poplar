@@ -3,6 +3,5 @@
   "short_name": "Poplar",
   "theme_color": "black",
   "background_color": "black",
-  "display": "fullscreen",
-  "scope": "/"
+  "display": "fullscreen"
 }
