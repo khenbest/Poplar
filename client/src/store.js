@@ -304,16 +304,7 @@ export default new Vuex.Store({
     },
     //#endregion
     //#region -- POSTS --
-    // @ts-ignore
-    getPublicPosts({ commit, dispatch }) {
-      // @ts-ignore
-      api.get('posts').then(res => {
-        debugger
-        commit("setPosts")
-      }).catch(error => {
-        console.log(error)
-      })
-    },
+
     // @ts-ignore
     getPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'

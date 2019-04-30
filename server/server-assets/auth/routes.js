@@ -40,9 +40,11 @@ router.post('/auth/login', (req, res) => {
   }).populate('participated')
     .then(user => {
       if (!user) {
+        window.alert("We're sorry, you seem to have entered invalid information. Please try again!")
         return res.status(400).send(loginError)
       }
       if (!user.validatePassword(req.body.password)) {
+        window.alert("We're sorry, you seem to have entered invalid information. Please try again!")
         return res.status(400).send(loginError)
       }
       //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
