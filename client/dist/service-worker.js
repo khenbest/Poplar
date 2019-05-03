@@ -17,7 +17,7 @@ importScripts(
   "/precache-manifest.1832df88d49d56ac790aabaac4ca91f6.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "client"});
+workbox.core.setCacheNameDetails({ prefix: "client" });
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
