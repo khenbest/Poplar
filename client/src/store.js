@@ -254,6 +254,16 @@ export default new Vuex.Store({
       commit('setPosts', sorted)
     },
     // @ts-ignore
+    newest({ commit, dispatch }) {
+      // @ts-ignore
+      let sorted = this.state.posts.sort((a, b) => {
+        // @ts-ignore
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      })
+      commit('setPosts', sorted)
+    },
+
+    // @ts-ignore
     filterUser({ commit, dispatch }, payload) {
       // @ts-ignore
       let filtered = this.state.posts.filter(post => {
