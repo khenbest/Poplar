@@ -116,7 +116,7 @@ export default new Vuex.Store({
       //Register all listeners
       // @ts-ignore
       socket.on('CONNECTED', data => {
-        console.log('Connected to socket', payload)
+
         //connect to room 
         socket.emit('join', {
           name: payload.name,
@@ -124,7 +124,6 @@ export default new Vuex.Store({
         })
       })
       socket.on('joinedRoom', data => {
-        console.log(data)
         commit('setRoom', data)
       })
 
@@ -133,12 +132,10 @@ export default new Vuex.Store({
       })
 
       socket.on('left', data => {
-        console.log('user left', data)
         commit('userLeft', data)
       })
 
       socket.on('newMessage', data => {
-        console.log(data)
         commit('addMessage', data)
       })
 
@@ -147,7 +144,6 @@ export default new Vuex.Store({
       })
 
       socket.on('messageError', err => {
-        console.log(err);
       })
     },
     // @ts-ignore
@@ -159,7 +155,6 @@ export default new Vuex.Store({
       socket.emit('leave', payload)
       socket.close()
       commit('leave', payload)
-      console.log('left room')
     },
     //#endregion
     // @ts-ignore
@@ -181,17 +176,14 @@ export default new Vuex.Store({
       // if(this.state.following.find(post => post == payload))
       api.put('users/follow/' + payload.toFollow, payload)
         .then(res => {
-          console.log(res.data)
           dispatch("getUser")
           dispatch("getUsers")
         })
     },
     // @ts-ignore
     unfollow({ commit, dispatch }, payload) {
-      console.log(payload)
       api.put('users/unfollow/' + payload.toUnfollowId, payload)
         .then(res => {
-          console.log(res.data)
           dispatch("getUser")
           dispatch("getUsers")
         })
@@ -220,7 +212,6 @@ export default new Vuex.Store({
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
-          console.log(res.data)
           commit('setUser', res.data)
           router.push({ name: 'posts' })
         }).catch(window.alert("We're sorry, you have entered invalid information. Please try again."))
@@ -276,14 +267,12 @@ export default new Vuex.Store({
       if (!payload) {
         // @ts-ignore
         let filtered = this.state.posts
-        console.log(filtered)
         commit('setFiltered', filtered)
       } else {
         // @ts-ignore
         let filtered = this.state.posts.filter(post => {
           return post.tags == payload
         })
-        console.log(filtered)
         commit('setFiltered', filtered)
       }
     },
@@ -353,7 +342,6 @@ export default new Vuex.Store({
         .then(res => {
           commit('setMyPosts', res.data)
         })
-      console.log(query)
     },
     // @ts-ignore
     clearActivePost({ commit, dispatch }, object) {
@@ -371,7 +359,6 @@ export default new Vuex.Store({
       api.post('posts', postData)
         .then(serverPost => {
           dispatch('getPosts')
-          console.log(serverPost.data)
         })
     },
     // @ts-ignore
@@ -386,8 +373,6 @@ export default new Vuex.Store({
     castVote({ commit, dispatch }, payload) {
       api.put(payload.endpoint, payload.data)
         .then(res => {
-          console.log(res.data.post)
-          console.log(res.data.user)
           commit('setUser', res.data.user)
           commit('UpdatePost', res.data.post)
         })
