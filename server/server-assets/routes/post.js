@@ -5,31 +5,50 @@ let User = require('../models/user')
 //GET
 
 router.get('/:myProfile?', (req, res, next) => {
-  let params = {}
-  if (req.params.myProfile) {
-    params['authorId'] = req.session.uid
-  }
-  Posts.find(params)
-    .then(posts => {
+  var pageNo = parseInt(req.query.pageNo)
+  var size = 9
+  var query = {}
+  if (req.query.myProfile) {
+    Posts.find({ authorId: req.session.uid }).then(posts => {
       res.send(posts)
     })
-    .catch(err => {
-      console.log(err)
+  }
+  if (pageNo < 0 || pageNo === 0) {
+    response = { "error": true, "message": "invalid page number, should start with 1" };
+    return res.send(response)
+  }
+  query.skip = size * (pageNo - 1)
+  query.limit = size
+  Posts.count({}, function (err, totalCount) {
+    if (err) {
+      response = { "error": true, "message": "Error fetching data" }
+    }
+    Posts.find({}, {}, query, function (err, data) {
+      // Mongo command to fetch all data from collection.
+      if (err) {
+        response = { "error": true, "message": "Error fetching data" }
+      } else {
+        var totalPages = Math.ceil(totalCount / size)
+        response = { data, totalPages };
+      }
+      res.send(response)
     })
-}),
-
-  // if you ever use this then add an additional path
-  router.get('/get/:activePostId', (req, res, next) => {
-    Posts.findById(req.params.activePostId)
-      .then(post => {
-        if (!post) {
-          return res.status(400).send('Bad Post Id')
-        }
-        res.send(post)
-      }).catch(err => {
-        res.status(400).send(err)
-      })
   })
+
+})
+
+// if you ever use this then add an additional path
+router.get('/get/:activePostId', (req, res, next) => {
+  Posts.findById(req.params.activePostId)
+    .then(post => {
+      if (!post) {
+        return res.status(400).send('Bad Post Id')
+      }
+      res.send(post)
+    }).catch(err => {
+      res.status(400).send(err)
+    })
+})
 
 
 //get posts that you participated in is handled in your user routes
