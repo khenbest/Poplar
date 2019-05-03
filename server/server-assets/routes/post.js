@@ -13,8 +13,8 @@ router.get('/:myProfile?', (req, res, next) => {
       res.send(posts)
     })
   }
-  if (pageNo < 0 || pageNo === 0) {
-    response = { "error": true, "message": "invalid page number, should start with 1" };
+  else if (pageNo < 0 || pageNo === 0) {
+    response = { "error": true, "message": "Invalid Page Number" };
     return res.send(response)
   }
   query.skip = size * (pageNo - 1)
@@ -37,7 +37,7 @@ router.get('/:myProfile?', (req, res, next) => {
 
 })
 
-// if you ever use this then add an additional path
+//GET for chatrooms
 router.get('/get/:activePostId', (req, res, next) => {
   Posts.findById(req.params.activePostId)
     .then(post => {
@@ -53,17 +53,18 @@ router.get('/get/:activePostId', (req, res, next) => {
 
 //get posts that you participated in is handled in your user routes
 
-//GET friends posts
-// router.get('/', (req, res, next) => {
-//   Posts.find({ authorId: req.session.uid })
-//     .then(data => {
-//       res.send(data)
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       next()
-//     })
-// })
+// GET friends posts
+router.get('/', (req, res, next) => {
+  Posts.find(
+    { authorId: req.session.uid })
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+      next()
+    })
+})
 
 
 //POST
