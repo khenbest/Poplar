@@ -1,5 +1,4 @@
 let router = require('express').Router()
-let Posts = require('../models/post')
 let Users = require('../models/user')
 
 

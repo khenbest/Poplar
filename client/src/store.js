@@ -327,14 +327,6 @@ export default new Vuex.Store({
         })
     },
     // @ts-ignore
-    getFollowing({ commit, dispatch }) {
-      commit('following')
-    },
-    // @ts-ignore
-    getFollowers({ commit, dispatch }) {
-      commit('followers')
-    },
-    // @ts-ignore
     getMyPosts({ commit, dispatch }, myPosts) {
       let query = 'posts'
       if (myPosts) {

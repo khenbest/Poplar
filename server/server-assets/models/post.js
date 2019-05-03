@@ -16,19 +16,6 @@ let schema = new Schema({
   tags: { type: String, enum: ["music", "sports", "fashion", "food", "movies", "meme-culture", "developer", "tv", "kimspiration", "question"] }
 }, { timestamps: true })
 
-//CASCADE ON DELETE
-
-// schema.pre('remove', function (next) {
-//   //lets find all the lists and remove them
-//   this._id //THIS IS THE POST
-//   Promise.all([
-//     //Tasks.deleteMany({ postId: this._id }),
-//     Lists.deleteMany({ postId: this._id })
-//   ])
-//     .then(() => next())
-//     .catch(err => next(err))
-// })
-
 
 
 

@@ -51,21 +51,23 @@ router.get('/get/:activePostId', (req, res, next) => {
 })
 
 
-//get posts that you participated in is handled in your user routes
-
 // GET friends posts
-router.get('/', (req, res, next) => {
-  Posts.find(
-    { authorId: req.session.uid })
-    .then(data => {
-      res.send(data)
-    })
-    .catch(err => {
-      console.log(err)
-      next()
-    })
-})
+// router.get('/yo/friendPosts', (req, res, next) => {
+//   let posts = []
+//   let user = User.findById(req.session.uid).then(
+//     Posts.find(post => {
+//       if (user.following.contains(post.authorId)
+//       ) {
+//         posts.push(post)
+//       }
 
+//     })).then(
+//       res.send(posts)
+//     )
+//     .catch(err => {
+//       console.log(err)
+//     })
+// })
 
 //POST
 router.post('/', (req, res, next) => {
