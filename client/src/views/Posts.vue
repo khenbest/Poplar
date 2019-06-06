@@ -60,9 +60,11 @@
     <div v-else class="row bar">
       <post v-for="filter in filtered" :post="filter"></post>
     </div>
-    <!-- <button @click="pageUp()" class="btn btn-outline-primary">Next</button>
-    <button @click="pageDown()" class="btn btn-outline-primary">Previous</button> -->
+    <button @click="pageNext()" class="btn btn-outline-primary">Next</button>
+    <button @click="pagePrev()" class="btn btn-outline-primary">Previous</button>
+
   </div>
+
 </template>
 
 <script>
@@ -89,8 +91,8 @@
         username: '',
         filter: '',
         visiblePosts: [],
-        lessThan: 8,
-        greaterThan: -1,
+        // lessThan: 8,
+        // greaterThan: -1,
       }
     },
     computed: {
@@ -102,14 +104,24 @@
       },
     },
     methods: {
-      // pageUp() {
-      //   this.lessThan += 8
-      //   this.greaterThan += 8
-      // },
-      // pageDown() {
-      //   this.lessThan -= 8
-      //   this.greaterThan -= 8
-      // },
+      pageNext() {
+        debugger
+        let payload = {
+          pageNum: req.params.pageNum += 1
+        }
+        this.$store.dispatch("getPosts", payload.pageNum)
+        // this.lessThan += 8
+        // this.greaterThan += 8
+      },
+      pagePrev() {
+        debugger
+        let payload = {
+          pageNum: req.query.pageNum -= 1
+        }
+        this.$store.dispatch("getPosts", payload.pageNum)
+        // this.lessThan -= 8
+        // this.greaterThan -= 8
+      },
       yesNo() {
         this.$store.dispatch('yesNo')
       },

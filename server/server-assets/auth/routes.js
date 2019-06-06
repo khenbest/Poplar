@@ -73,7 +73,7 @@ router.delete('/auth/logout', (req, res) => {
 
 
 //Validates req.session.uid
-router.get('/auth/authenticate', (req, res) => {
+router.get('/auth/authenticate', async (req, res) => {
   Users.findById(req.session.uid)
     .then(user => {
       if (!user) {

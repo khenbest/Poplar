@@ -5,37 +5,25 @@ let User = require('../models/user')
 //GET
 
 router.get('/:myProfile?', (req, res, next) => {
-  var pageNo = parseInt(req.query.pageNo)
-  var size = 9
+  var pageNum = req.query.pageNum
+  var pageSize = 18;
+  var skips = pageSize * (pageNum - 1)
   var query = {}
   if (req.query.myProfile) {
-    Posts.find({ authorId: req.session.uid }).then(posts => {
+    Posts.find({ authorId: req.session.uid }).skip(skips).limit(pageSize).then(posts => {
       res.send(posts)
     })
   }
-  else if (pageNo < 0 || pageNo === 0) {
-    response = { "error": true, "message": "Invalid Page Number" };
-    return res.send(response)
+  else if (pageNum < 0 || pageNum === 0) {
+    res.status(404).send("Invalid Page Number");
   }
-  query.skip = size * (pageNo - 1)
-  query.limit = size
-  Posts.count({}, function (err, totalCount) {
-    if (err) {
-      response = { "error": true, "message": "Error fetching data" }
-    }
-    Posts.find({}, {}, query, function (err, data) {
-      // Mongo command to fetch all data from collection.
-      if (err) {
-        response = { "error": true, "message": "Error fetching data" }
-      } else {
-        var totalPages = Math.ceil(totalCount / size)
-        response = { data, totalPages };
-      }
-      res.send(response)
-    })
+  Posts.find().skip(skips).limit(pageSize).then(posts => {
+    res.send(posts)
+  }).catch(err => {
+    res.status(400).send(err)
   })
-
 })
+
 
 //GET for chatrooms
 router.get('/get/:activePostId', (req, res, next) => {
