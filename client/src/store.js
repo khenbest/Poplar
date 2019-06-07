@@ -22,7 +22,7 @@ let auth = Axios.create({
 
 let api = Axios.create({
   baseURL: base + "api/",
-  timeout: 8000,
+  timeout: 800000000000,
   withCredentials: true
 })
 
@@ -37,7 +37,8 @@ export default new Vuex.Store({
     name: '',
     messages: [],
     roomData: {},
-    allUsers: []
+    allUsers: [],
+    pageNum: 1
   },
   mutations: {
     setUser(state, user) {
@@ -74,6 +75,9 @@ export default new Vuex.Store({
     },
     setActivePost(state, data) {
       state.activePost = data
+    },
+    setPageNum(state, val) {
+      state.pageNum = val
     },
     //#region --SOCKETS--
     setJoined(state, payload) {
@@ -307,12 +311,9 @@ export default new Vuex.Store({
     //#region -- POSTS --
 
     // @ts-ignore
-    getPosts({ commit, dispatch }, myPosts) {
-      let query = 'posts'
-      if (myPosts) {
-        query += '/myPosts'
-      }
-      api.get(query)
+    getPosts({ commit, dispatch }, pageNum = 1) {
+      let query = 'posts?pageNum=' + pageNum
+      return api.get(query)
         .then(res => {
           let addVotes = res.data.map(post => {
             if (!post.votes) {

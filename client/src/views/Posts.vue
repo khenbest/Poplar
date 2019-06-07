@@ -60,8 +60,8 @@
     <div v-else class="row bar">
       <post v-for="filter in filtered" :post="filter"></post>
     </div>
-    <button @click="pageNext()" class="btn btn-outline-primary">Next</button>
-    <button @click="pagePrev()" class="btn btn-outline-primary">Previous</button>
+    <button :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Previous</button>
+    <button :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
 
   </div>
 
@@ -91,8 +91,6 @@
         username: '',
         filter: '',
         visiblePosts: [],
-        // lessThan: 8,
-        // greaterThan: -1,
       }
     },
     computed: {
@@ -102,25 +100,18 @@
       filtered() {
         return this.$store.state.filteredPosts
       },
+      pageNum() {
+        return this.$store.state.pageNum
+      }
     },
     methods: {
-      pageNext() {
-        debugger
-        let payload = {
-          pageNum: req.params.pageNum += 1
-        }
-        this.$store.dispatch("getPosts", payload.pageNum)
-        // this.lessThan += 8
-        // this.greaterThan += 8
+      async pageNext() {
+        await this.$store.dispatch("getPosts", this.pageNum + 1)
+        this.$store.commit('setPageNum', this.pageNum + 1)
       },
       pagePrev() {
-        debugger
-        let payload = {
-          pageNum: req.query.pageNum -= 1
-        }
-        this.$store.dispatch("getPosts", payload.pageNum)
-        // this.lessThan -= 8
-        // this.greaterThan -= 8
+        this.$store.dispatch("getPosts", this.pageNum - 1)
+        this.$store.commit('setPageNum', this.pageNum - 1)
       },
       yesNo() {
         this.$store.dispatch('yesNo')

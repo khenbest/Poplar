@@ -5,23 +5,24 @@ let User = require('../models/user')
 //GET
 
 router.get('/:myProfile?', (req, res, next) => {
-  var pageNum = req.query.pageNum
-  var pageSize = 18;
+  var pageNum = parseInt(req.query.pageNum)
+  var pageSize = 12;
   var skips = pageSize * (pageNum - 1)
-  var query = {}
-  if (req.query.myProfile) {
+  if (pageNum < 0 || pageNum === 0) {
+    res.status(404).send("Invalid Page Number");
+  } else if
+    (req.params.myProfile) {
     Posts.find({ authorId: req.session.uid }).skip(skips).limit(pageSize).then(posts => {
       res.send(posts)
     })
   }
-  else if (pageNum < 0 || pageNum === 0) {
-    res.status(404).send("Invalid Page Number");
+  else {
+    Posts.find().skip(skips).limit(pageSize).then(posts => {
+      res.send(posts)
+    }).catch(err => {
+      res.status(400).send(err)
+    })
   }
-  Posts.find().skip(skips).limit(pageSize).then(posts => {
-    res.send(posts)
-  }).catch(err => {
-    res.status(400).send(err)
-  })
 })
 
 
