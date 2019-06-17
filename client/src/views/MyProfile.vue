@@ -538,10 +538,10 @@
       </div>
     </div>
     <button id="margin-mobile-prev-button"
-      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'profile-sort-btn', lg: 'profile-sort-btn'})"
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'comp-profile-sort-btn', lg: 'comp-profile-sort-btn'})"
       :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Prev</button>
     <button
-      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'profile-sort-btn', lg: 'profile-sort-btn'})"
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'comp-profile-sort-btn', lg: 'comp-profile-sort-btn'})"
       :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
   </div>
 
@@ -713,6 +713,28 @@
 
   .margin-comp {
     margin-top: 66px;
+  }
+
+  .margin-mobile-page-button {
+    margin-bottom: 2.5rem;
+  }
+
+  #margin-mobile-prev-button {
+    margin-right: 1rem;
+  }
+
+  .comp-profile-sort-btn {
+    background-color: #6496c7;
+    border: none;
+    border-radius: 50px;
+    color: #FFF;
+    padding: 0.5vh 3.8vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    transition: all 0.1s linear;
+    margin-bottom: 2.5rem;
   }
 
   .clickable:hover {

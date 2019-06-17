@@ -183,7 +183,7 @@
     }
   } */
   .margin-mobile-page-button {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   #margin-mobile-prev-button {
