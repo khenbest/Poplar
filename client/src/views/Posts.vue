@@ -60,8 +60,12 @@
     <div v-else class="row bar">
       <post v-for="filter in filtered" :post="filter"></post>
     </div>
-    <button :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Previous</button>
-    <button :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
+    <button id="margin-mobile-prev-button"
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'margin-comp-page-button', lg: 'margin-comp-page-button'})"
+      :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Prev</button>
+    <button
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'margin-comp-page-button', lg: 'margin-comp-page-button'})"
+      :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
 
   </div>
 
@@ -108,10 +112,12 @@
       async pageNext() {
         await this.$store.dispatch("getPosts", this.pageNum + 1)
         this.$store.commit('setPageNum', this.pageNum + 1)
+        window.scrollTo(0, 0)
       },
       pagePrev() {
         this.$store.dispatch("getPosts", this.pageNum - 1)
         this.$store.commit('setPageNum', this.pageNum - 1)
+        window.scrollTo(0, 0)
       },
       yesNo() {
         this.$store.dispatch('yesNo')
@@ -176,15 +182,24 @@
       display: none
     }
   } */
+  .margin-mobile-page-button {
+    margin-bottom: 3rem;
+  }
 
-
+  #margin-mobile-prev-button {
+    margin-right: 1rem;
+  }
 
   .margin-mobile {
     margin-top: 160px;
   }
 
   .margin-comp {
-    margin-top: 66px;
+    margin-top: 8vh;
+  }
+
+  .margin-comp-page-button {
+    margin-top: 2vh;
   }
 
   .username {

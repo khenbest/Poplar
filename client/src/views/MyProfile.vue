@@ -512,6 +512,7 @@
                     <img :class="$mq | mq({xs: 'photos', sm: 'photos', md: 'photos2', lg: 'photos2'})"
                       :src="participated.imgUrl2">
                   </div>
+
                 </div>
                 <!-- GO TO CHAT -->
                 <div v-if="participated">
@@ -536,6 +537,12 @@
         </span>
       </div>
     </div>
+    <button id="margin-mobile-prev-button"
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'profile-sort-btn', lg: 'profile-sort-btn'})"
+      :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Prev</button>
+    <button
+      :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'profile-sort-btn', lg: 'profile-sort-btn'})"
+      :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
   </div>
 
   <!-- :class="$mq | mq({xs: '', sm: '', md: '', lg: ''})" -->

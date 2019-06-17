@@ -40,24 +40,6 @@ router.get('/get/:activePostId', (req, res, next) => {
 })
 
 
-// GET friends posts
-// router.get('/yo/friendPosts', (req, res, next) => {
-//   let posts = []
-//   let user = User.findById(req.session.uid).then(
-//     Posts.find(post => {
-//       if (user.following.contains(post.authorId)
-//       ) {
-//         posts.push(post)
-//       }
-
-//     })).then(
-//       res.send(posts)
-//     )
-//     .catch(err => {
-//       console.log(err)
-//     })
-// })
-
 //POST
 router.post('/', (req, res, next) => {
   req.body.authorId = req.session.uid
