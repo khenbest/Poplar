@@ -51,6 +51,7 @@ auth.get('authenticate')
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })
+        store.dispatch("getPosts")
       },
       render: h => h(App)
     }).$mount('#app')

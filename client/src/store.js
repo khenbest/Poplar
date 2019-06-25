@@ -22,7 +22,7 @@ let auth = Axios.create({
 
 let api = Axios.create({
   baseURL: base + "api/",
-  timeout: 800000000000,
+  timeout: 8000,
   withCredentials: true
 })
 
@@ -310,6 +310,7 @@ export default new Vuex.Store({
     //#endregion
     //#region -- POSTS --
 
+    //#region -- POSTS
     // @ts-ignore
     getPosts({ commit, dispatch }, pageNum = 1) {
       let query = 'posts?pageNum=' + pageNum
@@ -328,12 +329,9 @@ export default new Vuex.Store({
         })
     },
     // @ts-ignore
-    getMyPosts({ commit, dispatch }, myPosts) {
-      let query = 'posts'
-      if (myPosts) {
-        query += '/myPosts'
-      }
-      api.get(query)
+    getMyPosts({ commit, dispatch }, pageNum = 1) {
+      let query = 'posts/myPosts?pageNum=' + pageNum
+      return api.get(query)
         .then(res => {
           commit('setMyPosts', res.data)
         })

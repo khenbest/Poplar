@@ -4,8 +4,6 @@
     <div class="row d-flex align-items-center bg-light text-center">
       <div class="col-12">
 
-
-
         <mq-layout mq="xs">
           <div class="row mt-1 profile-stats">
             <div class="col-5">
@@ -563,11 +561,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getMyPosts", true)
+      this.$store.dispatch("getMyPosts")
       this.$store.dispatch("getUsers")
-      if (!this.$store.state.posts.length) {
-        this.$store.dispatch("getPosts")
-      }
     },
     data() {
       return {
@@ -577,6 +572,9 @@
       }
     },
     computed: {
+      pageNum() {
+        return this.$store.state.pageNum
+      },
       user() {
         return this.$store.state.user
       },
@@ -604,6 +602,16 @@
       }
     },
     methods: {
+      async pageNext() {
+        await this.$store.dispatch("getMyPosts", this.pageNum + 1)
+        this.$store.commit('setPageNum', this.pageNum + 1)
+        window.scrollTo(0, 0)
+      },
+      pagePrev() {
+        this.$store.dispatch("getMyPosts", this.pageNum - 1)
+        this.$store.commit('setPageNum', this.pageNum - 1)
+        window.scrollTo(0, 0)
+      },
       addPost() {
         this.$store.dispatch("addPost", this.newPost);
         event.target.reset();

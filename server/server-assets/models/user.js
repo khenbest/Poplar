@@ -1,6 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
+let Posts = require('../models/post')
 
 //bcrypt uses hashing and salt to obfiscate your password 
 let bcrypt = require('bcryptjs')
@@ -11,6 +12,7 @@ let schema = new Schema({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
+  // created: [{ type: Posts }],
   participated: [{ type: ObjectId, ref: "Post" }],
   following: [{ type: String }],
   followedBy: [{ type: String }]
