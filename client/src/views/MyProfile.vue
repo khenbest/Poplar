@@ -537,7 +537,7 @@
     </div>
     <button id="margin-mobile-prev-button"
       :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'comp-profile-sort-btn', lg: 'comp-profile-sort-btn'})"
-      :disabled="pageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Prev</button>
+      :disabled="myPageNum == 1" @click="pagePrev()" class="btn btn-outline-primary">Prev</button>
     <button
       :class="$mq | mq({xs: 'margin-mobile-page-button', sm: 'margin-mobile-page-button', md: 'comp-profile-sort-btn', lg: 'comp-profile-sort-btn'})"
       :disabled="posts.length < 12" @click="pageNext()" class="btn btn-outline-primary">Next</button>
@@ -572,8 +572,8 @@
       }
     },
     computed: {
-      pageNum() {
-        return this.$store.state.pageNum
+      myPageNum() {
+        return this.$store.state.myPageNum
       },
       user() {
         return this.$store.state.user
@@ -603,13 +603,13 @@
     },
     methods: {
       async pageNext() {
-        await this.$store.dispatch("getMyPosts", this.pageNum + 1)
-        this.$store.commit('setPageNum', this.pageNum + 1)
+        await this.$store.dispatch("getMyPosts", this.myPageNum + 1)
+        this.$store.commit('setPageNum', this.myPageNum + 1)
         window.scrollTo(0, 0)
       },
       pagePrev() {
-        this.$store.dispatch("getMyPosts", this.pageNum - 1)
-        this.$store.commit('setPageNum', this.pageNum - 1)
+        this.$store.dispatch("getMyPosts", this.myPageNum - 1)
+        this.$store.commit('setPageNum', this.myPageNum - 1)
         window.scrollTo(0, 0)
       },
       addPost() {

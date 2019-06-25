@@ -38,7 +38,8 @@ export default new Vuex.Store({
     messages: [],
     roomData: {},
     allUsers: [],
-    pageNum: 1
+    pageNum: 1,
+    myPageNum: 1
   },
   mutations: {
     setUser(state, user) {
@@ -329,8 +330,8 @@ export default new Vuex.Store({
         })
     },
     // @ts-ignore
-    getMyPosts({ commit, dispatch }, pageNum = 1) {
-      let query = 'posts/myPosts?pageNum=' + pageNum
+    getMyPosts({ commit, dispatch }, myPageNum = 1) {
+      let query = 'posts/myPosts?pageNum=' + myPageNum
       return api.get(query)
         .then(res => {
           commit('setMyPosts', res.data)
