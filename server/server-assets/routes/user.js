@@ -35,7 +35,16 @@ router.get('/all', (req, res, next) => {
       res.status(400).send(err)
     })
 })
+router.get('/:id', (req, res, next) => {
+  Users.findById(req.params.id).then(u => {
+    res.send(u)
+  }).catch(err => {
+    res.status(400).send(err)
+  })
+})
 
-
+router.delete('/:id', (req, res, next) => {
+  Users.findByIdAndRemove(req.params.id).then(res.send).catch(err => res.status(400).send(err))
+})
 
 module.exports = router

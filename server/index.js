@@ -40,7 +40,7 @@ server.use(auth.session)
 server.use(auth.router)
 
 
-//Gate Keeper Must login to access any route below this code
+// Gate Keeper Must login to access any route below this code
 server.use((req, res, next) => {
   if (!req.session.uid) {
     return res.status(401).send({
@@ -55,12 +55,6 @@ let userRoutes = require('./server-assets/routes/user')
 let postRoutes = require('./server-assets/routes/post')
 server.use('/api/posts', postRoutes)
 server.use('/api/users', userRoutes)
-
-
-
-
-
-
 
 //Catch all
 server.use('*', (req, res, next) => {

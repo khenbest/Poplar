@@ -1,8 +1,9 @@
+let { uri, secret } = require("./nopush")
 var expressSession = require("express-session");
 var mongoStore = require("connect-mongodb-session")(expressSession);
 
 var store = new mongoStore({
-  uri: "mongodb://poplar:poplar!@den1.mongo1.gear.host:27001/poplar",
+  uri,
   collection: "Sessions"
 });
 
@@ -12,7 +13,7 @@ store.on("error", function (err) {
 
 // @ts-ignore
 var session = expressSession({
-  secret: "dargus",
+  secret,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 2,
   },

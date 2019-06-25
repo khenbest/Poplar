@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-
+server/server-assets/auth/nopush.js
 
 # local env files
 .env.local
