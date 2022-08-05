@@ -17,7 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-session": "^1.15.0",
-    "mongoose": "^4.13.18",
+    "mongoose": "^5.7.5",
     "socket.io": "^2.2.0"
   }
 }
